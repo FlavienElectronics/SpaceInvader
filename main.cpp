@@ -21,6 +21,27 @@ class Point : public sf::CircleShape
 			this->setFillColor(sf::Color::Green);
 			this->setPosition(x,y);
 		}
+		void xAdd()
+		{
+			this->x++;
+			this->setPosition(x,y);
+		}
+		void yAdd()
+		{
+			this->y++;
+			this->setPosition(x,y);
+		}
+};
+
+class SpaceShip : public sf::CircleShape
+{
+	private :
+		Point* p;
+	public :
+		SpaceShip(float x_pos, float y_pos, string color)
+		{
+			p = new Point(x_pos,y_pos,1,"Col");	
+		}
 };
 			
 
@@ -42,6 +63,7 @@ int main() {
     point.setPosition(x, y);
     
     Point p2(100,100,2,"Vert");
+    SpaceShip ship(200,100,"Green");
 
     while (window.isOpen()) {
         sf::Event event;
@@ -51,10 +73,14 @@ int main() {
         }
 
         // Exemple de déplacement du point
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) x += 1;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) x -= 1;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) y += 1;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) y -= 1;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) 
+        {
+        x += 1;
+        p2.xAdd();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {x -= 1;}
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {y += 1;}
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {y -= 1; p2.yAdd();}
         
          // Empêcher le point de sortir des bords de la fenêtre
         if (x < 0) x = 0;
@@ -71,6 +97,7 @@ int main() {
         // Dessine le point uniquement à la nouvelle position
         window.draw(point);
         window.draw(p2);
+        window.draw(ship);
 
         // Affiche la mise à jour de la fenêtre
         window.display();
