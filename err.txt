@@ -1,0 +1,4 @@
+main.cpp: In constructor ‘SpaceShip::SpaceShip(float, float, std::string)’:
+main.cpp:57:17: error: no matching function for call to ‘Point::Point()’
+   57 |                 {
+
