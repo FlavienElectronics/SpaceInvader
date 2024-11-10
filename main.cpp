@@ -72,20 +72,42 @@ public:
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			target.draw(*pt[i], states); 
+			target.draw(*pt[i], states);
 		}
 	}
+
+    void ySub()
+    {
+        this->y--;
+        pt[0]->ySub(); 
+        pt[1]->ySub(); 
+    }
 };
 
 class SpaceShip : public sf::Drawable
 {
 private:
+	sf::RenderWindow *window;
 	Point *pt[11];
-	Projectile * pjt[50];
+	Projectile *pjt[50];
 	float x, y;
 
+	void correctPosition()
+	{
+		/*
+				if (this->x < 0)
+			this->x = 0;
+		if (this->x > windowWidth - 2 * point.getRadius())
+			this->x = windowWidth - 2 * point.getRadius();
+		if (this->y < 0)
+			this->y = 0;
+		if (this->y > windowHeight - 2 * this->getRadius())
+			this->y = windowHeight - 2 * point.getRadius();
+			*/
+	}
+
 public:
-	SpaceShip(float x_pos, float y_pos, string color) : x(x_pos), y(y_pos)
+	SpaceShip(sf::RenderWindow *win, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos)
 	{
 		pt[0] = new Point(x + 2, y + 0, 1, color);
 		pt[1] = new Point(x + 1, y + 1, 1, color);
@@ -98,21 +120,55 @@ public:
 		pt[8] = new Point(x + 4, y + 2, 1, color);
 		pt[9] = new Point(x + 1, y + 3, 1, color);
 		pt[10] = new Point(x + 3, y + 3, 1, color);
-	}
-
-	// Surcharge de la fonction `draw` pour dessiner les Points de SpaceShip
-	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override
-	{
-		for (int i = 0; i < 11; i++)
+		this->window = win;
+		for (int i = 0; i < 50; ++i)
 		{
-			target.draw(*pt[i], states); // Dessiner chaque Point du vaisseau
+			pjt[i] = NULL;
 		}
 	}
 
 	void shoot()
 	{
-		pjt[0] = new Projectile(this->x + 2 , this->y -5 , "col");
-		cout << "space" << endl;
+		// Chercher un emplacement libre dans le tableau de projectiles
+		for (int i = 0; i < 50; ++i)
+		{
+			if (pjt[i] == nullptr) // Si l'emplacement est libre
+			{
+				pjt[i] = new Projectile(this->x + 2, this->y - 5, "col");
+				break;
+			}
+		}
+	}
+
+	void updateProjectiles()
+	{
+		// Déplacer tous les projectiles existants
+		for (int i = 0; i < 50; ++i)
+		{
+			if (pjt[i] != nullptr)
+			{
+				// Déplacer le projectile (par exemple, le faire se déplacer vers le haut)
+				pjt[i]->ySub(); // Vous pouvez ajouter une méthode de déplacement pour le projectile
+			}
+		}
+	}
+
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override
+	{
+		// Dessiner tous les points du vaisseau
+		for (int i = 0; i < 11; i++)
+		{
+			target.draw(*pt[i], states);
+		}
+
+		// Dessiner tous les projectiles
+		for (int i = 0; i < 50; ++i)
+		{
+			if (pjt[i] != nullptr)
+			{
+				target.draw(*pjt[i], states);
+			}
+		}
 	}
 
 	void xAdd()
@@ -174,7 +230,9 @@ int main()
 	point.setPosition(x, y);
 
 	Point p2(100, 100, 1, "Vert");
-	SpaceShip ship(200, 100, "Green");
+	SpaceShip ship(&window, 200, 100, "Green");
+	sf::Clock clock;
+	sf::Time delay = sf::milliseconds(20);
 
 	while (window.isOpen())
 	{
@@ -185,45 +243,23 @@ int main()
 				window.close();
 		}
 
-		// Exemple de déplacement du point
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		if (clock.getElapsedTime() >= delay)
 		{
-			ship.shoot();
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-			x += 1;
-			p2.xAdd();
-			ship.xAdd();
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			x -= 1;
-			p2.xSub();
-			ship.xSub();
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			y += 1;
-			p2.yAdd();
-			ship.yAdd();
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			y -= 1;
-			p2.ySub();
-			ship.ySub();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+				ship.xAdd();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+				ship.xSub();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+				ship.yAdd();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+				ship.ySub();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+				ship.shoot();
+
+			clock.restart(); // Redémarre l'horloge pour le prochain intervalle
 		}
 
 		// Empêcher le point de sortir des bords de la fenêtre
-		if (x < 0)
-			x = 0;
-		if (x > windowWidth - 2 * point.getRadius())
-			x = windowWidth - 2 * point.getRadius();
-		if (y < 0)
-			y = 0;
-		if (y > windowHeight - 2 * point.getRadius())
-			y = windowHeight - 2 * point.getRadius();
 
 		// Mise à jour de la position du point
 		point.setPosition(x, y);
@@ -231,10 +267,8 @@ int main()
 		// Efface l'écran en blanc
 		window.clear(sf::Color::White);
 
-		// Dessine le point et les éléments du vaisseau
-		window.draw(point);
-		window.draw(p2);
 		window.draw(ship);
+		ship.updateProjectiles();
 
 		// Affiche la mise à jour de la fenêtre
 		window.display();
