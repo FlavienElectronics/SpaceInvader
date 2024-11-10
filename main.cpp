@@ -54,10 +54,34 @@ public:
 	}
 };
 
+/* Projectile généralisable avec SpaceShip ???*/
+class Projectile : public sf::Drawable
+{
+private:
+	Point *pt[2];
+	float x, y;
+
+public:
+	Projectile(float x_pos, float y_pos, string color) : x(x_pos), y(y_pos)
+	{
+		pt[0] = new Point(x + 0, y + 0, 1, color);
+		pt[1] = new Point(x + 0, y + 1, 1, color);
+	}
+
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			target.draw(*pt[i], states); 
+		}
+	}
+};
+
 class SpaceShip : public sf::Drawable
 {
 private:
 	Point *pt[11];
+	Projectile * pjt[50];
 	float x, y;
 
 public:
@@ -82,6 +106,45 @@ public:
 		for (int i = 0; i < 11; i++)
 		{
 			target.draw(*pt[i], states); // Dessiner chaque Point du vaisseau
+		}
+	}
+
+	void shoot()
+	{
+		pjt[0] = new Projectile(this->x + 2 , this->y -5 , "col");
+		cout << "space" << endl;
+	}
+
+	void xAdd()
+	{
+		this->x++;
+		for (int i = 0; i < 11; i++)
+		{
+			pt[i]->xAdd();
+		}
+	}
+	void yAdd()
+	{
+		this->y++;
+		for (int i = 0; i < 11; i++)
+		{
+			pt[i]->yAdd();
+		}
+	}
+	void xSub()
+	{
+		this->x--;
+		for (int i = 0; i < 11; i++)
+		{
+			pt[i]->xSub();
+		}
+	}
+	void ySub()
+	{
+		this->y--;
+		for (int i = 0; i < 11; i++)
+		{
+			pt[i]->ySub();
 		}
 	}
 
@@ -123,25 +186,33 @@ int main()
 		}
 
 		// Exemple de déplacement du point
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			ship.shoot();
+		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
 			x += 1;
 			p2.xAdd();
+			ship.xAdd();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
 			x -= 1;
 			p2.xSub();
+			ship.xSub();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
 			y += 1;
 			p2.yAdd();
+			ship.yAdd();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
 			y -= 1;
 			p2.ySub();
+			ship.ySub();
 		}
 
 		// Empêcher le point de sortir des bords de la fenêtre
