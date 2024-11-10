@@ -3,6 +3,27 @@
 #include <iostream>
 using namespace std;
 
+class Point : public sf::CircleShape
+{
+			
+	private:
+		float x,y;
+		int size;
+		string color;
+	public:
+		Point(float x,float y,int size,string color) : sf::CircleShape(size)
+		{
+			this->x = x;
+			this->y = y;
+			this->size = size;
+			this->color = color;
+			
+			this->setFillColor(sf::Color::Green);
+			this->setPosition(x,y);
+		}
+};
+			
+
 int main() {
 
 
@@ -17,8 +38,10 @@ int main() {
     sf::CircleShape point(2); // Point avec un rayon de 2 pixels
     point.setFillColor(sf::Color::Red); // Couleur du point
 
-    float x = 400, y = 300; // Position initiale du point
+    float x = windowWidth/2, y = windowHeight/2; // Position initiale du point
     point.setPosition(x, y);
+    
+    Point p2(100,100,2,"Vert");
 
     while (window.isOpen()) {
         sf::Event event;
@@ -47,6 +70,7 @@ int main() {
 
         // Dessine le point uniquement à la nouvelle position
         window.draw(point);
+        window.draw(p2);
 
         // Affiche la mise à jour de la fenêtre
         window.display();
