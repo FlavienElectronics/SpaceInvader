@@ -1,0 +1,5 @@
+sudo apt update
+sudo apt install libsdl2-dev
+
+compilation : g++ main.cpp -o mon_jeu -lsfml-graphics -lsfml-window -lsfml-system
+
