@@ -97,8 +97,9 @@ public:
 
 class SpaceShip : public sf::Drawable
 {
-private:
+protected:
 	sf::RenderWindow *window;
+	int numberOfPixels;
 	float winHeight;
 	Point *pt[11];
 	Projectile *pjt[50];
@@ -119,7 +120,9 @@ private:
 	}
 
 public:
-	SpaceShip(sf::RenderWindow *win,float windowHeight, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos)
+	SpaceShip() : x(0), y(0),numberOfPixels(11) {}
+
+	SpaceShip(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos),numberOfPixels(11)
 	{
 		pt[0] = new Point(x + 2, y + 0, 1, color);
 		pt[1] = new Point(x + 1, y + 1, 1, color);
@@ -136,7 +139,7 @@ public:
 		this->winHeight = windowHeight;
 		for (int i = 0; i < 50; ++i)
 		{
-			pjt[i] = NULL;
+			this->pjt[i] = NULL;
 		}
 	}
 
@@ -148,7 +151,7 @@ public:
 			if (pjt[i] == nullptr) // Si l'emplacement est libre
 			{
 				pjt[i] = new Projectile(this->x + 2, this->y - 5, "col");
-				cout << "Lancement projectile " << i <<endl;
+				cout << "Lancement projectile " << i << endl;
 				break;
 			}
 		}
@@ -168,7 +171,7 @@ public:
 				{
 					// Libérer la mémoire du projectile
 					delete pjt[i];
-					cout << "Destruction projectile " << i <<endl;
+					cout << "Destruction projectile " << i << endl;
 					pjt[i] = nullptr; // Supprimer le projectile du tableau
 				}
 			}
@@ -178,7 +181,7 @@ public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override
 	{
 		// Dessiner tous les points du vaisseau
-		for (int i = 0; i < 11; i++)
+		for (int i = 0; i < numberOfPixels; i++)
 		{
 			target.draw(*pt[i], states);
 		}
@@ -228,9 +231,65 @@ public:
 
 	~SpaceShip()
 	{
-		for (int i = 0; i < 11; i++)
+		for (int i = 0; i < numberOfPixels; i++)
 		{
 			delete pt[i]; // Libérer la mémoire allouée pour chaque Point
+		}
+	}
+};
+
+class Monster : public SpaceShip
+{
+private:
+	Point *pt[10];
+
+public:
+	Monster(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color)
+	{
+		this->x = x_pos;
+		this->y = y_pos;
+		this->numberOfPixels = 10;
+		pt[0] = new Point(x + 1, y + 0, 1, color);
+		pt[1] = new Point(x + 3, y + 0, 1, color);
+		pt[2] = new Point(x + 0, y + 1, 1, color);
+		pt[3] = new Point(x + 2, y + 1, 1, color);
+		pt[4] = new Point(x + 4, y + 1, 1, color);
+		pt[5] = new Point(x + 1, y + 2, 1, color);
+		pt[6] = new Point(x + 2, y + 2, 1, color);
+		pt[7] = new Point(x + 3, y + 2, 1, color);
+		pt[8] = new Point(x + 1, y + 3, 1, color);
+		pt[9] = new Point(x + 3, y + 3, 1, color);
+		this->window = win;
+		this->winHeight = windowHeight;
+		for (int i = 0; i < 50; ++i)
+		{
+			this->pjt[i] = NULL;
+		}
+	}
+
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override
+	{
+		// Dessiner tous les points du vaisseau
+		for (int i = 0; i < numberOfPixels; i++)
+		{
+			target.draw(*pt[i], states);
+		}
+
+		// Dessiner tous les projectiles
+		for (int i = 0; i < 50; ++i)
+		{
+			if (pjt[i] != nullptr)
+			{
+				target.draw(*pjt[i], states);
+			}
+		}
+	}
+
+	~Monster()
+	{
+		for (int i = 0; i < numberOfPixels; i++)
+		{
+			delete pt[i]; // Libérer la mémoire des points du monstre
 		}
 	}
 };
@@ -252,7 +311,9 @@ int main()
 	point.setPosition(x, y);
 
 	Point p2(100, 100, 1, "Vert");
-	SpaceShip ship(&window,windowHeight, 200, 100, "Green");
+	SpaceShip ship(&window, windowHeight, windowWidth / 2, windowHeight / 2, "Green");
+	Monster mons(&window, windowHeight, windowWidth / 3, windowHeight / 3, "Green");
+
 	sf::Clock clock;
 	sf::Clock clockProjectile;
 	sf::Clock clockShoot;
@@ -299,6 +360,8 @@ int main()
 		window.clear(sf::Color::White);
 
 		window.draw(ship);
+		window.draw(mons);
+
 		if (clockProjectile.getElapsedTime() >= delayProjectile)
 		{
 			ship.updateProjectiles();
