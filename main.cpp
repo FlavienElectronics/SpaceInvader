@@ -68,6 +68,19 @@ public:
 		pt[1] = new Point(x + 0, y + 1, 1, color);
 	}
 
+	void ySub()
+	{
+		this->y--;
+		pt[0]->ySub();
+		pt[1]->ySub();
+	}
+
+	// Vérifie si le projectile est en dehors de la fenêtre
+	bool isOutOfBounds(float windowHeight)
+	{
+		return this->y < 0; // Un projectile est hors de l'écran si sa position Y est inférieure à 0
+	}
+
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override
 	{
 		for (int i = 0; i < 2; i++)
@@ -76,11 +89,9 @@ public:
 		}
 	}
 
-	void ySub()
+	float getY() const
 	{
-		this->y--;
-		pt[0]->ySub();
-		pt[1]->ySub();
+		return y;
 	}
 };
 
@@ -88,6 +99,7 @@ class SpaceShip : public sf::Drawable
 {
 private:
 	sf::RenderWindow *window;
+	float winHeight;
 	Point *pt[11];
 	Projectile *pjt[50];
 	float x, y;
@@ -107,7 +119,7 @@ private:
 	}
 
 public:
-	SpaceShip(sf::RenderWindow *win, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos)
+	SpaceShip(sf::RenderWindow *win,float windowHeight, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos)
 	{
 		pt[0] = new Point(x + 2, y + 0, 1, color);
 		pt[1] = new Point(x + 1, y + 1, 1, color);
@@ -121,6 +133,7 @@ public:
 		pt[9] = new Point(x + 1, y + 3, 1, color);
 		pt[10] = new Point(x + 3, y + 3, 1, color);
 		this->window = win;
+		this->winHeight = windowHeight;
 		for (int i = 0; i < 50; ++i)
 		{
 			pjt[i] = NULL;
@@ -135,6 +148,7 @@ public:
 			if (pjt[i] == nullptr) // Si l'emplacement est libre
 			{
 				pjt[i] = new Projectile(this->x + 2, this->y - 5, "col");
+				cout << "Lancement projectile " << i <<endl;
 				break;
 			}
 		}
@@ -142,13 +156,21 @@ public:
 
 	void updateProjectiles()
 	{
-		// Déplacer tous les projectiles existants
 		for (int i = 0; i < 50; ++i)
 		{
 			if (pjt[i] != nullptr)
 			{
-				// Déplacer le projectile (par exemple, le faire se déplacer vers le haut)
-				pjt[i]->ySub(); // Vous pouvez ajouter une méthode de déplacement pour le projectile
+				// Déplacer le projectile vers le haut
+				pjt[i]->ySub();
+
+				// Vérifier si le projectile est en dehors de l'écran
+				if (pjt[i]->isOutOfBounds(this->winHeight))
+				{
+					// Libérer la mémoire du projectile
+					delete pjt[i];
+					cout << "Destruction projectile " << i <<endl;
+					pjt[i] = nullptr; // Supprimer le projectile du tableau
+				}
 			}
 		}
 	}
@@ -216,8 +238,8 @@ public:
 int main()
 {
 	const string gameName = "SpaceInvader";
-	const float windowWidth = 1000;
-	const float windowHeight = 562;
+	const float windowWidth = 500;
+	const float windowHeight = 200;
 
 	// Création de la fenêtre SFML
 	cout << "Window creation" << endl;
@@ -230,7 +252,7 @@ int main()
 	point.setPosition(x, y);
 
 	Point p2(100, 100, 1, "Vert");
-	SpaceShip ship(&window, 200, 100, "Green");
+	SpaceShip ship(&window,windowHeight, 200, 100, "Green");
 	sf::Clock clock;
 	sf::Clock clockProjectile;
 	sf::Clock clockShoot;
