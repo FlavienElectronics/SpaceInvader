@@ -76,12 +76,12 @@ public:
 		}
 	}
 
-    void ySub()
-    {
-        this->y--;
-        pt[0]->ySub(); 
-        pt[1]->ySub(); 
-    }
+	void ySub()
+	{
+		this->y--;
+		pt[0]->ySub();
+		pt[1]->ySub();
+	}
 };
 
 class SpaceShip : public sf::Drawable
@@ -232,7 +232,11 @@ int main()
 	Point p2(100, 100, 1, "Vert");
 	SpaceShip ship(&window, 200, 100, "Green");
 	sf::Clock clock;
+	sf::Clock clockProjectile;
+	sf::Clock clockShoot;
 	sf::Time delay = sf::milliseconds(20);
+	sf::Time delayProjectile = sf::milliseconds(10);
+	sf::Time delayShoot = sf::milliseconds(100);
 
 	while (window.isOpen())
 	{
@@ -253,10 +257,15 @@ int main()
 				ship.yAdd();
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 				ship.ySub();
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-				ship.shoot();
 
 			clock.restart(); // Redémarre l'horloge pour le prochain intervalle
+		}
+
+		if (clockShoot.getElapsedTime() >= delayShoot)
+		{
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+				ship.shoot();
+			clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
 		}
 
 		// Empêcher le point de sortir des bords de la fenêtre
@@ -268,7 +277,11 @@ int main()
 		window.clear(sf::Color::White);
 
 		window.draw(ship);
-		ship.updateProjectiles();
+		if (clockProjectile.getElapsedTime() >= delayProjectile)
+		{
+			ship.updateProjectiles();
+			clockProjectile.restart();
+		}
 
 		// Affiche la mise à jour de la fenêtre
 		window.display();
