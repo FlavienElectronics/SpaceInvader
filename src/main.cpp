@@ -34,7 +34,7 @@ public:
 		this->winHeight = windowHeight;
 		this->winWidth = windowWidth;
 		block = new Monster *[this->numberOfMonster];
-		int xLocation = 5;
+		int xLocation = 50;
 		int yLocation = 5;
 		if (this->block != nullptr)
 		{
@@ -95,24 +95,12 @@ public:
 		{
 			for (int j = 0; j < this->numberOfMonster; j++)
 			{
-				cout << "add2 " << this->block[j]->x << " , " << j << endl;
-
-				if (this->block[j]->x < 0)
+				if (this->block[j]->x <= 0)
 				{
 					this->block[j]->x = 0;
-					throw(Exept("x out of bound < 0"));
+					throw Exept("x out of bound < 0");
 				}
-				else
-				{
-					try
-					{
-						this->block[j]->xSub();
-					}
-					catch (MonsterLine::Exept exp)
-					{
-						cout << exp.message << endl;
-					}
-				}
+				this->block[j]->xSub();
 			}
 		}
 	}
@@ -123,25 +111,12 @@ public:
 		{
 			for (int j = 0; j < this->numberOfMonster; j++)
 			{
-				cout << "add2 " << this->block[j]->x << " , " << j << endl;
-
-				if (this->block[j]->x > this->winWidth - this->block[j]->xSize)
+				if (this->block[j]->x >= winWidth - this->block[j]->xSize)
 				{
-					this->block[j]->x = this->winWidth - this->block[j]->xSize;
-					throw(Exept("x out of bound > width"));
+					this->block[j]->x = winWidth - this->block[j]->xSize;
+					throw Exept("x out of bound > width");
 				}
-				else
-				{
-					cout << "add3___---" << endl;
-					try
-					{
-						this->block[j]->xAdd();
-					}
-					catch (MonsterLine::Exept exp)
-					{
-						cout << exp.message << endl;
-					}
-				}
+				this->block[j]->xAdd();
 			}
 		}
 	}
@@ -154,6 +129,15 @@ public:
 	int getNumberOfMonster()
 	{
 		return (this->numberOfMonster);
+	}
+
+	~MonsterLine()
+	{
+		for (int i = 0; i < this->numberOfMonster; i++)
+		{
+			delete block[i];
+		}
+		delete[] block;
 	}
 };
 
@@ -291,12 +275,10 @@ int main()
 				try
 				{
 					mons.xSub();
-					cout << "sub" << endl;
 				}
-				catch (Monster::Exept exp)
+				catch (MonsterLine::Exept &exp)
 				{
 					mons.changeDirection();
-					cout << "Changing direction" << endl;
 					cout << exp.message << endl;
 				}
 			}
@@ -305,12 +287,10 @@ int main()
 				try
 				{
 					mons.xAdd();
-					cout << "add" << endl;
 				}
-				catch (Monster::Exept exp)
+				catch (MonsterLine::Exept &exp)
 				{
 					mons.changeDirection();
-					cout << "Changing direction" << endl;
 					cout << exp.message << endl;
 				}
 			}
