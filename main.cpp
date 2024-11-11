@@ -1,6 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+
+#define VERBOSE
+
 using namespace std;
 
 class SpaceShip;
@@ -101,7 +104,9 @@ public:
 		{
 			if (pt[i] != nullptr)
 			{
+#ifdef VERBOSE
 				cout << "Destruction point " << i << " projectile" << endl;
+#endif
 			}
 		}
 	}
@@ -137,7 +142,9 @@ public:
 
 	SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos), numberOfPixels(11), numberOfProjectiles(50), xSize(5), ySize(4)
 	{
+#ifdef VERBOSE
 		cout << "Creation ship nb pixels " << numberOfPixels << endl;
+#endif
 		pt = new Point *[numberOfPixels];
 		pjt = new Projectile *[numberOfProjectiles];
 		pt[0] = new Point(x + 2, y + 0, 1, color);
@@ -168,7 +175,9 @@ public:
 			if (pjt[i] == nullptr) // Si l'emplacement est libre
 			{
 				pjt[i] = new Projectile(this->x + 2, this->y - 2, "col");
+#ifdef VERBOSE
 				cout << "Lancement projectile " << i << endl;
+#endif
 				break;
 			}
 		}
@@ -189,7 +198,9 @@ public:
 					// Libérer la mémoire du projectile
 					delete pjt[i];
 					pjt[i] = nullptr;
+#ifdef VERBOSE
 					cout << "Destruction projectile " << i << endl;
+#endif
 				}
 			}
 		}
@@ -227,7 +238,9 @@ public:
 			{
 				pt[i]->xAdd();
 			}
+#ifdef VERBOSE
 			cout << "New pos : " << this->x << ";" << this->y << endl;
+#endif
 		}
 	}
 	void yAdd()
@@ -244,7 +257,9 @@ public:
 			{
 				pt[i]->yAdd();
 			}
+#ifdef VERBOSE
 			cout << "New pos : " << this->x << ";" << this->y << endl;
+#endif
 		}
 	}
 	void xSub()
@@ -261,7 +276,9 @@ public:
 			{
 				pt[i]->xSub();
 			}
+#ifdef VERBOSE
 			cout << "New pos : " << this->x << ";" << this->y << endl;
+#endif
 		}
 	}
 	void ySub()
@@ -278,7 +295,9 @@ public:
 			{
 				pt[i]->ySub();
 			}
+#ifdef VERBOSE
 			cout << "New pos : " << this->x << ";" << this->y << endl;
+#endif
 		}
 	}
 
@@ -293,13 +312,17 @@ public:
 				if (pt[i] != nullptr)
 				{
 					delete pt[i]; // Libérer la mémoire allouée pour chaque Point
+#ifdef VERBOSE
 					cout << "Destruction point vaisseau " << i << endl;
+#endif
 				}
 			}
 			delete[] pt;
 			pt = nullptr;
 		}
+#ifdef VERBOSE
 		cout << "Allons détruire les projectiles du vaisseau" << endl;
+#endif
 		if (pjt != nullptr)
 		{
 			for (int i = 0; i < numberOfProjectiles; i++)
@@ -307,7 +330,9 @@ public:
 				if (pjt[i] != nullptr)
 				{
 					delete pjt[i]; // Libérer chaque projectile si il est alloué
+#ifdef VERBOSE
 					cout << "Destruction point vaisseau " << i << endl;
+#endif
 				}
 			}
 			delete[] pjt;
@@ -348,7 +373,9 @@ public:
 		{
 			this->pjt[i] = nullptr;
 		}
+#ifdef VERBOSE
 		cout << "Creation monster nb pixels " << numberOfPixels << endl;
+#endif
 	}
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override
@@ -371,9 +398,11 @@ public:
 
 	~Monster()
 	{
+#ifdef VERBOSE
 		cout << typeid(this).name() << " Nombre de pixels monstre " << numberOfPixels << endl;
 		cout << typeid(this).name() << " Nombre de projectile monstre " << numberOfProjectiles << endl;
 		cout << "Fin destructeur monster " << endl;
+#endif
 	}
 };
 
@@ -420,7 +449,9 @@ int main()
 				}
 				catch (SpaceShip::Exept exp)
 				{
+#ifdef VERBOSE
 					cout << exp.message << endl;
+#endif
 				}
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -431,7 +462,9 @@ int main()
 				}
 				catch (SpaceShip::Exept exp)
 				{
+#ifdef VERBOSE
 					cout << exp.message << endl;
+#endif
 				}
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
@@ -442,7 +475,9 @@ int main()
 				}
 				catch (SpaceShip::Exept exp)
 				{
+#ifdef VERBOSE
 					cout << exp.message << endl;
+#endif
 				}
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -453,7 +488,9 @@ int main()
 				}
 				catch (SpaceShip::Exept exp)
 				{
+#ifdef VERBOSE
 					cout << exp.message << endl;
+#endif
 				}
 			}
 
