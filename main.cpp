@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 #define VERBOSE
 
@@ -112,6 +114,7 @@ public:
 	}
 };
 
+/*Faire une classe Player*/
 class SpaceShip : public sf::Drawable
 {
 protected:
@@ -303,8 +306,10 @@ public:
 
 	~SpaceShip()
 	{
+		#ifdef VERBOSE
 		cout << typeid(this).name() << " Nombre de pixels vaisseau " << numberOfPixels << endl;
 		cout << typeid(this).name() << " Nombre de projectile vaisseau " << numberOfProjectiles << endl;
+		#endif
 		if (pt != nullptr)
 		{
 			for (int i = 0; i < numberOfPixels; i++)
@@ -343,15 +348,23 @@ public:
 
 class Monster : public SpaceShip
 {
+
+protected:
+	int way; // 0 -> goes left | 1 -> goes right
+
 public:
 	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color)
 	{
+		srand(time(0));
+		this->way = rand() % 2;
+
 		this->x = x_pos;
 		this->y = y_pos;
 		this->numberOfPixels = 10;
 		this->numberOfProjectiles = 10;
 		this->xSize = 5;
 		this->ySize = 4;
+
 
 		pt = new Point *[numberOfPixels];
 		pjt = new Projectile *[numberOfProjectiles];
@@ -374,7 +387,7 @@ public:
 			this->pjt[i] = nullptr;
 		}
 #ifdef VERBOSE
-		cout << "Creation monster nb pixels " << numberOfPixels << endl;
+		cout << "Creation monster nb pixels " << numberOfPixels << " Sens : " << this->way << endl;
 #endif
 	}
 
@@ -508,7 +521,7 @@ int main()
 		window.clear(sf::Color::White);
 
 		window.draw(ship);
-		// window.draw(mons);
+		window.draw(mons);
 
 		if (clockProjectile.getElapsedTime() >= delayProjectile)
 		{
@@ -518,7 +531,7 @@ int main()
 
 		if (clockMonster.getElapsedTime() >= delayMonster)
 		{
-			// mons.xAdd();
+			//mons.xAdd();
 			clockMonster.restart();
 		}
 
