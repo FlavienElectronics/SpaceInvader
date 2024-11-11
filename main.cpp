@@ -9,6 +9,8 @@
 using namespace std;
 
 class SpaceShip;
+class Explosion;
+class Monster;
 class Point;
 
 class Point : public sf::RectangleShape
@@ -56,6 +58,11 @@ public:
 	{
 		this->y--;
 		this->setPosition(x, y);
+	}
+	void hide()
+	{
+		this->color = "Invisible";
+		this->setFillColor(sf::Color::Transparent);
 	}
 };
 
@@ -344,6 +351,15 @@ public:
 			pjt = nullptr;
 		}
 	}
+
+	float getX()
+	{
+		return (this->x);
+	}
+	float getY()
+	{
+		return (this->y);
+	}
 };
 
 class Monster : public SpaceShip
@@ -351,39 +367,9 @@ class Monster : public SpaceShip
 
 protected:
 	int direction; // 0 -> goes left | 1 -> goes right
+	Explosion explo;
 
 public:
-	class Explosion
-	{
-		int status = -1; //-1 = no explosion | 0 = starting | 1 = explosion range 1 | 2 = monster has exploded
-		Explosion &operator++()
-		{
-			if (this->status == -1)
-			{
-				status++;
-			}
-			switch (status)
-			{
-			case 0:
-				/* code */
-				break;
-			case 1:
-				/* code */
-				break;
-			case 2:
-				/* code */
-				break;
-
-			default:
-				break;
-			}
-			sf::RectangleShape *localPoint = new sf::RectangleShape(sf::Vector2f(3, 3));
-			localPoint->setFillColor(sf::Color::Black);
-			localPoint->setPosition(50, 20);
-			window->draw(*localPoint);
-		}
-	};
-
 	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color)
 	{
 		srand(time(0));
@@ -456,6 +442,26 @@ public:
 		}
 	}
 
+	void hide()
+	{
+		if (this->pt != nullptr)
+		{
+			for (int i = 0; i < this->numberOfPixels; i++)
+			{
+				if (this->pt[i] != nullptr)
+				{
+					this->pt[i]->hide();
+				}
+			}
+		}
+	}
+
+	void explode()
+	{
+		this->hide();
+		// explo.grow(*this);
+	}
+
 	~Monster()
 	{
 #ifdef VERBOSE
@@ -463,6 +469,100 @@ public:
 		cout << typeid(this).name() << " Nombre de projectile monstre " << numberOfProjectiles << endl;
 		cout << "Fin destructeur monster " << endl;
 #endif
+	}
+
+	friend Explosion;
+};
+
+class Explosion : public SpaceShip
+{
+protected:
+	int status = -1; //-1 = starting | 0 = explosion range 1| 1 = explosion range 2 | 2 = monster has exploded
+	Point **pt;
+
+public:
+	virtual void grow(const Monster &monstr)
+	{
+		switch (status)
+		{
+		case -1:
+			this->status++;
+			// localPoint = new sf::RectangleShape(sf::Vector2f(3, 3));
+			if (pt == nullptr)
+			{
+				pt = new Point *[1];
+			}
+			pt[0] = new Point(monstr.x + 2, monstr.x + 2, 1, "col");
+			break;
+
+		case 0:
+			this->status++;
+			if (pt[0] != nullptr)
+			{
+				delete pt[0];
+				pt[0] = nullptr;
+			}
+			if (pt != nullptr)
+			{
+				delete[] pt;
+				pt = nullptr;
+			}
+			if (pt == nullptr)
+			{
+				pt = new Point *[3];
+			}
+
+			pt[0] = new Point(monstr.x + 2, monstr.y + 1, 1, "col");
+			pt[1] = new Point(monstr.x + 1, monstr.y + 2, 1, "col");
+			pt[2] = new Point(monstr.x + 3, monstr.y + 2, 1, "col");
+			break;
+
+		case 1:
+			this->status++;
+			for (int i = 0; i < 3; i++)
+			{
+				if (pt[i] != nullptr)
+				{
+					delete pt[i];
+					pt[i] = nullptr;
+				}
+			}
+			if (pt != nullptr)
+			{
+				delete[] pt;
+				pt = nullptr;
+			}
+			if (pt == nullptr)
+				pt = new Point *[7];
+			pt[0] = new Point(monstr.x + 0, monstr.y + 0, 1, "col");
+			pt[1] = new Point(monstr.x + 2, monstr.y + 0, 1, "col");
+			pt[2] = new Point(monstr.x + 4, monstr.y + 0, 1, "col");
+			pt[3] = new Point(monstr.x + 1, monstr.y + 1, 1, "col");
+			pt[4] = new Point(monstr.x + 3, monstr.y + 1, 1, "col");
+			pt[5] = new Point(monstr.x + 0, monstr.y + 2, 1, "col");
+			pt[6] = new Point(monstr.x + 4, monstr.y + 2, 1, "col");
+			break;
+
+		case 2:
+			this->status++;
+			for (int i = 0; i < 7; i++)
+			{
+				if (pt[i] != nullptr)
+				{
+					delete pt[i];
+					pt[i] = nullptr;
+				}
+			}
+			if (pt != nullptr)
+			{
+				delete[] pt;
+				pt = nullptr;
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 };
 
@@ -601,7 +701,7 @@ int main()
 			clockProjectile.restart();
 		}
 
-		mons.explosion();
+		// mons.explosion();
 		if (clockMonster.getElapsedTime() >= delayMonster)
 		{
 			if (mons.getDirection() == 0) // go left
