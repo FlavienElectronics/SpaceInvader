@@ -124,14 +124,17 @@ private:
 	}
 
 protected:
+	float x, y;
 	Point **pt;
-	Projectile **pjt;
-	sf::RenderWindow *window;
+	Projectile **pjt;	/*Utilisation de la STL pour les projectile (vector)*/
 	int numberOfPixels;
 	int numberOfProjectiles;
+	int xSize;
+	int ySize;
+
+	sf::RenderWindow *window;
 	float winHeight;
 	float winWidth;
-	float x, y;
 
 public:
 	class Exept
@@ -146,7 +149,7 @@ public:
 
 	SpaceShip() : x(0), y(0), numberOfPixels(11) {}
 
-	SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos), numberOfPixels(11), numberOfProjectiles(50)
+	SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos), numberOfPixels(11), numberOfProjectiles(50),xSize(5),ySize(3)
 	{
 		cout << "Creation ship nb pixels " << numberOfPixels << endl;
 		pt = new Point *[numberOfPixels];
@@ -322,6 +325,9 @@ public:
 		this->y = y_pos;
 		this->numberOfPixels = 10;
 		this->numberOfProjectiles = 10;
+		this->xSize = 4;
+		this->ySize = 3;
+
 		pt = new Point *[numberOfPixels];
 		pjt = new Projectile *[numberOfProjectiles];
 
