@@ -353,6 +353,37 @@ protected:
 	int direction; // 0 -> goes left | 1 -> goes right
 
 public:
+	class Explosion
+	{
+		int status = -1; //-1 = no explosion | 0 = starting | 1 = explosion range 1 | 2 = monster has exploded
+		Explosion &operator++()
+		{
+			if (this->status == -1)
+			{
+				status++;
+			}
+			switch (status)
+			{
+			case 0:
+				/* code */
+				break;
+			case 1:
+				/* code */
+				break;
+			case 2:
+				/* code */
+				break;
+
+			default:
+				break;
+			}
+			sf::RectangleShape *localPoint = new sf::RectangleShape(sf::Vector2f(3, 3));
+			localPoint->setFillColor(sf::Color::Black);
+			localPoint->setPosition(50, 20);
+			window->draw(*localPoint);
+		}
+	};
+
 	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color)
 	{
 		srand(time(0));
@@ -435,6 +466,29 @@ public:
 	}
 };
 
+class MonsterLine
+{
+private:
+	Monster **part;
+	int numberOfMonster;
+
+	sf::RenderWindow *window;
+	float winHeight;
+	float winWidth;
+
+public:
+	MonsterLine()
+	{
+		this->numberOfMonster = 5;
+		part = new Monster *[this->numberOfMonster];
+		int xLoc = 10;
+		for (int i = 0; i < this->numberOfMonster; i++)
+		{
+			// part[i] = new Monster()
+		}
+	}
+};
+
 int main()
 {
 	const string gameName = "SpaceInvader";
@@ -454,10 +508,12 @@ int main()
 	sf::Clock clockProjectile;
 	sf::Clock clockShoot;
 	sf::Clock clockMonster;
+	sf::Clock clockExplosion;
 	sf::Time delayCommand = sf::milliseconds(20);
 	sf::Time delayProjectile = sf::milliseconds(10);
 	sf::Time delayMonster = sf::milliseconds(50);
 	sf::Time delayShoot = sf::milliseconds(100);
+	sf::Time delayExplosion = sf::milliseconds(100);
 
 	while (window.isOpen())
 	{
@@ -545,6 +601,7 @@ int main()
 			clockProjectile.restart();
 		}
 
+		mons.explosion();
 		if (clockMonster.getElapsedTime() >= delayMonster)
 		{
 			if (mons.getDirection() == 0) // go left
