@@ -65,6 +65,14 @@ public:
 
 	void changeDirection()
 	{
+		if (this->direction == 1)
+		{
+			this->direction = 0;
+		}
+		else
+		{
+			this->direction = 1;
+		}
 		for (int i = 0; i < this->numberOfMonster; i++)
 		{
 			this->block[i]->changeDirection();
@@ -87,17 +95,22 @@ public:
 		{
 			for (int j = 0; j < this->numberOfMonster; j++)
 			{
+				cout << "add2 " << this->block[j]->x << " , " << j << endl;
+
 				if (this->block[j]->x < 0)
 				{
-					cout << "Inferieur" << endl;
 					this->block[j]->x = 0;
 					throw(Exept("x out of bound < 0"));
 				}
 				else
 				{
-					for (int i = 0; i < this->block[j]->numberOfPixels; i++)
+					try
 					{
-						this->block[j]->pt[i]->xSub();
+						this->block[j]->xSub();
+					}
+					catch (MonsterLine::Exept exp)
+					{
+						cout << exp.message << endl;
 					}
 				}
 			}
@@ -283,6 +296,7 @@ int main()
 				catch (Monster::Exept exp)
 				{
 					mons.changeDirection();
+					cout << "Changing direction" << endl;
 					cout << exp.message << endl;
 				}
 			}
@@ -296,6 +310,7 @@ int main()
 				catch (Monster::Exept exp)
 				{
 					mons.changeDirection();
+					cout << "Changing direction" << endl;
 					cout << exp.message << endl;
 				}
 			}
