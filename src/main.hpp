@@ -7,6 +7,4 @@
 #include "Projectile.hpp"
 #include "Explosion.hpp"
 
-#define VERBOSE
-
 #endif

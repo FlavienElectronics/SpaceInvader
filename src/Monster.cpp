@@ -34,7 +34,7 @@ Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, f
     {
         this->pjt[i] = nullptr;
     }
-#ifdef VERBOSE
+#ifdef VERBOSE_MONSTER
     cout << "Creation monster nb pixels " << numberOfPixels << " Sens : " << this->direction << endl;
 #endif
 }
@@ -94,17 +94,19 @@ void Monster::explode()
     if (explo != nullptr)
     {
         int stat = explo->grow(*this);
-#ifdef VERBOSE
+#ifdef VERBOSE_MONSTER
         cout << "Status " << stat << endl;
 #endif
+    window->draw(*explo);
     }
 }
 
 Monster::~Monster()
 {
-#ifdef VERBOSE
+#ifdef VERBOSE_MONSTER
     cout << typeid(this).name() << " Nombre de pixels monstre " << numberOfPixels << endl;
     cout << typeid(this).name() << " Nombre de projectile monstre " << numberOfProjectiles << endl;
     cout << "Fin destructeur monster " << endl;
 #endif
+    delete explo;
 }

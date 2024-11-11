@@ -1,5 +1,7 @@
 #include "main.hpp"
 
+//#define VERBOSE_MAIN
+
 using namespace std;
 
 class MonsterLine
@@ -70,7 +72,7 @@ int main()
 				}
 				catch (SpaceShip::Exept exp)
 				{
-#ifdef VERBOSE
+#ifdef VERBOSE_MAIN
 					cout << exp.message << endl;
 #endif
 				}
@@ -83,7 +85,7 @@ int main()
 				}
 				catch (SpaceShip::Exept exp)
 				{
-#ifdef VERBOSE
+#ifdef VERBOSE_MAIN
 					cout << exp.message << endl;
 #endif
 				}
@@ -96,7 +98,7 @@ int main()
 				}
 				catch (SpaceShip::Exept exp)
 				{
-#ifdef VERBOSE
+#ifdef VERBOSE_MAIN
 					cout << exp.message << endl;
 #endif
 				}
@@ -109,7 +111,7 @@ int main()
 				}
 				catch (SpaceShip::Exept exp)
 				{
-#ifdef VERBOSE
+#ifdef VERBOSE_MAIN
 					cout << exp.message << endl;
 #endif
 				}
@@ -117,7 +119,7 @@ int main()
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 			{
-#ifdef VERBOSE
+#ifdef VERBOSE_MAIN
 				cout << "E pressed" << endl;
 #endif
 				if (clockExplosion.getElapsedTime() >= delayExplosion)

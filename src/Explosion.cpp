@@ -3,6 +3,9 @@
 Explosion::Explosion()
 {
     this->pt = nullptr;
+    this->pjt = nullptr;
+    this->numberOfPixels = 0;
+    this->numberOfProjectiles = 0;
     status = -1;
 }
 
@@ -21,6 +24,11 @@ int Explosion::grow(const Monster &monstr)
             pt = new Point *[1];
         }
         pt[0] = new Point(monstr.x + 2, monstr.x + 2, 1, "col");
+        this->numberOfPixels = 1;
+#ifdef VERBOSE
+        cout << "pt" << pt << endl;
+        cout << "pt[0]" << pt[0] << endl;
+#endif
         break;
 
     case 0:
@@ -43,6 +51,7 @@ int Explosion::grow(const Monster &monstr)
         pt[0] = new Point(monstr.x + 2, monstr.y + 1, 1, "col");
         pt[1] = new Point(monstr.x + 1, monstr.y + 2, 1, "col");
         pt[2] = new Point(monstr.x + 3, monstr.y + 2, 1, "col");
+        this->numberOfPixels = 3;
         break;
 
     case 1:
@@ -69,6 +78,7 @@ int Explosion::grow(const Monster &monstr)
         pt[4] = new Point(monstr.x + 3, monstr.y + 1, 1, "col");
         pt[5] = new Point(monstr.x + 0, monstr.y + 2, 1, "col");
         pt[6] = new Point(monstr.x + 4, monstr.y + 2, 1, "col");
+        this->numberOfPixels = 7;
         break;
 
     case 2:
@@ -86,6 +96,7 @@ int Explosion::grow(const Monster &monstr)
             delete[] pt;
             pt = nullptr;
         }
+        this->numberOfPixels = 0;
         break;
 
     default:

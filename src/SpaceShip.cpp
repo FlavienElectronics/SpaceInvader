@@ -9,7 +9,7 @@ SpaceShip::SpaceShip() : x(0), y(0), numberOfPixels(11) {}
 
 SpaceShip::SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos), numberOfPixels(11), numberOfProjectiles(50), xSize(5), ySize(4)
 {
-#ifdef VERBOSE
+#ifdef VERBOSE_SHIP
     cout << "Creation ship nb pixels " << numberOfPixels << endl;
 #endif
     pt = new Point *[numberOfPixels];
@@ -42,7 +42,7 @@ void SpaceShip::shoot()
         if (pjt[i] == nullptr) // Si l'emplacement est libre
         {
             pjt[i] = new Projectile(this->x + 2, this->y - 2, "col");
-#ifdef VERBOSE
+#ifdef VERBOSE_SHIP
             cout << "Lancement projectile " << i << endl;
 #endif
             break;
@@ -65,7 +65,7 @@ void SpaceShip::updateProjectiles()
                 // Libérer la mémoire du projectile
                 delete pjt[i];
                 pjt[i] = nullptr;
-#ifdef VERBOSE
+#ifdef VERBOSE_SHIP
                 cout << "Destruction projectile " << i << endl;
 #endif
             }
@@ -75,18 +75,27 @@ void SpaceShip::updateProjectiles()
 
 void SpaceShip::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    // Dessiner tous les points du vaisseau
-    for (int i = 0; i < numberOfPixels; i++)
+// Dessiner tous les points du vaisseau
+#ifdef VERBOSE_SHIP
+    cout << "Nombre de pixels " << numberOfPixels  << " " << pt << endl;
+#endif
+    if (pt != nullptr)
     {
-        target.draw(*pt[i], states);
-    }
-
-    // Dessiner tous les projectiles
-    for (int i = 0; i < numberOfProjectiles; ++i)
-    {
-        if (pjt[i] != nullptr)
+        for (int i = 0; i < numberOfPixels; i++)
         {
-            target.draw(*pjt[i], states);
+            if (pt[i] != nullptr)
+            {
+                target.draw(*pt[i], states);
+            }
+        }
+
+        // Dessiner tous les projectiles
+        for (int i = 0; i < numberOfProjectiles; ++i)
+        {
+            if (pjt[i] != nullptr)
+            {
+                target.draw(*pjt[i], states);
+            }
         }
     }
 }
@@ -105,7 +114,7 @@ void SpaceShip::xAdd()
         {
             pt[i]->xAdd();
         }
-#ifdef VERBOSE
+#ifdef VERBOSE_SHIP
         cout << "New pos : " << this->x << ";" << this->y << endl;
 #endif
     }
@@ -124,7 +133,7 @@ void SpaceShip::yAdd()
         {
             pt[i]->yAdd();
         }
-#ifdef VERBOSE
+#ifdef VERBOSE_SHIP
         cout << "New pos : " << this->x << ";" << this->y << endl;
 #endif
     }
@@ -143,7 +152,7 @@ void SpaceShip::xSub()
         {
             pt[i]->xSub();
         }
-#ifdef VERBOSE
+#ifdef VERBOSE_SHIP
         cout << "New pos : " << this->x << ";" << this->y << endl;
 #endif
     }
@@ -162,7 +171,7 @@ void SpaceShip::ySub()
         {
             pt[i]->ySub();
         }
-#ifdef VERBOSE
+#ifdef VERBOSE_SHIP
         cout << "New pos : " << this->x << ";" << this->y << endl;
 #endif
     }
@@ -170,7 +179,7 @@ void SpaceShip::ySub()
 
 SpaceShip::~SpaceShip()
 {
-#ifdef VERBOSE
+#ifdef VERBOSE_SHIP
     cout << typeid(this).name() << " Nombre de pixels vaisseau " << numberOfPixels << endl;
     cout << typeid(this).name() << " Nombre de projectile vaisseau " << numberOfProjectiles << endl;
 #endif
@@ -181,7 +190,7 @@ SpaceShip::~SpaceShip()
             if (pt[i] != nullptr)
             {
                 delete pt[i]; // Libérer la mémoire allouée pour chaque Point
-#ifdef VERBOSE
+#ifdef VERBOSE_SHIP
                 cout << "Destruction point vaisseau " << i << endl;
 #endif
             }
@@ -189,7 +198,7 @@ SpaceShip::~SpaceShip()
         delete[] pt;
         pt = nullptr;
     }
-#ifdef VERBOSE
+#ifdef VERBOSE_SHIP
     cout << "Allons détruire les projectiles du vaisseau" << endl;
 #endif
     if (pjt != nullptr)
@@ -199,7 +208,7 @@ SpaceShip::~SpaceShip()
             if (pjt[i] != nullptr)
             {
                 delete pjt[i]; // Libérer chaque projectile si il est alloué
-#ifdef VERBOSE
+#ifdef VERBOSE_SHIP
                 cout << "Destruction point vaisseau " << i << endl;
 #endif
             }
