@@ -127,6 +127,11 @@ int main()
 				explosion = true;
 			}
 
+			if(mons.updateCollision(ship))
+			{
+				explosion = true;
+			}
+
 			clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 		}
 

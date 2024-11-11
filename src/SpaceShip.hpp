@@ -50,7 +50,9 @@ public:
     ~SpaceShip();
     float getX() const;
     float getY() const;
+
     friend class Explosion;
+    friend class Monster;
 };
 
 #endif

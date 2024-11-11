@@ -29,5 +29,7 @@ public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 	float getY() const;
 	~Projectile();
+
+	friend class Monster;
 };
 #endif

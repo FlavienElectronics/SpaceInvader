@@ -26,5 +26,7 @@ public :
 	void hide();
 	float getX() const;
 	float getY() const;
+
+	friend class Monster;
 };
 #endif

@@ -146,6 +146,24 @@ float Monster::getY() const
     return (this->y);
 }
 
+bool Monster::updateCollision(const SpaceShip &ship)
+{
+    for (int i = 0; i < this->numberOfPixels; i++)
+    {
+        for (int j = 0; j < ship.numberOfProjectiles; j++)
+        {
+            if (ship.pjt != nullptr && ship.pjt[j] != nullptr && this->pt[i] != nullptr)
+            {
+                if ((int)ship.pjt[j]->x == (int)this->pt[i]->x && (int)ship.pjt[j]->y == (int)this->pt[i]->y)
+                {
+                    return (true);
+                }
+            }
+        }
+    }
+    return (false);
+}
+
 Monster::~Monster()
 {
 #ifdef VERBOSE_MONSTER

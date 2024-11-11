@@ -38,6 +38,7 @@ public:
 	bool isExplosing();
 	float getX() const;
 	float getY() const;
+	bool updateCollision(const SpaceShip& ship);
 	friend class Explosion;
 };
 #endif
