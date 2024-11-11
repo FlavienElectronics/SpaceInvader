@@ -260,7 +260,8 @@ public:
 					cout << "Destruction point vaisseau " << i << endl;
 				}
 			}
-			delete [] pt;
+			delete[] pt;
+			pt = nullptr;
 		}
 		cout << "Allons détruire les projectiles du vaisseau" << endl;
 		if (pjt != nullptr)
@@ -274,16 +275,13 @@ public:
 				}
 			}
 			delete[] pjt;
+			pjt = nullptr;
 		}
 	}
 };
 
 class Monster : public SpaceShip
 {
-private:
-	Point *pt[10];
-	Projectile *pjt[10];
-
 public:
 	// Monster(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color) : SpaceShip(win,windowHeight,x_pos,y_pos,color);
 	//~Monster();
@@ -294,6 +292,8 @@ public:
 		this->y = y_pos;
 		this->numberOfPixels = 10;
 		this->numberOfProjectiles = 10;
+		pt = new Point *[numberOfPixels];
+		pjt = new Projectile *[numberOfProjectiles];
 
 		pt[0] = new Point(x + 1, y + 0, 1, color);
 		pt[1] = new Point(x + 3, y + 0, 1, color);
