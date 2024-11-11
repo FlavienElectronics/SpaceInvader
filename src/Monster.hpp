@@ -7,10 +7,7 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "Point.hpp"
 #include "SpaceShip.hpp"
-#include "Projectile.hpp"
-#include "Explosion.hpp"
 
 using namespace std;
 
