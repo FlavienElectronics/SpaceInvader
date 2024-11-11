@@ -109,24 +109,10 @@ public:
 
 class SpaceShip : public sf::Drawable
 {
-private:
-	virtual void correctPosition()
-	{
-
-		if (this->x < 0)
-			this->x = 0;
-		if (this->x + 5 > winWidth)
-			this->x = winWidth;
-		if (this->y < 0)
-			this->y = 0;
-		if (this->y + 3 > winHeight)
-			this->y = winHeight;
-	}
-
 protected:
 	float x, y;
 	Point **pt;
-	Projectile **pjt;	/*Utilisation de la STL pour les projectile (vector)*/
+	Projectile **pjt; /*Utilisation de la STL pour les projectile (vector)*/
 	int numberOfPixels;
 	int numberOfProjectiles;
 	int xSize;
@@ -149,7 +135,7 @@ public:
 
 	SpaceShip() : x(0), y(0), numberOfPixels(11) {}
 
-	SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos), numberOfPixels(11), numberOfProjectiles(50),xSize(5),ySize(3)
+	SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos), numberOfPixels(11), numberOfProjectiles(50), xSize(5), ySize(4)
 	{
 		cout << "Creation ship nb pixels " << numberOfPixels << endl;
 		pt = new Point *[numberOfPixels];
@@ -230,9 +216,9 @@ public:
 	void xAdd()
 	{
 		this->x++;
-		if (this->x + 5 > winWidth)
+		if (this->x > winWidth - this->xSize)
 		{
-			this->x = winWidth - 5;
+			this->x = winWidth - this->xSize;
 			throw(Exept("x out of bound > width"));
 		}
 		else
@@ -247,12 +233,19 @@ public:
 	void yAdd()
 	{
 		this->y++;
-		correctPosition();
-		for (int i = 0; i < numberOfPixels; i++)
+		if (this->y > winHeight - this->ySize)
 		{
-			pt[i]->yAdd();
+			this->y = winHeight - this->ySize;
+			throw(Exept("y out of bound y > height"));
 		}
-		cout << "New pos : " << this->x << ";" << this->y << endl;
+		else
+		{
+			for (int i = 0; i < numberOfPixels; i++)
+			{
+				pt[i]->yAdd();
+			}
+			cout << "New pos : " << this->x << ";" << this->y << endl;
+		}
 	}
 	void xSub()
 	{
@@ -274,12 +267,19 @@ public:
 	void ySub()
 	{
 		this->y--;
-		correctPosition();
-		for (int i = 0; i < numberOfPixels; i++)
+		if (this->y < 0)
 		{
-			pt[i]->ySub();
+			this->y = 0;
+			throw(Exept("y out of bound y < 0"));
 		}
-		cout << "New pos : " << this->x << ";" << this->y << endl;
+		else
+		{
+			for (int i = 0; i < numberOfPixels; i++)
+			{
+				pt[i]->ySub();
+			}
+			cout << "New pos : " << this->x << ";" << this->y << endl;
+		}
 	}
 
 	~SpaceShip()
@@ -325,8 +325,8 @@ public:
 		this->y = y_pos;
 		this->numberOfPixels = 10;
 		this->numberOfProjectiles = 10;
-		this->xSize = 4;
-		this->ySize = 3;
+		this->xSize = 5;
+		this->ySize = 4;
 
 		pt = new Point *[numberOfPixels];
 		pjt = new Projectile *[numberOfProjectiles];
@@ -390,7 +390,7 @@ int main()
 	float x = windowWidth / 2, y = windowHeight / 2; // Position initiale du point
 
 	SpaceShip ship(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 2, "Green");
-	// Monster mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, "Green");
+	Monster mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, "Green");
 
 	sf::Clock clockCommand;
 	sf::Clock clockProjectile;
@@ -436,11 +436,25 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 			{
-				ship.yAdd();
+				try
+				{
+					ship.yAdd();
+				}
+				catch (SpaceShip::Exept exp)
+				{
+					cout << exp.message << endl;
+				}
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			{
-				ship.ySub();
+				try
+				{
+					ship.ySub();
+				}
+				catch (SpaceShip::Exept exp)
+				{
+					cout << exp.message << endl;
+				}
 			}
 
 			clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
