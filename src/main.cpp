@@ -34,15 +34,15 @@ public:
 		this->winHeight = windowHeight;
 		this->winWidth = windowWidth;
 		block = new Monster *[this->numberOfMonster];
-		int xLocation = 10;
-		int yLocation = 10;
+		int xLocation = 5;
+		int yLocation = 5;
 		if (this->block != nullptr)
 		{
+			int cnt = 1;
 			for (int i = 0; i < this->numberOfMonster; i++)
 			{
-				block[i] = new Monster(win, winHeight, winWidth, xLocation * (i + 1) * 5, yLocation * i * 4, "col");
-
-				// cout << block[i] << endl;
+				block[i] = new Monster(win, winHeight, winWidth, xLocation + (cnt * 5), yLocation, "col");
+				cnt++;
 			}
 		}
 	}
@@ -63,6 +63,14 @@ public:
 		}
 	}
 
+	void changeDirection()
+	{
+		for (int i = 0; i < this->numberOfMonster; i++)
+		{
+			this->block[i]->changeDirection();
+		}
+	}
+
 	bool *updateCollision(const SpaceShip &ship)
 	{
 		bool *monsterTouched = new bool[this->numberOfMonster];
@@ -75,18 +83,22 @@ public:
 
 	void xSub()
 	{
-		for (int j = 0; j < this->numberOfMonster; j++)
+		if (this->block != nullptr)
 		{
-			if (this->block[j]->x < 0)
+			for (int j = 0; j < this->numberOfMonster; j++)
 			{
-				this->block[j]->x = 0;
-				throw(Exept("x out of bound < 0"));
-			}
-			else
-			{
-				for (int i = 0; i < this->block[j]->numberOfPixels; i++)
+				if (this->block[j]->x < 0)
 				{
-					this->block[j]->pt[i]->xSub();
+					cout << "Inferieur" << endl;
+					this->block[j]->x = 0;
+					throw(Exept("x out of bound < 0"));
+				}
+				else
+				{
+					for (int i = 0; i < this->block[j]->numberOfPixels; i++)
+					{
+						this->block[j]->pt[i]->xSub();
+					}
 				}
 			}
 		}
@@ -94,18 +106,28 @@ public:
 
 	void xAdd()
 	{
-		for (int j = 0; j < this->numberOfMonster; j++)
+		if (this->block != nullptr)
 		{
-			if (this->block[j]->x > winWidth - this->block[j]->xSize)
+			for (int j = 0; j < this->numberOfMonster; j++)
 			{
-				this->block[j]->x = winWidth - this->block[j]->xSize;
-				throw(Exept("x out of bound > width"));
-			}
-			else
-			{
-				for (int i = 0; i < this->block[j]->numberOfPixels; i++)
+				cout << "add2 " << this->block[j]->x << " , " << j << endl;
+
+				if (this->block[j]->x > this->winWidth - this->block[j]->xSize)
 				{
-					this->block[j]->pt[i]->xAdd();
+					this->block[j]->x = this->winWidth - this->block[j]->xSize;
+					throw(Exept("x out of bound > width"));
+				}
+				else
+				{
+					cout << "add3___---" << endl;
+					try
+					{
+						this->block[j]->xAdd();
+					}
+					catch (MonsterLine::Exept exp)
+					{
+						cout << exp.message << endl;
+					}
 				}
 			}
 		}
@@ -143,7 +165,7 @@ int main()
 
 	SpaceShip ship(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 2, "Green");
 	// Monster mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, "Green");
-	MonsterLine mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, 2, "Green");
+	MonsterLine mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, 5, "Green");
 
 	bool *explosion;
 
@@ -251,29 +273,30 @@ int main()
 		// mons.explosion();
 		if (clockMonster.getElapsedTime() >= delayMonster)
 		{
-			for (int i = 0; i < mons.getNumberOfMonster(); i++)
+			if (mons.getDirection() == 0) // go left
 			{
-				if (mons.getDirection() == 0) // go left
+				try
 				{
-					try
-					{
-						mons.xSub();
-					}
-					catch (Monster::Exept exp)
-					{
-						// mons.changeDirection();
-					}
+					mons.xSub();
+					cout << "sub" << endl;
 				}
-				else if (mons.getDirection() == 1) // go right
+				catch (Monster::Exept exp)
 				{
-					try
-					{
-						mons.xAdd();
-					}
-					catch (Monster::Exept exp)
-					{
-						// mons.changeDirection();
-					}
+					mons.changeDirection();
+					cout << exp.message << endl;
+				}
+			}
+			else if (mons.getDirection() == 1) // go right
+			{
+				try
+				{
+					mons.xAdd();
+					cout << "add" << endl;
+				}
+				catch (Monster::Exept exp)
+				{
+					mons.changeDirection();
+					cout << exp.message << endl;
 				}
 			}
 			clockMonster.restart();
@@ -295,7 +318,7 @@ int main()
 					cout << "explosion" << endl;
 					clockExplosion.restart();
 				}
-				*/
+			*/
 
 		// Efface l'écran en blanc
 		window.clear(sf::Color::White);
