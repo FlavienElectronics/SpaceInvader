@@ -10,6 +10,7 @@ private:
 	int direction;
 	Monster **block;
 	int numberOfMonster;
+	float spacing;
 
 	sf::RenderWindow *window;
 	float winHeight;
@@ -33,6 +34,7 @@ public:
 		this->numberOfMonster = numberOfMonster;
 		this->winHeight = windowHeight;
 		this->winWidth = windowWidth;
+		this->spacing = 6;
 		block = new Monster *[this->numberOfMonster];
 		int xLocation = 50;
 		int yLocation = 5;
@@ -41,7 +43,7 @@ public:
 			int cnt = 1;
 			for (int i = 0; i < this->numberOfMonster; i++)
 			{
-				block[i] = new Monster(win, winHeight, winWidth, xLocation + (cnt * 5), yLocation, "col");
+				block[i] = new Monster(win, winHeight, winWidth, xLocation + (i * spacing), yLocation, "col");
 				cnt++;
 			}
 		}
@@ -98,9 +100,16 @@ public:
 				if (this->block[j]->x <= 0)
 				{
 					this->block[j]->x = 0;
-					throw Exept("x out of bound < 0");
+					// throw Exept("x out of bound < 0");
 				}
-				this->block[j]->xSub();
+				try
+				{
+					this->block[j]->xSub();
+				}
+				catch (SpaceShip::Exept &exp)
+				{
+					throw(exp);
+				}
 			}
 		}
 	}
@@ -114,9 +123,16 @@ public:
 				if (this->block[j]->x >= winWidth - this->block[j]->xSize)
 				{
 					this->block[j]->x = winWidth - this->block[j]->xSize;
-					throw Exept("x out of bound > width");
+					// throw Exept("x out of bound > width");
 				}
-				this->block[j]->xAdd();
+				try
+				{
+					this->block[j]->xAdd();
+				}
+				catch (SpaceShip::Exept &exp)
+				{
+					throw(exp);
+				}
 			}
 		}
 	}
@@ -131,13 +147,28 @@ public:
 		return (this->numberOfMonster);
 	}
 
+	/*Not working*/
+	void keepSpacing()
+	{
+		for (int i = 1; i < this->numberOfMonster; i++)
+		{
+			if (this->block[i - 1]->x - this->block[i]->x < (this->spacing - this->block[i]->xSize))
+			{
+				this->block[i - 1]->x++;
+			}
+		}
+	}
+
 	~MonsterLine()
 	{
-		for (int i = 0; i < this->numberOfMonster; i++)
+		if (block != nullptr)
 		{
-			delete block[i];
+			for (int i = 0; i < this->numberOfMonster; i++)
+			{
+				delete block[i];
+			}
+			delete[] block;
 		}
-		delete[] block;
 	}
 };
 
@@ -165,6 +196,7 @@ int main()
 	MonsterLine mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, 5, "Green");
 
 	bool *explosion;
+	bool change = false;
 
 	sf::Clock clockCommand;
 	sf::Clock clockProjectile;
@@ -276,9 +308,9 @@ int main()
 				{
 					mons.xSub();
 				}
-				catch (MonsterLine::Exept &exp)
+				catch (SpaceShip::Exept &exp)
 				{
-					mons.changeDirection();
+					change = true;
 					cout << exp.message << endl;
 				}
 			}
@@ -288,14 +320,22 @@ int main()
 				{
 					mons.xAdd();
 				}
-				catch (MonsterLine::Exept &exp)
+				catch (SpaceShip::Exept &exp)
 				{
-					mons.changeDirection();
+					change = true;
 					cout << exp.message << endl;
 				}
 			}
+
+			if (change)
+			{
+				mons.changeDirection();
+				change = false;
+			}
+
 			clockMonster.restart();
 		}
+		// mons.keepSpacing();
 		/*
 				if (clockExplosion.getElapsedTime() >= delayExplosion)
 				{
