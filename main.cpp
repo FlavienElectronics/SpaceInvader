@@ -306,10 +306,10 @@ public:
 
 	~SpaceShip()
 	{
-		#ifdef VERBOSE
+#ifdef VERBOSE
 		cout << typeid(this).name() << " Nombre de pixels vaisseau " << numberOfPixels << endl;
 		cout << typeid(this).name() << " Nombre de projectile vaisseau " << numberOfProjectiles << endl;
-		#endif
+#endif
 		if (pt != nullptr)
 		{
 			for (int i = 0; i < numberOfPixels; i++)
@@ -350,13 +350,13 @@ class Monster : public SpaceShip
 {
 
 protected:
-	int way; // 0 -> goes left | 1 -> goes right
+	int direction; // 0 -> goes left | 1 -> goes right
 
 public:
 	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color)
 	{
 		srand(time(0));
-		this->way = rand() % 2;
+		this->direction = rand() % 2;
 
 		this->x = x_pos;
 		this->y = y_pos;
@@ -364,7 +364,6 @@ public:
 		this->numberOfProjectiles = 10;
 		this->xSize = 5;
 		this->ySize = 4;
-
 
 		pt = new Point *[numberOfPixels];
 		pjt = new Projectile *[numberOfProjectiles];
@@ -387,7 +386,7 @@ public:
 			this->pjt[i] = nullptr;
 		}
 #ifdef VERBOSE
-		cout << "Creation monster nb pixels " << numberOfPixels << " Sens : " << this->way << endl;
+		cout << "Creation monster nb pixels " << numberOfPixels << " Sens : " << this->direction << endl;
 #endif
 	}
 
@@ -407,6 +406,11 @@ public:
 				target.draw(*pjt[i], states);
 			}
 		}
+	}
+
+	int getDirection()
+	{
+		return (this->direction);
 	}
 
 	~Monster()
@@ -531,7 +535,14 @@ int main()
 
 		if (clockMonster.getElapsedTime() >= delayMonster)
 		{
-			//mons.xAdd();
+			if (mons.getDirection() == 0) // go left
+			{
+				mons.xSub();
+			}
+			else if (mons.getDirection() == 1) // go right
+			{
+				mons.xAdd();
+			}
 			clockMonster.restart();
 		}
 
