@@ -1,14 +1,9 @@
 #include "SpaceShip.hpp"
 
-class SpaceShip::Exept
+SpaceShip::Exept::Exept(std::string mes)
 {
-public:
-    string message;
-    Exept(string mes)
-    {
-        this->message = mes;
-    }
-};
+    this->message = mes;
+}
 
 SpaceShip::SpaceShip() : x(0), y(0), numberOfPixels(11) {}
 

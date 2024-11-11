@@ -1,3 +1,6 @@
+#ifndef EXPLOSION_HPP
+#define EXPLOSION_HPP
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
@@ -21,3 +24,4 @@ protected:
 public:
 	virtual void grow(const Monster &monstr);
 };
+#endif

@@ -1,3 +1,6 @@
+#ifndef MONSTER_HPP
+#define MONSTER_HPP
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
@@ -7,6 +10,7 @@
 #include "Point.hpp"
 #include "SpaceShip.hpp"
 #include "Projectile.hpp"
+#include "Explosion.hpp"
 
 using namespace std;
 
@@ -30,3 +34,4 @@ public:
 	~Monster();
 	friend Explosion;
 };
+#endif

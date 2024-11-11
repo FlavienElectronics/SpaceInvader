@@ -4,8 +4,8 @@
 #include "Point.hpp"
 #include "SpaceShip.hpp"
 #include "Monster.hpp"
-#include "Explosion.hpp"
 #include "Projectile.hpp"
+#include "Explosion.hpp"
 
 #define VERBOSE
 

@@ -1,3 +1,7 @@
+#ifndef PROJECTILE_HPP
+#define PROJECTILE_HPP
+
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
@@ -26,3 +30,4 @@ public:
 	float getY() const;
 	~Projectile();
 };
+#endif
