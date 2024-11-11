@@ -165,7 +165,6 @@ int main()
 			}
 			clockMonster.restart();
 		}
-
 		// Affiche la mise à jour de la fenêtre
 		window.display();
 	}

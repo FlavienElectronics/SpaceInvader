@@ -22,7 +22,7 @@ class Monster : public SpaceShip
 
 protected:
 	int direction; // 0 -> goes left | 1 -> goes right
-	Explosion explo;
+	//class Explosion explo;
 
 public:
 	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color);
@@ -32,6 +32,6 @@ public:
 	void hide();
 	void explode();
 	~Monster();
-	friend Explosion;
+	friend class Explosion;
 };
 #endif

@@ -1,9 +1,10 @@
 NAME = SpaceInvader
 CC = g++
+LIBFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 CPPFLAGS = -Wall
 
 SRC_DIR = ./
-SRC = *.cpp
+SRC = main.cpp Explosion.cpp Monster.cpp Point.cpp Projectile.cpp SpaceShip.cpp
 
 TPP =
 OBJ_DIR = ./obj
@@ -17,7 +18,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
 	@echo "Compiling program:"
-	@$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME) $(LIBFLAGS)
 	@echo "[${NAME}] Successfully compiled!"
 
 # Compilation
