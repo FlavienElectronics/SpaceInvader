@@ -102,10 +102,10 @@ int Explosion::grow(const Monster &monstr)
     default:
         break;
     }
-    #ifdef VERBOSE
-    for (int i = 0 ; i < this->numberOfPixels ; i ++)
+#ifdef VERBOSE
+    for (int i = 0; i < this->numberOfPixels; i++)
     {
-        cout << "pt" << i <<" " << this->pt[i]->getX() << ";" << this->pt[i]->getY() << endl;
+        cout << "pt" << i << " " << this->pt[i]->getX() << ";" << this->pt[i]->getY() << endl;
     }
 #endif
     return (status);

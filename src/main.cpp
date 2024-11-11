@@ -171,16 +171,25 @@ int main()
 			clockMonster.restart();
 		}
 
-		if (clockExplosion.getElapsedTime() >= delayExplosion && explosion)
+		if (clockExplosion.getElapsedTime() >= delayExplosion)
 		{
-			mons.explode();
+			if (explosion && mons.isAlive())
+			{
+				mons.explode();
+				cout << "explosion" << endl;
+			}
+			mons.updateParticule();
 			clockExplosion.restart();
 		}
+
+		if (clockExplosion.getElapsedTime() >= delayExplosion)
+		{
+		}
+
 		// Efface l'écran en blanc
 		window.clear(sf::Color::White);
 		window.draw(ship);
 		window.draw(mons);
-		window.draw(*mons.explo);
 		window.display();
 	}
 	cout << "Window closed" << endl;

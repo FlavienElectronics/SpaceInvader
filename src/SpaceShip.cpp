@@ -52,7 +52,7 @@ void SpaceShip::shoot()
 
 void SpaceShip::updateProjectiles()
 {
-    for (int i = 0; i < numberOfProjectiles; ++i)
+    for (int i = 0; i < numberOfProjectiles; i++)
     {
         if (pjt[i] != nullptr)
         {

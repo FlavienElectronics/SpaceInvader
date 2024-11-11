@@ -14,6 +14,7 @@ Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, f
     this->numberOfProjectiles = 10;
     this->xSize = 5;
     this->ySize = 4;
+    this->stat = 0;
 
     pt = new Point *[numberOfPixels];
     pjt = new Projectile *[numberOfProjectiles];
@@ -43,17 +44,25 @@ Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, f
 void Monster::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     // Dessiner tous les points du vaisseau
-    for (int i = 0; i < numberOfPixels; i++)
+    for (int i = 0; i < this->numberOfPixels; i++)
     {
-        target.draw(*pt[i], states);
+        target.draw(*this->pt[i], states);
     }
 
     // Dessiner tous les projectiles
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < this->numberOfProjectiles; i++)
     {
-        if (pjt[i] != nullptr)
+        if (this->pjt[i] != nullptr)
         {
-            target.draw(*pjt[i], states);
+            target.draw(*this->pjt[i], states);
+        }
+    }
+
+    for (int i = 0; i < this->explo->numberOfPixels; i++)
+    {
+        if (this->explo->pt[i] != nullptr)
+        {
+            target.draw(*this->explo->pt[i], states);
         }
     }
 }
@@ -91,21 +100,29 @@ void Monster::hide()
 
 void Monster::explode()
 {
-    this->hide();
-    if (explo != nullptr && alive)
+    this->alive = false;
+    if (explo != nullptr && stat < 3)
     {
-        int stat = explo->grow(*this);
+        this->stat = explo->grow(*this);
 #ifdef VERBOSE_MONSTER
         cout << "Status " << stat << endl;
-        
+
 #endif
-        window->draw(*explo);
-        cout << "Draw explo" << endl;
-        if (stat == 3)
-        {
-            this->alive = false;
-        }
     }
+}
+
+void Monster::updateParticule()
+{
+    if (this->alive == false && this->stat < 3)
+    {
+        this->hide();
+        this->explode();
+    }
+}
+
+bool Monster::isAlive()
+{
+    return(this->alive);
 }
 
 Monster::~Monster()
