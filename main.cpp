@@ -109,6 +109,19 @@ public:
 
 class SpaceShip : public sf::Drawable
 {
+private:
+	virtual void correctPosition()
+	{
+
+		if (this->x < 0)
+			this->x = 0;
+		if (this->x + 5 > winWidth)
+			this->x = winWidth;
+		if (this->y < 0)
+			this->y = 0;
+		if (this->y + 3 > winHeight)
+			this->y = winHeight;
+	}
 
 protected:
 	Point **pt;
@@ -117,26 +130,23 @@ protected:
 	int numberOfPixels;
 	int numberOfProjectiles;
 	float winHeight;
+	float winWidth;
 	float x, y;
 
-	void correctPosition()
-	{
-		/*
-				if (this->x < 0)
-			this->x = 0;
-		if (this->x > windowWidth - 2 * point.getRadius())
-			this->x = windowWidth - 2 * point.getRadius();
-		if (this->y < 0)
-			this->y = 0;
-		if (this->y > windowHeight - 2 * this->getRadius())
-			this->y = windowHeight - 2 * point.getRadius();
-			*/
-	}
-
 public:
+	class Exept
+	{
+	public:
+		string message;
+		Exept(string mes)
+		{
+			this->message = mes;
+		}
+	};
+
 	SpaceShip() : x(0), y(0), numberOfPixels(11) {}
 
-	SpaceShip(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos), numberOfPixels(11), numberOfProjectiles(50)
+	SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos), numberOfPixels(11), numberOfProjectiles(50)
 	{
 		cout << "Creation ship nb pixels " << numberOfPixels << endl;
 		pt = new Point *[numberOfPixels];
@@ -154,6 +164,7 @@ public:
 		pt[10] = new Point(x + 3, y + 3, 1, color);
 		this->window = win;
 		this->winHeight = windowHeight;
+		this->winWidth = windowWidth;
 		for (int i = 0; i < numberOfProjectiles; i++)
 		{
 			this->pjt[i] = nullptr;
@@ -163,11 +174,11 @@ public:
 	void shoot()
 	{
 		// Chercher un emplacement libre dans le tableau de projectiles
-		for (int i = 0; i < 50; ++i)
+		for (int i = 0; i < numberOfProjectiles; ++i)
 		{
 			if (pjt[i] == nullptr) // Si l'emplacement est libre
 			{
-				pjt[i] = new Projectile(this->x + 2, this->y - 5, "col");
+				pjt[i] = new Projectile(this->x + 2, this->y - 2, "col");
 				cout << "Lancement projectile " << i << endl;
 				break;
 			}
@@ -176,7 +187,7 @@ public:
 
 	void updateProjectiles()
 	{
-		for (int i = 0; i < 50; ++i)
+		for (int i = 0; i < numberOfProjectiles; ++i)
 		{
 			if (pjt[i] != nullptr)
 			{
@@ -204,7 +215,7 @@ public:
 		}
 
 		// Dessiner tous les projectiles
-		for (int i = 0; i < 50; ++i)
+		for (int i = 0; i < numberOfProjectiles; ++i)
 		{
 			if (pjt[i] != nullptr)
 			{
@@ -216,34 +227,56 @@ public:
 	void xAdd()
 	{
 		this->x++;
-		for (int i = 0; i < 11; i++)
+		if (this->x + 5 > winWidth)
 		{
-			pt[i]->xAdd();
+			this->x = winWidth - 5;
+			throw(Exept("x out of bound > width"));
+		}
+		else
+		{
+			for (int i = 0; i < numberOfPixels; i++)
+			{
+				pt[i]->xAdd();
+			}
+			cout << "New pos : " << this->x << ";" << this->y << endl;
 		}
 	}
 	void yAdd()
 	{
 		this->y++;
-		for (int i = 0; i < 11; i++)
+		correctPosition();
+		for (int i = 0; i < numberOfPixels; i++)
 		{
 			pt[i]->yAdd();
 		}
+		cout << "New pos : " << this->x << ";" << this->y << endl;
 	}
 	void xSub()
 	{
 		this->x--;
-		for (int i = 0; i < 11; i++)
+		if (this->x < 0)
 		{
-			pt[i]->xSub();
+			this->x = 0;
+			throw(Exept("x out of bound < 0"));
+		}
+		else
+		{
+			for (int i = 0; i < numberOfPixels; i++)
+			{
+				pt[i]->xSub();
+			}
+			cout << "New pos : " << this->x << ";" << this->y << endl;
 		}
 	}
 	void ySub()
 	{
 		this->y--;
-		for (int i = 0; i < 11; i++)
+		correctPosition();
+		for (int i = 0; i < numberOfPixels; i++)
 		{
 			pt[i]->ySub();
 		}
+		cout << "New pos : " << this->x << ";" << this->y << endl;
 	}
 
 	~SpaceShip()
@@ -283,8 +316,7 @@ public:
 class Monster : public SpaceShip
 {
 public:
-
-	Monster(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color)
+	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color)
 	{
 		this->x = x_pos;
 		this->y = y_pos;
@@ -305,6 +337,7 @@ public:
 		pt[9] = new Point(x + 3, y + 3, 1, color);
 		this->window = win;
 		this->winHeight = windowHeight;
+		this->winWidth = windowWidth;
 		for (int i = 0; i < numberOfProjectiles; i++)
 		{
 			this->pjt[i] = nullptr;
@@ -350,14 +383,16 @@ int main()
 
 	float x = windowWidth / 2, y = windowHeight / 2; // Position initiale du point
 
-	SpaceShip ship(&window, windowHeight, windowWidth / 2, windowHeight / 2, "Green");
-	Monster mons(&window, windowHeight, windowWidth / 3, windowHeight / 3, "Green");
+	SpaceShip ship(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 2, "Green");
+	// Monster mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, "Green");
 
-	sf::Clock clock;
+	sf::Clock clockCommand;
 	sf::Clock clockProjectile;
 	sf::Clock clockShoot;
-	sf::Time delay = sf::milliseconds(20);
+	sf::Clock clockMonster;
+	sf::Time delayCommand = sf::milliseconds(20);
 	sf::Time delayProjectile = sf::milliseconds(10);
+	sf::Time delayMonster = sf::milliseconds(50);
 	sf::Time delayShoot = sf::milliseconds(100);
 
 	while (window.isOpen())
@@ -369,18 +404,40 @@ int main()
 				window.close();
 		}
 
-		if (clock.getElapsedTime() >= delay)
+		if (clockCommand.getElapsedTime() >= delayCommand)
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-				ship.xAdd();
+			{
+				try
+				{
+					ship.xAdd();
+				}
+				catch (SpaceShip::Exept exp)
+				{
+					cout << exp.message << endl;
+				}
+			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-				ship.xSub();
+			{
+				try
+				{
+					ship.xSub();
+				}
+				catch (SpaceShip::Exept exp)
+				{
+					cout << exp.message << endl;
+				}
+			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			{
 				ship.yAdd();
+			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			{
 				ship.ySub();
+			}
 
-			clock.restart(); // Redémarre l'horloge pour le prochain intervalle
+			clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 		}
 
 		if (clockShoot.getElapsedTime() >= delayShoot)
@@ -394,12 +451,18 @@ int main()
 		window.clear(sf::Color::White);
 
 		window.draw(ship);
-		window.draw(mons);
+		// window.draw(mons);
 
 		if (clockProjectile.getElapsedTime() >= delayProjectile)
 		{
 			ship.updateProjectiles();
 			clockProjectile.restart();
+		}
+
+		if (clockMonster.getElapsedTime() >= delayMonster)
+		{
+			// mons.xAdd();
+			clockMonster.restart();
 		}
 
 		// Affiche la mise à jour de la fenêtre
