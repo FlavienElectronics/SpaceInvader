@@ -23,5 +23,6 @@ protected:
 public:
 	Explosion();
 	virtual int grow(const Monster &monstr);
+
 };
 #endif

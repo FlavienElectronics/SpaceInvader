@@ -21,9 +21,11 @@ class Monster : public SpaceShip
 
 protected:
 	int direction; // 0 -> goes left | 1 -> goes right
-	Explosion* explo; // Circular inclusion
 
 public:
+	Explosion* explo; // Circular inclusion
+
+	
 	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 	int getDirection();

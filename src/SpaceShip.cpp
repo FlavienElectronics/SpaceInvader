@@ -77,7 +77,7 @@ void SpaceShip::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 // Dessiner tous les points du vaisseau
 #ifdef VERBOSE_SHIP
-    cout << "Nombre de pixels " << numberOfPixels  << " " << pt << endl;
+    cout << "Nombre de pixels " << numberOfPixels << " " << pt << endl;
 #endif
     if (pt != nullptr)
     {
@@ -97,6 +97,12 @@ void SpaceShip::draw(sf::RenderTarget &target, sf::RenderStates states) const
                 target.draw(*pjt[i], states);
             }
         }
+    }
+    else
+    {
+#ifdef VERBOSE_SHIP
+        cout << typeid(this).name() << endl;
+#endif
     }
 }
 

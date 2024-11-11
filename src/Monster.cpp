@@ -96,8 +96,16 @@ void Monster::explode()
         int stat = explo->grow(*this);
 #ifdef VERBOSE_MONSTER
         cout << "Status " << stat << endl;
+        
 #endif
-    window->draw(*explo);
+        window->draw(*explo);
+        cout << "Draw explo" << endl;
+    }
+    else
+    {
+#ifdef VERBOSE_MONSTER
+        cout << "explo null " << endl;
+#endif
     }
 }
 

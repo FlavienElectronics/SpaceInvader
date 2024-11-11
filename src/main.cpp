@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-//#define VERBOSE_MAIN
+// #define VERBOSE_MAIN
 
 using namespace std;
 
@@ -52,6 +52,8 @@ int main()
 	sf::Time delayMonster = sf::milliseconds(50);
 	sf::Time delayShoot = sf::milliseconds(100);
 	sf::Time delayExplosion = sf::milliseconds(500);
+
+	bool explosion = false;
 
 	while (window.isOpen())
 	{
@@ -122,11 +124,7 @@ int main()
 #ifdef VERBOSE_MAIN
 				cout << "E pressed" << endl;
 #endif
-				if (clockExplosion.getElapsedTime() >= delayExplosion)
-				{
-					mons.explode();
-					clockExplosion.restart();
-				}
+				explosion = true;
 			}
 
 			clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
@@ -172,10 +170,17 @@ int main()
 			}
 			clockMonster.restart();
 		}
-				// Efface l'écran en blanc
+
+		if (clockExplosion.getElapsedTime() >= delayExplosion && explosion)
+		{
+			mons.explode();
+			clockExplosion.restart();
+		}
+		// Efface l'écran en blanc
 		window.clear(sf::Color::White);
 		window.draw(ship);
 		window.draw(mons);
+		window.draw(*mons.explo);
 		window.display();
 	}
 	cout << "Window closed" << endl;
