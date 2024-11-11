@@ -35,6 +35,9 @@ public:
 	void explode();
 	~Monster();
 	bool isAlive();
+	bool isExplosing();
+	float getX() const;
+	float getY() const;
 	friend class Explosion;
 };
 #endif

@@ -173,17 +173,19 @@ int main()
 
 		if (clockExplosion.getElapsedTime() >= delayExplosion)
 		{
-			if (explosion && mons.isAlive())
+			if (mons.isExplosing())
 			{
-				mons.explode();
-				cout << "explosion" << endl;
+				cout << "is explosing" << endl;
+				mons.updateParticule();
+				clockExplosion.restart();
 			}
-			mons.updateParticule();
-			clockExplosion.restart();
 		}
 
-		if (clockExplosion.getElapsedTime() >= delayExplosion)
+		if (explosion && mons.isAlive())
 		{
+			mons.explode();
+			cout << "explosion" << endl;
+			clockExplosion.restart();
 		}
 
 		// Efface l'écran en blanc

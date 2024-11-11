@@ -14,7 +14,7 @@ Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, f
     this->numberOfProjectiles = 10;
     this->xSize = 5;
     this->ySize = 4;
-    this->stat = 0;
+    this->stat = -1;
 
     pt = new Point *[numberOfPixels];
     pjt = new Projectile *[numberOfProjectiles];
@@ -100,13 +100,13 @@ void Monster::hide()
 
 void Monster::explode()
 {
+    this->hide();
     this->alive = false;
     if (explo != nullptr && stat < 3)
     {
         this->stat = explo->grow(*this);
 #ifdef VERBOSE_MONSTER
         cout << "Status " << stat << endl;
-
 #endif
     }
 }
@@ -115,14 +115,35 @@ void Monster::updateParticule()
 {
     if (this->alive == false && this->stat < 3)
     {
-        this->hide();
-        this->explode();
+        if (this->stat > -1)
+        {
+            this->explode();
+        }
     }
 }
 
 bool Monster::isAlive()
 {
-    return(this->alive);
+    return (this->alive);
+}
+
+bool Monster::isExplosing()
+{
+    // cout << "Helo"<< endl;
+    if (this->stat >= 0 && this->stat < 3)
+    {
+        return (true);
+    }
+    return (false);
+}
+
+float Monster::getX() const
+{
+    return (this->x);
+}
+float Monster::getY() const
+{
+    return (this->y);
 }
 
 Monster::~Monster()

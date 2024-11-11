@@ -24,7 +24,7 @@ public :
 	void xSub();
 	void ySub();
 	void hide();
-	float getX();
-	float getY();
+	float getX() const;
+	float getY() const;
 };
 #endif

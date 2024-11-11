@@ -44,11 +44,11 @@ void Point::hide()
     this->setFillColor(sf::Color::Transparent);
 }
 
-float Point::getX()
+float Point::getX() const
 {
     return (this->x);
 }
-float Point::getY()
+float Point::getY() const
 {
     return (this->y);
 }

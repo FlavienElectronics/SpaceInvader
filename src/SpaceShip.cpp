@@ -224,11 +224,11 @@ SpaceShip::~SpaceShip()
     }
 }
 
-float SpaceShip::getX()
+float SpaceShip::getX() const
 {
     return (this->x);
 }
-float SpaceShip::getY()
+float SpaceShip::getY() const
 {
     return (this->y);
 }

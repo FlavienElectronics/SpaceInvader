@@ -48,8 +48,8 @@ public:
     void xSub();
     void ySub();
     ~SpaceShip();
-    float getX();
-    float getY();
+    float getX() const;
+    float getY() const;
     friend class Explosion;
 };
 

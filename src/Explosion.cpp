@@ -23,11 +23,12 @@ int Explosion::grow(const Monster &monstr)
         {
             pt = new Point *[1];
         }
-        pt[0] = new Point(monstr.x + 2, monstr.x + 2, 1, "col");
+        pt[0] = new Point(monstr.x + 2, monstr.y + 2, 1, "col");
         this->numberOfPixels = 1;
 #ifdef VERBOSE
         cout << "pt" << pt << endl;
         cout << "pt[0]" << pt[0]->getX() << " " << pt[0]->getY() << endl;
+        cout << "monstr" << monstr.getX() << " " << monstr.getY() << endl;
 #endif
         break;
 
