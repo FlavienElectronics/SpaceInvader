@@ -283,8 +283,6 @@ public:
 class Monster : public SpaceShip
 {
 public:
-	// Monster(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color) : SpaceShip(win,windowHeight,x_pos,y_pos,color);
-	//~Monster();
 
 	Monster(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color)
 	{
@@ -336,26 +334,6 @@ public:
 	{
 		cout << typeid(this).name() << " Nombre de pixels monstre " << numberOfPixels << endl;
 		cout << typeid(this).name() << " Nombre de projectile monstre " << numberOfProjectiles << endl;
-
-		/*for (int i = 0; i < numberOfPixels; i++)
-		{
-			if (pt[i] != nullptr)
-			{
-				delete pt[i]; // Libérer la mémoire des points du monstre
-				cout << "Destruction du point monster " << i << endl;
-			}
-		}
-
-		cout << "Allons détruire les projectiles du monstre" << endl;
-		for (int i = 0; i < 10; i++)
-		{
-			if (pjt[i] != nullptr)
-			{
-				delete pjt[i]; // Libérer chaque projectile si il est alloué
-				cout << "Destruction du projectile monster " << i << endl;
-			}
-		}
-		*/
 		cout << "Fin destructeur monster " << endl;
 	}
 };
@@ -372,8 +350,8 @@ int main()
 
 	float x = windowWidth / 2, y = windowHeight / 2; // Position initiale du point
 
-	Monster mons(&window, windowHeight, windowWidth / 3, windowHeight / 3, "Green");
 	SpaceShip ship(&window, windowHeight, windowWidth / 2, windowHeight / 2, "Green");
+	Monster mons(&window, windowHeight, windowWidth / 3, windowHeight / 3, "Green");
 
 	sf::Clock clock;
 	sf::Clock clockProjectile;
@@ -416,7 +394,7 @@ int main()
 		window.clear(sf::Color::White);
 
 		window.draw(ship);
-		// window.draw(mons);
+		window.draw(mons);
 
 		if (clockProjectile.getElapsedTime() >= delayProjectile)
 		{
