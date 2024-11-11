@@ -2,6 +2,7 @@
 
 void Explosion::grow(const Monster &monstr)
 {
+    /*
     switch (status)
     {
     case -1:
@@ -82,4 +83,5 @@ void Explosion::grow(const Monster &monstr)
     default:
         break;
     }
+    */
 }

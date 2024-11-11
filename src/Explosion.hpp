@@ -7,13 +7,12 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "Monster.hpp"
-#include "Point.hpp"
+#include "SpaceShip.hpp"
+class Monster;
 
 using namespace std;
 
 #define VERBOSE
-
 
 class Explosion : public SpaceShip
 {

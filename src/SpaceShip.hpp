@@ -8,9 +8,7 @@
 #include <ctime>
 
 #include "Point.hpp"
-#include "Monster.hpp"
 #include "Projectile.hpp"
-#include "Explosion.hpp"
 
 #define VERBOSE
 
