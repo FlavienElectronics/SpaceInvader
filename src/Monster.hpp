@@ -26,7 +26,6 @@ protected:
 	Explosion* explo; // Circular inclusion
 
 public:
-	void updateParticule();
 	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 	int getDirection();
@@ -38,7 +37,10 @@ public:
 	bool isExplosing();
 	float getX() const;
 	float getY() const;
-	bool updateCollision(const SpaceShip& ship);
+	bool updateCollision(const SpaceShip& ship); //For projectile throw by player
+	void updateParticule();	//To display explosion
+
 	friend class Explosion;
+	friend class MonsterLine;
 };
 #endif

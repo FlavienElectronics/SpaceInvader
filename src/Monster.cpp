@@ -3,6 +3,7 @@
 
 Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color)
 {
+    cout << "Creation Monster" << endl;
     srand(time(0));
     this->alive = true;
     this->explo = new Explosion;
@@ -37,7 +38,7 @@ Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, f
         this->pjt[i] = nullptr;
     }
 #ifdef VERBOSE_MONSTER
-    cout << "Creation monster nb pixels " << numberOfPixels << " Sens : " << this->direction << endl;
+    cout << "Creation monster nb pixels " << numberOfPixels << endl;
 #endif
 }
 
