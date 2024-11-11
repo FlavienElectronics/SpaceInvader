@@ -43,3 +43,13 @@ void Point::hide()
     this->color = "Invisible";
     this->setFillColor(sf::Color::Transparent);
 }
+
+float Point::getX()
+{
+    return (this->x);
+}
+float Point::getY()
+{
+    return (this->y);
+}
+

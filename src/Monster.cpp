@@ -3,8 +3,9 @@
 
 Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color)
 {
-    explo = new Explosion;
     srand(time(0));
+    this->alive = true;
+    this->explo = new Explosion;
     this->direction = rand() % 2;
 
     this->x = x_pos;
@@ -91,7 +92,7 @@ void Monster::hide()
 void Monster::explode()
 {
     this->hide();
-    if (explo != nullptr)
+    if (explo != nullptr && alive)
     {
         int stat = explo->grow(*this);
 #ifdef VERBOSE_MONSTER
@@ -100,12 +101,10 @@ void Monster::explode()
 #endif
         window->draw(*explo);
         cout << "Draw explo" << endl;
-    }
-    else
-    {
-#ifdef VERBOSE_MONSTER
-        cout << "explo null " << endl;
-#endif
+        if (stat == 3)
+        {
+            this->alive = false;
+        }
     }
 }
 

@@ -24,5 +24,7 @@ public :
 	void xSub();
 	void ySub();
 	void hide();
+	float getX();
+	float getY();
 };
 #endif

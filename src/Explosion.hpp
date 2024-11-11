@@ -11,6 +11,7 @@
 
 class Monster;
 
+
 using namespace std;
 
 #define VERBOSE
@@ -23,6 +24,5 @@ protected:
 public:
 	Explosion();
 	virtual int grow(const Monster &monstr);
-
 };
 #endif

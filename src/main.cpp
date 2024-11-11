@@ -51,7 +51,7 @@ int main()
 	sf::Time delayProjectile = sf::milliseconds(10);
 	sf::Time delayMonster = sf::milliseconds(50);
 	sf::Time delayShoot = sf::milliseconds(100);
-	sf::Time delayExplosion = sf::milliseconds(500);
+	sf::Time delayExplosion = sf::milliseconds(300);
 
 	bool explosion = false;
 
