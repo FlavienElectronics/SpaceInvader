@@ -250,24 +250,30 @@ public:
 	{
 		cout << typeid(this).name() << " Nombre de pixels vaisseau " << numberOfPixels << endl;
 		cout << typeid(this).name() << " Nombre de projectile vaisseau " << numberOfProjectiles << endl;
-
-		for (int i = 0; i < numberOfPixels; i++)
+		if (pt != nullptr)
 		{
-			if (pt[i] != nullptr)
+			for (int i = 0; i < numberOfPixels; i++)
 			{
-				delete pt[i]; // Libérer la mémoire allouée pour chaque Point
-				cout << "Destruction point vaisseau " << i << endl;
+				if (pt[i] != nullptr)
+				{
+					delete pt[i]; // Libérer la mémoire allouée pour chaque Point
+					cout << "Destruction point vaisseau " << i << endl;
+				}
 			}
+			delete [] pt;
 		}
 		cout << "Allons détruire les projectiles du vaisseau" << endl;
-
-		for (int i = 0; i < numberOfProjectiles; i++)
+		if (pjt != nullptr)
 		{
-			if (pjt[i] != nullptr)
+			for (int i = 0; i < numberOfProjectiles; i++)
 			{
-				delete pjt[i]; // Libérer chaque projectile si il est alloué
-				cout << "Destruction point vaisseau " << i << endl;
+				if (pjt[i] != nullptr)
+				{
+					delete pjt[i]; // Libérer chaque projectile si il est alloué
+					cout << "Destruction point vaisseau " << i << endl;
+				}
 			}
+			delete[] pjt;
 		}
 	}
 };
@@ -279,7 +285,7 @@ private:
 	Projectile *pjt[10];
 
 public:
-	//Monster(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color) : SpaceShip(win,windowHeight,x_pos,y_pos,color);
+	// Monster(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color) : SpaceShip(win,windowHeight,x_pos,y_pos,color);
 	//~Monster();
 
 	Monster(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color)
