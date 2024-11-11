@@ -1,6 +1,5 @@
 #include "main.hpp"
 
-#define VERBOSE
 using namespace std;
 
 class MonsterLine
@@ -113,6 +112,18 @@ int main()
 #ifdef VERBOSE
 					cout << exp.message << endl;
 #endif
+				}
+			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+			{
+#ifdef VERBOSE
+				cout << "E pressed" << endl;
+#endif
+				if (clockExplosion.getElapsedTime() >= delayExplosion)
+				{
+
+					clockExplosion.restart();
 				}
 			}
 

@@ -7,8 +7,9 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "SpaceShip.hpp"
 #include "Monster.hpp"
+
+class Monster;
 
 using namespace std;
 

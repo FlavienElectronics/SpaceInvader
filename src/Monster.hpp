@@ -8,6 +8,8 @@
 #include <ctime>
 
 #include "SpaceShip.hpp"
+//#include "Explosion.hpp"
+class Explosion;
 
 using namespace std;
 
@@ -19,7 +21,7 @@ class Monster : public SpaceShip
 
 protected:
 	int direction; // 0 -> goes left | 1 -> goes right
-	//class Explosion explo;
+	Explosion* explo; // Circular inclusion
 
 public:
 	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color);

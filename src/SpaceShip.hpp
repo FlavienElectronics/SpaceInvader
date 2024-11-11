@@ -7,7 +7,6 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "Point.hpp"
 #include "Projectile.hpp"
 
 #define VERBOSE
