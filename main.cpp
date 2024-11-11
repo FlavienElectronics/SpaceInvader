@@ -413,6 +413,18 @@ public:
 		return (this->direction);
 	}
 
+	void changeDirection()
+	{
+		if (this->direction == 1)
+		{
+			this->direction = 0;
+		}
+		else
+		{
+			this->direction = 1;
+		}
+	}
+
 	~Monster()
 	{
 #ifdef VERBOSE
@@ -426,8 +438,8 @@ public:
 int main()
 {
 	const string gameName = "SpaceInvader";
-	const float windowWidth = 500;
-	const float windowHeight = 200;
+	const float windowWidth = 128;
+	const float windowHeight = 96;
 
 	// Création de la fenêtre SFML
 	cout << "Window creation" << endl;
@@ -537,11 +549,25 @@ int main()
 		{
 			if (mons.getDirection() == 0) // go left
 			{
-				mons.xSub();
+				try
+				{
+					mons.xSub();
+				}
+				catch (Monster::Exept exp)
+				{
+					mons.changeDirection();
+				}
 			}
 			else if (mons.getDirection() == 1) // go right
 			{
-				mons.xAdd();
+				try
+				{
+					mons.xAdd();
+				}
+				catch (Monster::Exept exp)
+				{
+					mons.changeDirection();
+				}
 			}
 			clockMonster.restart();
 		}
