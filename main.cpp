@@ -139,8 +139,8 @@ public:
 	SpaceShip(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos), numberOfPixels(11), numberOfProjectiles(50)
 	{
 		cout << "Creation ship nb pixels " << numberOfPixels << endl;
-		pt = new Point*[numberOfPixels];
-		pjt = new Projectile*[numberOfProjectiles];
+		pt = new Point *[numberOfPixels];
+		pjt = new Projectile *[numberOfProjectiles];
 		pt[0] = new Point(x + 2, y + 0, 1, color);
 		pt[1] = new Point(x + 1, y + 1, 1, color);
 		pt[2] = new Point(x + 2, y + 1, 1, color);
@@ -279,6 +279,9 @@ private:
 	Projectile *pjt[10];
 
 public:
+	//Monster(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color) : SpaceShip(win,windowHeight,x_pos,y_pos,color);
+	//~Monster();
+
 	Monster(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color)
 	{
 		this->x = x_pos;
