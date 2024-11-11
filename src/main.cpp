@@ -35,8 +35,15 @@ int main()
 
 	// Création de la fenêtre SFML
 	cout << "Window creation" << endl;
-	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), gameName);
-
+	    // Définissez la résolution initiale
+    sf::Vector2u resolution(windowWidth, windowHeight);
+    // Créez une fenêtre avec une taille agrandie
+    sf::RenderWindow window(sf::VideoMode(resolution.x * 6, resolution.y * 6), gameName);
+    // Créez une vue qui correspond à la résolution de départ
+    sf::View view(sf::FloatRect(0, 0, resolution.x, resolution.y));
+    // Appliquez l’échelle à la vue (par exemple, x2 pour doubler la taille)
+    view.setViewport(sf::FloatRect(0, 0, 1, 1)); // Fenêtre entière
+    window.setView(view);
 	float x = windowWidth / 2, y = windowHeight / 2; // Position initiale du point
 
 	SpaceShip ship(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 2, "Green");
