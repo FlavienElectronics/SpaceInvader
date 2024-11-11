@@ -109,14 +109,13 @@ public:
 
 class SpaceShip : public sf::Drawable
 {
-private:
-	Point *pt[11];
-	Projectile *pjt[50];
 
 protected:
+	Point **pt;
+	Projectile **pjt;
 	sf::RenderWindow *window;
 	int numberOfPixels;
-	int numberOfProjectile;
+	int numberOfProjectiles;
 	float winHeight;
 	float x, y;
 
@@ -137,9 +136,11 @@ protected:
 public:
 	SpaceShip() : x(0), y(0), numberOfPixels(11) {}
 
-	SpaceShip(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos), numberOfPixels(11), numberOfProjectile(50)
+	SpaceShip(sf::RenderWindow *win, float windowHeight, float x_pos, float y_pos, string color) : x(x_pos), y(y_pos), numberOfPixels(11), numberOfProjectiles(50)
 	{
 		cout << "Creation ship nb pixels " << numberOfPixels << endl;
+		pt = new Point*[numberOfPixels];
+		pjt = new Projectile*[numberOfProjectiles];
 		pt[0] = new Point(x + 2, y + 0, 1, color);
 		pt[1] = new Point(x + 1, y + 1, 1, color);
 		pt[2] = new Point(x + 2, y + 1, 1, color);
@@ -153,7 +154,7 @@ public:
 		pt[10] = new Point(x + 3, y + 3, 1, color);
 		this->window = win;
 		this->winHeight = windowHeight;
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < numberOfProjectiles; i++)
 		{
 			this->pjt[i] = nullptr;
 		}
@@ -245,10 +246,10 @@ public:
 		}
 	}
 
-	virtual ~SpaceShip()
+	~SpaceShip()
 	{
 		cout << typeid(this).name() << " Nombre de pixels vaisseau " << numberOfPixels << endl;
-		cout << typeid(this).name() << " Nombre de projectile vaisseau " << numberOfProjectile << endl;
+		cout << typeid(this).name() << " Nombre de projectile vaisseau " << numberOfProjectiles << endl;
 
 		for (int i = 0; i < numberOfPixels; i++)
 		{
@@ -258,9 +259,9 @@ public:
 				cout << "Destruction point vaisseau " << i << endl;
 			}
 		}
-		cout << "Allons détruire les projectiles du monstres" << endl;
+		cout << "Allons détruire les projectiles du vaisseau" << endl;
 
-		for (int i = 0; i < numberOfProjectile; i++)
+		for (int i = 0; i < numberOfProjectiles; i++)
 		{
 			if (pjt[i] != nullptr)
 			{
@@ -283,7 +284,8 @@ public:
 		this->x = x_pos;
 		this->y = y_pos;
 		this->numberOfPixels = 10;
-		this->numberOfProjectile = 10;
+		this->numberOfProjectiles = 10;
+
 		pt[0] = new Point(x + 1, y + 0, 1, color);
 		pt[1] = new Point(x + 3, y + 0, 1, color);
 		pt[2] = new Point(x + 0, y + 1, 1, color);
@@ -296,7 +298,7 @@ public:
 		pt[9] = new Point(x + 3, y + 3, 1, color);
 		this->window = win;
 		this->winHeight = windowHeight;
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < numberOfProjectiles; i++)
 		{
 			this->pjt[i] = nullptr;
 		}
@@ -324,7 +326,7 @@ public:
 	~Monster()
 	{
 		cout << typeid(this).name() << " Nombre de pixels monstre " << numberOfPixels << endl;
-		cout << typeid(this).name() << " Nombre de projectile monstre " << numberOfProjectile << endl;
+		cout << typeid(this).name() << " Nombre de projectile monstre " << numberOfProjectiles << endl;
 
 		/*for (int i = 0; i < numberOfPixels; i++)
 		{
