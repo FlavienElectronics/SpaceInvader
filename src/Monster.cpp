@@ -1,7 +1,9 @@
 #include "Monster.hpp"
+#include "Explosion.hpp"
 
 Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color)
 {
+    explo = new Explosion;
     srand(time(0));
     this->direction = rand() % 2;
 
@@ -89,7 +91,13 @@ void Monster::hide()
 void Monster::explode()
 {
     this->hide();
-    // explo.grow(*this);
+    if (explo != nullptr)
+    {
+        int stat = explo->grow(*this);
+#ifdef VERBOSE
+        cout << "Status " << stat << endl;
+#endif
+    }
 }
 
 Monster::~Monster()

@@ -1,7 +1,16 @@
 #include "Explosion.hpp"
 
-void Explosion::grow(const Monster &monstr)
+Explosion::Explosion()
 {
+    this->pt = nullptr;
+    status = -1;
+}
+
+int Explosion::grow(const Monster &monstr)
+{
+#ifdef VERBOSE
+    cout << "Dans grow " << endl;
+#endif
     switch (status)
     {
     case -1:
@@ -82,4 +91,5 @@ void Explosion::grow(const Monster &monstr)
     default:
         break;
     }
+    return (status);
 }

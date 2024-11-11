@@ -49,7 +49,7 @@ int main()
 	sf::Time delayProjectile = sf::milliseconds(10);
 	sf::Time delayMonster = sf::milliseconds(50);
 	sf::Time delayShoot = sf::milliseconds(100);
-	sf::Time delayExplosion = sf::milliseconds(100);
+	sf::Time delayExplosion = sf::milliseconds(500);
 
 	while (window.isOpen())
 	{
@@ -122,7 +122,7 @@ int main()
 #endif
 				if (clockExplosion.getElapsedTime() >= delayExplosion)
 				{
-
+					mons.explode();
 					clockExplosion.restart();
 				}
 			}
@@ -136,12 +136,6 @@ int main()
 				ship.shoot();
 			clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
 		}
-
-		// Efface l'écran en blanc
-		window.clear(sf::Color::White);
-
-		window.draw(ship);
-		window.draw(mons);
 
 		if (clockProjectile.getElapsedTime() >= delayProjectile)
 		{
@@ -176,7 +170,10 @@ int main()
 			}
 			clockMonster.restart();
 		}
-		// Affiche la mise à jour de la fenêtre
+				// Efface l'écran en blanc
+		window.clear(sf::Color::White);
+		window.draw(ship);
+		window.draw(mons);
 		window.display();
 	}
 	cout << "Window closed" << endl;

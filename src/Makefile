@@ -1,7 +1,7 @@
 NAME = SpaceInvader
 CC = g++
 LIBFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
-CPPFLAGS = -Wall
+CPPFLAGS = -Wall -g
 
 SRC_DIR = ./
 SRC = main.cpp Explosion.cpp Monster.cpp Point.cpp Projectile.cpp SpaceShip.cpp

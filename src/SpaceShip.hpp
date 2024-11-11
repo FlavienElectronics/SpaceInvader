@@ -9,7 +9,7 @@
 
 #include "Projectile.hpp"
 
-#define VERBOSE
+//#define VERBOSE
 
 using namespace std;
 
