@@ -113,7 +113,7 @@ public:
 	{
 		if (this->block != nullptr)
 		{
-			for (int j = this->numberOfMonster - 1; j > 0; j--)
+			for (int j = this->numberOfMonster - 1; j >= 0; j--)
 			{
 				try
 				{
