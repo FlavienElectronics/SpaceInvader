@@ -24,8 +24,10 @@ protected:
 	bool alive;
 	int stat;
 	Explosion* explo; // Circular inclusion
+	sf::Clock clockExplosion;
 
 public:
+
 	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 	int getDirection();
@@ -39,6 +41,9 @@ public:
 	float getY() const;
 	bool updateCollision(const SpaceShip& ship); //For projectile throw by player
 	void updateParticule();	//To display explosion
+
+	const sf::Time& getElapsedTimeClockExplosion();
+	void resetClockExplosion();
 
 	friend class Explosion;
 	friend class MonsterLine;

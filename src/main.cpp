@@ -17,6 +17,14 @@ private:
 	float winWidth;
 
 public:
+	Monster *getMonster(int index)
+	{
+		if (index >= 0 && index < numberOfMonster)
+		{
+			return block[index];
+		}
+		return nullptr;
+	}
 	class Exept
 	{
 	public:
@@ -233,7 +241,7 @@ int main()
 	sf::Time delayProjectile = sf::milliseconds(10);
 	sf::Time delayMonster = sf::milliseconds(50);
 	sf::Time delayShoot = sf::milliseconds(100);
-	sf::Time delayExplosion = sf::milliseconds(300);
+	sf::Time delayExplosion = sf::milliseconds(300 / 5);
 
 	while (window.isOpen())
 	{
@@ -366,6 +374,8 @@ int main()
 
 			clockMonster.restart();
 		}
+
+		// cout << mons[0]->operator[](0).getElapsedTimeClockExplosion().asMilliseconds() << endl;
 
 		for (int j = 0; j < 2; j++)
 		{

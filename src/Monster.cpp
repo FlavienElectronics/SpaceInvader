@@ -17,6 +17,7 @@ Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, f
     this->ySize = 4;
     this->stat = -1;
 
+
     pt = new Point *[numberOfPixels];
     pjt = new Projectile *[numberOfProjectiles];
 
@@ -163,6 +164,16 @@ bool Monster::updateCollision(const SpaceShip &ship)
         }
     }
     return (false);
+}
+
+const sf::Time& Monster::getElapsedTimeClockExplosion()
+{
+    return (this->clockExplosion.getElapsedTime());
+}
+
+void Monster::resetClockExplosion()
+{
+    this->clockExplosion.restart();
 }
 
 Monster::~Monster()
