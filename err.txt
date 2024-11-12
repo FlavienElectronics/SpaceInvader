@@ -1,33 +1,9 @@
-Window creation
-libGL error: pci id for fd 4: 1ab8:0010, driver (null)
-pci id for fd 5: 1ab8:0010, driver (null)
-Window closed
-Nombre de pixels vaisseau 11
-Destruction point vaisseau 0
-Destruction point vaisseau 1
-Destruction point vaisseau 2
-Destruction point vaisseau 3
-Destruction point vaisseau 4
-Destruction point vaisseau 5
-Destruction point vaisseau 6
-Destruction point vaisseau 7
-Destruction point vaisseau 8
-Destruction point vaisseau 9
-Destruction point vaisseau 10
-Allons détruire les projectiles du monstres
-Nombre de pixels monstre 10
-Destruction du point monster 0
-Destruction du point monster 1
-Destruction du point monster 2
-Destruction du point monster 3
-Destruction du point monster 4
-Destruction du point monster 5
-Destruction du point monster 6
-Destruction du point monster 7
-Destruction du point monster 8
-Destruction du point monster 9
-Allons détruire les projectiles du monstre
-Fin destructeur monster 
-Nombre de pixels vaisseau 10
-Segmentation fault (core dumped)
+0x0000555555558d81 in MonsterLine::updateCollision (this=0x7fffffffdb90, ship=..., vectorBool=0x7fffffffdb00) at main.cpp:118
+118					*vectorBool[i] = false;
+(gdb) quit
+A debugging session is active.
+
+	Inferior 1 [process 293210] will be killed.
+
+Quit anyway? (y or n) y
 

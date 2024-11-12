@@ -65,6 +65,26 @@ public:
 		}
 	}
 
+	bool isExplosing(int location)
+	{
+		return (this->block[location]->isExplosing());
+	}
+
+	void updateParticule(int location)
+	{
+		this->block[location]->updateParticule();
+	}
+
+	void explode(int location)
+	{
+		this->block[location]->explode();
+	}
+
+	bool isAlive(int location)
+	{
+		return (this->block[location]->isAlive());
+	}
+
 	void changeDirection()
 	{
 		if (this->direction == 1)
@@ -81,14 +101,28 @@ public:
 		}
 	}
 
-	bool *updateCollision(const SpaceShip &ship)
+	void updateCollision(const SpaceShip &ship, bool **vectorBool)
 	{
-		bool *monsterTouched = new bool[this->numberOfMonster];
+		if (*vectorBool != nullptr)
+		{
+			delete[] *vectorBool;
+			*vectorBool = nullptr;
+			cout << "Vector deleted" << endl;
+ 		}
+		if (*vectorBool == nullptr)
+		{
+			*vectorBool = new bool[this->numberOfMonster];
+			cout << "Vector allocated " << *vectorBool << " Size " << this->numberOfMonster << endl;
+			for (int i = 0 ; i < this->numberOfMonster; i ++)
+			{
+				(*vectorBool)[i] = false;
+			}
+		}
+		cout << "Number of monster " << this->numberOfMonster << endl;
 		for (int i = 0; i < this->numberOfMonster; i++)
 		{
-			monsterTouched[i] = this->block[i]->updateCollision(ship);
+			(*vectorBool)[i] = this->block[i]->updateCollision(ship);
 		}
-		return (monsterTouched);
 	}
 
 	void xSub()
@@ -185,7 +219,7 @@ int main()
 	// Monster mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, "Green");
 	MonsterLine mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, 5, "Green");
 
-	bool *explosion;
+	bool *explosion = nullptr;
 	bool change = false;
 
 	sf::Clock clockCommand;
@@ -271,7 +305,7 @@ int main()
 				// explosion = true;
 			}
 
-			explosion = mons.updateCollision(ship);
+			mons.updateCollision(ship, &explosion);
 
 			clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 		}
@@ -325,25 +359,29 @@ int main()
 
 			clockMonster.restart();
 		}
-		// mons.keepSpacing();
-		/*
+		if (explosion != nullptr)
+		{
+			cout << "Non null ++++++" << endl;
+			for (int i = 0; i < mons.getNumberOfMonster(); i++)
+			{
 				if (clockExplosion.getElapsedTime() >= delayExplosion)
 				{
-					if (mons.isExplosing())
+					if (mons.isExplosing(i))
 					{
-						cout << "is explosing" << endl;
-						mons.updateParticule();
+						cout << "is explosing " << i << endl;
+						mons.updateParticule(i);
 						clockExplosion.restart();
 					}
 				}
-
-				if (explosion && mons.isAlive())
+				cout << explosion << endl;
+				if (explosion[i] && mons.isAlive(i))
 				{
-					mons.explode();
+					mons.explode(i);
 					cout << "explosion" << endl;
 					clockExplosion.restart();
 				}
-			*/
+			}
+		}
 
 		// Efface l'écran en blanc
 		window.clear(sf::Color::White);
