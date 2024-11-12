@@ -97,11 +97,6 @@ public:
 		{
 			for (int j = 0; j < this->numberOfMonster; j++)
 			{
-				if (this->block[j]->x <= 0)
-				{
-					this->block[j]->x = 0;
-					// throw Exept("x out of bound < 0");
-				}
 				try
 				{
 					this->block[j]->xSub();
@@ -118,13 +113,8 @@ public:
 	{
 		if (this->block != nullptr)
 		{
-			for (int j = 0; j < this->numberOfMonster; j++)
+			for (int j = this->numberOfMonster - 1; j > 0; j--)
 			{
-				if (this->block[j]->x >= winWidth - this->block[j]->xSize)
-				{
-					this->block[j]->x = winWidth - this->block[j]->xSize;
-					// throw Exept("x out of bound > width");
-				}
 				try
 				{
 					this->block[j]->xAdd();
