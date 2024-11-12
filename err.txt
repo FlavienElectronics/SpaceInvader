@@ -1,9 +1,9 @@
-0x0000555555558d81 in MonsterLine::updateCollision (this=0x7fffffffdb90, ship=..., vectorBool=0x7fffffffdb00) at main.cpp:118
-118					*vectorBool[i] = false;
+Thread 1 "SpaceInvader" received signal SIGSEGV, Segmentation fault.
+0x00007ffff7f78578 in sf::RenderTarget::draw(sf::Drawable const&, sf::RenderStates const&) () from /lib/x86_64-linux-gnu/libsfml-graphics.so.2.5
 (gdb) quit
 A debugging session is active.
 
-	Inferior 1 [process 293210] will be killed.
+	Inferior 1 [process 297601] will be killed.
 
 Quit anyway? (y or n) y
 
