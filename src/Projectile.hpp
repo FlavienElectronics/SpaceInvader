@@ -29,6 +29,7 @@ public:
 	bool isOutOfBounds(float windowHeight);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 	float getY() const;
+	float getX() const;
 	~Projectile();
 
 	friend class Monster;

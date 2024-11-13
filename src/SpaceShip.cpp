@@ -256,11 +256,12 @@ bool SpaceShip::detectImpact(MonsterLine **monsterLine, int numberOfLine)
 
                     if (tempMonster.pjt[k] != nullptr)
                     {
-                        if (tempMonster.pjt[k]->getY() == this->getY())
+
+                        if (tempMonster.pjt[k]->getY() == this->getY() && tempMonster.pjt[k]->getX() == this->getY())
                         {
                             cout << tempMonster.pjt[k]->getY() << endl;
                             cout << "Decteting impact" << endl;
-                            return(true);
+                            return (true);
                         }
                     }
                 }

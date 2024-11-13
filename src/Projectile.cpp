@@ -40,8 +40,14 @@ void Projectile::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 float Projectile::getY() const
 {
-    return y;
+    return this->y;
 }
+
+float Projectile::getX() const
+{
+    return this->x;
+}
+
 
 Projectile::~Projectile()
 {
