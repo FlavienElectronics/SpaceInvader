@@ -330,8 +330,17 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
 				ship.shoot();
-				Monster &tempMonster = (*mons[0])[0];
-				tempMonster.shoot();
+				for (int j = 0; j < numberOfLine; j++)
+				{
+					for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
+					{
+						Monster &tempMonster = (*mons[j])[i];
+						if (tempMonster.isAlive())
+						{
+							tempMonster.shoot();
+						}
+					}
+				}
 			}
 			clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
 		}
@@ -339,8 +348,14 @@ int main()
 		if (clockProjectile.getElapsedTime() >= delayProjectile)
 		{
 			ship.updateProjectiles();
-			Monster &tempMonster = (*mons[0])[0];
-			tempMonster.updateProjectiles();
+			for (int j = 0; j < numberOfLine; j++)
+			{
+				for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
+				{
+					Monster &tempMonster = (*mons[j])[i];
+					tempMonster.updateProjectiles();
+				}
+			}
 			clockProjectile.restart();
 		}
 

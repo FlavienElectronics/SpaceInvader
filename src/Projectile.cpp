@@ -15,7 +15,7 @@ void Projectile::ySub()
 
 void Projectile::yAdd()
 {
-    this->y--;
+    this->y++;
     pt[0]->yAdd();
     pt[1]->yAdd();
 }
@@ -23,7 +23,11 @@ void Projectile::yAdd()
 // Vérifie si le projectile est en dehors de la fenêtre
 bool Projectile::isOutOfBounds(float windowHeight)
 {
-    return this->y < 0; // Un projectile est hors de l'écran si sa position Y est inférieure à 0
+    if (this->y < 0 || this->y > windowHeight)
+    {
+        return (true);
+    }
+    return (false);
 }
 
 void Projectile::draw(sf::RenderTarget &target, sf::RenderStates states) const
