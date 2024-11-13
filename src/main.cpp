@@ -46,17 +46,17 @@ int main()
 	sf::Time delayMonster = sf::milliseconds(50);
 	sf::Time delayShoot = sf::milliseconds(100);
 	sf::Time delayExplosion = sf::milliseconds(300 / 5);
+	sf::Event event;
 
 	while (window.isOpen())
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
+		while (!shipDestroyed && window.isOpen())
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-		while (!shipDestroyed)
-		{
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					window.close();
+			}
 
 			if (clockCommand.getElapsedTime() >= delayCommand)
 			{
@@ -248,7 +248,13 @@ int main()
 			}
 			window.display();
 		}
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
 	}
+
 	cout << "Window closed" << endl;
 
 	for (int j = 0; j < numberOfLine; j++)

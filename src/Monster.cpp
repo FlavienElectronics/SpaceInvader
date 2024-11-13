@@ -35,6 +35,8 @@ Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, f
     this->window = win;
     this->winHeight = windowHeight;
     this->winWidth = windowWidth;
+    this->hitBox_x = 4;
+    this->hitBox_y = 3;
     for (int i = 0; i < numberOfProjectiles; i++)
     {
         this->pjt[i] = nullptr;

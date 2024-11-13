@@ -29,6 +29,8 @@ SpaceShip::SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidt
     this->window = win;
     this->winHeight = windowHeight;
     this->winWidth = windowWidth;
+    this->hitBox_x = 4;
+    this->hitBox_y = 3;
     for (int i = 0; i < numberOfProjectiles; i++)
     {
         this->pjt[i] = nullptr;
@@ -248,16 +250,9 @@ bool SpaceShip::detectImpact(MonsterLine **monsterLine, int numberOfLine)
 
                 for (int k = 0; k < tempMonster.numberOfProjectiles; k++)
                 {
-                    /*
-                    if (tempMonster.pjt[0] != nullptr)
-                    {
-                        cout << tempMonster.pjt[0]->getY() << endl;
-                    }*/
-
                     if (tempMonster.pjt[k] != nullptr)
                     {
-
-                        if (tempMonster.pjt[k]->getY() == this->getY() && tempMonster.pjt[k]->getX() == this->getY())
+                        if ((int)tempMonster.pjt[k]->getY() == (int)this->getY() && ((int)tempMonster.pjt[k]->getX() >= (int)this->getX() && (int)tempMonster.pjt[k]->getX() < ((int)this->getX()+(int)this->hitBox_x)))
                         {
                             cout << tempMonster.pjt[k]->getY() << endl;
                             cout << "Decteting impact" << endl;

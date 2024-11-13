@@ -23,6 +23,8 @@ protected:
     float x, y;
     Point **pt;
     Projectile **pjt; /*Utilisation de la STL pour les projectile (vector)*/
+    int hitBox_x;
+    int hitBox_y;
     int numberOfPixels;
     int numberOfProjectiles;
     int xSize;
