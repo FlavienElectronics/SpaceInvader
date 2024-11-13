@@ -13,6 +13,13 @@ void Projectile::ySub()
     pt[1]->ySub();
 }
 
+void Projectile::yAdd()
+{
+    this->y--;
+    pt[0]->yAdd();
+    pt[1]->yAdd();
+}
+
 // Vérifie si le projectile est en dehors de la fenêtre
 bool Projectile::isOutOfBounds(float windowHeight)
 {

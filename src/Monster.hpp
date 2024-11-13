@@ -39,8 +39,11 @@ public:
 	bool isExplosing();
 	float getX() const;
 	float getY() const;
+	void updateProjectiles();
 	bool updateCollision(const SpaceShip& ship); //For projectile throw by player
 	void updateParticule();	//To display explosion
+	void shoot();
+
 
 	sf::Time getElapsedTimeClockExplosion();
 	void resetClockExplosion();

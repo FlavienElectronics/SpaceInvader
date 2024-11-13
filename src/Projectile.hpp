@@ -25,6 +25,7 @@ private:
 public:
 	Projectile(float x_pos, float y_pos, string color);
 	void ySub();
+	void yAdd();
 	bool isOutOfBounds(float windowHeight);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 	float getY() const;

@@ -19,7 +19,6 @@ Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, f
 
     this->clockExplosion = new sf::Clock;
 
-
     pt = new Point *[numberOfPixels];
     pjt = new Projectile *[numberOfProjectiles];
 
@@ -106,9 +105,9 @@ void Monster::explode()
 {
     this->hide();
     this->alive = false;
-    if (explo != nullptr && stat < 3)
+    if (this->explo != nullptr && stat < 3)
     {
-        this->stat = explo->grow(*this);
+        this->stat = this->explo->grow(*this);
 #ifdef VERBOSE_MONSTER
         cout << "Status " << stat << endl;
 #endif
@@ -170,7 +169,7 @@ bool Monster::updateCollision(const SpaceShip &ship)
 
 sf::Time Monster::getElapsedTimeClockExplosion()
 {
-    cout << this->clockExplosion <<endl;
+    cout << this->clockExplosion << endl;
     cout << this->clockExplosion->getElapsedTime().asMilliseconds() << endl;
     return (this->clockExplosion->getElapsedTime());
 }
@@ -179,6 +178,40 @@ void Monster::resetClockExplosion()
 {
     this->clockExplosion->restart();
 }
+
+void Monster::shoot()
+{
+    // Chercher un emplacement libre dans le tableau de projectiles
+    for (int i = 0; i < numberOfProjectiles; ++i)
+    {
+        if (pjt[i] == nullptr) // Si l'emplacement est libre
+        {
+            pjt[i] = new Projectile(this->x + 2, this->y - 2, "col");
+            break;
+        }
+    }
+}
+
+void Monster::updateProjectiles()
+{
+        for (int i = 0; i < numberOfProjectiles; i++)
+    {
+        if (pjt[i] != nullptr)
+        {
+            // Déplacer le projectile vers le haut
+            pjt[i]->yAdd();
+
+            // Vérifier si le projectile est en dehors de l'écran
+            if (pjt[i]->isOutOfBounds(this->winHeight))
+            {
+                // Libérer la mémoire du projectile
+                delete pjt[i];
+                pjt[i] = nullptr;
+            }
+        }
+    }
+}
+
 
 Monster::~Monster()
 {

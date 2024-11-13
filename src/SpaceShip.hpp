@@ -40,7 +40,7 @@ public:
 
     SpaceShip();
     SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color);
-    void shoot();
+    virtual void shoot();
     void updateProjectiles();
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     void xAdd();

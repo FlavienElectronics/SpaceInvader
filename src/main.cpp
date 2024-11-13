@@ -225,11 +225,14 @@ int main()
 
 	SpaceShip ship(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 1.2, "Green");
 	// Monster mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, "Green");
-	MonsterLine *mons[2];
+	int numberOfLine = 4;
+	MonsterLine *mons[4];
 	mons[0] = new MonsterLine(&window, windowHeight, windowWidth, windowWidth / 5, windowHeight / 3, 10, "Green");
-	mons[1] = new MonsterLine(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 4, 5, "Green");
+	mons[1] = new MonsterLine(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 4, 15, "Green");
+	mons[2] = new MonsterLine(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 6, 11, "Green");
+	mons[3] = new MonsterLine(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 5, 4, "Green");
 
-	bool *explosion[2] = {nullptr, nullptr};
+	bool *explosion[] = {nullptr, nullptr, nullptr, nullptr};
 	bool change = false;
 
 	sf::Clock clockCommand;
@@ -314,7 +317,7 @@ int main()
 #endif
 				// explosion = true;
 			}
-			for (int j = 0; j < 2; j++)
+			for (int j = 0; j < numberOfLine; j++)
 			{
 				mons[j]->updateCollision(ship, &(explosion[j]));
 			}
@@ -325,20 +328,26 @@ int main()
 		if (clockShoot.getElapsedTime() >= delayShoot)
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			{
 				ship.shoot();
+				Monster &tempMonster = (*mons[0])[0];
+				tempMonster.shoot();
+			}
 			clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
 		}
 
 		if (clockProjectile.getElapsedTime() >= delayProjectile)
 		{
 			ship.updateProjectiles();
+			Monster &tempMonster = (*mons[0])[0];
+			tempMonster.updateProjectiles();
 			clockProjectile.restart();
 		}
 
 		// mons.explosion();
 		if (clockMonster.getElapsedTime() >= delayMonster)
 		{
-			for (int j = 0; j < 2; j++)
+			for (int j = 0; j < numberOfLine; j++)
 			{
 				if (mons[j]->getDirection() == 0) // go left
 				{
@@ -383,7 +392,7 @@ int main()
 			cout << "Position X: " << temp.getX() << endl;
 		}
 
-		for (int j = 0; j < 2; j++)
+		for (int j = 0; j < numberOfLine; j++)
 		{
 			if (explosion[j] != nullptr)
 			{
@@ -411,7 +420,7 @@ int main()
 		// Efface l'écran en blanc
 		window.clear(sf::Color::White);
 		window.draw(ship);
-		for (int j = 0; j < 2; j++)
+		for (int j = 0; j < numberOfLine; j++)
 		{
 			for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
 			{
@@ -422,7 +431,7 @@ int main()
 	}
 	cout << "Window closed" << endl;
 
-	for (int j = 0; j < 2; j++)
+	for (int j = 0; j < numberOfLine; j++)
 	{
 		delete mons[j];
 	}
