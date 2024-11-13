@@ -24,7 +24,7 @@ protected:
 	bool alive;
 	int stat;
 	Explosion* explo; // Circular inclusion
-	sf::Clock clockExplosion;
+	sf::Clock* clockExplosion;
 
 public:
 
@@ -42,7 +42,7 @@ public:
 	bool updateCollision(const SpaceShip& ship); //For projectile throw by player
 	void updateParticule();	//To display explosion
 
-	const sf::Time& getElapsedTimeClockExplosion();
+	sf::Time getElapsedTimeClockExplosion();
 	void resetClockExplosion();
 
 	friend class Explosion;

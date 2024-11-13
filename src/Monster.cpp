@@ -17,6 +17,8 @@ Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, f
     this->ySize = 4;
     this->stat = -1;
 
+    this->clockExplosion = new sf::Clock;
+
 
     pt = new Point *[numberOfPixels];
     pjt = new Projectile *[numberOfProjectiles];
@@ -166,14 +168,16 @@ bool Monster::updateCollision(const SpaceShip &ship)
     return (false);
 }
 
-const sf::Time& Monster::getElapsedTimeClockExplosion()
+sf::Time Monster::getElapsedTimeClockExplosion()
 {
-    return (this->clockExplosion.getElapsedTime());
+    cout << this->clockExplosion <<endl;
+    cout << this->clockExplosion->getElapsedTime().asMilliseconds() << endl;
+    return (this->clockExplosion->getElapsedTime());
 }
 
 void Monster::resetClockExplosion()
 {
-    this->clockExplosion.restart();
+    this->clockExplosion->restart();
 }
 
 Monster::~Monster()
@@ -183,5 +187,7 @@ Monster::~Monster()
     cout << typeid(this).name() << " Nombre de projectile monstre " << numberOfProjectiles << endl;
     cout << "Fin destructeur monster " << endl;
 #endif
+
+    delete clockExplosion;
     delete explo;
 }

@@ -375,7 +375,13 @@ int main()
 			clockMonster.restart();
 		}
 
-		// cout << mons[0]->operator[](0).getElapsedTimeClockExplosion().asMilliseconds() << endl;
+		if (mons[0] != nullptr)
+		{
+			cout << (mons[0])[0].getDirection() << endl;
+			Monster &temp = (*mons[0])[0];
+			cout << "Elapsed Time for Explosion: " << temp.getElapsedTimeClockExplosion().asMilliseconds() << " ms" << endl;
+			cout << "Position X: " << temp.getX() << endl;
+		}
 
 		for (int j = 0; j < 2; j++)
 		{
@@ -384,10 +390,11 @@ int main()
 				for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
 				{
 					// Check if we should update the explosion particles
-					if (mons[j]->isExplosing(i) && clockExplosion.getElapsedTime() >= delayExplosion)
+					Monster &tempMonster = (*mons[j])[i];
+					if (mons[j]->isExplosing(i) && tempMonster.getElapsedTimeClockExplosion() >= delayExplosion)
 					{
 						mons[j]->updateParticule(i);
-						clockExplosion.restart();
+						tempMonster.resetClockExplosion();
 					}
 
 					// Only trigger an explosion if needed and the monster is alive
