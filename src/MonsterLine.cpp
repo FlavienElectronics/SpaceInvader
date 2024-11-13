@@ -1,14 +1,5 @@
 #include "MonsterLine.hpp"
 
-Monster *MonsterLine::getMonster(int index)
-{
-    if (index >= 0 && index < numberOfMonster)
-    {
-        return block[index];
-    }
-    return nullptr;
-}
-
 MonsterLine::MonsterLine(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, int numberOfMonster, string color)
 {
     cout << "Constructeur MonsterLine" << endl;

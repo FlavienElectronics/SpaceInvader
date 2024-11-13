@@ -1,4 +1,5 @@
 #include "SpaceShip.hpp"
+#include "MonsterLine.hpp"
 
 SpaceShip::Exept::Exept(std::string mes)
 {
@@ -231,4 +232,39 @@ float SpaceShip::getX() const
 float SpaceShip::getY() const
 {
     return (this->y);
+}
+
+bool SpaceShip::detectImpact(MonsterLine **monsterLine, int numberOfLine)
+{
+    for (int j = 0; j < numberOfLine; j++)
+    {
+        if (monsterLine != nullptr)
+        {
+            MonsterLine *tempMonsterLine = monsterLine[j];
+            for (int i = 0; i < tempMonsterLine->getNumberOfMonster(); i++)
+            {
+
+                Monster &tempMonster = (*monsterLine[j])[i];
+
+                for (int k = 0; k < tempMonster.numberOfProjectiles; k++)
+                {
+                    /*
+                    if (tempMonster.pjt[0] != nullptr)
+                    {
+                        cout << tempMonster.pjt[0]->getY() << endl;
+                    }*/
+
+                    if (tempMonster.pjt[k] != nullptr)
+                    {
+                        if (tempMonster.pjt[k]->getY() == this->getY())
+                        {
+                            cout << tempMonster.pjt[k]->getY() << endl;
+                            cout << "Decteting impact" << endl;
+                            return(true);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

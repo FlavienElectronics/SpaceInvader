@@ -24,7 +24,6 @@ private:
 	float winWidth;
 
 public:
-	Monster *getMonster(int index);
 	MonsterLine(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, int numberOfMonster, string color);
 	Monster &operator[](int location);
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;

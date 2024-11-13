@@ -4,8 +4,6 @@
 
 using namespace std;
 
-
-
 /*SpaceInvader INSA*/
 int main()
 {
@@ -26,6 +24,7 @@ int main()
 	float x = windowWidth / 2, y = windowHeight / 2; // Position initiale du point
 
 	SpaceShip ship(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 1.2, "Green");
+	bool shipDestroyed = false;
 	// Monster mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, "Green");
 	int numberOfLine = 4;
 	MonsterLine *mons[4];
@@ -56,195 +55,199 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-
-		if (clockCommand.getElapsedTime() >= delayCommand)
+		while (!shipDestroyed)
 		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+
+			if (clockCommand.getElapsedTime() >= delayCommand)
 			{
-				try
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 				{
-					ship.xAdd();
+					try
+					{
+						ship.xAdd();
+					}
+					catch (SpaceShip::Exept exp)
+					{
+#ifdef VERBOSE_MAIN
+						cout << exp.message << endl;
+#endif
+					}
 				}
-				catch (SpaceShip::Exept exp)
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+				{
+					try
+					{
+						ship.xSub();
+					}
+					catch (SpaceShip::Exept exp)
+					{
+#ifdef VERBOSE_MAIN
+						cout << exp.message << endl;
+#endif
+					}
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+				{
+					try
+					{
+						ship.yAdd();
+					}
+					catch (SpaceShip::Exept exp)
+					{
+#ifdef VERBOSE_MAIN
+						cout << exp.message << endl;
+#endif
+					}
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+				{
+					try
+					{
+						ship.ySub();
+					}
+					catch (SpaceShip::Exept exp)
+					{
+#ifdef VERBOSE_MAIN
+						cout << exp.message << endl;
+#endif
+					}
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 				{
 #ifdef VERBOSE_MAIN
-					cout << exp.message << endl;
+					cout << "E pressed" << endl;
 #endif
+					// explosion = true;
 				}
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			{
-				try
+				for (int j = 0; j < numberOfLine; j++)
 				{
-					ship.xSub();
+					mons[j]->updateCollision(ship, &(explosion[j]));
 				}
-				catch (SpaceShip::Exept exp)
-				{
-#ifdef VERBOSE_MAIN
-					cout << exp.message << endl;
-#endif
-				}
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			{
-				try
-				{
-					ship.yAdd();
-				}
-				catch (SpaceShip::Exept exp)
-				{
-#ifdef VERBOSE_MAIN
-					cout << exp.message << endl;
-#endif
-				}
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			{
-				try
-				{
-					ship.ySub();
-				}
-				catch (SpaceShip::Exept exp)
-				{
-#ifdef VERBOSE_MAIN
-					cout << exp.message << endl;
-#endif
-				}
+				shipDestroyed = ship.detectImpact(mons, numberOfLine);
+
+				clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 			}
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+			if (clockShoot.getElapsedTime() >= delayShoot)
 			{
-#ifdef VERBOSE_MAIN
-				cout << "E pressed" << endl;
-#endif
-				// explosion = true;
-			}
-			for (int j = 0; j < numberOfLine; j++)
-			{
-				mons[j]->updateCollision(ship, &(explosion[j]));
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+				{
+					ship.shoot();
+					for (int j = 0; j < numberOfLine; j++)
+					{
+						for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
+						{
+							Monster &tempMonster = (*mons[j])[i];
+							if (tempMonster.isAlive())
+							{
+								tempMonster.shoot();
+							}
+						}
+					}
+				}
+				clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
 			}
 
-			clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
-		}
-
-		if (clockShoot.getElapsedTime() >= delayShoot)
-		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			if (clockProjectile.getElapsedTime() >= delayProjectile)
 			{
-				ship.shoot();
+				ship.updateProjectiles();
 				for (int j = 0; j < numberOfLine; j++)
 				{
 					for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
 					{
 						Monster &tempMonster = (*mons[j])[i];
-						if (tempMonster.isAlive())
+						tempMonster.updateProjectiles();
+					}
+				}
+				clockProjectile.restart();
+			}
+
+			// mons.explosion();
+			if (clockMonster.getElapsedTime() >= delayMonster)
+			{
+				for (int j = 0; j < numberOfLine; j++)
+				{
+					if (mons[j]->getDirection() == 0) // go left
+					{
+						try
 						{
-							tempMonster.shoot();
+							mons[j]->xSub();
+						}
+						catch (SpaceShip::Exept &exp)
+						{
+							change = true;
+							cout << exp.message << endl;
+						}
+					}
+					else if (mons[j]->getDirection() == 1) // go right
+					{
+						try
+						{
+							mons[j]->xAdd();
+						}
+						catch (SpaceShip::Exept &exp)
+						{
+							change = true;
+							cout << exp.message << endl;
+						}
+					}
+
+					if (change)
+					{
+						mons[j]->changeDirection();
+						change = false;
+					}
+				}
+
+				clockMonster.restart();
+			}
+
+			if (mons[0] != nullptr)
+			{
+				cout << (mons[0])[0].getDirection() << endl;
+				Monster &temp = (*mons[0])[0];
+				cout << "Elapsed Time for Explosion: " << temp.getElapsedTimeClockExplosion().asMilliseconds() << " ms" << endl;
+				cout << "Position X: " << temp.getX() << endl;
+			}
+
+			for (int j = 0; j < numberOfLine; j++)
+			{
+				if (explosion[j] != nullptr)
+				{
+					for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
+					{
+						// Check if we should update the explosion particles
+						Monster &tempMonster = (*mons[j])[i];
+						if (mons[j]->isExplosing(i) && tempMonster.getElapsedTimeClockExplosion() >= delayExplosion)
+						{
+							mons[j]->updateParticule(i);
+							tempMonster.resetClockExplosion();
+						}
+
+						// Only trigger an explosion if needed and the monster is alive
+						if (explosion[j][i] && mons[j]->isAlive(i))
+						{
+							mons[j]->explode(i); // Start explosion
+							cout << "Monster " << i << " in line " << j << " exploded." << endl;
+							clockExplosion.restart(); // Only reset timer when an explosion starts
 						}
 					}
 				}
 			}
-			clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
-		}
 
-		if (clockProjectile.getElapsedTime() >= delayProjectile)
-		{
-			ship.updateProjectiles();
+			// Efface l'écran en blanc
+			window.clear(sf::Color::White);
+			window.draw(ship);
 			for (int j = 0; j < numberOfLine; j++)
 			{
 				for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
 				{
-					Monster &tempMonster = (*mons[j])[i];
-					tempMonster.updateProjectiles();
+					window.draw((*mons[j])[i]);
 				}
 			}
-			clockProjectile.restart();
+			window.display();
 		}
-
-		// mons.explosion();
-		if (clockMonster.getElapsedTime() >= delayMonster)
-		{
-			for (int j = 0; j < numberOfLine; j++)
-			{
-				if (mons[j]->getDirection() == 0) // go left
-				{
-					try
-					{
-						mons[j]->xSub();
-					}
-					catch (SpaceShip::Exept &exp)
-					{
-						change = true;
-						cout << exp.message << endl;
-					}
-				}
-				else if (mons[j]->getDirection() == 1) // go right
-				{
-					try
-					{
-						mons[j]->xAdd();
-					}
-					catch (SpaceShip::Exept &exp)
-					{
-						change = true;
-						cout << exp.message << endl;
-					}
-				}
-
-				if (change)
-				{
-					mons[j]->changeDirection();
-					change = false;
-				}
-			}
-
-			clockMonster.restart();
-		}
-
-		if (mons[0] != nullptr)
-		{
-			cout << (mons[0])[0].getDirection() << endl;
-			Monster &temp = (*mons[0])[0];
-			cout << "Elapsed Time for Explosion: " << temp.getElapsedTimeClockExplosion().asMilliseconds() << " ms" << endl;
-			cout << "Position X: " << temp.getX() << endl;
-		}
-
-		for (int j = 0; j < numberOfLine; j++)
-		{
-			if (explosion[j] != nullptr)
-			{
-				for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
-				{
-					// Check if we should update the explosion particles
-					Monster &tempMonster = (*mons[j])[i];
-					if (mons[j]->isExplosing(i) && tempMonster.getElapsedTimeClockExplosion() >= delayExplosion)
-					{
-						mons[j]->updateParticule(i);
-						tempMonster.resetClockExplosion();
-					}
-
-					// Only trigger an explosion if needed and the monster is alive
-					if (explosion[j][i] && mons[j]->isAlive(i))
-					{
-						mons[j]->explode(i); // Start explosion
-						cout << "Monster " << i << " in line " << j << " exploded." << endl;
-						clockExplosion.restart(); // Only reset timer when an explosion starts
-					}
-				}
-			}
-		}
-
-		// Efface l'écran en blanc
-		window.clear(sf::Color::White);
-		window.draw(ship);
-		for (int j = 0; j < numberOfLine; j++)
-		{
-			for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
-			{
-				window.draw((*mons[j])[i]);
-			}
-		}
-		window.display();
 	}
 	cout << "Window closed" << endl;
 

@@ -8,6 +8,8 @@
 #include <ctime>
 
 #include "Projectile.hpp"
+class Monster;
+class MonsterLine;
 
 //#define VERBOSE_SHIP
 
@@ -51,7 +53,7 @@ public:
     float getX() const;
     float getY() const;
 
-    //bool detectImpact();
+    bool detectImpact(MonsterLine** monsterLine, int numberOfLine);
 
     friend class Explosion;
     friend class Monster;
