@@ -51,6 +51,8 @@ public:
     float getX() const;
     float getY() const;
 
+    //bool detectImpact();
+
     friend class Explosion;
     friend class Monster;
 };

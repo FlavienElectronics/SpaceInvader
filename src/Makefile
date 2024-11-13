@@ -4,7 +4,7 @@ LIBFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 CPPFLAGS = -Wall -g
 
 SRC_DIR = ./
-SRC = main.cpp Explosion.cpp Monster.cpp Point.cpp Projectile.cpp SpaceShip.cpp
+SRC = main.cpp Explosion.cpp Monster.cpp Point.cpp Projectile.cpp SpaceShip.cpp MonsterLine.cpp
 
 TPP =
 OBJ_DIR = ./obj

@@ -6,5 +6,6 @@
 #include "Monster.hpp"
 #include "Projectile.hpp"
 #include "Explosion.hpp"
+#include "MonsterLine.hpp"
 
 #endif
