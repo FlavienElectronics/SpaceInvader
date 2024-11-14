@@ -15,17 +15,18 @@ SpaceShip::SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidt
 #endif
     pt = new Point *[numberOfPixels];
     pjt = new Projectile *[numberOfProjectiles];
-    pt[0] = new Point(x + 2, y + 0, 1, color);
+    pt[0] = new Point(x + 0, y + 2, 1, color);
     pt[1] = new Point(x + 1, y + 1, 1, color);
-    pt[2] = new Point(x + 2, y + 1, 1, color);
-    pt[3] = new Point(x + 3, y + 1, 1, color);
-    pt[4] = new Point(x + 0, y + 2, 1, color);
-    pt[5] = new Point(x + 1, y + 2, 1, color);
+    pt[2] = new Point(x + 1, y + 2, 1, color);
+    pt[3] = new Point(x + 1, y + 3, 1, color);
+    pt[4] = new Point(x + 2, y + 0, 1, color);
+    pt[5] = new Point(x + 2, y + 1, 1, color);
     pt[6] = new Point(x + 2, y + 2, 1, color);
-    pt[7] = new Point(x + 3, y + 2, 1, color);
-    pt[8] = new Point(x + 4, y + 2, 1, color);
-    pt[9] = new Point(x + 1, y + 3, 1, color);
-    pt[10] = new Point(x + 3, y + 3, 1, color);
+    pt[7] = new Point(x + 3, y + 1, 1, color);
+    pt[8] = new Point(x + 3, y + 2, 1, color);
+    pt[9] = new Point(x + 3, y + 3, 1, color);
+    pt[10] = new Point(x + 4, y + 2, 1, color);
+    this->life = 6;
     this->window = win;
     this->winHeight = windowHeight;
     this->winWidth = windowWidth;
@@ -49,6 +50,47 @@ void SpaceShip::shoot()
             cout << "Lancement projectile " << i << endl;
 #endif
             break;
+        }
+    }
+}
+
+bool SpaceShip::correctCoordinates(int &xToCorrect, int &yToCorrect)
+{
+    int *yVector = new int[this->numberOfPixels];
+    cout << "xToCorrect" << xToCorrect << endl;
+    int ySmaller = this->hitBox_y; // Max on y axis
+    for (int i = 0; i < this->numberOfPixels; i++)
+    {
+        yVector[i] = this->hitBox_y; // Max on y axis
+        //cout <<this->pt[i]->color <<endl;
+        cout << (int)this->pt[i]->getX() - (int)this->getX()  << endl;
+        if (((int)this->pt[i]->getX()- (int)this->getX()) == xToCorrect && this->pt[i]->color != "Invisible")
+        {
+            yVector[i] = ((int)this->pt[i]->getY() - (int)this->getY());
+            cout << "Adding new value" <<((int)this->pt[i]->getY() - (int)this->getY()) << endl;
+        }
+    }
+    for (int i = 0; i < this->numberOfPixels; i++)
+    {
+        if (ySmaller > yVector[i])
+            ySmaller = yVector[i];
+    }
+    yToCorrect = ySmaller; 
+    delete [] yVector;
+
+}
+
+void SpaceShip::hidePixel(int xTH, int yTH)
+{
+    for (int i = 0; i < this->numberOfPixels; i++)
+    {
+        int xtemp = ((int)this->pt[i]->getX() - (int)this->getX());
+        int ytemp = ((int)this->pt[i]->getY() - (int)this->getY());
+        if (xtemp == xTH && ytemp == yTH)
+        {
+            // cout << (int)this->pt[i]->getX() - (int)this->getX() << "x-x " <<  (int)this->pt[i]->getY() - (int)this->getY() << "y-y" << endl;
+            this->pt[i]->hide();
+            cout << "Hiding pixel " << i << endl;
         }
     }
 }
@@ -254,13 +296,23 @@ bool SpaceShip::detectImpact(MonsterLine **monsterLine, int numberOfLine)
                     {
                         if ((int)tempMonster.pjt[k]->getY() == (int)this->getY() && ((int)tempMonster.pjt[k]->getX() >= (int)this->getX() && (int)tempMonster.pjt[k]->getX() < ((int)this->getX() + (int)this->hitBox_x)))
                         {
-                            cout << tempMonster.pjt[k]->getY() << endl;
-                            cout << "Decteting impact" << endl;
-                            return (true);
+
+                            int xToDestroy = (int)tempMonster.pjt[k]->getX() - (int)(this->getX());
+                            int yToDestroy = (int)tempMonster.pjt[k]->getY() + 1 - (int)(this->getY());
+                            cout << "Decteting impact on x = " << xToDestroy << " y = " << yToDestroy << endl;
+                            this->correctCoordinates(xToDestroy, yToDestroy);
+                            cout << "Corrected x = " << xToDestroy << " y = " << yToDestroy << endl;
+                            this->hidePixel(xToDestroy, yToDestroy);
+                            this->life--;
+                            if (this->life == 0)
+                            {
+                                return (true);
+                            }
                         }
                     }
                 }
             }
         }
     }
+    return (false);
 }

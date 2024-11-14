@@ -305,7 +305,7 @@ int main()
 	view.setViewport(sf::FloatRect(0, 0, 1, 1));
 	window.setView(view);
 
-	int numberOfLine = 2;
+	int numberOfLine = 4;
 	// int numberOfLine = 25;
 	MonsterLine **mons;
 	SpaceShip *ship;
@@ -348,6 +348,13 @@ int main()
 				/*Managing the input command*/
 				if (clockCommand.getElapsedTime() >= delayCommand)
 				{
+
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+					{
+						cout << "Hide pixel" << endl;
+						ship->hidePixel(3,3);
+					}
+
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 					{
 						try
@@ -464,7 +471,7 @@ int main()
 							catch (SpaceShip::Exept &exp)
 							{
 								change = true;
-								cout << exp.message << endl;
+								//cout << exp.message << endl;
 							}
 						}
 						else if (mons[j]->getDirection() == 1) // go right
@@ -476,7 +483,7 @@ int main()
 							catch (SpaceShip::Exept &exp)
 							{
 								change = true;
-								cout << exp.message << endl;
+								//cout << exp.message << endl;
 							}
 						}
 
@@ -527,7 +534,7 @@ int main()
 								if (explosion[j][i] && mons[j]->isAlive(i))
 								{
 									mons[j]->explode(i); // Start explosion
-									cout << "Monster " << i << " in line " << j << " exploded." << endl;
+									//cout << "Monster " << i << " in line " << j << " exploded." << endl;
 									clockExplosion.restart(); // Only reset timer when an explosion starts
 								}
 							}

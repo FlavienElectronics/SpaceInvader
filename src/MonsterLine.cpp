@@ -2,7 +2,7 @@
 
 MonsterLine::MonsterLine(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, int numberOfMonster, string color)
 {
-    cout << "Constructeur MonsterLine" << endl;
+    //cout << "Constructeur MonsterLine" << endl;
     srand(time(0));
     this->direction = rand() % 2;
     this->numberOfMonster = numberOfMonster;
@@ -81,18 +81,18 @@ void MonsterLine::updateCollision(const SpaceShip &ship, bool **vectorBool)
     {
         delete[] *vectorBool;
         *vectorBool = nullptr;
-        cout << "Vector deleted" << endl;
+        //cout << "Vector deleted" << endl;
     }
     if (*vectorBool == nullptr)
     {
         *vectorBool = new bool[this->numberOfMonster];
-        cout << "Vector allocated " << *vectorBool << " Size " << this->numberOfMonster << endl;
+        //cout << "Vector allocated " << *vectorBool << " Size " << this->numberOfMonster << endl;
         for (int i = 0; i < this->numberOfMonster; i++)
         {
             (*vectorBool)[i] = false;
         }
     }
-    cout << "Number of monster " << this->numberOfMonster << endl;
+    //cout << "Number of monster " << this->numberOfMonster << endl;
     for (int i = 0; i < this->numberOfMonster; i++)
     {
         (*vectorBool)[i] = this->block[i]->updateCollision(ship);

@@ -17,10 +17,12 @@ Point::Point(float x, float y, int size, string color) : sf::RectangleShape(sf::
     if (color == "B")
     {
         localColor = sf::Color::Black;
+        this->color == "B";
     }
     else if (color == "W")
     {
         localColor = sf::Color::White;
+        this->color == "W";
     }
     else
     {
@@ -34,6 +36,7 @@ Point::Point(float x, float y) : sf::RectangleShape(sf::Vector2f(1, 1))
 {
     this->x = x;
     this->y = y;
+    this->color == "B";
     this->setFillColor(sf::Color::Black);
     this->setPosition(x, y);
 }
@@ -46,10 +49,12 @@ Point::Point(float x, float y, string color) : sf::RectangleShape(sf::Vector2f(1
     if (color == "B")
     {
         localColor = sf::Color::Black;
+         this->color == "B";
     }
     else if (color == "W")
     {
         localColor = sf::Color::White;
+        this->color == "W";
     }
     else
     {

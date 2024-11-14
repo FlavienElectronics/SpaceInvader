@@ -3,7 +3,7 @@
 
 Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos,int direction, string color)
 {
-    cout << "Creation Monster" << endl;
+    //cout << "Creation Monster" << endl;
     this->alive = true;
     this->explo = new Explosion;
     this->direction = direction;
@@ -170,8 +170,8 @@ bool Monster::updateCollision(const SpaceShip &ship)
 
 sf::Time Monster::getElapsedTimeClockExplosion()
 {
-    cout << this->clockExplosion << endl;
-    cout << this->clockExplosion->getElapsedTime().asMilliseconds() << endl;
+    //cout << this->clockExplosion << endl;
+    //cout << this->clockExplosion->getElapsedTime().asMilliseconds() << endl;
     return (this->clockExplosion->getElapsedTime());
 }
 

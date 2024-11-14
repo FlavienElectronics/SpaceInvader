@@ -30,5 +30,6 @@ public :
 	float getY() const;
 
 	friend class Monster;
+	friend class SpaceShip;
 };
 #endif

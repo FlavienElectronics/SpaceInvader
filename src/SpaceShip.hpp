@@ -11,7 +11,7 @@
 class Monster;
 class MonsterLine;
 
-//#define VERBOSE_SHIP
+// #define VERBOSE_SHIP
 
 using namespace std;
 
@@ -19,6 +19,9 @@ using namespace std;
 
 class SpaceShip : public sf::Drawable
 {
+private:
+    int life;
+
 protected:
     float x, y;
     Point **pt;
@@ -41,7 +44,7 @@ public:
         std::string message;
         Exept(std::string mes);
     };
- 
+
     SpaceShip();
     SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color);
     virtual void shoot();
@@ -54,8 +57,11 @@ public:
     ~SpaceShip();
     float getX() const;
     float getY() const;
+    void hidePixel(int x, int y);
 
-    bool detectImpact(MonsterLine** monsterLine, int numberOfLine);
+    bool correctCoordinates(int& xToCorrect, int& yToCorrect);
+
+    bool detectImpact(MonsterLine **monsterLine, int numberOfLine);
 
     friend class Explosion;
     friend class Monster;
