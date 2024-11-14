@@ -7,6 +7,13 @@ using namespace std;
 class GameOver : public sf::Drawable
 {
 private:
+	class G;
+	class A;
+	class M;
+	class E;
+	class O;
+	class V;
+	class R;
 	class Letter
 	{
 	protected:
@@ -37,6 +44,13 @@ private:
 			}
 		}
 		friend GameOver;
+		friend G;
+		friend A;
+		friend M;
+		friend E;
+		friend O;
+		friend V;
+		friend R;
 	};
 	class G : public Letter
 	{
@@ -179,28 +193,31 @@ private:
 			this->pt[10] = new Point(this->x + 3, this->y + 0);
 			this->pt[11] = new Point(this->x + 3, this->y + 1);
 			this->pt[12] = new Point(this->x + 3, this->y + 4);
-			// cout << "Construction de R" << endl;
-			// cout << pt[9]->getX() << " " << pt[9]->getY() << endl;
 		}
 		~R() {}
 	};
 
 	Letter **lettersGameOver;
 	int numberOfLetter;
+	float winW, winH;
 
 public:
-	GameOver()
+	GameOver(float windowWidth, float windowHeight) : winW(windowWidth), winH(windowHeight)
 	{
 		this->numberOfLetter = 8;
 		lettersGameOver = new Letter *[this->numberOfLetter];
-		lettersGameOver[0] = new G(00, 20);
-		lettersGameOver[1] = new A(10, 30);
-		lettersGameOver[2] = new M(20, 40);
-		lettersGameOver[3] = new E(30, 50);
-		lettersGameOver[4] = new O(40, 60);
-		lettersGameOver[5] = new V(50, 70);
-		lettersGameOver[6] = new E(60, 80);
-		lettersGameOver[7] = new R(70, 90);
+		int big_space = 4;
+		int small_space = 1;
+		float widthString = 4 + 4 + 5 + 3 + 4 + 5 + 3 + 4 + 8 * 1 + 4; // G + A + M + E + O + V + E + R + 8 small space + 1 big space
+		int startX = windowWidth;
+		lettersGameOver[0] = new G(((windowWidth-widthString)/2), windowHeight / 2);
+		lettersGameOver[1] = new A((this->lettersGameOver[0]->x + this->lettersGameOver[0]->width + small_space), windowHeight / 2);
+		lettersGameOver[2] = new M((this->lettersGameOver[1]->x + this->lettersGameOver[1]->width + small_space), windowHeight / 2);
+		lettersGameOver[3] = new E((this->lettersGameOver[2]->x + this->lettersGameOver[2]->width + small_space), windowHeight / 2);
+		lettersGameOver[4] = new O((this->lettersGameOver[3]->x + this->lettersGameOver[3]->width + big_space), windowHeight / 2);
+		lettersGameOver[5] = new V((this->lettersGameOver[4]->x + this->lettersGameOver[4]->width + small_space), windowHeight / 2);
+		lettersGameOver[6] = new E((this->lettersGameOver[5]->x + this->lettersGameOver[5]->width + small_space), windowHeight / 2);
+		lettersGameOver[7] = new R((this->lettersGameOver[6]->x + this->lettersGameOver[6]->width + small_space), windowHeight / 2);
 	}
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -515,7 +532,7 @@ int main()
 		}
 		window.clear(sf::Color::White);
 
-		window.draw(GameOver());
+		window.draw(GameOver(windowWidth, windowHeight));
 
 		window.display();
 
