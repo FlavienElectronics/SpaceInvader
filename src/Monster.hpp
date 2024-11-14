@@ -28,7 +28,7 @@ protected:
 
 public:
 
-	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color);
+	Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos,int direction, string color);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 	int getDirection();
 	void changeDirection();

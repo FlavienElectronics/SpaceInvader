@@ -4,6 +4,13 @@
 
 using namespace std;
 
+struct main_info
+{
+	SpaceShip *ship;
+	MonsterLine **monsters;
+	bool **explosionVector;
+};
+
 void init(SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &change, bool &shipDestroyed, int numberOfLine, sf::RenderWindow &win, float winH, float winW)
 {
 	shipDestroyed = false;
@@ -13,7 +20,7 @@ void init(SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &change
 	for (int i = 0; i < numberOfLine; i++)
 	{
 		(*explo)[i] = nullptr;
-		(*monsterL)[i] = new MonsterLine(&win, winH, winW, winW / (2 + i), winH / (i + 1),(1 + i*3), "Green");
+		(*monsterL)[i] = new MonsterLine(&win, winH, winW, winW / 2 - (1 + i * 2 * 4), winH / 2 - (1 + i * 2 * 4), i * 2 + 1, "col");
 	}
 	change = false;
 }
@@ -37,6 +44,8 @@ int main()
 	const string gameName = "SpaceInvader";
 	const float windowWidth = 128;
 	const float windowHeight = 64;
+	// const float windowWidth = 1000;
+	// const float windowHeight = 500;
 
 	// Création de la fenêtre SFML
 	cout << "Window creation" << endl;
@@ -50,7 +59,7 @@ int main()
 	window.setView(view);
 
 	// Monster mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, "Green");
-	int numberOfLine = 6;
+	int numberOfLine = 4;
 	MonsterLine **mons;
 	SpaceShip *ship;
 
@@ -65,10 +74,10 @@ int main()
 	sf::Clock clockShoot;
 	sf::Clock clockMonster;
 	sf::Clock clockExplosion;
-	sf::Time delayCommand = sf::milliseconds(20);
+	sf::Time delayCommand = sf::milliseconds(10);
 	sf::Time delayProjectile = sf::milliseconds(10);
 	sf::Time delayMonster = sf::milliseconds(50);
-	sf::Time delayShoot = sf::milliseconds(100);
+	sf::Time delayShoot = sf::milliseconds(500);
 	sf::Time delayExplosion = sf::milliseconds(300 / 5);
 	sf::Event event;
 
@@ -156,9 +165,9 @@ int main()
 				clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 			}
 
-			if (clockShoot.getElapsedTime() >= delayShoot)
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+				if (clockShoot.getElapsedTime() >= delayShoot)
 				{
 					ship->shoot();
 					for (int j = 0; j < numberOfLine; j++)
@@ -172,8 +181,8 @@ int main()
 							}
 						}
 					}
+					clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
 				}
-				clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
 			}
 
 			if (clockProjectile.getElapsedTime() >= delayProjectile)

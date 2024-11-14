@@ -41,7 +41,7 @@ public:
         std::string message;
         Exept(std::string mes);
     };
-
+ 
     SpaceShip();
     SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, string color);
     virtual void shoot();

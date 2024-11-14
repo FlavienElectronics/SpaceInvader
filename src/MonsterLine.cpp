@@ -3,6 +3,7 @@
 MonsterLine::MonsterLine(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, int numberOfMonster, string color)
 {
     cout << "Constructeur MonsterLine" << endl;
+    srand(time(0));
     this->direction = rand() % 2;
     this->numberOfMonster = numberOfMonster;
     this->winHeight = windowHeight;
@@ -16,7 +17,7 @@ MonsterLine::MonsterLine(sf::RenderWindow *win, float windowHeight, float window
         int cnt = 1;
         for (int i = 0; i < this->numberOfMonster; i++)
         {
-            block[i] = new Monster(win, winHeight, winWidth, xLocation + (i * spacing), yLocation, "col");
+            block[i] = new Monster(win, winHeight, winWidth, xLocation + (i * spacing), yLocation, this->direction, "col");
             cnt++;
         }
     }
