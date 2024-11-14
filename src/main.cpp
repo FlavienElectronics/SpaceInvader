@@ -58,16 +58,16 @@ private:
 		G(float x, float y) : Letter(x, y, 10, 4)
 		{
 			this->pt = new Point *[this->numberOfPoint];
-			this->pt[0] = new Point(this->x + 0, this->y + 1);
-			this->pt[1] = new Point(this->x + 0, this->y + 2);
-			this->pt[2] = new Point(this->x + 0, this->y + 3);
-			this->pt[3] = new Point(this->x + 1, this->y + 0);
-			this->pt[4] = new Point(this->x + 1, this->y + 4);
-			this->pt[5] = new Point(this->x + 2, this->y + 0);
-			this->pt[6] = new Point(this->x + 2, this->y + 2);
-			this->pt[7] = new Point(this->x + 2, this->y + 4);
-			this->pt[8] = new Point(this->x + 3, this->y + 2);
-			this->pt[9] = new Point(this->x + 3, this->y + 3);
+			this->pt[0] = new Point(this->x + 0, this->y + 1, "W");
+			this->pt[1] = new Point(this->x + 0, this->y + 2, "W");
+			this->pt[2] = new Point(this->x + 0, this->y + 3, "W");
+			this->pt[3] = new Point(this->x + 1, this->y + 0, "W");
+			this->pt[4] = new Point(this->x + 1, this->y + 4, "W");
+			this->pt[5] = new Point(this->x + 2, this->y + 0, "W");
+			this->pt[6] = new Point(this->x + 2, this->y + 2, "W");
+			this->pt[7] = new Point(this->x + 2, this->y + 4, "W");
+			this->pt[8] = new Point(this->x + 3, this->y + 2, "W");
+			this->pt[9] = new Point(this->x + 3, this->y + 3, "W");
 		}
 		~G() {}
 	};
@@ -77,18 +77,18 @@ private:
 		A(float x, float y) : Letter(x, y, 12, 4)
 		{
 			this->pt = new Point *[this->numberOfPoint];
-			this->pt[0] = new Point(this->x + 0, this->y + 1);
-			this->pt[1] = new Point(this->x + 0, this->y + 2);
-			this->pt[2] = new Point(this->x + 0, this->y + 3);
-			this->pt[3] = new Point(this->x + 0, this->y + 4);
-			this->pt[4] = new Point(this->x + 1, this->y + 0);
-			this->pt[5] = new Point(this->x + 1, this->y + 2);
-			this->pt[6] = new Point(this->x + 2, this->y + 0);
-			this->pt[7] = new Point(this->x + 2, this->y + 2);
-			this->pt[8] = new Point(this->x + 3, this->y + 1);
-			this->pt[9] = new Point(this->x + 3, this->y + 2);
-			this->pt[10] = new Point(this->x + 3, this->y + 3);
-			this->pt[11] = new Point(this->x + 3, this->y + 4);
+			this->pt[0] = new Point(this->x + 0, this->y + 1, "W");
+			this->pt[1] = new Point(this->x + 0, this->y + 2, "W");
+			this->pt[2] = new Point(this->x + 0, this->y + 3, "W");
+			this->pt[3] = new Point(this->x + 0, this->y + 4, "W");
+			this->pt[4] = new Point(this->x + 1, this->y + 0, "W");
+			this->pt[5] = new Point(this->x + 1, this->y + 2, "W");
+			this->pt[6] = new Point(this->x + 2, this->y + 0, "W");
+			this->pt[7] = new Point(this->x + 2, this->y + 2, "W");
+			this->pt[8] = new Point(this->x + 3, this->y + 1, "W");
+			this->pt[9] = new Point(this->x + 3, this->y + 2, "W");
+			this->pt[10] = new Point(this->x + 3, this->y + 3, "W");
+			this->pt[11] = new Point(this->x + 3, this->y + 4, "W");
 		}
 		~A() {}
 	};
@@ -99,19 +99,19 @@ private:
 		M(float x, float y) : Letter(x, y, 13, 5)
 		{
 			this->pt = new Point *[this->numberOfPoint];
-			this->pt[0] = new Point(this->x + 0, this->y + 0);
-			this->pt[1] = new Point(this->x + 0, this->y + 1);
-			this->pt[2] = new Point(this->x + 0, this->y + 2);
-			this->pt[3] = new Point(this->x + 0, this->y + 3);
-			this->pt[4] = new Point(this->x + 0, this->y + 4);
-			this->pt[5] = new Point(this->x + 1, this->y + 1);
-			this->pt[6] = new Point(this->x + 2, this->y + 2);
-			this->pt[7] = new Point(this->x + 3, this->y + 1);
-			this->pt[8] = new Point(this->x + 4, this->y + 0);
-			this->pt[9] = new Point(this->x + 4, this->y + 1);
-			this->pt[10] = new Point(this->x + 4, this->y + 2);
-			this->pt[11] = new Point(this->x + 4, this->y + 3);
-			this->pt[12] = new Point(this->x + 4, this->y + 4);
+			this->pt[0] = new Point(this->x + 0, this->y + 0, "W");
+			this->pt[1] = new Point(this->x + 0, this->y + 1, "W");
+			this->pt[2] = new Point(this->x + 0, this->y + 2, "W");
+			this->pt[3] = new Point(this->x + 0, this->y + 3, "W");
+			this->pt[4] = new Point(this->x + 0, this->y + 4, "W");
+			this->pt[5] = new Point(this->x + 1, this->y + 1, "W");
+			this->pt[6] = new Point(this->x + 2, this->y + 2, "W");
+			this->pt[7] = new Point(this->x + 3, this->y + 1, "W");
+			this->pt[8] = new Point(this->x + 4, this->y + 0, "W");
+			this->pt[9] = new Point(this->x + 4, this->y + 1, "W");
+			this->pt[10] = new Point(this->x + 4, this->y + 2, "W");
+			this->pt[11] = new Point(this->x + 4, this->y + 3, "W");
+			this->pt[12] = new Point(this->x + 4, this->y + 4, "W");
 		}
 		~M() {}
 	};
@@ -121,16 +121,16 @@ private:
 		E(float x, float y) : Letter(x, y, 10, 3)
 		{
 			this->pt = new Point *[this->numberOfPoint];
-			this->pt[0] = new Point(this->x + 0, this->y + 0);
-			this->pt[1] = new Point(this->x + 0, this->y + 1);
-			this->pt[2] = new Point(this->x + 0, this->y + 2);
-			this->pt[3] = new Point(this->x + 0, this->y + 3);
-			this->pt[4] = new Point(this->x + 0, this->y + 4);
-			this->pt[5] = new Point(this->x + 1, this->y + 0);
-			this->pt[6] = new Point(this->x + 1, this->y + 2);
-			this->pt[7] = new Point(this->x + 1, this->y + 4);
-			this->pt[8] = new Point(this->x + 2, this->y + 0);
-			this->pt[9] = new Point(this->x + 2, this->y + 4);
+			this->pt[0] = new Point(this->x + 0, this->y + 0, "W");
+			this->pt[1] = new Point(this->x + 0, this->y + 1, "W");
+			this->pt[2] = new Point(this->x + 0, this->y + 2, "W");
+			this->pt[3] = new Point(this->x + 0, this->y + 3, "W");
+			this->pt[4] = new Point(this->x + 0, this->y + 4, "W");
+			this->pt[5] = new Point(this->x + 1, this->y + 0, "W");
+			this->pt[6] = new Point(this->x + 1, this->y + 2, "W");
+			this->pt[7] = new Point(this->x + 1, this->y + 4, "W");
+			this->pt[8] = new Point(this->x + 2, this->y + 0, "W");
+			this->pt[9] = new Point(this->x + 2, this->y + 4, "W");
 		}
 		~E() {}
 	};
@@ -141,16 +141,16 @@ private:
 		O(float x, float y) : Letter(x, y, 10, 4)
 		{
 			this->pt = new Point *[this->numberOfPoint];
-			this->pt[0] = new Point(this->x + 0, this->y + 1);
-			this->pt[1] = new Point(this->x + 0, this->y + 2);
-			this->pt[2] = new Point(this->x + 0, this->y + 3);
-			this->pt[3] = new Point(this->x + 1, this->y + 0);
-			this->pt[4] = new Point(this->x + 1, this->y + 4);
-			this->pt[5] = new Point(this->x + 2, this->y + 0);
-			this->pt[6] = new Point(this->x + 2, this->y + 4);
-			this->pt[7] = new Point(this->x + 3, this->y + 1);
-			this->pt[8] = new Point(this->x + 3, this->y + 2);
-			this->pt[9] = new Point(this->x + 3, this->y + 3);
+			this->pt[0] = new Point(this->x + 0, this->y + 1, "W");
+			this->pt[1] = new Point(this->x + 0, this->y + 2, "W");
+			this->pt[2] = new Point(this->x + 0, this->y + 3, "W");
+			this->pt[3] = new Point(this->x + 1, this->y + 0, "W");
+			this->pt[4] = new Point(this->x + 1, this->y + 4, "W");
+			this->pt[5] = new Point(this->x + 2, this->y + 0, "W");
+			this->pt[6] = new Point(this->x + 2, this->y + 4, "W");
+			this->pt[7] = new Point(this->x + 3, this->y + 1, "W");
+			this->pt[8] = new Point(this->x + 3, this->y + 2, "W");
+			this->pt[9] = new Point(this->x + 3, this->y + 3, "W");
 		}
 		~O() {}
 	};
@@ -161,15 +161,15 @@ private:
 		V(float x, float y) : Letter(x, y, 9, 5)
 		{
 			this->pt = new Point *[this->numberOfPoint];
-			this->pt[0] = new Point(this->x + 0, this->y + 0);
-			this->pt[1] = new Point(this->x + 0, this->y + 1);
-			this->pt[2] = new Point(this->x + 1, this->y + 2);
-			this->pt[3] = new Point(this->x + 1, this->y + 3);
-			this->pt[4] = new Point(this->x + 2, this->y + 4);
-			this->pt[5] = new Point(this->x + 3, this->y + 2);
-			this->pt[6] = new Point(this->x + 3, this->y + 3);
-			this->pt[7] = new Point(this->x + 4, this->y + 0);
-			this->pt[8] = new Point(this->x + 4, this->y + 1);
+			this->pt[0] = new Point(this->x + 0, this->y + 0, "W");
+			this->pt[1] = new Point(this->x + 0, this->y + 1, "W");
+			this->pt[2] = new Point(this->x + 1, this->y + 2, "W");
+			this->pt[3] = new Point(this->x + 1, this->y + 3, "W");
+			this->pt[4] = new Point(this->x + 2, this->y + 4, "W");
+			this->pt[5] = new Point(this->x + 3, this->y + 2, "W");
+			this->pt[6] = new Point(this->x + 3, this->y + 3, "W");
+			this->pt[7] = new Point(this->x + 4, this->y + 0, "W");
+			this->pt[8] = new Point(this->x + 4, this->y + 1, "W");
 		}
 		~V() {}
 	};
@@ -180,19 +180,19 @@ private:
 		R(float x, float y) : Letter(x, y, 13, 4)
 		{
 			this->pt = new Point *[this->numberOfPoint];
-			this->pt[0] = new Point(this->x + 0, this->y + 0);
-			this->pt[1] = new Point(this->x + 0, this->y + 1);
-			this->pt[2] = new Point(this->x + 0, this->y + 2);
-			this->pt[3] = new Point(this->x + 0, this->y + 3);
-			this->pt[4] = new Point(this->x + 0, this->y + 4);
-			this->pt[5] = new Point(this->x + 1, this->y + 0);
-			this->pt[6] = new Point(this->x + 1, this->y + 2);
-			this->pt[7] = new Point(this->x + 2, this->y + 0);
-			this->pt[8] = new Point(this->x + 2, this->y + 2);
-			this->pt[9] = new Point(this->x + 2, this->y + 3);
-			this->pt[10] = new Point(this->x + 3, this->y + 0);
-			this->pt[11] = new Point(this->x + 3, this->y + 1);
-			this->pt[12] = new Point(this->x + 3, this->y + 4);
+			this->pt[0] = new Point(this->x + 0, this->y + 0, "W");
+			this->pt[1] = new Point(this->x + 0, this->y + 1, "W");
+			this->pt[2] = new Point(this->x + 0, this->y + 2, "W");
+			this->pt[3] = new Point(this->x + 0, this->y + 3, "W");
+			this->pt[4] = new Point(this->x + 0, this->y + 4, "W");
+			this->pt[5] = new Point(this->x + 1, this->y + 0, "W");
+			this->pt[6] = new Point(this->x + 1, this->y + 2, "W");
+			this->pt[7] = new Point(this->x + 2, this->y + 0, "W");
+			this->pt[8] = new Point(this->x + 2, this->y + 2, "W");
+			this->pt[9] = new Point(this->x + 2, this->y + 3, "W");
+			this->pt[10] = new Point(this->x + 3, this->y + 0, "W");
+			this->pt[11] = new Point(this->x + 3, this->y + 1, "W");
+			this->pt[12] = new Point(this->x + 3, this->y + 4, "W");
 		}
 		~R() {}
 	};
@@ -210,7 +210,7 @@ public:
 		int small_space = 1;
 		float widthString = 4 + 4 + 5 + 3 + 4 + 5 + 3 + 4 + 8 * 1 + 4; // G + A + M + E + O + V + E + R + 8 small space + 1 big space
 		int startX = windowWidth;
-		lettersGameOver[0] = new G(((windowWidth-widthString)/2), windowHeight / 2);
+		lettersGameOver[0] = new G(((windowWidth - widthString) / 2), windowHeight / 2);
 		lettersGameOver[1] = new A((this->lettersGameOver[0]->x + this->lettersGameOver[0]->width + small_space), windowHeight / 2);
 		lettersGameOver[2] = new M((this->lettersGameOver[1]->x + this->lettersGameOver[1]->width + small_space), windowHeight / 2);
 		lettersGameOver[3] = new E((this->lettersGameOver[2]->x + this->lettersGameOver[2]->width + small_space), windowHeight / 2);
@@ -517,7 +517,7 @@ int main()
 				}
 			}
 
-			// Efface l'écran en blanc
+			// Erase the screen in white
 			window.clear(sf::Color::White);
 
 			window.draw(*ship);
@@ -530,7 +530,10 @@ int main()
 			}
 			window.display();
 		}
-		window.clear(sf::Color::White);
+
+		/*Player died*/
+		// Erase the screen in black
+		window.clear(sf::Color::Black);
 
 		window.draw(GameOver(windowWidth, windowHeight));
 
