@@ -6,9 +6,23 @@ using namespace std;
 
 class YouWon : public LetterGroup
 {
-
+public:
+	YouWon(string colour, float windowWidth, float windowHeight) : LetterGroup(colour, windowWidth, windowHeight)
+	{
+		this->numberOfLetter = 8;
+		this->lettersList = new Letter *[this->numberOfLetter];
+		float widthString = 4 + 4 + 5 + 3 + 4 + 5 + 3 + 4 + 6 * 1 + 4; // Y + O + U + W + O + N + ! + ! + 6 small space + 1 big space
+		lettersList[0] = new Y(((windowWidth - widthString) / 2), windowHeight / 2, colour);
+		lettersList[1] = new O((this->lettersList[0]->getX() + this->lettersList[0]->getWidth() + this->small_space), windowHeight / 2, colour);
+		lettersList[2] = new U((this->lettersList[1]->getX() + this->lettersList[1]->getWidth() + this->small_space), windowHeight / 2, colour);
+		lettersList[3] = new W((this->lettersList[2]->getX() + this->lettersList[2]->getWidth() + this->big_space), windowHeight / 2, colour);
+		lettersList[4] = new O((this->lettersList[3]->getX() + this->lettersList[3]->getWidth() + this->small_space), windowHeight / 2, colour);
+		lettersList[5] = new N((this->lettersList[4]->getX() + this->lettersList[4]->getWidth() + this->small_space), windowHeight / 2, colour);
+		lettersList[6] = new Exclamation((this->lettersList[5]->getX() + this->lettersList[5]->getWidth() + this->small_space), windowHeight / 2, colour);
+		lettersList[7] = new Exclamation((this->lettersList[6]->getX() + this->lettersList[6]->getWidth() + this->small_space), windowHeight / 2, colour);
+	}
+	~YouWon() {}
 };
-
 
 struct main_info
 {
@@ -107,8 +121,8 @@ int main()
 
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 					{
-						//cout << "Hide pixel" << endl;
-						//ship->hidePixel(3,3);
+						// cout << "Hide pixel" << endl;
+						// ship->hidePixel(3,3);
 					}
 
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -227,7 +241,7 @@ int main()
 							catch (SpaceShip::Exept &exp)
 							{
 								change = true;
-								//cout << exp.message << endl;
+								// cout << exp.message << endl;
 							}
 						}
 						else if (mons[j]->getDirection() == 1) // go right
@@ -239,7 +253,7 @@ int main()
 							catch (SpaceShip::Exept &exp)
 							{
 								change = true;
-								//cout << exp.message << endl;
+								// cout << exp.message << endl;
 							}
 						}
 
@@ -290,7 +304,7 @@ int main()
 								if (explosion[j][i] && mons[j]->isAlive(i))
 								{
 									mons[j]->explode(i); // Start explosion
-									//cout << "Monster " << i << " in line " << j << " exploded." << endl;
+									// cout << "Monster " << i << " in line " << j << " exploded." << endl;
 									clockExplosion.restart(); // Only reset timer when an explosion starts
 								}
 							}
@@ -326,7 +340,7 @@ int main()
 				{
 					window.clear(sf::Color::Magenta);
 
-					// window.draw(GameOver(windowWidth, windowHeight));
+					window.draw(YouWon("B", windowWidth, windowHeight));
 
 					window.display();
 					clockRefreshScreen.restart();
@@ -340,7 +354,7 @@ int main()
 			{
 				window.clear(sf::Color::Black);
 
-				window.draw(GameOver("W",windowWidth, windowHeight));
+				window.draw(GameOver("W", windowWidth, windowHeight));
 
 				window.display();
 
