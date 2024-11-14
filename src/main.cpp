@@ -4,6 +4,11 @@
 
 using namespace std;
 
+class YouWon : public LetterGroup
+{
+
+};
+
 
 struct main_info
 {
