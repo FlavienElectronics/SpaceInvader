@@ -18,6 +18,14 @@ Point::Point(float x, float y, int size, string color) : sf::RectangleShape(sf::
     this->setPosition(x, y);
 }
 
+Point::Point(float x, float y) : sf::RectangleShape(sf::Vector2f(1, 1))
+{
+    this->x = x;
+    this->y = y;
+    this->setFillColor(sf::Color::Black);
+    this->setPosition(x, y);
+}
+
 void Point::xAdd()
 {
     this->x++;
@@ -52,4 +60,3 @@ float Point::getY() const
 {
     return (this->y);
 }
-

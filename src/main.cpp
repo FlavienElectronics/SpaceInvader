@@ -7,45 +7,232 @@ using namespace std;
 class GameOver : public sf::Drawable
 {
 private:
-	Point **ptGameOver;
-	int numberOfPixel;
+	class Letter
+	{
+	protected:
+		float x;
+		float y;
+		int numberOfPoint;
+		int width;
+		Point **pt;
+
+	public:
+		Letter(float x, float y, int numberOfPoint, int width)
+		{
+			this->x = x;
+			this->y = y;
+			this->numberOfPoint = numberOfPoint;
+			this->width = width;
+		}
+
+		~Letter()
+		{
+			if (this->pt != nullptr)
+			{
+				for (int i = 0; i < this->numberOfPoint; i++)
+				{
+					delete this->pt[i];
+				}
+				delete[] this->pt;
+			}
+		}
+		friend GameOver;
+	};
+	class G : public Letter
+	{
+	public:
+		G(float x, float y) : Letter(x, y, 10, 4)
+		{
+			this->pt = new Point *[this->numberOfPoint];
+			this->pt[0] = new Point(this->x + 0, this->y + 1);
+			this->pt[1] = new Point(this->x + 0, this->y + 2);
+			this->pt[2] = new Point(this->x + 1, this->y + 0);
+			this->pt[3] = new Point(this->x + 2, this->y + 0);
+			this->pt[4] = new Point(this->x + 2, this->y + 2);
+			this->pt[5] = new Point(this->x + 2, this->y + 3);
+			this->pt[6] = new Point(this->x + 3, this->y + 0);
+			this->pt[7] = new Point(this->x + 3, this->y + 3);
+			this->pt[8] = new Point(this->x + 4, this->y + 1);
+			this->pt[9] = new Point(this->x + 4, this->y + 2);
+		}
+		~G() {}
+	};
+	class A : public Letter
+	{
+	public:
+		A(float x, float y) : Letter(x, y, 12, 4)
+		{
+			this->pt = new Point *[this->numberOfPoint];
+			this->pt[0] = new Point(this->x + 0, this->y + 1);
+			this->pt[1] = new Point(this->x + 0, this->y + 2);
+			this->pt[2] = new Point(this->x + 0, this->y + 3);
+			this->pt[3] = new Point(this->x + 0, this->y + 4);
+			this->pt[4] = new Point(this->x + 1, this->y + 0);
+			this->pt[5] = new Point(this->x + 1, this->y + 2);
+			this->pt[6] = new Point(this->x + 2, this->y + 0);
+			this->pt[7] = new Point(this->x + 3, this->y + 2);
+			this->pt[8] = new Point(this->x + 4, this->y + 1);
+			this->pt[9] = new Point(this->x + 4, this->y + 2);
+			this->pt[10] = new Point(this->x + 4, this->y + 3);
+			this->pt[11] = new Point(this->x + 4, this->y + 4);
+		}
+		~A() {}
+	};
+
+	class M : public Letter
+	{
+	public:
+		M(float x, float y) : Letter(x, y, 13, 5)
+		{
+			this->pt = new Point *[this->numberOfPoint];
+			this->pt[0] = new Point(this->x + 0, this->y + 0);
+			this->pt[1] = new Point(this->x + 0, this->y + 1);
+			this->pt[2] = new Point(this->x + 0, this->y + 2);
+			this->pt[3] = new Point(this->x + 0, this->y + 3);
+			this->pt[4] = new Point(this->x + 0, this->y + 4);
+			this->pt[5] = new Point(this->x + 1, this->y + 1);
+			this->pt[6] = new Point(this->x + 2, this->y + 2);
+			this->pt[7] = new Point(this->x + 3, this->y + 1);
+			this->pt[8] = new Point(this->x + 4, this->y + 0);
+			this->pt[9] = new Point(this->x + 4, this->y + 1);
+			this->pt[10] = new Point(this->x + 4, this->y + 2);
+			this->pt[11] = new Point(this->x + 4, this->y + 3);
+			this->pt[12] = new Point(this->x + 4, this->y + 4);
+		}
+		~M() {}
+	};
+	class E : public Letter
+	{
+	public:
+		E(float x, float y) : Letter(x, y, 10, 3)
+		{
+			this->pt = new Point *[this->numberOfPoint];
+			this->pt[0] = new Point(this->x + 0, this->y + 0);
+			this->pt[1] = new Point(this->x + 0, this->y + 1);
+			this->pt[2] = new Point(this->x + 0, this->y + 2);
+			this->pt[3] = new Point(this->x + 0, this->y + 3);
+			this->pt[4] = new Point(this->x + 0, this->y + 4);
+			this->pt[5] = new Point(this->x + 1, this->y + 0);
+			this->pt[6] = new Point(this->x + 1, this->y + 2);
+			this->pt[7] = new Point(this->x + 1, this->y + 4);
+			this->pt[8] = new Point(this->x + 2, this->y + 0);
+			this->pt[9] = new Point(this->x + 2, this->y + 4);
+		}
+		~E() {}
+	};
+
+	class O : public Letter
+	{
+	public:
+		O(float x, float y) : Letter(x, y, 10, 4)
+		{
+			this->pt = new Point *[this->numberOfPoint];
+			this->pt[0] = new Point(this->x + 0, this->y + 1);
+			this->pt[1] = new Point(this->x + 0, this->y + 2);
+			this->pt[2] = new Point(this->x + 0, this->y + 3);
+			this->pt[3] = new Point(this->x + 1, this->y + 0);
+			this->pt[4] = new Point(this->x + 1, this->y + 4);
+			this->pt[5] = new Point(this->x + 2, this->y + 0);
+			this->pt[6] = new Point(this->x + 2, this->y + 4);
+			this->pt[7] = new Point(this->x + 3, this->y + 1);
+			this->pt[8] = new Point(this->x + 3, this->y + 2);
+			this->pt[9] = new Point(this->x + 3, this->y + 3);
+		}
+		~O() {}
+	};
+
+	class V : public Letter
+	{
+	public:
+		V(float x, float y) : Letter(x, y, 9, 5)
+		{
+			this->pt = new Point *[this->numberOfPoint];
+			this->pt[0] = new Point(this->x + 0, this->y + 0);
+			this->pt[1] = new Point(this->x + 0, this->y + 1);
+			this->pt[2] = new Point(this->x + 1, this->y + 2);
+			this->pt[3] = new Point(this->x + 1, this->y + 3);
+			this->pt[4] = new Point(this->x + 2, this->y + 4);
+			this->pt[5] = new Point(this->x + 3, this->y + 2);
+			this->pt[6] = new Point(this->x + 3, this->y + 3);
+			this->pt[7] = new Point(this->x + 4, this->y + 0);
+			this->pt[8] = new Point(this->x + 4, this->y + 1);
+		}
+		~V() {}
+	};
+
+	class R : public Letter
+	{
+	public:
+		R(float x, float y) : Letter(x, y, 13, 4)
+		{
+			this->pt = new Point *[this->numberOfPoint];
+			this->pt[0] = new Point(this->x + 0, this->y + 0);
+			this->pt[1] = new Point(this->x + 0, this->y + 1);
+			this->pt[2] = new Point(this->x + 0, this->y + 2);
+			this->pt[3] = new Point(this->x + 0, this->y + 3);
+			this->pt[4] = new Point(this->x + 0, this->y + 4);
+			this->pt[5] = new Point(this->x + 1, this->y + 0);
+			this->pt[6] = new Point(this->x + 1, this->y + 2);
+			this->pt[7] = new Point(this->x + 2, this->y + 0);
+			this->pt[8] = new Point(this->x + 2, this->y + 2);
+			this->pt[9] = new Point(this->x + 2, this->y + 3);
+			this->pt[10] = new Point(this->x + 3, this->y + 0);
+			this->pt[11] = new Point(this->x + 3, this->y + 1);
+			this->pt[12] = new Point(this->x + 3, this->y + 4);
+			// cout << "Construction de R" << endl;
+			// cout << pt[9]->getX() << " " << pt[9]->getY() << endl;
+		}
+		~R() {}
+	};
+
+	Letter **lettersGameOver;
+	int numberOfLetter;
 
 public:
 	GameOver()
 	{
-		this->numberOfPixel = 100;
-		ptGameOver = new Point *[100];
-		for (int i = 0; i < this->numberOfPixel; i++)
-		{
-			ptGameOver[i] = new Point(100 / (i + 1), 100 / (100 - i), 1, "Col");
-		}
+		this->numberOfLetter = 8;
+		lettersGameOver = new Letter *[this->numberOfLetter];
+		lettersGameOver[0] = new G(00, 20);
+		lettersGameOver[1] = new A(10, 30);
+		lettersGameOver[2] = new M(20, 40);
+		lettersGameOver[3] = new E(30, 50);
+		lettersGameOver[4] = new O(40, 60);
+		lettersGameOver[5] = new V(50, 70);
+		lettersGameOver[6] = new E(60, 80);
+		lettersGameOver[7] = new R(70, 90);
 	}
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const
 	{
-		if (this->ptGameOver != nullptr)
+		// cout << this->lettersGameOver[4]->pt[0]->getX() << endl;
+		target.draw(*this->lettersGameOver[0]->pt[0]);
+		if (this->lettersGameOver != nullptr)
 		{
-			for (int i = 0; i < this->numberOfPixel; i++)
+			for (int i = 0; i < this->numberOfLetter; i++)
 			{
-				if (this->ptGameOver[i] != nullptr)
+				if (this->lettersGameOver[i] != nullptr)
 				{
-					target.draw(*this->ptGameOver[i], states);
+					for (int j = 0; j < this->lettersGameOver[i]->numberOfPoint; j++)
+					{
+						target.draw(*(this->lettersGameOver[i])->pt[j], states);
+					}
 				}
 			}
 		}
 	}
 	~GameOver()
 	{
-		if (this->ptGameOver != nullptr)
+		if (this->lettersGameOver != nullptr)
 		{
-			for (int i = 0; i < this->numberOfPixel; i++)
+			for (int i = 0; i < this->numberOfLetter; i++)
 			{
-				if (ptGameOver[i] != nullptr)
+				if (lettersGameOver[i] != nullptr)
 				{
-					delete ptGameOver[i];
+					delete lettersGameOver[i];
 				}
 			}
-			delete[] ptGameOver;
+			delete[] lettersGameOver;
 		}
 	}
 };
@@ -328,8 +515,7 @@ int main()
 		}
 		window.clear(sf::Color::White);
 
-		GameOver printed;
-		window.draw(printed);
+		window.draw(GameOver());
 
 		window.display();
 

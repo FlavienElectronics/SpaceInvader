@@ -19,6 +19,7 @@ private:
 public :
 	Point();
 	Point(float x, float y, int size, string color);
+	Point(float x,float y);
 	void xAdd();
 	void yAdd();
 	void xSub();
