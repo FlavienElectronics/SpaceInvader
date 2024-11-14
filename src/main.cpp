@@ -4,12 +4,39 @@
 
 using namespace std;
 
+void init(SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &change, bool &shipDestroyed, int numberOfLine, sf::RenderWindow &win, float winH, float winW)
+{
+	shipDestroyed = false;
+	*ship = new SpaceShip(&win, winH, winW, winW / 2, winH / 1.2, "Green");
+	*monsterL = new MonsterLine *[numberOfLine];
+	*explo = new bool *[numberOfLine];
+	for (int i = 0; i < numberOfLine; i++)
+	{
+		(*explo)[i] = nullptr;
+		(*monsterL)[i] = new MonsterLine(&win, winH, winW, winW / (2 + i), winH / (i + 1), 10 % (1 + i), "Green");
+	}
+	change = false;
+}
+
+void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOfLine)
+{
+	delete ship;
+	for (int j = 0; j < numberOfLine; j++)
+	{
+		delete monsterL[j];
+		if (explo[j] != nullptr)
+		{
+			delete explo[j];
+		}
+	}
+}
+
 /*SpaceInvader INSA*/
 int main()
 {
 	const string gameName = "SpaceInvader";
 	const float windowWidth = 128;
-	const float windowHeight = 96;
+	const float windowHeight = 64;
 
 	// Création de la fenêtre SFML
 	cout << "Window creation" << endl;
@@ -21,20 +48,17 @@ int main()
 	// Appliquez l’échelle à la vue (par exemple, x2 pour doubler la taille)
 	view.setViewport(sf::FloatRect(0, 0, 1, 1)); // Fenêtre entière
 	window.setView(view);
-	float x = windowWidth / 2, y = windowHeight / 2; // Position initiale du point
 
-	SpaceShip ship(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 1.2, "Green");
-	bool shipDestroyed = false;
 	// Monster mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, "Green");
 	int numberOfLine = 4;
-	MonsterLine *mons[4];
-	mons[0] = new MonsterLine(&window, windowHeight, windowWidth, windowWidth / 5, windowHeight / 3, 10, "Green");
-	mons[1] = new MonsterLine(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 4, 15, "Green");
-	mons[2] = new MonsterLine(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 6, 11, "Green");
-	mons[3] = new MonsterLine(&window, windowHeight, windowWidth, windowWidth / 2, windowHeight / 5, 4, "Green");
+	MonsterLine **mons;
+	SpaceShip *ship;
 
-	bool *explosion[] = {nullptr, nullptr, nullptr, nullptr};
-	bool change = false;
+	bool **explosion;
+	bool change;
+	bool shipDestroyed;
+
+	init(&ship, &mons, &explosion, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
 
 	sf::Clock clockCommand;
 	sf::Clock clockProjectile;
@@ -64,7 +88,7 @@ int main()
 				{
 					try
 					{
-						ship.xAdd();
+						ship->xAdd();
 					}
 					catch (SpaceShip::Exept exp)
 					{
@@ -77,7 +101,7 @@ int main()
 				{
 					try
 					{
-						ship.xSub();
+						ship->xSub();
 					}
 					catch (SpaceShip::Exept exp)
 					{
@@ -90,7 +114,7 @@ int main()
 				{
 					try
 					{
-						ship.yAdd();
+						ship->yAdd();
 					}
 					catch (SpaceShip::Exept exp)
 					{
@@ -103,7 +127,7 @@ int main()
 				{
 					try
 					{
-						ship.ySub();
+						ship->ySub();
 					}
 					catch (SpaceShip::Exept exp)
 					{
@@ -122,9 +146,12 @@ int main()
 				}
 				for (int j = 0; j < numberOfLine; j++)
 				{
-					mons[j]->updateCollision(ship, &(explosion[j]));
+					if (mons[j] != nullptr)
+					{
+						mons[j]->updateCollision(*ship, &(explosion[j]));
+					}
 				}
-				shipDestroyed = ship.detectImpact(mons, numberOfLine);
+				shipDestroyed = ship->detectImpact(mons, numberOfLine);
 
 				clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 			}
@@ -133,7 +160,7 @@ int main()
 			{
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
-					ship.shoot();
+					ship->shoot();
 					for (int j = 0; j < numberOfLine; j++)
 					{
 						for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
@@ -151,7 +178,7 @@ int main()
 
 			if (clockProjectile.getElapsedTime() >= delayProjectile)
 			{
-				ship.updateProjectiles();
+				ship->updateProjectiles();
 				for (int j = 0; j < numberOfLine; j++)
 				{
 					for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
@@ -203,34 +230,29 @@ int main()
 				clockMonster.restart();
 			}
 
-			if (mons[0] != nullptr)
-			{
-				cout << (mons[0])[0].getDirection() << endl;
-				Monster &temp = (*mons[0])[0];
-				cout << "Elapsed Time for Explosion: " << temp.getElapsedTimeClockExplosion().asMilliseconds() << " ms" << endl;
-				cout << "Position X: " << temp.getX() << endl;
-			}
-
 			for (int j = 0; j < numberOfLine; j++)
 			{
-				if (explosion[j] != nullptr)
+				if (explosion != nullptr)
 				{
-					for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
+					if (explosion[j] != nullptr)
 					{
-						// Check if we should update the explosion particles
-						Monster &tempMonster = (*mons[j])[i];
-						if (mons[j]->isExplosing(i) && tempMonster.getElapsedTimeClockExplosion() >= delayExplosion)
+						for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
 						{
-							mons[j]->updateParticule(i);
-							tempMonster.resetClockExplosion();
-						}
+							// Check if we should update the explosion particles
+							Monster &tempMonster = (*mons[j])[i];
+							if (mons[j]->isExplosing(i) && tempMonster.getElapsedTimeClockExplosion() >= delayExplosion)
+							{
+								mons[j]->updateParticule(i);
+								tempMonster.resetClockExplosion();
+							}
 
-						// Only trigger an explosion if needed and the monster is alive
-						if (explosion[j][i] && mons[j]->isAlive(i))
-						{
-							mons[j]->explode(i); // Start explosion
-							cout << "Monster " << i << " in line " << j << " exploded." << endl;
-							clockExplosion.restart(); // Only reset timer when an explosion starts
+							// Only trigger an explosion if needed and the monster is alive
+							if (explosion[j][i] && mons[j]->isAlive(i))
+							{
+								mons[j]->explode(i); // Start explosion
+								cout << "Monster " << i << " in line " << j << " exploded." << endl;
+								clockExplosion.restart(); // Only reset timer when an explosion starts
+							}
 						}
 					}
 				}
@@ -238,7 +260,7 @@ int main()
 
 			// Efface l'écran en blanc
 			window.clear(sf::Color::White);
-			window.draw(ship);
+			window.draw(*ship);
 			for (int j = 0; j < numberOfLine; j++)
 			{
 				for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
@@ -248,6 +270,15 @@ int main()
 			}
 			window.display();
 		}
+
+		if (clockCommand.getElapsedTime() >= delayCommand)
+		{
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+			{
+				shipDestroyed = false;
+			}
+		}
+
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -257,10 +288,7 @@ int main()
 
 	cout << "Window closed" << endl;
 
-	for (int j = 0; j < numberOfLine; j++)
-	{
-		delete mons[j];
-	}
+	freeMem(ship, mons, explosion, numberOfLine);
 
 	return 0;
 }

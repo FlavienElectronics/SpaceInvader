@@ -57,17 +57,17 @@ void SpaceShip::updateProjectiles()
 {
     for (int i = 0; i < numberOfProjectiles; i++)
     {
-        if (pjt[i] != nullptr)
+        if (this->pjt[i] != nullptr)
         {
             // Déplacer le projectile vers le haut
-            pjt[i]->ySub();
+            this->pjt[i]->ySub();
 
             // Vérifier si le projectile est en dehors de l'écran
-            if (pjt[i]->isOutOfBounds(this->winHeight))
+            if (this->pjt[i]->isOutOfBounds(this->winHeight))
             {
                 // Libérer la mémoire du projectile
                 delete pjt[i];
-                pjt[i] = nullptr;
+                this->pjt[i] = nullptr;
 #ifdef VERBOSE_SHIP
                 cout << "Destruction projectile " << i << endl;
 #endif
@@ -252,7 +252,7 @@ bool SpaceShip::detectImpact(MonsterLine **monsterLine, int numberOfLine)
                 {
                     if (tempMonster.pjt[k] != nullptr)
                     {
-                        if ((int)tempMonster.pjt[k]->getY() == (int)this->getY() && ((int)tempMonster.pjt[k]->getX() >= (int)this->getX() && (int)tempMonster.pjt[k]->getX() < ((int)this->getX()+(int)this->hitBox_x)))
+                        if ((int)tempMonster.pjt[k]->getY() == (int)this->getY() && ((int)tempMonster.pjt[k]->getX() >= (int)this->getX() && (int)tempMonster.pjt[k]->getX() < ((int)this->getX() + (int)this->hitBox_x)))
                         {
                             cout << tempMonster.pjt[k]->getY() << endl;
                             cout << "Decteting impact" << endl;
