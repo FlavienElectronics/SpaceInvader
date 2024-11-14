@@ -54,7 +54,7 @@ void SpaceShip::shoot()
     }
 }
 
-bool SpaceShip::correctCoordinates(int &xToCorrect, int &yToCorrect)
+void SpaceShip::correctCoordinates(int &xToCorrect, int &yToCorrect)
 {
     int *yVector = new int[this->numberOfPixels];
     cout << "xToCorrect" << xToCorrect << endl;

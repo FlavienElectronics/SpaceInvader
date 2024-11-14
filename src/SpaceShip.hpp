@@ -59,7 +59,7 @@ public:
     float getY() const;
     void hidePixel(int x, int y);
 
-    bool correctCoordinates(int& xToCorrect, int& yToCorrect);
+    void correctCoordinates(int& xToCorrect, int& yToCorrect);
 
     bool detectImpact(MonsterLine **monsterLine, int numberOfLine);
 

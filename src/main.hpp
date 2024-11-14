@@ -7,5 +7,6 @@
 #include "Projectile.hpp"
 #include "Explosion.hpp"
 #include "MonsterLine.hpp"
+#include "GameOver.hpp"
 
 #endif
