@@ -13,7 +13,7 @@ class Explosion;
 
 using namespace std;
 
-#define VERBOSE_MONSTER
+//#define VERBOSE_MONSTER
 
 
 class Monster : public SpaceShip

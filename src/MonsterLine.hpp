@@ -26,7 +26,7 @@ private:
 public:
 	MonsterLine(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, int numberOfMonster, string color);
 	Monster &operator[](int location);
-	bool lineDestoyed();
+	bool isLineDestoyed();
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 	bool isExplosing(int location);
 	void updateParticule(int location);

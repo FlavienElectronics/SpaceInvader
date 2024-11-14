@@ -145,7 +145,7 @@ int MonsterLine::getNumberOfMonster()
     return (this->numberOfMonster);
 }
 
-bool MonsterLine::lineDestoyed()
+bool MonsterLine::isLineDestoyed()
 {
     for (int i = 0 ; i < this->numberOfMonster ; i++)
     {

@@ -14,7 +14,7 @@ class Monster;
 
 using namespace std;
 
-#define VERBOSE
+//#define VERBOSE
 
 class Explosion : public SpaceShip
 {

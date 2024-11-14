@@ -10,7 +10,7 @@
 
 #include "Point.hpp"
 
-#define VERBOSE
+//#define VERBOSE
 
 using namespace std;
 
