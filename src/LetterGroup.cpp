@@ -1,11 +1,12 @@
 #include "LetterGroup.hpp"
 
-LetterGroup::Letter::Letter(float x, float y, int numberOfPoint, int width)
+LetterGroup::Letter::Letter(float x, float y, string colour, int numberOfPoint, int width)
 {
 	this->x = x;
 	this->y = y;
 	this->numberOfPoint = numberOfPoint;
 	this->width = width;
+	this->colour = colour;
 }
 
 LetterGroup::Letter::~Letter()
@@ -20,126 +21,142 @@ LetterGroup::Letter::~Letter()
 	}
 }
 
-LetterGroup::G::G(float x, float y) : Letter(x, y, 10, 4)
+LetterGroup::G::G(float x, float y,string colour) : Letter(x, y, colour, 10, 4)
 {
 	this->pt = new Point *[this->numberOfPoint];
-	this->pt[0] = new Point(this->x + 0, this->y + 1, "W");
-	this->pt[1] = new Point(this->x + 0, this->y + 2, "W");
-	this->pt[2] = new Point(this->x + 0, this->y + 3, "W");
-	this->pt[3] = new Point(this->x + 1, this->y + 0, "W");
-	this->pt[4] = new Point(this->x + 1, this->y + 4, "W");
-	this->pt[5] = new Point(this->x + 2, this->y + 0, "W");
-	this->pt[6] = new Point(this->x + 2, this->y + 2, "W");
-	this->pt[7] = new Point(this->x + 2, this->y + 4, "W");
-	this->pt[8] = new Point(this->x + 3, this->y + 2, "W");
-	this->pt[9] = new Point(this->x + 3, this->y + 3, "W");
+	this->pt[0] = new Point(this->x + 0, this->y + 1, this->colour);
+	this->pt[1] = new Point(this->x + 0, this->y + 2, this->colour);
+	this->pt[2] = new Point(this->x + 0, this->y + 3, this->colour);
+	this->pt[3] = new Point(this->x + 1, this->y + 0, this->colour);
+	this->pt[4] = new Point(this->x + 1, this->y + 4, this->colour);
+	this->pt[5] = new Point(this->x + 2, this->y + 0, this->colour);
+	this->pt[6] = new Point(this->x + 2, this->y + 2, this->colour);
+	this->pt[7] = new Point(this->x + 2, this->y + 4, this->colour);
+	this->pt[8] = new Point(this->x + 3, this->y + 2, this->colour);
+	this->pt[9] = new Point(this->x + 3, this->y + 3, this->colour);
 }
 LetterGroup::G::~G() {}
 
-LetterGroup::A::A(float x, float y) : Letter(x, y, 12, 4)
+LetterGroup::U::U(float x, float y,string colour) : Letter(x, y, colour, 10, 4)
 {
 	this->pt = new Point *[this->numberOfPoint];
-	this->pt[0] = new Point(this->x + 0, this->y + 1, "W");
-	this->pt[1] = new Point(this->x + 0, this->y + 2, "W");
-	this->pt[2] = new Point(this->x + 0, this->y + 3, "W");
-	this->pt[3] = new Point(this->x + 0, this->y + 4, "W");
-	this->pt[4] = new Point(this->x + 1, this->y + 0, "W");
-	this->pt[5] = new Point(this->x + 1, this->y + 2, "W");
-	this->pt[6] = new Point(this->x + 2, this->y + 0, "W");
-	this->pt[7] = new Point(this->x + 2, this->y + 2, "W");
-	this->pt[8] = new Point(this->x + 3, this->y + 1, "W");
-	this->pt[9] = new Point(this->x + 3, this->y + 2, "W");
-	this->pt[10] = new Point(this->x + 3, this->y + 3, "W");
-	this->pt[11] = new Point(this->x + 3, this->y + 4, "W");
+	this->pt[0] = new Point(this->x + 0, this->y + 0, this->colour);
+	this->pt[1] = new Point(this->x + 0, this->y + 1, this->colour);
+	this->pt[2] = new Point(this->x + 0, this->y + 2, this->colour);
+	this->pt[3] = new Point(this->x + 0, this->y + 3, this->colour);
+	this->pt[4] = new Point(this->x + 1, this->y + 4, this->colour);
+	this->pt[5] = new Point(this->x + 2, this->y + 4, this->colour);
+	this->pt[6] = new Point(this->x + 3, this->y + 0, this->colour);
+	this->pt[7] = new Point(this->x + 3, this->y + 1, this->colour);
+	this->pt[8] = new Point(this->x + 3, this->y + 2, this->colour);
+	this->pt[9] = new Point(this->x + 3, this->y + 3, this->colour);
+}
+LetterGroup::U::~U() {}
+
+LetterGroup::A::A(float x, float y,string colour) : Letter(x, y, colour, 12, 4)
+{
+	this->pt = new Point *[this->numberOfPoint];
+	this->pt[0] = new Point(this->x + 0, this->y + 1, this->colour);
+	this->pt[1] = new Point(this->x + 0, this->y + 2, this->colour);
+	this->pt[2] = new Point(this->x + 0, this->y + 3, this->colour);
+	this->pt[3] = new Point(this->x + 0, this->y + 4, this->colour);
+	this->pt[4] = new Point(this->x + 1, this->y + 0, this->colour);
+	this->pt[5] = new Point(this->x + 1, this->y + 2, this->colour);
+	this->pt[6] = new Point(this->x + 2, this->y + 0, this->colour);
+	this->pt[7] = new Point(this->x + 2, this->y + 2, this->colour);
+	this->pt[8] = new Point(this->x + 3, this->y + 1, this->colour);
+	this->pt[9] = new Point(this->x + 3, this->y + 2, this->colour);
+	this->pt[10] = new Point(this->x + 3, this->y + 3, this->colour);
+	this->pt[11] = new Point(this->x + 3, this->y + 4, this->colour);
 }
 LetterGroup::A::~A() {}
 
-LetterGroup::M::M(float x, float y) : Letter(x, y, 13, 5)
+LetterGroup::M::M(float x, float y,string colour) : Letter(x, y, colour, 13, 5)
 {
 	this->pt = new Point *[this->numberOfPoint];
-	this->pt[0] = new Point(this->x + 0, this->y + 0, "W");
-	this->pt[1] = new Point(this->x + 0, this->y + 1, "W");
-	this->pt[2] = new Point(this->x + 0, this->y + 2, "W");
-	this->pt[3] = new Point(this->x + 0, this->y + 3, "W");
-	this->pt[4] = new Point(this->x + 0, this->y + 4, "W");
-	this->pt[5] = new Point(this->x + 1, this->y + 1, "W");
-	this->pt[6] = new Point(this->x + 2, this->y + 2, "W");
-	this->pt[7] = new Point(this->x + 3, this->y + 1, "W");
-	this->pt[8] = new Point(this->x + 4, this->y + 0, "W");
-	this->pt[9] = new Point(this->x + 4, this->y + 1, "W");
-	this->pt[10] = new Point(this->x + 4, this->y + 2, "W");
-	this->pt[11] = new Point(this->x + 4, this->y + 3, "W");
-	this->pt[12] = new Point(this->x + 4, this->y + 4, "W");
+	this->pt[0] = new Point(this->x + 0, this->y + 0, this->colour);
+	this->pt[1] = new Point(this->x + 0, this->y + 1, this->colour);
+	this->pt[2] = new Point(this->x + 0, this->y + 2, this->colour);
+	this->pt[3] = new Point(this->x + 0, this->y + 3, this->colour);
+	this->pt[4] = new Point(this->x + 0, this->y + 4, this->colour);
+	this->pt[5] = new Point(this->x + 1, this->y + 1, this->colour);
+	this->pt[6] = new Point(this->x + 2, this->y + 2, this->colour);
+	this->pt[7] = new Point(this->x + 3, this->y + 1, this->colour);
+	this->pt[8] = new Point(this->x + 4, this->y + 0, this->colour);
+	this->pt[9] = new Point(this->x + 4, this->y + 1, this->colour);
+	this->pt[10] = new Point(this->x + 4, this->y + 2, this->colour);
+	this->pt[11] = new Point(this->x + 4, this->y + 3, this->colour);
+	this->pt[12] = new Point(this->x + 4, this->y + 4, this->colour);
 }
 LetterGroup::M::~M() {}
 
-LetterGroup::E::E(float x, float y) : Letter(x, y, 10, 3)
+LetterGroup::E::E(float x, float y,string colour) : Letter(x, y, colour, 10, 3)
 {
 	this->pt = new Point *[this->numberOfPoint];
-	this->pt[0] = new Point(this->x + 0, this->y + 0, "W");
-	this->pt[1] = new Point(this->x + 0, this->y + 1, "W");
-	this->pt[2] = new Point(this->x + 0, this->y + 2, "W");
-	this->pt[3] = new Point(this->x + 0, this->y + 3, "W");
-	this->pt[4] = new Point(this->x + 0, this->y + 4, "W");
-	this->pt[5] = new Point(this->x + 1, this->y + 0, "W");
-	this->pt[6] = new Point(this->x + 1, this->y + 2, "W");
-	this->pt[7] = new Point(this->x + 1, this->y + 4, "W");
-	this->pt[8] = new Point(this->x + 2, this->y + 0, "W");
-	this->pt[9] = new Point(this->x + 2, this->y + 4, "W");
+	this->pt[0] = new Point(this->x + 0, this->y + 0, this->colour);
+	this->pt[1] = new Point(this->x + 0, this->y + 1, this->colour);
+	this->pt[2] = new Point(this->x + 0, this->y + 2, this->colour);
+	this->pt[3] = new Point(this->x + 0, this->y + 3, this->colour);
+	this->pt[4] = new Point(this->x + 0, this->y + 4, this->colour);
+	this->pt[5] = new Point(this->x + 1, this->y + 0, this->colour);
+	this->pt[6] = new Point(this->x + 1, this->y + 2, this->colour);
+	this->pt[7] = new Point(this->x + 1, this->y + 4, this->colour);
+	this->pt[8] = new Point(this->x + 2, this->y + 0, this->colour);
+	this->pt[9] = new Point(this->x + 2, this->y + 4, this->colour);
 }
 LetterGroup::E::~E() {}
 
-LetterGroup::O::O(float x, float y) : Letter(x, y, 10, 4)
+LetterGroup::O::O(float x, float y,string colour) : Letter(x, y, colour, 10, 4)
 {
 	this->pt = new Point *[this->numberOfPoint];
-	this->pt[0] = new Point(this->x + 0, this->y + 1, "W");
-	this->pt[1] = new Point(this->x + 0, this->y + 2, "W");
-	this->pt[2] = new Point(this->x + 0, this->y + 3, "W");
-	this->pt[3] = new Point(this->x + 1, this->y + 0, "W");
-	this->pt[4] = new Point(this->x + 1, this->y + 4, "W");
-	this->pt[5] = new Point(this->x + 2, this->y + 0, "W");
-	this->pt[6] = new Point(this->x + 2, this->y + 4, "W");
-	this->pt[7] = new Point(this->x + 3, this->y + 1, "W");
-	this->pt[8] = new Point(this->x + 3, this->y + 2, "W");
-	this->pt[9] = new Point(this->x + 3, this->y + 3, "W");
+	this->pt[0] = new Point(this->x + 0, this->y + 1, this->colour);
+	this->pt[1] = new Point(this->x + 0, this->y + 2, this->colour);
+	this->pt[2] = new Point(this->x + 0, this->y + 3, this->colour);
+	this->pt[3] = new Point(this->x + 1, this->y + 0, this->colour);
+	this->pt[4] = new Point(this->x + 1, this->y + 4, this->colour);
+	this->pt[5] = new Point(this->x + 2, this->y + 0, this->colour);
+	this->pt[6] = new Point(this->x + 2, this->y + 4, this->colour);
+	this->pt[7] = new Point(this->x + 3, this->y + 1, this->colour);
+	this->pt[8] = new Point(this->x + 3, this->y + 2, this->colour);
+	this->pt[9] = new Point(this->x + 3, this->y + 3, this->colour);
 }
 LetterGroup::O::~O() {}
 
-LetterGroup::V::V(float x, float y) : Letter(x, y, 9, 5)
+LetterGroup::V::V(float x, float y,string colour) : Letter(x, y, colour, 9, 5)
 {
 	this->pt = new Point *[this->numberOfPoint];
-	this->pt[0] = new Point(this->x + 0, this->y + 0, "W");
-	this->pt[1] = new Point(this->x + 0, this->y + 1, "W");
-	this->pt[2] = new Point(this->x + 1, this->y + 2, "W");
-	this->pt[3] = new Point(this->x + 1, this->y + 3, "W");
-	this->pt[4] = new Point(this->x + 2, this->y + 4, "W");
-	this->pt[5] = new Point(this->x + 3, this->y + 2, "W");
-	this->pt[6] = new Point(this->x + 3, this->y + 3, "W");
-	this->pt[7] = new Point(this->x + 4, this->y + 0, "W");
-	this->pt[8] = new Point(this->x + 4, this->y + 1, "W");
+	this->pt[0] = new Point(this->x + 0, this->y + 0, this->colour);
+	this->pt[1] = new Point(this->x + 0, this->y + 1, this->colour);
+	this->pt[2] = new Point(this->x + 1, this->y + 2, this->colour);
+	this->pt[3] = new Point(this->x + 1, this->y + 3, this->colour);
+	this->pt[4] = new Point(this->x + 2, this->y + 4, this->colour);
+	this->pt[5] = new Point(this->x + 3, this->y + 2, this->colour);
+	this->pt[6] = new Point(this->x + 3, this->y + 3, this->colour);
+	this->pt[7] = new Point(this->x + 4, this->y + 0, this->colour);
+	this->pt[8] = new Point(this->x + 4, this->y + 1, this->colour);
 }
 LetterGroup::V::~V() {}
 
-LetterGroup::R::R(float x, float y) : Letter(x, y, 13, 4)
+LetterGroup::R::R(float x, float y,string colour) : Letter(x, y, colour, 13, 4)
 {
 	this->pt = new Point *[this->numberOfPoint];
-	this->pt[0] = new Point(this->x + 0, this->y + 0, "W");
-	this->pt[1] = new Point(this->x + 0, this->y + 1, "W");
-	this->pt[2] = new Point(this->x + 0, this->y + 2, "W");
-	this->pt[3] = new Point(this->x + 0, this->y + 3, "W");
-	this->pt[4] = new Point(this->x + 0, this->y + 4, "W");
-	this->pt[5] = new Point(this->x + 1, this->y + 0, "W");
-	this->pt[6] = new Point(this->x + 1, this->y + 2, "W");
-	this->pt[7] = new Point(this->x + 2, this->y + 0, "W");
-	this->pt[8] = new Point(this->x + 2, this->y + 2, "W");
-	this->pt[9] = new Point(this->x + 2, this->y + 3, "W");
-	this->pt[10] = new Point(this->x + 3, this->y + 0, "W");
-	this->pt[11] = new Point(this->x + 3, this->y + 1, "W");
-	this->pt[12] = new Point(this->x + 3, this->y + 4, "W");
+	this->pt[0] = new Point(this->x + 0, this->y + 0, this->colour);
+	this->pt[1] = new Point(this->x + 0, this->y + 1, this->colour);
+	this->pt[2] = new Point(this->x + 0, this->y + 2, this->colour);
+	this->pt[3] = new Point(this->x + 0, this->y + 3, this->colour);
+	this->pt[4] = new Point(this->x + 0, this->y + 4, this->colour);
+	this->pt[5] = new Point(this->x + 1, this->y + 0, this->colour);
+	this->pt[6] = new Point(this->x + 1, this->y + 2, this->colour);
+	this->pt[7] = new Point(this->x + 2, this->y + 0, this->colour);
+	this->pt[8] = new Point(this->x + 2, this->y + 2, this->colour);
+	this->pt[9] = new Point(this->x + 2, this->y + 3, this->colour);
+	this->pt[10] = new Point(this->x + 3, this->y + 0, this->colour);
+	this->pt[11] = new Point(this->x + 3, this->y + 1, this->colour);
+	this->pt[12] = new Point(this->x + 3, this->y + 4, this->colour);
 }
 LetterGroup::R::~R() {}
 
-LetterGroup::LetterGroup(float windowWidth, float windowHeight) : winW(windowWidth), winH(windowHeight) {}
+LetterGroup::LetterGroup(string groupColour, float windowWidth, float windowHeight) : colorGrp(groupColour), winW(windowWidth), winH(windowHeight) {}
 
 void LetterGroup::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
@@ -166,7 +183,7 @@ int LetterGroup::Letter::getWidth()
 }
 float LetterGroup::Letter::getX()
 {
-	return(this->x);
+	return (this->x);
 }
 float LetterGroup::Letter::getY()
 {

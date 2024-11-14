@@ -340,7 +340,7 @@ int main()
 			{
 				window.clear(sf::Color::Black);
 
-				window.draw(GameOver(windowWidth, windowHeight));
+				window.draw(GameOver("W",windowWidth, windowHeight));
 
 				window.display();
 

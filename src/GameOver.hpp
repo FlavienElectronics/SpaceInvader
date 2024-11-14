@@ -12,7 +12,7 @@
 class GameOver : public LetterGroup
 {
 public:
-    GameOver(float windowWidth, float windowHeight);
+    GameOver(string colour,float windowWidth, float windowHeight);
 };
 
 #endif
