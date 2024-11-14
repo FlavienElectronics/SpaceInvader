@@ -261,7 +261,7 @@ struct main_info
 	bool **explosionVector;
 };
 
-void init(SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &change, bool &shipDestroyed, int numberOfLine, sf::RenderWindow &win, float winH, float winW)
+void init(SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &allMonsDestoyed, bool &change, bool &shipDestroyed, int numberOfLine, sf::RenderWindow &win, float winH, float winW)
 {
 	shipDestroyed = false;
 	*ship = new SpaceShip(&win, winH, winW, winW / 2, winH / 1.2, "Green");
@@ -273,6 +273,7 @@ void init(SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &change
 		(*monsterL)[i] = new MonsterLine(&win, winH, winW, winW / 2 - (1 + i * 2 * 4), winH / 2 - (1 + i * 2 * 4), i * 2 + 1, "col");
 	}
 	change = false;
+	allMonsDestoyed = false;
 }
 
 void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOfLine)
@@ -297,15 +298,11 @@ int main()
 	// const float windowWidth = 1000;
 	// const float windowHeight = 500;
 
-	// Création de la fenêtre SFML
 	cout << "Window creation" << endl;
 	sf::Vector2u resolution(windowWidth, windowHeight);
-	// Créez une fenêtre avec une taille agrandie
 	sf::RenderWindow window(sf::VideoMode(resolution.x * 6, resolution.y * 6), gameName);
-	// Créez une vue qui correspond à la résolution de départ
 	sf::View view(sf::FloatRect(0, 0, resolution.x, resolution.y));
-	// Appliquez l’échelle à la vue (par exemple, x2 pour doubler la taille)
-	view.setViewport(sf::FloatRect(0, 0, 1, 1)); // Fenêtre entière
+	view.setViewport(sf::FloatRect(0, 0, 1, 1));
 	window.setView(view);
 
 	// Monster mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, "Green");
@@ -317,23 +314,28 @@ int main()
 	bool change;
 	bool shipDestroyed;
 
-	init(&ship, &mons, &explosion, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
+	bool allMonstersDestroyed;
+
+	init(&ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
 
 	sf::Clock clockCommand;
 	sf::Clock clockProjectile;
 	sf::Clock clockShoot;
 	sf::Clock clockMonster;
 	sf::Clock clockExplosion;
+	sf::Clock clockRefreshScreen;
 	sf::Time delayCommand = sf::milliseconds(10);
 	sf::Time delayProjectile = sf::milliseconds(10);
 	sf::Time delayMonster = sf::milliseconds(50);
 	sf::Time delayShoot = sf::milliseconds(500);
 	sf::Time delayExplosion = sf::milliseconds(300 / 5);
+	sf::Time delayRefreshScreen = sf::milliseconds(17);
+
 	sf::Event event;
 
 	while (window.isOpen())
 	{
-		while (!shipDestroyed && window.isOpen())
+		while (!shipDestroyed && !allMonstersDestroyed && window.isOpen())
 		{
 			while (window.pollEvent(event))
 			{
@@ -341,6 +343,7 @@ int main()
 					window.close();
 			}
 
+			/*Managing the input command*/
 			if (clockCommand.getElapsedTime() >= delayCommand)
 			{
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -396,13 +399,6 @@ int main()
 					}
 				}
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-				{
-#ifdef VERBOSE_MAIN
-					cout << "E pressed" << endl;
-#endif
-					// explosion = true;
-				}
 				for (int j = 0; j < numberOfLine; j++)
 				{
 					if (mons[j] != nullptr)
@@ -415,6 +411,7 @@ int main()
 				clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 			}
 
+			/*Managing the shooting*/
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
 				if (clockShoot.getElapsedTime() >= delayShoot)
@@ -435,6 +432,7 @@ int main()
 				}
 			}
 
+			/*Managing the projectile*/
 			if (clockProjectile.getElapsedTime() >= delayProjectile)
 			{
 				ship->updateProjectiles();
@@ -449,7 +447,7 @@ int main()
 				clockProjectile.restart();
 			}
 
-			// mons.explosion();
+			/*Managing the monsters's movement*/
 			if (clockMonster.getElapsedTime() >= delayMonster)
 			{
 				for (int j = 0; j < numberOfLine; j++)
@@ -489,6 +487,7 @@ int main()
 				clockMonster.restart();
 			}
 
+			/*Explosion management*/
 			for (int j = 0; j < numberOfLine; j++)
 			{
 				if (explosion != nullptr)
@@ -517,34 +516,59 @@ int main()
 				}
 			}
 
-			// Erase the screen in white
-			window.clear(sf::Color::White);
-
-			window.draw(*ship);
-			for (int j = 0; j < numberOfLine; j++)
+			if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
 			{
-				for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
+				// Erase the screen in white
+				window.clear(sf::Color::White);
+
+				/*Displaying ship and monsters*/
+				window.draw(*ship);
+				for (int j = 0; j < numberOfLine; j++)
 				{
-					window.draw((*mons[j])[i]);
+					for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
+					{
+						window.draw((*mons[j])[i]);
+					}
 				}
+				window.display();
 			}
-			window.display();
 		}
 
 		/*Player died*/
 		// Erase the screen in black
-		window.clear(sf::Color::Black);
+		if (shipDestroyed)
+		{
+			if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
+			{
+				window.clear(sf::Color::Black);
 
-		window.draw(GameOver(windowWidth, windowHeight));
+				window.draw(GameOver(windowWidth, windowHeight));
 
-		window.display();
+				window.display();
+			}
+		}
+
+		/*Player kills all the monster*/
+		// Erase the screen in black
+		if (allMonstersDestroyed)
+		{
+			if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
+			{
+				window.clear(sf::Color::Magenta);
+
+				window.draw(GameOver(windowWidth, windowHeight));
+
+				window.display();
+			}
+		}
 
 		if (clockCommand.getElapsedTime() >= delayCommand)
 		{
+			/*Reseting the game*/
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 			{
 				freeMem(ship, mons, explosion, numberOfLine);
-				init(&ship, &mons, &explosion, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
+				init(&ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
 			}
 		}
 

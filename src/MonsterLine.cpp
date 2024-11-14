@@ -145,6 +145,18 @@ int MonsterLine::getNumberOfMonster()
     return (this->numberOfMonster);
 }
 
+bool MonsterLine::lineDestoyed()
+{
+    for (int i = 0 ; i < this->numberOfMonster ; i++)
+    {
+        if(this->block[i]->alive)
+        {
+            return (false);
+        }
+    }
+    return (true);
+}
+
 MonsterLine::~MonsterLine()
 {
     if (block != nullptr)
@@ -156,3 +168,4 @@ MonsterLine::~MonsterLine()
         delete[] block;
     }
 }
+
