@@ -60,14 +60,14 @@ private:
 			this->pt = new Point *[this->numberOfPoint];
 			this->pt[0] = new Point(this->x + 0, this->y + 1);
 			this->pt[1] = new Point(this->x + 0, this->y + 2);
-			this->pt[2] = new Point(this->x + 1, this->y + 0);
-			this->pt[3] = new Point(this->x + 2, this->y + 0);
-			this->pt[4] = new Point(this->x + 2, this->y + 2);
-			this->pt[5] = new Point(this->x + 2, this->y + 3);
-			this->pt[6] = new Point(this->x + 3, this->y + 0);
-			this->pt[7] = new Point(this->x + 3, this->y + 3);
-			this->pt[8] = new Point(this->x + 4, this->y + 1);
-			this->pt[9] = new Point(this->x + 4, this->y + 2);
+			this->pt[2] = new Point(this->x + 0, this->y + 3);
+			this->pt[3] = new Point(this->x + 1, this->y + 0);
+			this->pt[4] = new Point(this->x + 1, this->y + 4);
+			this->pt[5] = new Point(this->x + 2, this->y + 0);
+			this->pt[6] = new Point(this->x + 2, this->y + 2);
+			this->pt[7] = new Point(this->x + 2, this->y + 4);
+			this->pt[8] = new Point(this->x + 3, this->y + 2);
+			this->pt[9] = new Point(this->x + 3, this->y + 3);
 		}
 		~G() {}
 	};
@@ -84,11 +84,11 @@ private:
 			this->pt[4] = new Point(this->x + 1, this->y + 0);
 			this->pt[5] = new Point(this->x + 1, this->y + 2);
 			this->pt[6] = new Point(this->x + 2, this->y + 0);
-			this->pt[7] = new Point(this->x + 3, this->y + 2);
-			this->pt[8] = new Point(this->x + 4, this->y + 1);
-			this->pt[9] = new Point(this->x + 4, this->y + 2);
-			this->pt[10] = new Point(this->x + 4, this->y + 3);
-			this->pt[11] = new Point(this->x + 4, this->y + 4);
+			this->pt[7] = new Point(this->x + 2, this->y + 2);
+			this->pt[8] = new Point(this->x + 3, this->y + 1);
+			this->pt[9] = new Point(this->x + 3, this->y + 2);
+			this->pt[10] = new Point(this->x + 3, this->y + 3);
+			this->pt[11] = new Point(this->x + 3, this->y + 4);
 		}
 		~A() {}
 	};
