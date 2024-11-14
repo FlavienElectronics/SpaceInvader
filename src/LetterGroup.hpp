@@ -18,11 +18,11 @@ protected:
     class N;
     class O;
     class R;
-
     class U;
     class V;
     class W;
     class Y;
+    class Exclamation;
 
     class Letter
     {
@@ -56,6 +56,13 @@ protected:
     public:
         G(float x, float y,string colour);
         ~G();
+    };
+
+        class Exclamation : public Letter
+    {
+    public:
+        Exclamation(float x, float y,string colour);
+        ~Exclamation();
     };
     class A : public Letter
     {
