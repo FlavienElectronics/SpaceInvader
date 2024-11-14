@@ -13,7 +13,7 @@ void init(SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &change
 	for (int i = 0; i < numberOfLine; i++)
 	{
 		(*explo)[i] = nullptr;
-		(*monsterL)[i] = new MonsterLine(&win, winH, winW, winW / (2 + i), winH / (i + 1), 10 % (1 + i), "Green");
+		(*monsterL)[i] = new MonsterLine(&win, winH, winW, winW / (2 + i), winH / (i + 1),(1 + i*3), "Green");
 	}
 	change = false;
 }
@@ -50,7 +50,7 @@ int main()
 	window.setView(view);
 
 	// Monster mons(&window, windowHeight, windowWidth, windowWidth / 3, windowHeight / 3, "Green");
-	int numberOfLine = 4;
+	int numberOfLine = 6;
 	MonsterLine **mons;
 	SpaceShip *ship;
 
@@ -275,7 +275,8 @@ int main()
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 			{
-				shipDestroyed = false;
+				freeMem(ship, mons, explosion, numberOfLine);
+				init(&ship, &mons, &explosion, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
 			}
 		}
 
