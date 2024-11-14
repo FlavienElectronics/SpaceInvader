@@ -4,6 +4,52 @@
 
 using namespace std;
 
+class GameOver : public sf::Drawable
+{
+private:
+	Point **ptGameOver;
+	int numberOfPixel;
+
+public:
+	GameOver()
+	{
+		this->numberOfPixel = 100;
+		ptGameOver = new Point *[100];
+		for (int i = 0; i < this->numberOfPixel; i++)
+		{
+			ptGameOver[i] = new Point(100 / (i + 1), 100 / (100 - i), 1, "Col");
+		}
+	}
+
+	void draw(sf::RenderTarget &target, sf::RenderStates states) const
+	{
+		if (this->ptGameOver != nullptr)
+		{
+			for (int i = 0; i < this->numberOfPixel; i++)
+			{
+				if (this->ptGameOver[i] != nullptr)
+				{
+					target.draw(*this->ptGameOver[i], states);
+				}
+			}
+		}
+	}
+	~GameOver()
+	{
+		if (this->ptGameOver != nullptr)
+		{
+			for (int i = 0; i < this->numberOfPixel; i++)
+			{
+				if (ptGameOver[i] != nullptr)
+				{
+					delete ptGameOver[i];
+				}
+			}
+			delete[] ptGameOver;
+		}
+	}
+};
+
 struct main_info
 {
 	SpaceShip *ship;
@@ -269,6 +315,7 @@ int main()
 
 			// Efface l'écran en blanc
 			window.clear(sf::Color::White);
+
 			window.draw(*ship);
 			for (int j = 0; j < numberOfLine; j++)
 			{
@@ -279,6 +326,12 @@ int main()
 			}
 			window.display();
 		}
+		window.clear(sf::Color::White);
+
+		GameOver printed;
+		window.draw(printed);
+
+		window.display();
 
 		if (clockCommand.getElapsedTime() >= delayCommand)
 		{
