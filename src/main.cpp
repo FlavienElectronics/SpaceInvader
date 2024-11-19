@@ -13,35 +13,27 @@ private:
 	serial_port *serial;
 
 public:
-	string readUSART()
+	void readUSART(string& dataOut)
 	{
 		char c = 0;
-		string data;
+		dataOut.clear();
 
 		while (c != '\n')
 		{
 			read(*this->serial, buffer(&c, 1));
-			if (c == '\n')
-			{
-				data.clear();
-			}
-			else
-			{
-				data += c;
-			}
+			dataOut += c;
 		}
-		return (data);
 	}
 
-	void send(string& message)
+	void send(string &message)
 	{
-		write(*this->serial,buffer(message));
+		write(*this->serial, buffer(message));
 	}
 
 	ESP(const string &port, unsigned int baud_rate)
 	{
 		io_service io;
-		
+
 		this->portName = port;
 		this->baud_rate = baud_rate;
 		this->serial = new serial_port(io, this->portName);
@@ -97,7 +89,6 @@ void init(SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &allMon
 
 	/* Sending to esp */
 	// intialiser l'esp en envoyant les bonne commande
-
 }
 
 void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOfLine)
@@ -124,8 +115,8 @@ int main()
 	// const float windowWidth = 1000;
 	// const float windowHeight = 500;
 
-	ESP myESP(portName,baud_rate);
-	cout<< "Window creation" << endl;
+	ESP myESP(portName, baud_rate);
+	cout << "Window creation" << endl;
 	sf::Vector2u resolution(windowWidth, windowHeight);
 	sf::RenderWindow window(sf::VideoMode(resolution.x * 6, resolution.y * 6), gameName);
 	sf::View view(sf::FloatRect(0, 0, resolution.x, resolution.y));
@@ -246,8 +237,12 @@ int main()
 					shipDestroyed = ship->detectImpact(mons, numberOfLine);
 
 					/* Reading USART */
-					//myESP.readUSART();
-
+					string readFromUsart;
+					myESP.readUSART(readFromUsart);
+					if (readFromUsart != "")
+					{
+						cout << readFromUsart << endl;
+					}
 					clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 				}
 
