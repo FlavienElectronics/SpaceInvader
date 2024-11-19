@@ -46,18 +46,15 @@ int main() {
 try {
 		mySerial = serialConfig(portName, baud_rate);
 
-        // Données à envoyer
-        //std::string message = "Data from PC!\n";
-        //boost::asio::write(serial, boost::asio::buffer(message));
-
-        //std::cout << "Message envoyé : " << message << std::endl;
-
     } catch (const std::exception& e) {
         std::cerr << "Erreur : " << e.what() << std::endl;
     }
 	while(42)
 	{
 		readUART(mySerial, portName , baud_rate);
+		string message = "[SCR]5";
+		write(*mySerial,buffer(message));
+		cout << "Message sent : " << message << endl;
 	}
 	
     return 0;
