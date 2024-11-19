@@ -10,9 +10,14 @@ class ESP
 private:
 	string portName;
 	unsigned int baud_rate;
+	bool connected;
 	serial_port *serial;
 
 public:
+	bool isConnected()
+	{
+		return (this->connected);
+	}
 	struct USART_package
 	{
 		string device; // Button , potentiometer...
@@ -67,13 +72,27 @@ public:
 
 		this->portName = port;
 		this->baud_rate = baud_rate;
-		this->serial = new serial_port(io, this->portName);
+		try
+		{
+			this->serial = new serial_port(io, this->portName);
+			this->connected = true;
 
-		// Configuration of serial port
-		this->serial->set_option(serial_port_base::baud_rate(this->baud_rate));
-		this->serial->set_option(serial_port_base::character_size(8));
-		this->serial->set_option(serial_port_base::parity(serial_port_base::parity::none));
-		this->serial->set_option(serial_port_base::stop_bits(serial_port_base::stop_bits::one));
+			// Configuration of serial port
+			this->serial->set_option(serial_port_base::baud_rate(this->baud_rate));
+			this->serial->set_option(serial_port_base::character_size(8));
+			this->serial->set_option(serial_port_base::parity(serial_port_base::parity::none));
+			this->serial->set_option(serial_port_base::stop_bits(serial_port_base::stop_bits::one));
+		}
+		catch (std::exception e)
+		{
+			this->connected = false;
+			cout << "Erreur connexion USART : " << e.what() << endl;
+		}
+	}
+
+	~ESP()
+	{
+		delete (this->serial);
 	}
 };
 
@@ -147,6 +166,7 @@ int main()
 	// const float windowHeight = 500;
 
 	ESP myESP(portName, baud_rate);
+
 	cout << "Window creation" << endl;
 	sf::Vector2u resolution(windowWidth, windowHeight);
 	sf::RenderWindow window(sf::VideoMode(resolution.x * 6, resolution.y * 6), gameName);
@@ -426,33 +446,34 @@ int main()
 				}
 			}
 
-			/* Reading USART */
-
-			ESP::USART_package localPackage;
-
-			localPackage = myESP.readUSART();
-			cout << localPackage.value << endl;
-			if (localPackage.device == "POT")
+			/* Reading USART and sending command to game */
+			if (myESP.isConnected())
 			{
-				ship->goTo((float)localPackage.value);
-			}
-			else if (localPackage.device == "BTN")
-			{
-				if (clockShoot.getElapsedTime() >= delayShoot)
+				ESP::USART_package localPackage;
+				localPackage = myESP.readUSART();
+				cout << localPackage.value << endl;
+				if (localPackage.device == "POT")
 				{
-					ship->shoot();
-					for (int j = 0; j < numberOfLine; j++)
+					ship->goTo((float)localPackage.value);
+				}
+				else if (localPackage.device == "BTN")
+				{
+					if (clockShoot.getElapsedTime() >= delayShoot)
 					{
-						for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
+						ship->shoot();
+						for (int j = 0; j < numberOfLine; j++)
 						{
-							Monster &tempMonster = (*mons[j])[i];
-							if (tempMonster.isAlive())
+							for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
 							{
-								tempMonster.shoot();
+								Monster &tempMonster = (*mons[j])[i];
+								if (tempMonster.isAlive())
+								{
+									tempMonster.shoot();
+								}
 							}
 						}
+						clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
 					}
-					clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
 				}
 			}
 		}
