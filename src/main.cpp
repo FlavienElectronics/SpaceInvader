@@ -13,7 +13,8 @@ private:
 	serial_port *serial;
 
 public:
-	void readUSART(string& dataOut)
+	/*Returns the size of the string*/
+	int readUSART(string& dataOut)
 	{
 		char c = 0;
 		dataOut.clear();
@@ -23,6 +24,7 @@ public:
 			read(*this->serial, buffer(&c, 1));
 			dataOut += c;
 		}
+		return(dataOut.size());
 	}
 
 	void send(string &message)
@@ -238,8 +240,9 @@ int main()
 
 					/* Reading USART */
 					string readFromUsart;
-					myESP.readUSART(readFromUsart);
-					if (readFromUsart != "")
+					int sizeRead;
+					sizeRead = myESP.readUSART(readFromUsart);
+					if (sizeRead != 0)
 					{
 						cout << readFromUsart << endl;
 					}
