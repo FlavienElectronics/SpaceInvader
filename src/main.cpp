@@ -215,13 +215,13 @@ int main()
 				}
 
 				/*Managing the input command*/
+				/* Update collision and detect impact between projectile and ship-monster*/
 				if (clockCommand.getElapsedTime() >= delayCommand)
 				{
 
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 					{
-						// cout << "Hide pixel" << endl;
-						// ship->hidePixel(3,3);
+						ship->goTo((float)30);
 					}
 
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -479,6 +479,8 @@ int main()
 		}
 		else
 		{
+			/*Player died*/
+			// Erase the screen in black
 			cout << "Monsters killed you" << endl;
 			if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
 			{
@@ -491,9 +493,6 @@ int main()
 				clockRefreshScreen.restart();
 			}
 		}
-
-		/*Player died*/
-		// Erase the screen in black
 
 		if (clockCommand.getElapsedTime() >= delayCommand)
 		{
