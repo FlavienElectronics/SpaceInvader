@@ -1,6 +1,6 @@
 NAME = SpaceInvader
 CC = g++
-LIBFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
+LIBFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -pthread -lboost_system -lboost_thread
 CPPFLAGS = -Wall -Wno-reorder -g
 
 SRC_DIR = ./
@@ -52,4 +52,4 @@ re: fclean all
 
 # Command to execute
 r: $(NAME)
-	./$(NAME)
+	sudo ./$(NAME)

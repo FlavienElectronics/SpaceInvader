@@ -2,7 +2,57 @@
 
 // #define VERBOSE_MAIN
 
+using namespace boost::asio;
 using namespace std;
+
+class ESP
+{
+private:
+	string portName;
+	unsigned int baud_rate;
+	serial_port *serial;
+
+public:
+	string readUSART()
+	{
+		char c = 0;
+		string data;
+
+		while (c != '\n')
+		{
+			read(*this->serial, buffer(&c, 1));
+			if (c == '\n')
+			{
+				data.clear();
+			}
+			else
+			{
+				data += c;
+			}
+		}
+		return (data);
+	}
+
+	void send(string& message)
+	{
+		write(*this->serial,buffer(message));
+	}
+
+	ESP(const string &port, unsigned int baud_rate)
+	{
+		io_service io;
+		
+		this->portName = port;
+		this->baud_rate = baud_rate;
+		this->serial = new serial_port(io, this->portName);
+
+		// Configuration of serial port
+		this->serial->set_option(serial_port_base::baud_rate(this->baud_rate));
+		this->serial->set_option(serial_port_base::character_size(8));
+		this->serial->set_option(serial_port_base::parity(serial_port_base::parity::none));
+		this->serial->set_option(serial_port_base::stop_bits(serial_port_base::stop_bits::one));
+	}
+};
 
 class YouWon : public LetterGroup
 {
@@ -44,6 +94,10 @@ void init(SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &allMon
 	}
 	change = false;
 	allMonsDestroyed = false;
+
+	/* Sending to esp */
+	// intialiser l'esp en envoyant les bonne commande
+
 }
 
 void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOfLine)
@@ -62,13 +116,16 @@ void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOf
 /*SpaceInvader INSA*/
 int main()
 {
+	const string portName = "/dev/ttyUSB0";
+	const unsigned int baud_rate = 921600;
 	const string gameName = "SpaceInvader";
 	const float windowWidth = 128;
 	const float windowHeight = 64;
 	// const float windowWidth = 1000;
 	// const float windowHeight = 500;
 
-	cout << "Window creation" << endl;
+	ESP myESP(portName,baud_rate);
+	cout<< "Window creation" << endl;
 	sf::Vector2u resolution(windowWidth, windowHeight);
 	sf::RenderWindow window(sf::VideoMode(resolution.x * 6, resolution.y * 6), gameName);
 	sf::View view(sf::FloatRect(0, 0, resolution.x, resolution.y));
@@ -187,6 +244,9 @@ int main()
 					}
 
 					shipDestroyed = ship->detectImpact(mons, numberOfLine);
+
+					/* Reading USART */
+					//myESP.readUSART();
 
 					clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 				}
