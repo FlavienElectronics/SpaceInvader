@@ -230,17 +230,18 @@ void SpaceShip::ySub()
 void SpaceShip::goTo(float xValue)
 {
     this->x = xValue;
-    pt[0]->setPosition(x + 0, this->y + 2);
-    pt[1]->setPosition(x + 1, this->y + 1);
-    pt[2]->setPosition(x + 1, this->y + 2);
-    pt[3]->setPosition(x + 1, this->y + 3);
-    pt[4]->setPosition(x + 2, this->y + 0);
-    pt[5]->setPosition(x + 2, this->y + 1);
-    pt[6]->setPosition(x + 2, this->y + 2);
-    pt[7]->setPosition(x + 3, this->y + 1);
-    pt[8]->setPosition(x + 3, this->y + 2);
-    pt[9]->setPosition(x + 3, this->y + 3);
-    pt[10]->setPosition(x + 4, this->y + 2);
+    pt[0]->setPosition(this->x + 0, this->y + 2);
+    pt[1]->setPosition(this->x + 1, this->y + 1);
+    pt[2]->setPosition(this->x + 1, this->y + 2);
+    pt[3]->setPosition(this->x + 1, this->y + 3);
+    pt[4]->setPosition(this->x + 2, this->y + 0);
+    pt[5]->setPosition(this->x + 2, this->y + 1);
+    pt[6]->setPosition(this->x + 2, this->y + 2);
+    pt[7]->setPosition(this->x + 3, this->y + 1);
+    pt[8]->setPosition(this->x + 3, this->y + 2);
+    pt[9]->setPosition(this->x + 3, this->y + 3);
+    pt[10]->setPosition(this->x + 4, this->y + 2);
+    cout <<"x ship = " << this->x << " y ship =  " << this->y << endl;
 }
 
 SpaceShip::~SpaceShip()
