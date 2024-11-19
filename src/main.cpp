@@ -13,18 +13,43 @@ private:
 	serial_port *serial;
 
 public:
-	/*Returns the size of the string*/
-	int readUSART(string& dataOut)
+	struct USART_package
+	{
+		string device; // Button , potentiometer...
+		int sizeStr;   // size of the string
+		int value;	   // Value of the device
+	};
+
+	struct USART_package readUSART()
 	{
 		char c = 0;
-		dataOut.clear();
+		string data;
 
 		while (c != '\n')
 		{
 			read(*this->serial, buffer(&c, 1));
-			dataOut += c;
+			data += c;
 		}
-		return(dataOut.size());
+		struct USART_package package;
+		package.device = data.substr(1, 3);
+		cout << "Device " << package.device << endl;
+		package.sizeStr = data.size();
+		cout << "Size " << package.sizeStr << endl;
+
+		if (package.device != "BTN")
+		{
+			try 
+			{
+			package.value = stoi(data.substr(5, package.sizeStr - 1 ));
+			cout << "Value " << package.value << endl;
+			}
+			catch (std::exception e)
+			{
+				cout << e.what() << endl;
+			}
+		}
+
+		return (package);
 	}
 
 	void send(string &message)
@@ -239,13 +264,9 @@ int main()
 					shipDestroyed = ship->detectImpact(mons, numberOfLine);
 
 					/* Reading USART */
-					string readFromUsart;
-					int sizeRead;
-					sizeRead = myESP.readUSART(readFromUsart);
-					if (sizeRead != 0)
-					{
-						cout << readFromUsart << endl;
-					}
+
+					myESP.readUSART();
+
 					clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 				}
 
