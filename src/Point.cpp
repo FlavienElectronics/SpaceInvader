@@ -26,7 +26,7 @@ Point::Point(float x, float y, int size, string color) : sf::RectangleShape(sf::
     }
     else
     {
-        localColor = sf::Color::Black;
+        localColor = sf::Color::Black; 
     }
     this->setFillColor(localColor);
     this->setPosition(x, y);

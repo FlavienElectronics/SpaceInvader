@@ -221,7 +221,13 @@ int main()
 
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 					{
-						ship->goTo((float)30);
+						int position = windowWidth*(100./100); 
+						ship->goTo(position);
+					}
+										if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+					{
+						int position = windowWidth*(0./100); 
+						ship->goTo(position);
 					}
 
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -454,7 +460,8 @@ int main()
 				cout << localPackage.value << endl;
 				if (localPackage.device == "POT")
 				{
-					ship->goTo((float)localPackage.value);
+					int position = windowWidth*(localPackage.value)/100; 
+					ship->goTo(position);
 				}
 				else if (localPackage.device == "BTN")
 				{

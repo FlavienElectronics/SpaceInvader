@@ -232,11 +232,25 @@ void SpaceShip::goTo(float xValue)
     int delta = (int)xValue - (int)this->x;
     if (delta > 0)
     {
-        this->xAdd();
+        try
+        {
+            this->xAdd();
+        }
+        catch (SpaceShip::Exept exp)
+        {
+            cout << exp.message << endl;
+        }
     }
     else if (delta < 0)
     {
-        this->xSub();
+        try
+        {
+            this->xSub();
+        }
+        catch (SpaceShip::Exept exp)
+        {
+            cout << exp.message << endl;
+        }
     }
     cout << "x ship = " << this->x << " y ship =  " << this->y << endl;
 }
