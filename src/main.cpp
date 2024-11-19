@@ -75,6 +75,7 @@ public:
 		try
 		{
 			this->serial = new serial_port(io, this->portName);
+			cout << "Connexion USART OK : " << endl;
 			this->connected = true;
 
 			// Configuration of serial port
