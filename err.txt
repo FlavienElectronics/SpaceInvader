@@ -1,3 +1,2 @@
-Thread 1 "SpaceInvader" received signal SIGSEGV, Segmentation fault.
-0x00007ffff7f2d4ae in sf::Time::asMilliseconds() const () from /lib/x86_64-linux-gnu/libsfml-system.so.2.5
+Error: open: No such file or directory
 

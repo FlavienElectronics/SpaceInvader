@@ -1,6 +1,10 @@
 sudo apt update
-sudo apt install libsdl2-dev
-sudo apt install libsfml-dev
+
+(sudo apt install libsdl2-dev) -> pas forcément utile je crois
+
+sudo apt install libsfml-dev -> libraire graphique
+
+sudo apt install libboost-all-dev -> librairie de lecture USART
 
 compilation : g++ main.cpp -o mon_jeu -lsfml-graphics -lsfml-window -lsfml-system
 
