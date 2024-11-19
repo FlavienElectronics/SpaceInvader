@@ -436,6 +436,25 @@ int main()
 			{
 				ship->goTo((float)localPackage.value);
 			}
+			else if (localPackage.device == "BTN")
+			{
+				if (clockShoot.getElapsedTime() >= delayShoot)
+				{
+					ship->shoot();
+					for (int j = 0; j < numberOfLine; j++)
+					{
+						for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
+						{
+							Monster &tempMonster = (*mons[j])[i];
+							if (tempMonster.isAlive())
+							{
+								tempMonster.shoot();
+							}
+						}
+					}
+					clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
+				}
+			}
 		}
 		else
 		{
