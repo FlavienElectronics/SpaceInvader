@@ -29,7 +29,7 @@ int First_Start = 1;
 
 // ********** MELODIE : Game of Thrones **********
 
-int melody[] = {
+int Music::melody[] = {
   NOTE_G4, NOTE_C4, NOTE_DS4, NOTE_F4, NOTE_G4, NOTE_C4, NOTE_DS4, NOTE_F4,
   NOTE_G4, NOTE_C4, NOTE_DS4, NOTE_F4, NOTE_G4, NOTE_C4, NOTE_DS4, NOTE_F4,
   NOTE_G4, NOTE_C4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_C4, NOTE_E4, NOTE_F4,
@@ -77,7 +77,7 @@ int melody[] = {
   NOTE_C6, NOTE_G5, NOTE_GS5, NOTE_AS5, NOTE_C6, NOTE_G5, NOTE_GS5, NOTE_AS5
 };
 
-int durations[] = {
+int Music::durations[] = {
   8, 8, 16, 16, 8, 8, 16, 16,
   8, 8, 16, 16, 8, 8, 16, 16,
   8, 8, 16, 16, 8, 8, 16, 16,
@@ -253,10 +253,13 @@ void Application::UPDATE_Buzzer(void){
 }
 
 void Application::playMelody(void){
-  int melodySize = sizeof(durations) / sizeof(int);
+  Music myMusic;
+
+  //int melodySize = sizeof(myMusic.durations) / sizeof(int);
+  int melodySize = myMusic.getSizeDuration();
 
   if (isPlaying) {
-    if (millis() - noteStartTime >= 1000 / durations[currentNote] * 1.30) {
+    if (millis() - noteStartTime >= 1000 / myMusic.getDuration(currentNote) * 1.30) {
       noTone(BUZZER_PIN);         // Arrête la note actuelle
       isPlaying = false;          // Indique que la note est terminée
       noteStartTime = millis();   // Réinitialise le temps pour la prochaine note
@@ -265,8 +268,8 @@ void Application::playMelody(void){
   }
 
   if (!isPlaying && currentNote < melodySize) {
-    int noteDuration = 1000 / durations[currentNote];
-    tone(BUZZER_PIN, melody[currentNote], noteDuration);
+    int noteDuration = 1000 / myMusic.getDuration(currentNote);
+    tone(BUZZER_PIN, myMusic.getMelody(currentNote), noteDuration);
     isPlaying = true;
   }
 
