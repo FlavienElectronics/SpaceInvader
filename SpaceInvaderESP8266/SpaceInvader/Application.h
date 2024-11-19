@@ -11,7 +11,8 @@
 #include <iostream>
 #include <Wire.h>
 #include "rgb_lcd.h"
-#include "pitches.h"
+#include "Music.h"
+//#include "pitches.h"
 
 #define RED 1
 #define BLU 2
@@ -42,8 +43,8 @@ class Application
 {
   public :
 
-    Application(); 
-    ~Application();    
+    Application();
+    ~Application();
 
     void init(void);
 
