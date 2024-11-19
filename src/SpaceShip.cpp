@@ -230,17 +230,17 @@ void SpaceShip::ySub()
 void SpaceShip::goTo(float xValue)
 {
     this->x = xValue;
-    pt[0]->setPosition(x + 0, pt[0]->getY() + 2);
-    pt[1]->setPosition(x + 1, pt[1]->getY() + 1);
-    pt[2]->setPosition(x + 1, pt[2]->getY() + 2);
-    pt[3]->setPosition(x + 1, pt[3]->getY() + 3);
-    pt[4]->setPosition(x + 2, pt[4]->getY() + 0);
-    pt[5]->setPosition(x + 2, pt[5]->getY() + 1);
-    pt[6]->setPosition(x + 2, pt[6]->getY() + 2);
-    pt[7]->setPosition(x + 3, pt[7]->getY() + 1);
-    pt[8]->setPosition(x + 3, pt[8]->getY() + 2);
-    pt[9]->setPosition(x + 3, pt[9]->getY() + 3);
-    pt[10]->setPosition(x + 4, pt[10]->getY() + 2);
+    pt[0]->setPosition(x + 0, this->y + 2);
+    pt[1]->setPosition(x + 1, this->y + 1);
+    pt[2]->setPosition(x + 1, this->y + 2);
+    pt[3]->setPosition(x + 1, this->y + 3);
+    pt[4]->setPosition(x + 2, this->y + 0);
+    pt[5]->setPosition(x + 2, this->y + 1);
+    pt[6]->setPosition(x + 2, this->y + 2);
+    pt[7]->setPosition(x + 3, this->y + 1);
+    pt[8]->setPosition(x + 3, this->y + 2);
+    pt[9]->setPosition(x + 3, this->y + 3);
+    pt[10]->setPosition(x + 4, this->y + 2);
 }
 
 SpaceShip::~SpaceShip()
