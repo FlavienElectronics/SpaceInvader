@@ -32,21 +32,25 @@ public:
 		}
 		struct USART_package package;
 		package.device = data.substr(1, 3);
-		cout << "Device " << package.device << endl;
+		//cout << "Device " << package.device << endl;
 		package.sizeStr = data.size();
-		cout << "Size " << package.sizeStr << endl;
+		//cout << "Size " << package.sizeStr << endl;
 
 		if (package.device != "BTN")
 		{
 			try 
 			{
 			package.value = stoi(data.substr(5, package.sizeStr - 1 ));
-			cout << "Value " << package.value << endl;
+			//cout << "Value " << package.value << endl;
 			}
 			catch (std::exception e)
 			{
 				cout << e.what() << endl;
 			}
+		}
+		else 
+		{
+			package.value = 0;
 		}
 
 		return (package);
@@ -265,7 +269,14 @@ int main()
 
 					/* Reading USART */
 
-					myESP.readUSART();
+					ESP::USART_package localPackage;
+
+					localPackage = myESP.readUSART();
+					cout << localPackage.value << endl;
+					if (localPackage.device == "POT")
+					{
+						ship->goTo((float)localPackage.value);
+					}
 
 					clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 				}

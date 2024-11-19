@@ -21,6 +21,7 @@ public :
 	Point(float x, float y, int size, string color);
 	Point(float x, float y,string color);
 	Point(float x,float y);
+	void setPositionXY(float x,float y);
 	void xAdd();
 	void yAdd();
 	void xSub();

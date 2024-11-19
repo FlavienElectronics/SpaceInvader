@@ -62,12 +62,12 @@ void SpaceShip::correctCoordinates(int &xToCorrect, int &yToCorrect)
     for (int i = 0; i < this->numberOfPixels; i++)
     {
         yVector[i] = this->hitBox_y; // Max on y axis
-        //cout <<this->pt[i]->color <<endl;
-        cout << (int)this->pt[i]->getX() - (int)this->getX()  << endl;
-        if (((int)this->pt[i]->getX()- (int)this->getX()) == xToCorrect && this->pt[i]->color != "Invisible")
+        // cout <<this->pt[i]->color <<endl;
+        cout << (int)this->pt[i]->getX() - (int)this->getX() << endl;
+        if (((int)this->pt[i]->getX() - (int)this->getX()) == xToCorrect && this->pt[i]->color != "Invisible")
         {
             yVector[i] = ((int)this->pt[i]->getY() - (int)this->getY());
-            cout << "Adding new value" <<((int)this->pt[i]->getY() - (int)this->getY()) << endl;
+            cout << "Adding new value" << ((int)this->pt[i]->getY() - (int)this->getY()) << endl;
         }
     }
     for (int i = 0; i < this->numberOfPixels; i++)
@@ -75,9 +75,8 @@ void SpaceShip::correctCoordinates(int &xToCorrect, int &yToCorrect)
         if (ySmaller > yVector[i])
             ySmaller = yVector[i];
     }
-    yToCorrect = ySmaller; 
-    delete [] yVector;
-
+    yToCorrect = ySmaller;
+    delete[] yVector;
 }
 
 void SpaceShip::hidePixel(int xTH, int yTH)
@@ -226,6 +225,22 @@ void SpaceShip::ySub()
         cout << "New pos : " << this->x << ";" << this->y << endl;
 #endif
     }
+}
+
+void SpaceShip::goTo(float xValue)
+{
+    this->x = xValue;
+    pt[0]->setPosition(x + 0, pt[0]->getY() + 2);
+    pt[1]->setPosition(x + 1, pt[1]->getY() + 1);
+    pt[2]->setPosition(x + 1, pt[2]->getY() + 2);
+    pt[3]->setPosition(x + 1, pt[3]->getY() + 3);
+    pt[4]->setPosition(x + 2, pt[4]->getY() + 0);
+    pt[5]->setPosition(x + 2, pt[5]->getY() + 1);
+    pt[6]->setPosition(x + 2, pt[6]->getY() + 2);
+    pt[7]->setPosition(x + 3, pt[7]->getY() + 1);
+    pt[8]->setPosition(x + 3, pt[8]->getY() + 2);
+    pt[9]->setPosition(x + 3, pt[9]->getY() + 3);
+    pt[10]->setPosition(x + 4, pt[10]->getY() + 2);
 }
 
 SpaceShip::~SpaceShip()
