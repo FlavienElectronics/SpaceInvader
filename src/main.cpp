@@ -1,103 +1,8 @@
 #include "main.hpp"
-#include <thread>
 
 // #define VERBOSE_MAIN
 
-using namespace boost::asio;
 using namespace std;
-
-class ESP
-{
-private:
-	string portName;
-	unsigned int baud_rate;
-	bool connected;
-	serial_port *serial;
-
-public:
-	bool isConnected()
-	{
-		return (this->connected);
-	}
-	struct USART_package
-	{
-		bool empty;	   // if nothing is read
-		string device; // Button , potentiometer...
-		int sizeStr;   // size of the string
-		int value;	   // Value of the device
-	};
-
-	struct USART_package readUSART()
-	{
-		char c = 0;
-		string data;
-		struct USART_package package;
-
-		while (c != '\n')
-		{
-			read(*this->serial, buffer(&c, 1));
-			data += c;
-		}
-		package.device = data.substr(1, 3);
-		// cout << "Device " << package.device << endl;
-		package.sizeStr = data.size();
-		// cout << "Size " << package.sizeStr << endl;
-
-		if (package.device != "BTN")
-		{
-			try
-			{
-				package.value = stoi(data.substr(5, package.sizeStr - 1));
-				// cout << "Value " << package.value << endl;
-			}
-			catch (std::exception e)
-			{
-				cout << e.what() << endl;
-			}
-		}
-		else
-		{
-			package.value = 0;
-		}
-
-		return (package);
-	}
-
-	void send(string &message)
-	{
-		write(*this->serial, buffer(message));
-	}
-
-	ESP(const string &port, unsigned int baud_rate)
-	{
-		io_service io;
-
-		this->portName = port;
-		this->baud_rate = baud_rate;
-		try
-		{
-			this->serial = new serial_port(io, this->portName);
-			cout << "Connexion USART OK : " << endl;
-			this->connected = true;
-
-			// Configuration of serial port
-			this->serial->set_option(serial_port_base::baud_rate(this->baud_rate));
-			this->serial->set_option(serial_port_base::character_size(8));
-			this->serial->set_option(serial_port_base::parity(serial_port_base::parity::none));
-			this->serial->set_option(serial_port_base::stop_bits(serial_port_base::stop_bits::one));
-		}
-		catch (std::exception e)
-		{
-			this->connected = false;
-			cout << "Erreur connexion USART : " << e.what() << endl;
-		}
-	}
-
-	~ESP()
-	{
-		delete (this->serial);
-	}
-};
 
 class YouWon : public LetterGroup
 {
@@ -157,27 +62,18 @@ void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOf
 	}
 }
 
-void readingThread(ESP uControler, ESP::USART_package *package)
-{
-	if (uControler.isConnected())
-	{
-		*package = uControler.readUSART();
-	}
-}
-
-void mainThread()
+/*SpaceInvader INSA*/
+int main()
 {
 	const string portName = "/dev/ttyUSB0";
 	const unsigned int baud_rate = 921600;
 	const string gameName = "SpaceInvader";
 	const float windowWidth = 128;
 	const float windowHeight = 64;
+	// const float windowWidth = 1000;
+	// const float windowHeight = 500;
 
 	ESP myESP(portName, baud_rate);
-	ESP::USART_package localPackage;
-
-	std::thread t2(readingThread, myESP, &localPackage);
-	t2.join();
 
 	cout << "Window creation" << endl;
 	sf::Vector2u resolution(windowWidth, windowHeight);
@@ -233,12 +129,12 @@ void mainThread()
 
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 					{
-						int position = windowWidth * (100. / 100);
+						int position = windowWidth*(100./100); 
 						ship->goTo(position);
 					}
-					if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+										if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 					{
-						int position = windowWidth * (0. / 100);
+						int position = windowWidth*(0./100); 
 						ship->goTo(position);
 					}
 
@@ -448,7 +344,7 @@ void mainThread()
 				}
 			}
 
-			/*Player killed all the monster*/
+			/*Player kills all the monster*/
 			// Erase the screen in majenta
 			else
 			{
@@ -467,11 +363,12 @@ void mainThread()
 			/* Reading USART and sending command to game */
 			if (myESP.isConnected())
 			{
-				//localPackage = myESP.readUSART();
+				ESP::USART_package localPackage;
+				localPackage = myESP.readUSART();
 				cout << localPackage.value << endl;
 				if (localPackage.device == "POT")
 				{
-					int position = windowWidth * (localPackage.value) / 100;
+					int position = windowWidth*(localPackage.value)/100; 
 					ship->goTo(position);
 				}
 				else if (localPackage.device == "BTN")
@@ -532,14 +429,6 @@ void mainThread()
 	cout << "Window closed" << endl;
 
 	freeMem(ship, mons, explosion, numberOfLine);
-}
-
-/*SpaceInvader INSA*/
-int main()
-{
-	std::thread t1(mainThread);
-
-	t1.join();
 
 	return 0;
 }

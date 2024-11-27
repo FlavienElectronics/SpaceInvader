@@ -252,7 +252,7 @@ void SpaceShip::goTo(float xValue)
             cout << exp.message << endl;
         }
     }
-    cout << "x ship = " << this->x << " y ship =  " << this->y << endl;
+    //cout << "x ship = " << this->x << " y ship =  " << this->y << endl;
 }
 
 SpaceShip::~SpaceShip()
