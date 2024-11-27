@@ -21,6 +21,7 @@ public:
 	}
 	struct USART_package
 	{
+		bool empty;	   // if nothing is read
 		string device; // Button , potentiometer...
 		int sizeStr;   // size of the string
 		int value;	   // Value of the device
@@ -156,8 +157,12 @@ void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOf
 	}
 }
 
-void readingThread()
+void readingThread(ESP uControler, ESP::USART_package *package)
 {
+	if (uControler.isConnected())
+	{
+		*package = uControler.readUSART();
+	}
 }
 
 void mainThread()
@@ -167,10 +172,12 @@ void mainThread()
 	const string gameName = "SpaceInvader";
 	const float windowWidth = 128;
 	const float windowHeight = 64;
-	// const float windowWidth = 1000;
-	// const float windowHeight = 500;
 
 	ESP myESP(portName, baud_rate);
+	ESP::USART_package localPackage;
+
+	std::thread t2(readingThread, myESP, &localPackage);
+	t2.join();
 
 	cout << "Window creation" << endl;
 	sf::Vector2u resolution(windowWidth, windowHeight);
@@ -460,8 +467,7 @@ void mainThread()
 			/* Reading USART and sending command to game */
 			if (myESP.isConnected())
 			{
-				ESP::USART_package localPackage;
-				localPackage = myESP.readUSART();
+				//localPackage = myESP.readUSART();
 				cout << localPackage.value << endl;
 				if (localPackage.device == "POT")
 				{
@@ -527,15 +533,13 @@ void mainThread()
 
 	freeMem(ship, mons, explosion, numberOfLine);
 }
+
 /*SpaceInvader INSA*/
 int main()
 {
 	std::thread t1(mainThread);
-	std::thread t2(readingThread);
 
-	// Wait for threads to finish
 	t1.join();
-	t2.join();
 
 	return 0;
 }
