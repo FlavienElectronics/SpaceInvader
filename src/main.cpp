@@ -206,7 +206,7 @@ void mainThread()
 	sf::Time delayRefreshScreen = sf::milliseconds(17);
 
 	sf::Event event;
-	
+
 	while (window.isOpen())
 	{
 		if (!shipDestroyed)
@@ -523,20 +523,19 @@ void mainThread()
 		}
 	}
 
-	/*SpaceInvader INSA*/
-	int main()
-	{
-		std::thread t1(mainThread);
-		std::thread t2(readingThread);
-
-		// Wait for threads to finish
-		t1.join();
-		t2.join();
-	}
-
 	cout << "Window closed" << endl;
 
 	freeMem(ship, mons, explosion, numberOfLine);
+}
+/*SpaceInvader INSA*/
+int main()
+{
+	std::thread t1(mainThread);
+	std::thread t2(readingThread);
+
+	// Wait for threads to finish
+	t1.join();
+	t2.join();
 
 	return 0;
 }
