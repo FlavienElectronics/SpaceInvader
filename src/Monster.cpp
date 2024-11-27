@@ -126,11 +126,6 @@ void Monster::updateParticule()
     }
 }
 
-bool Monster::isAlive()
-{
-    return (this->alive);
-}
-
 bool Monster::isExplosing()
 {
     // cout << "Helo"<< endl;

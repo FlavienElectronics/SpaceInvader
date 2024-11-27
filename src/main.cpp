@@ -11,7 +11,7 @@ struct main_info
 	bool **explosionVector;
 };
 
-void init(SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &allMonsDestroyed, bool &change, bool &shipDestroyed, int numberOfLine, sf::RenderWindow &win, float winH, float winW)
+void init(ESP &uControler, SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &allMonsDestroyed, bool &change, bool &shipDestroyed, int numberOfLine, sf::RenderWindow &win, float winH, float winW)
 {
 	shipDestroyed = false;
 	*ship = new SpaceShip(&win, winH, winW, winW / 2, winH / 1.2, "Green");
@@ -25,8 +25,9 @@ void init(SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &allMon
 	change = false;
 	allMonsDestroyed = false;
 
-	/* Sending to esp */
-	// intialiser l'esp en envoyant les bonne commande
+	/* Sending to esp the initialisation signal*/
+	string messageToESP = "[RST]";
+	uControler.send(messageToESP);
 }
 
 void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOfLine)
@@ -73,7 +74,7 @@ int main()
 
 	bool allMonstersDestroyed;
 
-	init(&ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
+	init(myESP, &ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
 
 	sf::Clock clockCommand;
 	sf::Clock clockProjectile;
@@ -109,12 +110,12 @@ int main()
 
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 					{
-						int position = windowWidth*(100./100); 
+						int position = windowWidth * (100. / 100);
 						ship->goTo(position);
 					}
-										if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 					{
-						int position = windowWidth*(0./100); 
+						int position = windowWidth * (0. / 100);
 						ship->goTo(position);
 					}
 
@@ -307,14 +308,6 @@ int main()
 
 				if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
 				{
-					int totalMonsterAlive = 0;
-					for(int t = 0 ; t < numberOfLine ; t++)
-					{
-						totalMonsterAlive =+ mons[t]->getNumberOfMonster();
-					}
-					//temp+=totalMonsterAlive;
-					string temp = "[GOR]";
-					myESP.send(temp);
 					// Erase the screen in white
 					window.clear(sf::Color::White);
 
@@ -351,13 +344,24 @@ int main()
 			/* Reading USART and sending command to game */
 			if (myESP.isConnected())
 			{
+				int totalMonsterAlive = 0;
+				for (int t = 0; t < numberOfLine; t++)
+				{
+					totalMonsterAlive += mons[t]->getNumberOfMonsterAlive();
+				}
+				// temp+=totalMonsterAlive;
+				string messageToESP = "[SCR]";
+				messageToESP += to_string((int)pow(2, numberOfLine) - totalMonsterAlive);
+				myESP.send(messageToESP);
+				cout << totalMonsterAlive << endl;
+
 				ESP::USART_package localPackage;
 				localPackage = myESP.readUSART();
-				//cout << localPackage.value << endl;
+				// cout << localPackage.value << endl;
 				if (localPackage.device == "POT")
 				{
-					int position = windowWidth*(localPackage.value)/100; 
-					ship->goTo(position-1);
+					int position = windowWidth * (localPackage.value) / 100;
+					ship->goTo(position - 1);
 				}
 				else if (localPackage.device == "BTN")
 				{
@@ -382,12 +386,28 @@ int main()
 		}
 		else
 		{
+			/*Check if the player pressed the button to restart the game*/
+			if (myESP.isConnected())
+			{
+				ESP::USART_package localPackage;
+				localPackage = myESP.readUSART();
+				if (localPackage.device == "BTN")
+					init(myESP, &ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
+			}
+
 			/*Player died*/
 			// Erase the screen in black
 			cout << "Monsters killed you" << endl;
 			if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
 			{
 				window.clear(sf::Color::Black);
+				ship->die();
+
+				if (myESP.isConnected())
+				{
+					string messageToESP = "[GOR]";
+					myESP.send(messageToESP);
+				}
 
 				window.draw(GameOver("W", windowWidth, windowHeight));
 
@@ -403,7 +423,7 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 			{
 				freeMem(ship, mons, explosion, numberOfLine);
-				init(&ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
+				init(myESP, &ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
 			}
 		}
 

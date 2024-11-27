@@ -38,6 +38,7 @@ public:
 	void xAdd();
 	int getDirection();
 	int getNumberOfMonster();
+	int getNumberOfMonsterAlive();
 	~MonsterLine();
 };
 

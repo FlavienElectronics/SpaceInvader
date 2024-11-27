@@ -2,6 +2,7 @@
 #define MAIN_HPP
 
 #include <boost/asio.hpp>
+#include <math.h>
 
 #include "Point.hpp"
 #include "SpaceShip.hpp"

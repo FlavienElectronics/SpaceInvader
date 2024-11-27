@@ -33,6 +33,8 @@ protected:
     int xSize;
     int ySize;
 
+    bool alive;
+
     sf::RenderWindow *window;
     float winHeight;
     float winWidth;
@@ -64,6 +66,9 @@ public:
     void correctCoordinates(int& xToCorrect, int& yToCorrect);
 
     bool detectImpact(MonsterLine **monsterLine, int numberOfLine);
+
+    bool isAlive();
+    void die();
 
     friend class Explosion;
     friend class Monster;

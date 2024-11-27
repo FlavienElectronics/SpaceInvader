@@ -27,6 +27,7 @@ SpaceShip::SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidt
     pt[9] = new Point(x + 3, y + 3, 1, color);
     pt[10] = new Point(x + 4, y + 2, 1, color);
     this->life = 6;
+    this->alive = true;
     this->window = win;
     this->winHeight = windowHeight;
     this->winWidth = windowWidth;
@@ -342,4 +343,14 @@ bool SpaceShip::detectImpact(MonsterLine **monsterLine, int numberOfLine)
         }
     }
     return (false);
+}
+
+bool SpaceShip::isAlive()
+{
+    return (this->alive);
+}
+
+void SpaceShip::die()
+{
+    this->alive = false;
 }

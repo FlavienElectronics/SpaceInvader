@@ -21,7 +21,6 @@ class Monster : public SpaceShip
 
 protected:
 	int direction; // 0 -> goes left | 1 -> goes right
-	bool alive;
 	int stat;
 	Explosion* explo; // Circular inclusion
 	sf::Clock* clockExplosion;
@@ -35,7 +34,6 @@ public:
 	void hide();
 	void explode();
 	~Monster();
-	bool isAlive();
 	bool isExplosing();
 	float getX() const;
 	float getY() const;
