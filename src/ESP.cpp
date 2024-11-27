@@ -42,7 +42,7 @@ ESP::USART_package ESP::readUSART()
     return (package);
 }
 
-void ESP::send(string &message)
+void ESP::sendUSART(string &message)
 {
     write(*this->serial, buffer(message));
 }

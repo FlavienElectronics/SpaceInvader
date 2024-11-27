@@ -25,7 +25,7 @@ public:
 	};
 
 	struct USART_package readUSART();
-	void send(string &message);
+	void sendUSART(string &message);
 
 	ESP(const string &port, unsigned int baud_rate);
 

@@ -1,0 +1,352 @@
++-----------------------------+
+|           Point             |
++-----------------------------+
+| - x     : float             |
+| - y     : float             |
+| - size  : int               |
+| - color : string            |
++-----------------------------+
+| + Point()                   |
+| + Point(x : float, y : float, size : int, color : string) |
+| + Point(x : float, y : float, color : string)            |
+| + Point(x : float, y : float)                            |
+| + xAdd()                                                  |
+| + yAdd()                                                  |
+| + xSub()                                                  |
+| + ySub()                                                  |
+| + hide()                                                  |
+| + getX() : float                                          |
+| + getY() : float                                          |
++-----------------------------+
+Notes:
+- Hérite de : sf::RectangleShape
+- Amis    : Monster, SpaceShip
+
+
+
+
+
+
++----------------------------------------+
+|               SpaceShip                |
++----------------------------------------+
+| - life             : int               |
+| - x                : float             |
+| - y                : float             |
+| - pt               : Point**           |
+| - pjt              : std::vector<Projectile*> |
+| - hitBox_x         : int               |
+| - hitBox_y         : int               |
+| - numberOfPixels   : int               |
+| - numberOfProjectiles : int            |
+| - xSize            : int               |
+| - ySize            : int               |
+| - alive            : bool              |
+| - window           : sf::RenderWindow* |
+| - winHeight        : float             |
+| - winWidth         : float             |
++----------------------------------------+
+| + SpaceShip()                          |
+| + SpaceShip(win : sf::RenderWindow*,   |
+|             windowHeight : float,      |
+|             windowWidth : float,       |
+|             x_pos : float,             |
+|             y_pos : float,             |
+|             color : string)            |
+| + shoot() : virtual void               |
+| + updateProjectiles() : void           |
+| + draw(target : sf::RenderTarget&,     |
+|        states : sf::RenderStates) const : void override |
+| + xAdd() : void                        |
+| + yAdd() : void                        |
+| + xSub() : void                        |
+| + ySub() : void                        |
+| + ~SpaceShip()                         |
+| + getX() : float                       |
+| + getY() : float                       |
+| + hidePixel(x : int, y : int) : void   |
+| + goTo(xValue : float) : void          |
+| + correctCoordinates(xToCorrect : int&,|
+|                      yToCorrect : int&) : void |
+| + detectImpact(monsterLine : MonsterLine**, |
+|                numberOfLine : int) : bool |
+| + isAlive() : bool                     |
+| + die() : void                         |
++----------------------------------------+
+| + class Exept                          |
+|   - message : std::string              |
+|   + Exept(mes : std::string)           |
++----------------------------------------+
+Notes:
+- Hérite de : sf::Drawable
+- Amis    : Explosion, Monster
+
+
+
+
+
+
+
+
++----------------------------------------+
+|               Projectile               |
++----------------------------------------+
+| - numberOfPixels : int                 |
+| - pt             : Point*[2]           |
+| - x              : float               |
+| - y              : float               |
++----------------------------------------+
+| + Projectile(x_pos : float,            |
+|              y_pos : float,            |
+|              color : string)           |
+| + ySub() : void                        |
+| + yAdd() : void                        |
+| + isOutOfBounds(windowHeight : float)  |
+|                : bool                  |
+| + draw(target : sf::RenderTarget&,     |
+|        states : sf::RenderStates) const : void override |
+| + getY() : float                       |
+| + getX() : float                       |
+| + ~Projectile()                        |
++----------------------------------------+
+Notes:
+- Hérite de : sf::Drawable
+- Amis    : Monster
+
+
+
+
+
+
+
++--------------------------------------------+
+|                  Monster                   |
++--------------------------------------------+
+| - direction         : int                  |
+| - stat              : int                  |
+| - explo             : Explosion*           |
+| - clockExplosion    : sf::Clock*           |
++--------------------------------------------+
+| + Monster(win : sf::RenderWindow*,         |
+|            windowHeight : float,           |
+|            windowWidth : float,            |
+|            x_pos : float,                  |
+|            y_pos : float,                  |
+|            direction : int,                |
+|            color : string)                 |
+| + draw(target : sf::RenderTarget&,         |
+|        states : sf::RenderStates) const : void override |
+| + getDirection() : int                     |
+| + changeDirection() : void                 |
+| + hide() : void                            |
+| + explode() : void                         |
+| + ~Monster()                               |
+| + isExplosing() : bool                     |
+| + getX() : float                           |
+| + getY() : float                           |
+| + updateProjectiles() : void               |
+| + updateCollision(ship : const SpaceShip&) |
+|                       : bool               |
+| + updateParticule() : void                 |
+| + shoot() : void                           |
+| + getElapsedTimeClockExplosion() : sf::Time|
+| + resetClockExplosion() : void             |
++--------------------------------------------+
+Notes:
+- Hérite de : SpaceShip
+- Amis    : Explosion, MonsterLine
+
+
+
+
+
+
+
++-----------------------------------------------+
+|                  Explosion                   |
++-----------------------------------------------+
+| - status           : int                      |
++-----------------------------------------------+
+| + Explosion()                                   |
+| + grow(monstr : const Monster) : int           |
+| + clearPoints() : void                         |
++-----------------------------------------------+
+Notes:
+- Hérite de : SpaceShip
+- Amis    : Monster
+
+
+
+
+
+
+
++-------------------------------------------------+
+|                  MonsterLine                   |
++-------------------------------------------------+
+| - direction         : int                      |
+| - block             : Monster**                |
+| - numberOfMonster   : int                      |
+| - spacing           : float                    |
+| - window            : sf::RenderWindow*        |
+| - winHeight         : float                    |
+| - winWidth          : float                    |
++-------------------------------------------------+
+| + MonsterLine(win : sf::RenderWindow*,         |
+|               windowHeight : float,            |
+|               windowWidth : float,             |
+|               x_pos : float,                   |
+|               y_pos : float,                   |
+|               numberOfMonster : int,           |
+|               color : string)                  |
+| + operator[](location : int) : Monster&        |
+| + isLineDestroyed() : bool                     |
+| + draw(target : sf::RenderTarget&,             |
+|        states : sf::RenderStates) const : void |
+| + isExplosing(location : int) : bool           |
+| + updateParticule(location : int) : void       |
+| + explode(location : int) : void               |
+| + isAlive(location : int) : bool               |
+| + changeDirection() : void                     |
+| + updateCollision(ship : const SpaceShip&,     |
+|                   vectorBool : bool**) : void  |
+| + xSub() : void                                |
+| + xAdd() : void                                |
+| + getDirection() : int                         |
+| + getNumberOfMonster() : int                   |
+| + getNumberOfMonsterAlive() : int              |
+| + ~MonsterLine()                               |
++-------------------------------------------------+
+
+
+
+
+
+
+
+
++-----------------------------------------------------+
+|                     Letter                          |
++-----------------------------------------------------+
+| - x              : float                           |
+| - y              : float                           |
+| - numberOfPoint  : int                             |
+| - width          : int                             |
+| - colour         : string                          |
+| - pt             : Point**                         |
++-----------------------------------------------------+
+| + Letter(x : float, y : float,                    |
+|          color : string,                          |
+|          numberOfPoint : int,                     |
+|          width : int)                             |
+| + getWidth() : int                                 |
+| + getX() : float                                   |
+| + getY() : float                                   |
+| + getNumberOfPoint() : int                         |
+| + ~Letter()                                        |
++-----------------------------------------------------+
+Notes:
+- Amis : LetterGroup, G, A, M, E, O, V, R
+
+
+
+
+
+
+
++-----------------------------------------------------+
+|                    LetterGroup                     |
++-----------------------------------------------------+
+| - winW            : float                          |
+| - winH            : float                          |
+| - lettersList     : Letter**                       |
+| - numberOfLetter  : int                            |
+| - big_space       : const int = 4                  |
+| - small_space     : const int = 1                  |
+| - colorGrp        : string                         |
++-----------------------------------------------------+
+| + LetterGroup(groupColour : string,               |
+|               windowWidth : float,                |
+|               windowHeight : float)               |
+| + draw(target : sf::RenderTarget&,                |
+|        states : sf::RenderStates) const : void    |
+| + ~LetterGroup()                                   |
++-----------------------------------------------------+
+Notes:
+- Hérite de : sf::Drawable
+- Contient des sous-classes protégées : A, E, G, M, N, O, R, U, V, W, Y, Exclamation, Letter
+
+
+
+
+
++-----------------------------------------------------+
+|                       A                             |
++-----------------------------------------------------+
+| (hérite de Letter)                                  |
++-----------------------------------------------------+
+| + A(x : float, y : float, colour : string)          |
+| + ~A()                                              |
++-----------------------------------------------------+
+Notes:
+- Idem pour toutes les autres lettres, seul les constructeurs sont différents
+
+
+
+
+
++-----------------------------------------------+
+|                  GameOver                     |
++-----------------------------------------------+
+| (hérite de LetterGroup)                       |
++-----------------------------------------------+
+| + GameOver(colour : string,                   |
+|            windowWidth : float,               |
+|            windowHeight : float)              |
++-----------------------------------------------+
+Notes:
+- Hérite de : LetterGroup
+
+
+
+
++-----------------------------------------------+
+|                   YouWon                      |
++-----------------------------------------------+
+| (hérite de LetterGroup)                       |
++-----------------------------------------------+
+| + YouWon(colour : string,                    |
+|           windowWidth : float,                |
+|           windowHeight : float)               |
+| + ~YouWon()                                   |
++-----------------------------------------------+
+Notes:
+- Hérite de : LetterGroup
+
+
+
+
++-------------------------------------------+
+|                  ESP                      |
++-------------------------------------------+
+| - portName        : string                |
+| - baud_rate       : unsigned int          |
+| - connected       : bool                  |
+| - serial          : serial_port*          |
++-------------------------------------------+
+| + isConnected() : bool                    |
+| + readUSART() : USART_package             |
+| + sendUSART(message : string&) : void          |
+| + ESP(port : const string&,               |
+|        baud_rate : unsigned int)          |
+| + ~ESP()                                   |
++-------------------------------------------+
+
+Notes:
+- Utilise : boost::asio::serial_port
+- Struct USART_package :
+    + device : string
+    + sizeStr : int
+    + value : int
+
+

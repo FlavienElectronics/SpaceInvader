@@ -37,7 +37,7 @@ void init(struct main_info &information)
 	if (information.uControler.isConnected())
 	{
 		string messageToESP = "[RST]";
-		information.uControler.send(messageToESP);
+		information.uControler.sendUSART(messageToESP);
 	}
 }
 
@@ -372,7 +372,7 @@ int main()
 				// temp+=totalMonsterAlive;
 				string messageToESP = "[SCR]";
 				messageToESP += to_string((int)pow(2, numberOfLine) - totalMonsterAlive);
-				myESP.send(messageToESP);
+				myESP.sendUSART(messageToESP);
 				// cout << totalMonsterAlive << endl;
 
 				ESP::USART_package localPackage;
@@ -426,7 +426,7 @@ int main()
 				if (myESP.isConnected())
 				{
 					string messageToESP = "[GOR]";
-					myESP.send(messageToESP);
+					myESP.sendUSART(messageToESP);
 				}
 
 				window.draw(GameOver("W", windowWidth, windowHeight));
