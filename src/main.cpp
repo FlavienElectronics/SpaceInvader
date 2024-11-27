@@ -1,4 +1,5 @@
 #include "main.hpp"
+#include <thread>
 
 // #define VERBOSE_MAIN
 
@@ -29,13 +30,13 @@ public:
 	{
 		char c = 0;
 		string data;
+		struct USART_package package;
 
 		while (c != '\n')
 		{
 			read(*this->serial, buffer(&c, 1));
 			data += c;
 		}
-		struct USART_package package;
 		package.device = data.substr(1, 3);
 		// cout << "Device " << package.device << endl;
 		package.sizeStr = data.size();
@@ -155,8 +156,11 @@ void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOf
 	}
 }
 
-/*SpaceInvader INSA*/
-int main()
+void readingThread()
+{
+}
+
+void mainThread()
 {
 	const string portName = "/dev/ttyUSB0";
 	const unsigned int baud_rate = 921600;
@@ -202,7 +206,7 @@ int main()
 	sf::Time delayRefreshScreen = sf::milliseconds(17);
 
 	sf::Event event;
-
+	
 	while (window.isOpen())
 	{
 		if (!shipDestroyed)
@@ -222,12 +226,12 @@ int main()
 
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 					{
-						int position = windowWidth*(100./100); 
+						int position = windowWidth * (100. / 100);
 						ship->goTo(position);
 					}
-										if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 					{
-						int position = windowWidth*(0./100); 
+						int position = windowWidth * (0. / 100);
 						ship->goTo(position);
 					}
 
@@ -437,7 +441,7 @@ int main()
 				}
 			}
 
-			/*Player kills all the monster*/
+			/*Player killed all the monster*/
 			// Erase the screen in majenta
 			else
 			{
@@ -461,7 +465,7 @@ int main()
 				cout << localPackage.value << endl;
 				if (localPackage.device == "POT")
 				{
-					int position = windowWidth*(localPackage.value)/100; 
+					int position = windowWidth * (localPackage.value) / 100;
 					ship->goTo(position);
 				}
 				else if (localPackage.device == "BTN")
@@ -517,6 +521,17 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+	}
+
+	/*SpaceInvader INSA*/
+	int main()
+	{
+		std::thread t1(mainThread);
+		std::thread t2(readingThread);
+
+		// Wait for threads to finish
+		t1.join();
+		t2.join();
 	}
 
 	cout << "Window closed" << endl;
