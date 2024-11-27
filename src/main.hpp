@@ -10,6 +10,7 @@
 #include "Explosion.hpp"
 #include "MonsterLine.hpp"
 #include "GameOver.hpp"
+#include "YouWon.hpp"
 #include "ESP.hpp"
 
 #endif
