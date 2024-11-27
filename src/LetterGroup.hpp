@@ -38,13 +38,6 @@ protected:
         Letter(float x, float y,string color, int numberOfPoint, int width);
         ~Letter();
         friend LetterGroup;
-        friend G;
-        friend A;
-        friend M;
-        friend E;
-        friend O;
-        friend V;
-        friend R;
         int getWidth();
         float getX();
         float getY();

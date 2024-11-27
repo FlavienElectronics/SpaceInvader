@@ -6,6 +6,5 @@ class YouWon : public LetterGroup
 {
 public:
 	YouWon(string colour, float windowWidth, float windowHeight);
-	~YouWon();
 };
 #endif

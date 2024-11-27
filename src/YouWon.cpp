@@ -14,4 +14,3 @@ YouWon::YouWon(string colour, float windowWidth, float windowHeight) : LetterGro
     lettersList[6] = new Exclamation((this->lettersList[5]->getX() + this->lettersList[5]->getWidth() + this->small_space), windowHeight / 2, colour);
     lettersList[7] = new Exclamation((this->lettersList[6]->getX() + this->lettersList[6]->getWidth() + this->small_space), windowHeight / 2, colour);
 }
-YouWon::~YouWon() {}
