@@ -1,5 +1,0 @@
- g++ main.cpp -o exec
-/usr/bin/ld: /tmp/cctLIpvZ.o: in function `std::thread::thread<void (&)(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&), std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, void>(void (&)(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&), std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)':
-main.cpp:(.text._ZNSt6threadC2IRFvRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEJS6_EvEEOT_DpOT0_[_ZNSt6threadC5IRFvRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEJS6_EvEEOT_DpOT0_]+0x24): undefined reference to `pthread_create'
-collect2: error: ld returned 1 exit status
-
