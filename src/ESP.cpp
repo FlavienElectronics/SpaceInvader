@@ -31,7 +31,7 @@ ESP::USART_package ESP::readUSART()
         }
         catch (std::exception e)
         {
-            //cout << e.what() << endl;
+            // cout << e.what() << endl;
         }
     }
     else
@@ -74,5 +74,8 @@ ESP::ESP(const string &port, unsigned int baud_rate)
 
 ESP::~ESP()
 {
-    delete (this->serial);
+    if (this->connected == true)
+    {
+        delete (this->serial);
+    }
 }
