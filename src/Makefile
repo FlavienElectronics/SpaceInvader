@@ -1,5 +1,5 @@
 NAME = SpaceInvader
-CC = g++
+CC = g++ -std=c++11
 LIBFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -pthread -lboost_system -lboost_thread
 CPPFLAGS = -Wall -Wno-reorder -g
 
