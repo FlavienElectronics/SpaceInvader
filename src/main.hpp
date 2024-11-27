@@ -4,6 +4,8 @@
 #include <boost/asio.hpp>
 #include <math.h>
 
+#include <vector>
+
 #include "Point.hpp"
 #include "SpaceShip.hpp"
 #include "Monster.hpp"

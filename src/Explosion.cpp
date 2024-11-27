@@ -3,7 +3,6 @@
 Explosion::Explosion()
 {
     this->pt = nullptr;
-    this->pjt = nullptr;
     this->numberOfPixels = 0;
     this->numberOfProjectiles = 0;
     status = -1;

@@ -14,7 +14,7 @@ SpaceShip::SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidt
     cout << "Creation ship nb pixels " << numberOfPixels << endl;
 #endif
     pt = new Point *[numberOfPixels];
-    pjt = new Projectile *[numberOfProjectiles];
+    pjt = std::vector<Projectile *>();
     pt[0] = new Point(x + 0, y + 2, 1, color);
     pt[1] = new Point(x + 1, y + 1, 1, color);
     pt[2] = new Point(x + 1, y + 2, 1, color);
@@ -33,10 +33,6 @@ SpaceShip::SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidt
     this->winWidth = windowWidth;
     this->hitBox_x = 4;
     this->hitBox_y = 3;
-    for (int i = 0; i < numberOfProjectiles; i++)
-    {
-        this->pjt[i] = nullptr;
-    }
 }
 
 void SpaceShip::shoot()
@@ -44,14 +40,8 @@ void SpaceShip::shoot()
     // Chercher un emplacement libre dans le tableau de projectiles
     for (int i = 0; i < numberOfProjectiles; ++i)
     {
-        if (pjt[i] == nullptr) // Si l'emplacement est libre
-        {
-            pjt[i] = new Projectile(this->x + 2, this->y - 2, "col");
-#ifdef VERBOSE_SHIP
-            cout << "Lancement projectile " << i << endl;
-#endif
-            break;
-        }
+        pjt.push_back(new Projectile(this->x + 2, this->y - 2, "col"));
+        cout << "Lancement projectile, nombre total : " << pjt.size() << endl;
     }
 }
 
@@ -97,23 +87,20 @@ void SpaceShip::hidePixel(int xTH, int yTH)
 
 void SpaceShip::updateProjectiles()
 {
-    for (int i = 0; i < numberOfProjectiles; i++)
+    for (size_t i = 0; i < pjt.size();)
     {
-        if (this->pjt[i] != nullptr)
+        pjt[i]->ySub();                             // Déplacer le projectile
+        if (pjt[i]->isOutOfBounds(this->winHeight)) // Si hors écran
         {
-            // Déplacer le projectile vers le haut
-            this->pjt[i]->ySub();
-
-            // Vérifier si le projectile est en dehors de l'écran
-            if (this->pjt[i]->isOutOfBounds(this->winHeight))
-            {
-                // Libérer la mémoire du projectile
-                delete pjt[i];
-                this->pjt[i] = nullptr;
+            delete pjt[i];
+            pjt.erase(pjt.begin() + i); // Supprimer du vecteur
 #ifdef VERBOSE_SHIP
-                cout << "Destruction projectile " << i << endl;
+            cout << "Destruction projectile, reste : " << pjt.size() << endl;
 #endif
-            }
+        }
+        else
+        {
+            ++i; // Avancer seulement si aucun élément n'a été supprimé
         }
     }
 }
@@ -135,12 +122,9 @@ void SpaceShip::draw(sf::RenderTarget &target, sf::RenderStates states) const
         }
 
         // Dessiner tous les projectiles
-        for (int i = 0; i < numberOfProjectiles; ++i)
+        for (const auto &projectile : pjt)
         {
-            if (pjt[i] != nullptr)
-            {
-                target.draw(*pjt[i], states);
-            }
+            target.draw(*projectile, states);
         }
     }
     else
@@ -239,7 +223,7 @@ void SpaceShip::goTo(float xValue)
         }
         catch (SpaceShip::Exept exp)
         {
-            //cout << exp.message << endl;
+            // cout << exp.message << endl;
         }
     }
     else if (delta < 0)
@@ -250,10 +234,10 @@ void SpaceShip::goTo(float xValue)
         }
         catch (SpaceShip::Exept exp)
         {
-            //cout << exp.message << endl;
+            // cout << exp.message << endl;
         }
     }
-    //cout << "x ship = " << this->x << " y ship =  " << this->y << endl;
+    // cout << "x ship = " << this->x << " y ship =  " << this->y << endl;
 }
 
 SpaceShip::~SpaceShip()
@@ -280,21 +264,11 @@ SpaceShip::~SpaceShip()
 #ifdef VERBOSE_SHIP
     cout << "Allons détruire les projectiles du vaisseau" << endl;
 #endif
-    if (pjt != nullptr)
+    for (auto &projectile : pjt)
     {
-        for (int i = 0; i < numberOfProjectiles; i++)
-        {
-            if (pjt[i] != nullptr)
-            {
-                delete pjt[i]; // Libérer chaque projectile si il est alloué
-#ifdef VERBOSE_SHIP
-                cout << "Destruction point vaisseau " << i << endl;
-#endif
-            }
-        }
-        delete[] pjt;
-        pjt = nullptr;
+        delete projectile;
     }
+    pjt.clear();
 }
 
 float SpaceShip::getX() const
@@ -318,23 +292,26 @@ bool SpaceShip::detectImpact(MonsterLine **monsterLine, int numberOfLine)
 
                 Monster &tempMonster = (*monsterLine[j])[i];
 
-                for (int k = 0; k < tempMonster.numberOfProjectiles; k++)
+                for (auto &monsterProjectile : tempMonster.pjt)
                 {
-                    if (tempMonster.pjt[k] != nullptr)
+                    if (monsterProjectile != nullptr)
                     {
-                        /*Check if the position of the projectile is in the hitbox of the ship*/
-                        if ((int)tempMonster.pjt[k]->getY() == (int)this->getY() && ((int)tempMonster.pjt[k]->getX() >= (int)this->getX() && (int)tempMonster.pjt[k]->getX() < ((int)this->getX() + (int)this->hitBox_x)))
+                        /* Check if the position of the projectile is in the hitbox of the ship */
+                        if ((int)monsterProjectile->getY() == (int)this->getY() &&
+                            (int)monsterProjectile->getX() >= (int)this->getX() &&
+                            (int)monsterProjectile->getX() < (int)this->getX() + (int)this->hitBox_x)
                         {
-                            int xToDestroy = (int)tempMonster.pjt[k]->getX() - (int)(this->getX());
-                            int yToDestroy = (int)tempMonster.pjt[k]->getY() + 1 - (int)(this->getY());
-                            //cout << "Decteting impact on x = " << xToDestroy << " y = " << yToDestroy << endl;
+                            int xToDestroy = (int)monsterProjectile->getX() - (int)(this->getX());
+                            int yToDestroy = (int)monsterProjectile->getY() + 1 - (int)(this->getY());
+
+                            // Corriger les coordonnées avant de cacher le pixel
                             this->correctCoordinates(xToDestroy, yToDestroy);
-                            //cout << "Corrected x = " << xToDestroy << " y = " << yToDestroy << endl;
                             this->hidePixel(xToDestroy, yToDestroy);
+
                             this->life--;
                             if (this->life == 0)
                             {
-                                return (true);
+                                return true; // Détection d'impact fatal
                             }
                         }
                     }

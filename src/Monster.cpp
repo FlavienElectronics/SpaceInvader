@@ -1,13 +1,12 @@
 #include "Monster.hpp"
 #include "Explosion.hpp"
 
-Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos,int direction, string color)
+Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, float x_pos, float y_pos, int direction, string color)
 {
-    //cout << "Creation Monster" << endl;
+    // Initialisation classique
     this->alive = true;
     this->explo = new Explosion;
     this->direction = direction;
-
     this->x = x_pos;
     this->y = y_pos;
     this->numberOfPixels = 10;
@@ -15,12 +14,12 @@ Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, f
     this->xSize = 5;
     this->ySize = 4;
     this->stat = -1;
-
     this->clockExplosion = new sf::Clock;
-
+    
     pt = new Point *[numberOfPixels];
-    pjt = new Projectile *[numberOfProjectiles];
+    pjt.resize(numberOfProjectiles, nullptr); // Remplacer l'allocation dynamique par un vecteur
 
+    // Initialisation des points
     pt[0] = new Point(x + 1, y + 0, 1, color);
     pt[1] = new Point(x + 3, y + 0, 1, color);
     pt[2] = new Point(x + 0, y + 1, 1, color);
@@ -31,19 +30,18 @@ Monster::Monster(sf::RenderWindow *win, float windowHeight, float windowWidth, f
     pt[7] = new Point(x + 3, y + 2, 1, color);
     pt[8] = new Point(x + 1, y + 3, 1, color);
     pt[9] = new Point(x + 3, y + 3, 1, color);
+
     this->window = win;
     this->winHeight = windowHeight;
     this->winWidth = windowWidth;
     this->hitBox_x = 4;
     this->hitBox_y = 3;
-    for (int i = 0; i < numberOfProjectiles; i++)
-    {
-        this->pjt[i] = nullptr;
-    }
+    
 #ifdef VERBOSE_MONSTER
     cout << "Creation monster nb pixels " << numberOfPixels << endl;
 #endif
 }
+
 
 void Monster::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
@@ -149,18 +147,18 @@ bool Monster::updateCollision(const SpaceShip &ship)
 {
     for (int i = 0; i < this->numberOfPixels; i++)
     {
-        for (int j = 0; j < ship.numberOfProjectiles; j++)
+        for (size_t j = 0; j < ship.pjt.size(); j++) // Utilisation du vecteur
         {
-            if (ship.pjt != nullptr && ship.pjt[j] != nullptr && this->pt[i] != nullptr)
+            if (ship.pjt[j] != nullptr && this->pt[i] != nullptr)
             {
                 if ((int)ship.pjt[j]->x == (int)this->pt[i]->x && (int)ship.pjt[j]->y == (int)this->pt[i]->y)
                 {
-                    return (true);
+                    return true;
                 }
             }
         }
     }
-    return (false);
+    return false;
 }
 
 sf::Time Monster::getElapsedTimeClockExplosion()
@@ -177,8 +175,7 @@ void Monster::resetClockExplosion()
 
 void Monster::shoot()
 {
-    // Chercher un emplacement libre dans le tableau de projectiles
-    for (int i = 0; i < numberOfProjectiles; ++i)
+    for (size_t i = 0; i < pjt.size(); ++i)
     {
         if (pjt[i] == nullptr) // Si l'emplacement est libre
         {
@@ -188,9 +185,10 @@ void Monster::shoot()
     }
 }
 
+
 void Monster::updateProjectiles()
 {
-        for (int i = 0; i < numberOfProjectiles; i++)
+    for (size_t i = 0; i < pjt.size(); i++) // Utilisation du vecteur
     {
         if (pjt[i] != nullptr)
         {
@@ -209,6 +207,7 @@ void Monster::updateProjectiles()
 }
 
 
+
 Monster::~Monster()
 {
 #ifdef VERBOSE_MONSTER
@@ -219,4 +218,13 @@ Monster::~Monster()
 
     delete clockExplosion;
     delete explo;
+
+    // Libérer la mémoire des projectiles
+    for (size_t i = 0; i < pjt.size(); i++)
+    {
+        if (pjt[i] != nullptr)
+        {
+            delete pjt[i];
+        }
+    }
 }

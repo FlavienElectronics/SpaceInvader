@@ -59,8 +59,6 @@ int main()
 	const string gameName = "SpaceInvader";
 	const float windowWidth = 128;
 	const float windowHeight = 64;
-	// const float windowWidth = 1000;
-	// const float windowHeight = 500;
 
 	ESP myESP(portName, baud_rate);
 
@@ -347,7 +345,7 @@ int main()
 					if (localPackage.device == "BTN")
 						init(info);
 				}
-				
+
 				cout << "All monster destroyed" << endl;
 				if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
 				{
@@ -372,7 +370,7 @@ int main()
 				string messageToESP = "[SCR]";
 				messageToESP += to_string((int)pow(2, numberOfLine) - totalMonsterAlive);
 				myESP.send(messageToESP);
-				cout << totalMonsterAlive << endl;
+				//cout << totalMonsterAlive << endl;
 
 				ESP::USART_package localPackage;
 				localPackage = myESP.readUSART();
