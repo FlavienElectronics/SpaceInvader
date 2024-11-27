@@ -31,7 +31,7 @@ ESP::USART_package ESP::readUSART()
         }
         catch (std::exception e)
         {
-            cout << e.what() << endl;
+            //cout << e.what() << endl;
         }
     }
     else

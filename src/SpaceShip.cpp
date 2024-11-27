@@ -238,7 +238,7 @@ void SpaceShip::goTo(float xValue)
         }
         catch (SpaceShip::Exept exp)
         {
-            cout << exp.message << endl;
+            //cout << exp.message << endl;
         }
     }
     else if (delta < 0)
@@ -249,7 +249,7 @@ void SpaceShip::goTo(float xValue)
         }
         catch (SpaceShip::Exept exp)
         {
-            cout << exp.message << endl;
+            //cout << exp.message << endl;
         }
     }
     //cout << "x ship = " << this->x << " y ship =  " << this->y << endl;
@@ -326,9 +326,9 @@ bool SpaceShip::detectImpact(MonsterLine **monsterLine, int numberOfLine)
                         {
                             int xToDestroy = (int)tempMonster.pjt[k]->getX() - (int)(this->getX());
                             int yToDestroy = (int)tempMonster.pjt[k]->getY() + 1 - (int)(this->getY());
-                            cout << "Decteting impact on x = " << xToDestroy << " y = " << yToDestroy << endl;
+                            //cout << "Decteting impact on x = " << xToDestroy << " y = " << yToDestroy << endl;
                             this->correctCoordinates(xToDestroy, yToDestroy);
-                            cout << "Corrected x = " << xToDestroy << " y = " << yToDestroy << endl;
+                            //cout << "Corrected x = " << xToDestroy << " y = " << yToDestroy << endl;
                             this->hidePixel(xToDestroy, yToDestroy);
                             this->life--;
                             if (this->life == 0)

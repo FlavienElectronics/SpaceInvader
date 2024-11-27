@@ -327,6 +327,14 @@ int main()
 
 				if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
 				{
+					int totalMonsterAlive = 0;
+					for(int t = 0 ; t < numberOfLine ; t++)
+					{
+						totalMonsterAlive =+ mons[t]->getNumberOfMonster();
+					}
+					//temp+=totalMonsterAlive;
+					string temp = "[GOR]";
+					myESP.send(temp);
 					// Erase the screen in white
 					window.clear(sf::Color::White);
 
@@ -365,11 +373,11 @@ int main()
 			{
 				ESP::USART_package localPackage;
 				localPackage = myESP.readUSART();
-				cout << localPackage.value << endl;
+				//cout << localPackage.value << endl;
 				if (localPackage.device == "POT")
 				{
 					int position = windowWidth*(localPackage.value)/100; 
-					ship->goTo(position);
+					ship->goTo(position-1);
 				}
 				else if (localPackage.device == "BTN")
 				{
