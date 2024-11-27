@@ -1,0 +1,5 @@
+
+g++ main.cpp -o executable_name -pthread -lboost_system -lboost_thread
+
+Pour le lancer : 
+sudo ./nomExecutable

@@ -11,6 +11,8 @@ Pour utiliser le programme correctement, il faut installer les librairies suivan
     COMPILATION 
 
 Pour compiler le programme un Makefile existe.
+Il faut se rendre dans le dossier /src
+
 Les commandes utiles sont les suivantes :
 
 [Compilation] 
