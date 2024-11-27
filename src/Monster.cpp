@@ -218,13 +218,4 @@ Monster::~Monster()
 
     delete clockExplosion;
     delete explo;
-
-    // Libérer la mémoire des projectiles
-    for (size_t i = 0; i < pjt.size(); i++)
-    {
-        if (pjt[i] != nullptr)
-        {
-            delete pjt[i];
-        }
-    }
 }

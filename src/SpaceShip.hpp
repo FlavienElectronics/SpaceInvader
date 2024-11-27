@@ -11,11 +11,9 @@
 class Monster;
 class MonsterLine;
 
-// #define VERBOSE_SHIP
+#define VERBOSE_SHIP
 
 using namespace std;
-
-/*Faire une classe Player*/
 
 class SpaceShip : public sf::Drawable
 {
