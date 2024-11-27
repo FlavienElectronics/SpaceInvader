@@ -6,28 +6,36 @@ using namespace std;
 
 struct main_info
 {
+	ESP &uControler;
 	SpaceShip **ship;
-	MonsterLine **monsters;
-	bool **explosionVector;
+	MonsterLine ***monsterL;
+	bool ***explo;
+	bool &allMonsDestroyed;
+	bool &change;
+	bool &shipDestroyed;
+	int numberOfLine;
+	sf::RenderWindow &win;
+	float winH;
+	float winW;
 };
 
-void init(ESP &uControler, SpaceShip **ship, MonsterLine ***monsterL, bool ***explo, bool &allMonsDestroyed, bool &change, bool &shipDestroyed, int numberOfLine, sf::RenderWindow &win, float winH, float winW)
+void init(struct main_info &information)
 {
-	shipDestroyed = false;
-	*ship = new SpaceShip(&win, winH, winW, winW / 2, winH / 1.2, "Green");
-	*monsterL = new MonsterLine *[numberOfLine];
-	*explo = new bool *[numberOfLine];
-	for (int i = 0; i < numberOfLine; i++)
+	information.shipDestroyed = false;
+	*information.ship = new SpaceShip(&information.win, information.winH, information.winW, information.winW / 2, information.winH / 1.2, "Green");
+	*information.monsterL = new MonsterLine *[information.numberOfLine];
+	*information.explo = new bool *[information.numberOfLine];
+	for (int i = 0; i < information.numberOfLine; i++)
 	{
-		(*explo)[i] = nullptr;
-		(*monsterL)[i] = new MonsterLine(&win, winH, winW, winW / 2 - (1 + i * 2 * 4), winH / 2 - (1 + i * 2 * 4), i * 2 + 1, "col");
+		(*information.explo)[i] = nullptr;
+		(*information.monsterL)[i] = new MonsterLine(&information.win, information.winH, information.winW, information.winW / 2 - (1 + i * 2 * 4), information.winH / 2 - (1 + i * 2 * 4), i * 2 + 1, "col");
 	}
-	change = false;
-	allMonsDestroyed = false;
+	information.change = false;
+	information.allMonsDestroyed = false;
 
 	/* Sending to esp the initialisation signal*/
 	string messageToESP = "[RST]";
-	uControler.send(messageToESP);
+	information.uControler.send(messageToESP);
 }
 
 void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOfLine)
@@ -74,7 +82,9 @@ int main()
 
 	bool allMonstersDestroyed;
 
-	init(myESP, &ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
+	struct main_info info = {myESP, &ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth};
+
+	init(info);
 
 	sf::Clock clockCommand;
 	sf::Clock clockProjectile;
@@ -329,6 +339,15 @@ int main()
 			// Erase the screen in majenta
 			else
 			{
+				/*Check if the player pressed the button to restart the game*/
+				if (myESP.isConnected())
+				{
+					ESP::USART_package localPackage;
+					localPackage = myESP.readUSART();
+					if (localPackage.device == "BTN")
+						init(info);
+				}
+				
 				cout << "All monster destroyed" << endl;
 				if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
 				{
@@ -392,7 +411,7 @@ int main()
 				ESP::USART_package localPackage;
 				localPackage = myESP.readUSART();
 				if (localPackage.device == "BTN")
-					init(myESP, &ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
+					init(info);
 			}
 
 			/*Player died*/
@@ -423,7 +442,7 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 			{
 				freeMem(ship, mons, explosion, numberOfLine);
-				init(myESP, &ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth);
+				init(info);
 			}
 		}
 
