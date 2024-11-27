@@ -34,8 +34,11 @@ void init(struct main_info &information)
 	information.allMonsDestroyed = false;
 
 	/* Sending to esp the initialisation signal*/
-	string messageToESP = "[RST]";
-	information.uControler.send(messageToESP);
+	if (information.uControler.isConnected())
+	{
+		string messageToESP = "[RST]";
+		information.uControler.send(messageToESP);
+	}
 }
 
 void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOfLine)
@@ -370,7 +373,7 @@ int main()
 				string messageToESP = "[SCR]";
 				messageToESP += to_string((int)pow(2, numberOfLine) - totalMonsterAlive);
 				myESP.send(messageToESP);
-				//cout << totalMonsterAlive << endl;
+				// cout << totalMonsterAlive << endl;
 
 				ESP::USART_package localPackage;
 				localPackage = myESP.readUSART();
