@@ -243,3 +243,86 @@ void displayGame(main_info &main_information, clock_info &clock_information)
         clock_information.clockRefreshScreen.restart();
     }
 }
+
+
+void gameOver(main_info &main_information, clock_info &clock_information)
+{
+	if (main_information.endScreenPrinted == false)
+	{
+		/*Check if the player pressed the button to restart the game*/
+
+		if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
+		{
+			main_information.endScreenPrinted = true; // Display only once per game
+			cout << "Monsters killed you" << endl;
+			main_information.win.clear(sf::Color::Black);
+			(*main_information.ship)->die();
+
+			if (main_information.uControler.isConnected())
+			{
+				string messageToESP = "[GOR]";
+				main_information.uControler.sendUSART(messageToESP);
+			}
+
+			main_information.win.draw(GameOver("W", main_information.winW, main_information.winH));
+
+			main_information.win.display();
+
+			clock_information.clockRefreshScreen.restart();
+		}
+	}
+
+	if (main_information.uControler.isConnected())
+	{
+		ESP::USART_package localPackage;
+		localPackage = main_information.uControler.readUSART();
+		if (localPackage.device == "BTN")
+			init(main_information,clock_information);
+	}
+	if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
+	{
+		/*Reseting the game*/
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			freeMem(main_information);
+			init(main_information,clock_information);
+		}
+	}
+}
+
+void youWon(main_info &main_information, clock_info &clock_information)
+{
+	if (main_information.endScreenPrinted == false)
+	{
+
+		if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
+		{
+			main_information.endScreenPrinted = true; // Display only once per game
+			cout << "All monster destroyed" << endl;
+			main_information.win.clear(sf::Color::Magenta);
+
+			main_information.win.draw(YouWon("B", main_information.winW, main_information.winH));
+
+			main_information.win.display();
+			clock_information.clockRefreshScreen.restart();
+		}
+	}
+	/*Check if the player pressed the button to restart the game*/
+	if (main_information.uControler.isConnected())
+	{
+		ESP::USART_package localPackage;
+		localPackage = main_information.uControler.readUSART();
+		if (localPackage.device == "BTN")
+			init(main_information,clock_information);
+	}
+
+	if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
+	{
+		/*Reseting the game*/
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			freeMem(main_information);
+			init(main_information,clock_information);
+		}
+	}
+}
