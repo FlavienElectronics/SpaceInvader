@@ -4,37 +4,6 @@
 
 using namespace std;
 
-struct main_info
-{
-	ESP &uControler;
-	SpaceShip **ship;
-	MonsterLine ***monsterL;
-	bool ***explo;
-	bool &allMonsDestroyed;
-	bool &change;
-	bool &shipDestroyed;
-	int numberOfLine;
-	sf::RenderWindow &win;
-	float winH;
-	float winW;
-};
-
-struct clock_info
-{
-	sf::Clock &clockCommand;
-	sf::Clock &clockProjectile;
-	sf::Clock &clockShoot;
-	sf::Clock &clockMonster;
-	sf::Clock &clockExplosion;
-	sf::Clock &clockRefreshScreen;
-	sf::Time &delayCommand;
-	sf::Time &delayProjectile;
-	sf::Time &delayMonster;
-	sf::Time &delayShoot;
-	sf::Time &delayExplosion;
-	sf::Time &delayRefreshScreen;
-};
-
 void init(struct main_info &main_information)
 {
 	main_information.shipDestroyed = false;
@@ -264,6 +233,27 @@ void manageExplosion(main_info &main_information, clock_info clock_information)
 	}
 }
 
+void displayGame(main_info &main_information, clock_info clock_information)
+{
+	if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
+	{
+		// Erase the screen in white
+		main_information.win.clear(sf::Color::White);
+
+		/*Displaying ship and monsters*/
+		main_information.win.draw(*(*main_information.ship));
+		for (int j = 0; j < main_information.numberOfLine; j++)
+		{
+			for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
+			{
+				main_information.win.draw((*(*main_information.monsterL)[j])[i]);
+			}
+		}
+		main_information.win.display();
+		clock_information.clockRefreshScreen.restart();
+	}
+}
+
 /*SpaceInvader INSA*/
 int main()
 {
@@ -409,23 +399,26 @@ int main()
 
 				manageExplosion(main_info, clock_info);
 
-				if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
+				displayGame(main_info, clock_info);
+
+				/*if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
 				{
 					// Erase the screen in white
 					window.clear(sf::Color::White);
 
 					/*Displaying ship and monsters*/
-					window.draw(*ship);
-					for (int j = 0; j < numberOfLine; j++)
+				/*window.draw(*ship);
+				for (int j = 0; j < numberOfLine; j++)
+				{
+					for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
 					{
-						for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
-						{
-							window.draw((*mons[j])[i]);
-						}
+						window.draw((*mons[j])[i]);
 					}
-					window.display();
-					clockRefreshScreen.restart();
 				}
+				window.display();
+				clockRefreshScreen.restart();
+			}
+			*/
 			}
 
 			/*Player kills all the monster*/

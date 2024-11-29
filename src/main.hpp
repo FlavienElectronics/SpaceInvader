@@ -16,4 +16,38 @@
 #include "YouWon.hpp"
 #include "ESP.hpp"
 
+
+struct main_info
+{
+	ESP &uControler;
+	SpaceShip **ship;
+	MonsterLine ***monsterL;
+	bool ***explo;
+	bool &allMonsDestroyed;
+	bool &change;
+	bool &shipDestroyed;
+	int numberOfLine;
+	sf::RenderWindow &win;
+	float winH;
+	float winW;
+};
+
+struct clock_info
+{
+	sf::Clock &clockCommand;
+	sf::Clock &clockProjectile;
+	sf::Clock &clockShoot;
+	sf::Clock &clockMonster;
+	sf::Clock &clockExplosion;
+	sf::Clock &clockRefreshScreen;
+	sf::Time &delayCommand;
+	sf::Time &delayProjectile;
+	sf::Time &delayMonster;
+	sf::Time &delayShoot;
+	sf::Time &delayExplosion;
+	sf::Time &delayRefreshScreen;
+};
+
+
+
 #endif
