@@ -27,6 +27,7 @@ SpaceShip::SpaceShip(sf::RenderWindow *win, float windowHeight, float windowWidt
     pt[9] = new Point(x + 3, y + 3, 1, color);
     pt[10] = new Point(x + 4, y + 2, 1, color);
     this->life = 6;
+    this->max_life = 6;
     this->alive = true;
     this->window = win;
     this->winHeight = windowHeight;
@@ -41,24 +42,24 @@ void SpaceShip::shoot()
     for (int i = 0; i < numberOfProjectiles; ++i)
     {
         pjt.push_back(new Projectile(this->x + 2, this->y - 2, "col"));
-        //cout << "Lancement projectile, nombre total : " << pjt.size() << endl;
+        // cout << "Lancement projectile, nombre total : " << pjt.size() << endl;
     }
 }
 
 void SpaceShip::correctCoordinates(int &xToCorrect, int &yToCorrect)
 {
     int *yVector = new int[this->numberOfPixels];
-    //cout << "xToCorrect" << xToCorrect << endl;
+    // cout << "xToCorrect" << xToCorrect << endl;
     int ySmaller = this->hitBox_y; // Max on y axis
     for (int i = 0; i < this->numberOfPixels; i++)
     {
         yVector[i] = this->hitBox_y; // Max on y axis
         // cout <<this->pt[i]->color <<endl;
-        //cout << (int)this->pt[i]->getX() - (int)this->getX() << endl;
+        // cout << (int)this->pt[i]->getX() - (int)this->getX() << endl;
         if (((int)this->pt[i]->getX() - (int)this->getX()) == xToCorrect && this->pt[i]->color != "Invisible")
         {
             yVector[i] = ((int)this->pt[i]->getY() - (int)this->getY());
-            //cout << "Adding new value" << ((int)this->pt[i]->getY() - (int)this->getY()) << endl;
+            // cout << "Adding new value" << ((int)this->pt[i]->getY() - (int)this->getY()) << endl;
         }
     }
     for (int i = 0; i < this->numberOfPixels; i++)
@@ -80,7 +81,7 @@ void SpaceShip::hidePixel(int xTH, int yTH)
         {
             // cout << (int)this->pt[i]->getX() - (int)this->getX() << "x-x " <<  (int)this->pt[i]->getY() - (int)this->getY() << "y-y" << endl;
             this->pt[i]->hide();
-            //cout << "Hiding pixel " << i << endl;
+            // cout << "Hiding pixel " << i << endl;
         }
     }
 }
@@ -307,11 +308,18 @@ bool SpaceShip::detectImpact(MonsterLine **monsterLine, int numberOfLine)
                             // Corriger les coordonnées avant de cacher le pixel
                             this->correctCoordinates(xToDestroy, yToDestroy);
                             this->hidePixel(xToDestroy, yToDestroy);
-
                             this->life--;
+
                             if (this->life == 0)
                             {
                                 return true; // Détection d'impact fatal
+                            }
+                            else
+                            {
+                                int hullIntegrity = 100. * float(this->life) / float(this->max_life);
+                                cout << "Your ship was hit, hull integrity : " << hullIntegrity << " %" << endl;
+                                if (this->life == 1)
+                                    cout << "Critical integrity. Evacuate immediately !" << endl;
                             }
                         }
                     }

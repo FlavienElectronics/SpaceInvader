@@ -34,18 +34,18 @@ struct main_info
 
 struct clock_info
 {
-	sf::Clock &clockCommand;
-	sf::Clock &clockProjectile;
-	sf::Clock &clockShoot;
-	sf::Clock &clockMonster;
-	sf::Clock &clockExplosion;
-	sf::Clock &clockRefreshScreen;
-	sf::Time &delayCommand;
-	sf::Time &delayProjectile;
-	sf::Time &delayMonster;
-	sf::Time &delayShoot;
-	sf::Time &delayExplosion;
-	sf::Time &delayRefreshScreen;
+	sf::Clock clockCommand;
+	sf::Clock clockProjectile;
+	sf::Clock clockShoot;
+	sf::Clock clockMonster;
+	sf::Clock clockExplosion;
+	sf::Clock clockRefreshScreen;
+	sf::Time delayCommand;
+	sf::Time delayProjectile;
+	sf::Time delayMonster;
+	sf::Time delayShoot;
+	sf::Time delayExplosion;
+	sf::Time delayRefreshScreen;
 };
 
 #endif

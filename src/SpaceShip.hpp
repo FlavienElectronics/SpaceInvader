@@ -19,6 +19,7 @@ class SpaceShip : public sf::Drawable
 {
 private:
     int life;
+    int max_life;
 
 protected:
     float x, y;

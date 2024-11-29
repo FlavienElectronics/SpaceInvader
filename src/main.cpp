@@ -35,7 +35,7 @@ void gameOver(main_info &main_information, clock_info &clock_information)
 		ESP::USART_package localPackage;
 		localPackage = main_information.uControler.readUSART();
 		if (localPackage.device == "BTN")
-			init(main_information);
+			init(main_information,clock_information);
 	}
 	if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
 	{
@@ -43,7 +43,7 @@ void gameOver(main_info &main_information, clock_info &clock_information)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 		{
 			freeMem(main_information);
-			init(main_information);
+			init(main_information,clock_information);
 		}
 	}
 }
@@ -71,7 +71,7 @@ void youWon(main_info &main_information, clock_info &clock_information)
 		ESP::USART_package localPackage;
 		localPackage = main_information.uControler.readUSART();
 		if (localPackage.device == "BTN")
-			init(main_information);
+			init(main_information,clock_information);
 	}
 
 	if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
@@ -80,7 +80,7 @@ void youWon(main_info &main_information, clock_info &clock_information)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 		{
 			freeMem(main_information);
-			init(main_information);
+			init(main_information,clock_information);
 		}
 	}
 }
@@ -133,6 +133,7 @@ void manage_uControler(main_info &main_information, clock_info &clock_informatio
 /*UNTESTED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 485 897897/*-+ ++++++++++++9+9---+-++-+--++//+//+*/
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
+
 /*SpaceInvader INSA*/
 int main()
 {
@@ -163,18 +164,6 @@ int main()
 
 	/*remove that*/
 	/*---d-fsd-sd-f-sdf-sdf-sd-fs-df-sdf-sd-fsd-f-sdfs*/
-	sf::Clock clockCommand;
-	sf::Clock clockProjectile;
-	sf::Clock clockShoot;
-	sf::Clock clockMonster;
-	sf::Clock clockExplosion;
-	sf::Clock clockRefreshScreen;
-	sf::Time delayCommand = sf::milliseconds(10);
-	sf::Time delayProjectile = sf::milliseconds(10);
-	sf::Time delayMonster = sf::milliseconds(50);
-	sf::Time delayShoot = sf::milliseconds(500);
-	sf::Time delayExplosion = sf::milliseconds(150);
-	sf::Time delayRefreshScreen = sf::milliseconds(17);
 
 	sf::Event event;
 
@@ -190,22 +179,9 @@ int main()
 								  windowHeight,
 								  windowWidth};
 
-	struct clock_info clock_info =
-		{
-			clockCommand,
-			clockProjectile,
-			clockShoot,
-			clockMonster,
-			clockExplosion,
-			clockRefreshScreen,
-			delayCommand,
-			delayProjectile,
-			delayMonster,
-			delayShoot,
-			delayExplosion,
-			delayRefreshScreen};
+	struct clock_info clock_info;
 
-	init(main_info);
+	init(main_info,clock_info);
 
 	while (window.isOpen())
 	{
