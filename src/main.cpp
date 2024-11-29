@@ -14,8 +14,6 @@ void gameOver(main_info main_information, clock_info clock_information)
 			init(main_information);
 	}
 
-	/*Player died*/
-	// Erase the screen in black
 	cout << "Monsters killed you" << endl;
 	if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
 	{
@@ -48,14 +46,15 @@ void gameOver(main_info main_information, clock_info clock_information)
 
 void youWon(main_info main_information, clock_info clock_information)
 {
-	/*Check if the player pressed the button to restart the game*/
-	if (main_information.uControler.isConnected())
-	{
-		ESP::USART_package localPackage;
-		localPackage = main_information.uControler.readUSART();
-		if (localPackage.device == "BTN")
-			init(main_information);
-	}
+	//if (printed)
+		/*Check if the player pressed the button to restart the game*/
+		if (main_information.uControler.isConnected())
+		{
+			ESP::USART_package localPackage;
+			localPackage = main_information.uControler.readUSART();
+			if (localPackage.device == "BTN")
+				init(main_information);
+		}
 
 	cout << "All monster destroyed" << endl;
 	if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
@@ -78,6 +77,55 @@ void youWon(main_info main_information, clock_info clock_information)
 		}
 	}
 }
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+/*UNTESTED !!!!!! NEED TO TEST WITH ESP8266*/
+void manage_uControler(main_info main_information, clock_info clock_information)
+{
+	/* Reading USART and sending command to game */
+	if (main_information.uControler.isConnected())
+	{
+		int totalMonsterAlive = 0;
+		for (int t = 0; t < main_information.numberOfLine; t++)
+		{
+			totalMonsterAlive += (*main_information.monsterL)[t]->getNumberOfMonsterAlive();
+		}
+		string messageToESP = "[SCR]";
+		messageToESP += to_string((int)pow(2, main_information.numberOfLine) - totalMonsterAlive);
+		main_information.uControler.sendUSART(messageToESP);
+
+
+		ESP::USART_package localPackage;
+		localPackage = main_information.uControler.readUSART();
+		// cout << localPackage.value << endl;
+		if (localPackage.device == "POT")
+		{
+			int position = main_information.winW * (localPackage.value) / 100;
+			(*main_information.ship)->goTo(position - 1);
+		}
+		else if (localPackage.device == "BTN")
+		{
+			if (clock_information.clockShoot.getElapsedTime() >= clock_information.delayShoot)
+			{
+				(*main_information.ship)->shoot();
+				for (int j = 0; j < main_information.numberOfLine; j++)
+				{
+					for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
+					{
+						Monster &tempMonster = (*(*main_information.monsterL)[j])[i];
+						if (tempMonster.isAlive())
+						{
+							tempMonster.shoot();
+						}
+					}
+				}
+				clock_information.clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
+			}
+		}
+	}
+}
+/*UNTESTED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 485 897897/*-+ ++++++++++++9+9---+-++-+--++//+//+*/
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
 /*SpaceInvader INSA*/
 int main()
@@ -106,6 +154,9 @@ int main()
 	bool shipDestroyed;
 
 	bool allMonstersDestroyed;
+
+	/*remove that*/
+	/*---d-fsd-sd-f-sdf-sdf-sd-fs-df-sdf-sd-fsd-f-sdfs*/
 	sf::Clock clockCommand;
 	sf::Clock clockProjectile;
 	sf::Clock clockShoot;
@@ -162,52 +213,11 @@ int main()
 						window.close();
 				}
 
-				/* Reading USART and sending command to game */
-				if (myESP.isConnected())
-				{
-					int totalMonsterAlive = 0;
-					for (int t = 0; t < numberOfLine; t++)
-					{
-						totalMonsterAlive += mons[t]->getNumberOfMonsterAlive();
-					}
-					// temp+=totalMonsterAlive;
-					string messageToESP = "[SCR]";
-					messageToESP += to_string((int)pow(2, numberOfLine) - totalMonsterAlive);
-					myESP.sendUSART(messageToESP);
-					// cout << totalMonsterAlive << endl;
-
-					ESP::USART_package localPackage;
-					localPackage = myESP.readUSART();
-					// cout << localPackage.value << endl;
-					if (localPackage.device == "POT")
-					{
-						int position = windowWidth * (localPackage.value) / 100;
-						ship->goTo(position - 1);
-					}
-					else if (localPackage.device == "BTN")
-					{
-						if (clockShoot.getElapsedTime() >= delayShoot)
-						{
-							ship->shoot();
-							for (int j = 0; j < numberOfLine; j++)
-							{
-								for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
-								{
-									Monster &tempMonster = (*mons[j])[i];
-									if (tempMonster.isAlive())
-									{
-										tempMonster.shoot();
-									}
-								}
-							}
-							clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
-						}
-					}
-				}
+				manage_uControler(main_info, clock_info);
 
 				/*Managing the input command*/
 				/* Update collision and detect impact between projectile and ship-monster*/
-				if (clockCommand.getElapsedTime() >= delayCommand)
+				if (clock_info.clockCommand.getElapsedTime() >= clock_info.delayCommand)
 				{
 					manageKeyboard(main_info, clock_info);
 
@@ -215,7 +225,7 @@ int main()
 
 					detectImpact(main_info);
 
-					clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
+					clock_info.clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 				}
 
 				updateProjectile(main_info, clock_info);
@@ -234,6 +244,8 @@ int main()
 				youWon(main_info, clock_info);
 			}
 		}
+		/*Player died*/
+		// Erase the screen in black
 		else
 		{
 			gameOver(main_info, clock_info);
