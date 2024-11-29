@@ -46,6 +46,39 @@ void gameOver(main_info main_information, clock_info clock_information)
 	}
 }
 
+void youWon(main_info main_information, clock_info clock_information)
+{
+	/*Check if the player pressed the button to restart the game*/
+	if (main_information.uControler.isConnected())
+	{
+		ESP::USART_package localPackage;
+		localPackage = main_information.uControler.readUSART();
+		if (localPackage.device == "BTN")
+			init(main_information);
+	}
+
+	cout << "All monster destroyed" << endl;
+	if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
+	{
+		main_information.win.clear(sf::Color::Magenta);
+
+		main_information.win.draw(YouWon("B", main_information.winW, main_information.winH));
+
+		main_information.win.display();
+		clock_information.clockRefreshScreen.restart();
+	}
+
+	if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
+	{
+		/*Reseting the game*/
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			freeMem(main_information);
+			init(main_information);
+		}
+	}
+}
+
 /*SpaceInvader INSA*/
 int main()
 {
@@ -198,25 +231,7 @@ int main()
 			// Erase the screen in majenta
 			else
 			{
-				/*Check if the player pressed the button to restart the game*/
-				if (myESP.isConnected())
-				{
-					ESP::USART_package localPackage;
-					localPackage = myESP.readUSART();
-					if (localPackage.device == "BTN")
-						init(main_info);
-				}
-
-				cout << "All monster destroyed" << endl;
-				if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
-				{
-					window.clear(sf::Color::Magenta);
-
-					window.draw(YouWon("B", windowWidth, windowHeight));
-
-					window.display();
-					clockRefreshScreen.restart();
-				}
+				youWon(main_info, clock_info);
 			}
 		}
 		else
