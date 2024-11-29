@@ -2,6 +2,8 @@
 
 void init(struct main_info &main_information)
 {
+    cout << "Restarting the game" << endl;
+    main_information.endScreenPrinted = false;
 	main_information.shipDestroyed = false;
 	*main_information.ship = new SpaceShip(&main_information.win, main_information.winH, main_information.winW, main_information.winW / 2, main_information.winH / 1.2, "col");
 	*main_information.monsterL = new MonsterLine *[main_information.numberOfLine];

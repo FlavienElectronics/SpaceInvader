@@ -29,6 +29,7 @@ struct main_info
 	sf::RenderWindow &win;
 	float winH;
 	float winW;
+    bool endScreenPrinted;
 };
 
 struct clock_info

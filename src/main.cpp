@@ -3,9 +3,33 @@
 
 using namespace std;
 
-void gameOver(main_info main_information, clock_info clock_information)
+void gameOver(main_info &main_information, clock_info &clock_information)
 {
-	/*Check if the player pressed the button to restart the game*/
+	if (main_information.endScreenPrinted == false)
+	{
+		/*Check if the player pressed the button to restart the game*/
+
+		if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
+		{
+			main_information.endScreenPrinted = true; // Display only once per game
+			cout << "Monsters killed you" << endl;
+			main_information.win.clear(sf::Color::Black);
+			(*main_information.ship)->die();
+
+			if (main_information.uControler.isConnected())
+			{
+				string messageToESP = "[GOR]";
+				main_information.uControler.sendUSART(messageToESP);
+			}
+
+			main_information.win.draw(GameOver("W", main_information.winW, main_information.winH));
+
+			main_information.win.display();
+
+			clock_information.clockRefreshScreen.restart();
+		}
+	}
+
 	if (main_information.uControler.isConnected())
 	{
 		ESP::USART_package localPackage;
@@ -13,26 +37,6 @@ void gameOver(main_info main_information, clock_info clock_information)
 		if (localPackage.device == "BTN")
 			init(main_information);
 	}
-
-	cout << "Monsters killed you" << endl;
-	if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
-	{
-		main_information.win.clear(sf::Color::Black);
-		(*main_information.ship)->die();
-
-		if (main_information.uControler.isConnected())
-		{
-			string messageToESP = "[GOR]";
-			main_information.uControler.sendUSART(messageToESP);
-		}
-
-		main_information.win.draw(GameOver("W", main_information.winW, main_information.winH));
-
-		main_information.win.display();
-
-		clock_information.clockRefreshScreen.restart();
-	}
-
 	if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
 	{
 		/*Reseting the game*/
@@ -44,27 +48,30 @@ void gameOver(main_info main_information, clock_info clock_information)
 	}
 }
 
-void youWon(main_info main_information, clock_info clock_information)
+void youWon(main_info &main_information, clock_info &clock_information)
 {
-	//if (printed)
-		/*Check if the player pressed the button to restart the game*/
-		if (main_information.uControler.isConnected())
-		{
-			ESP::USART_package localPackage;
-			localPackage = main_information.uControler.readUSART();
-			if (localPackage.device == "BTN")
-				init(main_information);
-		}
-
-	cout << "All monster destroyed" << endl;
-	if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
+	if (main_information.endScreenPrinted == false)
 	{
-		main_information.win.clear(sf::Color::Magenta);
 
-		main_information.win.draw(YouWon("B", main_information.winW, main_information.winH));
+		if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
+		{
+			main_information.endScreenPrinted = true; // Display only once per game
+			cout << "All monster destroyed" << endl;
+			main_information.win.clear(sf::Color::Magenta);
 
-		main_information.win.display();
-		clock_information.clockRefreshScreen.restart();
+			main_information.win.draw(YouWon("B", main_information.winW, main_information.winH));
+
+			main_information.win.display();
+			clock_information.clockRefreshScreen.restart();
+		}
+	}
+	/*Check if the player pressed the button to restart the game*/
+	if (main_information.uControler.isConnected())
+	{
+		ESP::USART_package localPackage;
+		localPackage = main_information.uControler.readUSART();
+		if (localPackage.device == "BTN")
+			init(main_information);
 	}
 
 	if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
@@ -80,7 +87,7 @@ void youWon(main_info main_information, clock_info clock_information)
 
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 /*UNTESTED !!!!!! NEED TO TEST WITH ESP8266*/
-void manage_uControler(main_info main_information, clock_info clock_information)
+void manage_uControler(main_info &main_information, clock_info &clock_information)
 {
 	/* Reading USART and sending command to game */
 	if (main_information.uControler.isConnected())
@@ -93,7 +100,6 @@ void manage_uControler(main_info main_information, clock_info clock_information)
 		string messageToESP = "[SCR]";
 		messageToESP += to_string((int)pow(2, main_information.numberOfLine) - totalMonsterAlive);
 		main_information.uControler.sendUSART(messageToESP);
-
 
 		ESP::USART_package localPackage;
 		localPackage = main_information.uControler.readUSART();
