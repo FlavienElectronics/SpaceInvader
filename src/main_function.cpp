@@ -62,26 +62,6 @@ void manageKeyboard(main_info &main_information, clock_info &clock_information)
 		{
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
-		try
-		{
-			(*main_information.ship)->yAdd();
-		}
-		catch (SpaceShip::Exept exp)
-		{
-		}
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		try
-		{
-			(*main_information.ship)->ySub();
-		}
-		catch (SpaceShip::Exept exp)
-		{
-		}
-	}
 
 	/*Managing the shooting*/
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))

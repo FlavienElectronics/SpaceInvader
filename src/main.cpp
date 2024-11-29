@@ -5,35 +5,45 @@ using namespace std;
 
 void gameOver(main_info main_information, clock_info clock_information)
 {
-			/*Check if the player pressed the button to restart the game*/
-			if (main_information.uControler.isConnected())
-			{
-				ESP::USART_package localPackage;
-				localPackage = main_information.uControler.readUSART();
-				if (localPackage.device == "BTN")
-					init(main_information);
-			}
+	/*Check if the player pressed the button to restart the game*/
+	if (main_information.uControler.isConnected())
+	{
+		ESP::USART_package localPackage;
+		localPackage = main_information.uControler.readUSART();
+		if (localPackage.device == "BTN")
+			init(main_information);
+	}
 
-			/*Player died*/
-			// Erase the screen in black
-			cout << "Monsters killed you" << endl;
-			if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
-			{
-				main_information.win.clear(sf::Color::Black);
-				(*main_information.ship)->die();
+	/*Player died*/
+	// Erase the screen in black
+	cout << "Monsters killed you" << endl;
+	if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
+	{
+		main_information.win.clear(sf::Color::Black);
+		(*main_information.ship)->die();
 
-				if (main_information.uControler.isConnected())
-				{
-					string messageToESP = "[GOR]";
-					main_information.uControler.sendUSART(messageToESP);
-				}
+		if (main_information.uControler.isConnected())
+		{
+			string messageToESP = "[GOR]";
+			main_information.uControler.sendUSART(messageToESP);
+		}
 
-				main_information.win.draw(GameOver("W", main_information.winW, main_information.winH));
+		main_information.win.draw(GameOver("W", main_information.winW, main_information.winH));
 
-				main_information.win.display();
+		main_information.win.display();
 
-				clock_information.clockRefreshScreen.restart();
-			}
+		clock_information.clockRefreshScreen.restart();
+	}
+
+	if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
+	{
+		/*Reseting the game*/
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			freeMem(main_information);
+			init(main_information);
+		}
+	}
 }
 
 /*SpaceInvader INSA*/
@@ -182,7 +192,6 @@ int main()
 				manageExplosion(main_info, clock_info);
 
 				displayGame(main_info, clock_info);
-
 			}
 
 			/*Player kills all the monster*/
@@ -212,17 +221,7 @@ int main()
 		}
 		else
 		{
-			gameOver(main_info,clock_info);
-		}
-
-		if (clockCommand.getElapsedTime() >= delayCommand)
-		{
-			/*Reseting the game*/
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-			{
-				freeMem(main_info);
-				init(main_info);
-			}
+			gameOver(main_info, clock_info);
 		}
 
 		while (window.pollEvent(event))
