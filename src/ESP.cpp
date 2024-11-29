@@ -29,7 +29,7 @@ ESP::USART_package ESP::readUSART()
             package.value = stoi(data.substr(5, package.sizeStr - 1));
             // cout << "Value " << package.value << endl;
         }
-        catch (std::exception e)
+        catch (std::exception& e)
         {
             // cout << e.what() << endl;
         }
@@ -65,7 +65,7 @@ ESP::ESP(const string &port, unsigned int baud_rate)
         this->serial->set_option(serial_port_base::parity(serial_port_base::parity::none));
         this->serial->set_option(serial_port_base::stop_bits(serial_port_base::stop_bits::one));
     }
-    catch (std::exception e)
+    catch (std::exception& e)
     {
         this->connected = false;
         cout << "Erreur connexion USART : " << e.what() << endl;

@@ -152,42 +152,24 @@ int main()
 	view.setViewport(sf::FloatRect(0, 0, 1, 1));
 	window.setView(view);
 
-	int numberOfLine = 4;
-	MonsterLine **mons;
-	SpaceShip *ship;
-
-	bool **explosion;
-	bool change;
-	bool shipDestroyed;
-
-	bool allMonstersDestroyed;
-
-	/*remove that*/
-	/*---d-fsd-sd-f-sdf-sdf-sd-fs-df-sdf-sd-fsd-f-sdfs*/
-
 	sf::Event event;
 
-	struct main_info main_info = {myESP,
-								  &ship,
-								  &mons,
-								  &explosion,
-								  allMonstersDestroyed,
-								  change,
-								  shipDestroyed,
-								  numberOfLine,
-								  window,
-								  windowHeight,
-								  windowWidth};
-
 	struct clock_info clock_info;
+
+	struct main_info main_info = {myESP,window};
+	main_info.winW = windowWidth;
+	main_info.winH = windowHeight;
+	main_info.numberOfLine = 4;
+
+
 
 	init(main_info,clock_info);
 
 	while (window.isOpen())
 	{
-		if (!shipDestroyed)
+		if (!main_info.shipDestroyed)
 		{
-			if (!allMonstersDestroyed)
+			if (!main_info.allMonsDestroyed)
 			{
 				while (window.pollEvent(event))
 				{

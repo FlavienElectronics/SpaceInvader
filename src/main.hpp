@@ -19,14 +19,14 @@
 struct main_info
 {
 	ESP &uControler;
+	sf::RenderWindow &win;
 	SpaceShip **ship;
 	MonsterLine ***monsterL;
 	bool ***explo;
-	bool &allMonsDestroyed;
-	bool &change;
-	bool &shipDestroyed;
+	bool allMonsDestroyed;
+	bool change;
+	bool shipDestroyed;
 	int numberOfLine;
-	sf::RenderWindow &win;
 	float winH;
 	float winW;
     bool endScreenPrinted;
