@@ -129,7 +129,6 @@ void manageKeyboard(main_info &main_information, clock_info &clock_information)
 				for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
 				{
 					Monster &tempMonster = (*(*main_information.monsterL)[j])[i];
-					// Monster &tempMonster = (*mons[j])[i];
 					if (tempMonster.isAlive())
 					{
 						tempMonster.shoot();
@@ -145,7 +144,7 @@ void updateCollision(main_info &main_information)
 {
 	for (int j = 0; j < main_information.numberOfLine; j++)
 	{
-		
+
 		if ((*main_information.monsterL)[j] != nullptr)
 		{
 			(*main_information.monsterL)[j]->updateCollision(*(*main_information.ship), &(*main_information.explo)[j]);
@@ -153,13 +152,117 @@ void updateCollision(main_info &main_information)
 	}
 }
 
-
 void detectImpact(main_info &main_information)
 {
-	main_information.shipDestroyed = (*main_information.ship)->detectImpact((*main_information.monsterL),main_information.numberOfLine);
+	main_information.shipDestroyed = (*main_information.ship)->detectImpact((*main_information.monsterL), main_information.numberOfLine);
 }
 
+void updateProjectile(main_info &main_information, clock_info &clock_information)
+{
+	/*Managing the projectile*/
+	if (clock_information.clockProjectile.getElapsedTime() >= clock_information.delayProjectile)
+	{
+		(*main_information.ship)->updateProjectiles();
+		for (int j = 0; j < main_information.numberOfLine; j++)
+		{
+			for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
+			{
+				Monster &tempMonster = (*(*main_information.monsterL)[j])[i];
+				tempMonster.updateProjectiles();
+			}
+		}
+		clock_information.clockProjectile.restart();
+	}
+}
 
+void manageMonsters(main_info &main_information, clock_info clock_information)
+{
+	/*Managing the monsters's movement*/
+	if (clock_information.clockMonster.getElapsedTime() >= clock_information.delayMonster)
+	{
+		for (int j = 0; j < main_information.numberOfLine; j++)
+		{
+			if ((*main_information.monsterL)[j]->getDirection() == 0) // go left
+			{
+				try
+				{
+					(*main_information.monsterL)[j]->xSub();
+				}
+				catch (SpaceShip::Exept &exp)
+				{
+					main_information.change = true;
+				}
+			}
+			else if ((*main_information.monsterL)[j]->getDirection() == 1) // go right
+			{
+				try
+				{
+					(*main_information.monsterL)[j]->xAdd();
+				}
+				catch (SpaceShip::Exept &exp)
+				{
+					main_information.change = true;
+				}
+			}
+
+			if (main_information.change)
+			{
+				(*main_information.monsterL)[j]->changeDirection();
+				main_information.change = false;
+			}
+		}
+
+		/*Checking if all monsters are dead*/
+		for (int i = 0; i < main_information.numberOfLine; i++)
+		{
+			if (!(*main_information.monsterL)[i]->isLineDestoyed())
+			{
+				break;
+			}
+			else
+			{
+				if (i == (main_information.numberOfLine - 1))
+				{
+					main_information.allMonsDestroyed = true;
+				}
+			}
+		}
+
+		clock_information.clockMonster.restart();
+	}
+}
+
+void manageExplosion(main_info &main_information, clock_info clock_information)
+{
+	/*Explosion management*/
+	for (int j = 0; j < main_information.numberOfLine; j++)
+	{
+		if (*main_information.explo != nullptr)
+		{
+			if ((*main_information.explo)[j] != nullptr)
+			{
+				for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
+				{
+					// Check if we should update the explosion particles
+					Monster &tempMonster = (*(*main_information.monsterL)[j])[i];
+					if ((*main_information.monsterL)[j]->isExplosing(i) && tempMonster.getElapsedTimeClockExplosion() >= clock_information.delayExplosion)
+					{
+						(*main_information.monsterL)[j]->updateParticule(i);
+						tempMonster.resetClockExplosion();
+					}
+
+					// Only trigger an explosion if needed and the monster is alive
+					if ((*main_information.explo)[j][i] && (*main_information.monsterL)[j]->isAlive(i))
+					{
+						(*main_information.monsterL)[j]->explode(i); // Start explosion
+						// cout << "Monster " << i << " in line " << j << " exploded." << endl;
+						clock_information.clockExplosion.restart(); // Only reset timer when an explosion starts
+					}
+				}
+			}
+		}
+	}
+}
 
 /*SpaceInvader INSA*/
 int main()
@@ -297,110 +400,14 @@ int main()
 
 					detectImpact(main_info);
 
-					//shipDestroyed = ship->detectImpact(mons, numberOfLine);
-
 					clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 				}
 
-				/*Managing the projectile*/
-				if (clockProjectile.getElapsedTime() >= delayProjectile)
-				{
-					ship->updateProjectiles();
-					for (int j = 0; j < numberOfLine; j++)
-					{
-						for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
-						{
-							Monster &tempMonster = (*mons[j])[i];
-							tempMonster.updateProjectiles();
-						}
-					}
-					clockProjectile.restart();
-				}
+				updateProjectile(main_info, clock_info);
 
-				/*Managing the monsters's movement*/
-				if (clockMonster.getElapsedTime() >= delayMonster)
-				{
-					for (int j = 0; j < numberOfLine; j++)
-					{
-						if (mons[j]->getDirection() == 0) // go left
-						{
-							try
-							{
-								mons[j]->xSub();
-							}
-							catch (SpaceShip::Exept &exp)
-							{
-								change = true;
-								// cout << exp.message << endl;
-							}
-						}
-						else if (mons[j]->getDirection() == 1) // go right
-						{
-							try
-							{
-								mons[j]->xAdd();
-							}
-							catch (SpaceShip::Exept &exp)
-							{
-								change = true;
-								// cout << exp.message << endl;
-							}
-						}
+				manageMonsters(main_info, clock_info);
 
-						if (change)
-						{
-							mons[j]->changeDirection();
-							change = false;
-						}
-					}
-
-					/*Checking if all monsters are dead*/
-					for (int i = 0; i < numberOfLine; i++)
-					{
-						if (!(mons[i]->isLineDestoyed()))
-						{
-							break;
-						}
-						else
-						{
-							if (i == (numberOfLine - 1))
-							{
-								allMonstersDestroyed = true;
-							}
-						}
-					}
-
-					clockMonster.restart();
-				}
-
-				/*Explosion management*/
-				for (int j = 0; j < numberOfLine; j++)
-				{
-					if (explosion != nullptr)
-					{
-						if (explosion[j] != nullptr)
-						{
-							for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
-							{
-								// Check if we should update the explosion particles
-								Monster &tempMonster = (*mons[j])[i];
-								if (mons[j]->isExplosing(i) && tempMonster.getElapsedTimeClockExplosion() >= delayExplosion)
-								{
-									mons[j]->updateParticule(i);
-									tempMonster.resetClockExplosion();
-								}
-
-								// Only trigger an explosion if needed and the monster is alive
-								if (explosion[j][i] && mons[j]->isAlive(i))
-								{
-									mons[j]->explode(i); // Start explosion
-									// cout << "Monster " << i << " in line " << j << " exploded." << endl;
-									clockExplosion.restart(); // Only reset timer when an explosion starts
-								}
-							}
-						}
-					}
-				}
+				manageExplosion(main_info, clock_info);
 
 				if (clockRefreshScreen.getElapsedTime() >= delayRefreshScreen)
 				{
