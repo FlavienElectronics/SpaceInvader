@@ -153,6 +153,14 @@ void updateCollision(main_info &main_information)
 	}
 }
 
+
+void detectImpact(main_info &main_information)
+{
+	main_information.shipDestroyed = (*main_information.ship)->detectImpact((*main_information.monsterL),main_information.numberOfLine);
+}
+
+
+
 /*SpaceInvader INSA*/
 int main()
 {
@@ -287,9 +295,9 @@ int main()
 
 					updateCollision(main_info);
 
-					//detectInpact();
+					detectImpact(main_info);
 
-					shipDestroyed = ship->detectImpact(mons, numberOfLine);
+					//shipDestroyed = ship->detectImpact(mons, numberOfLine);
 
 					clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
 				}
