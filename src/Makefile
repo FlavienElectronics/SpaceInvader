@@ -4,7 +4,7 @@ LIBFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -pthread -lboost_system -
 CPPFLAGS = -Wall -Wno-reorder -g
 
 SRC_DIR = ./
-SRC = main.cpp Explosion.cpp Monster.cpp Point.cpp Projectile.cpp SpaceShip.cpp MonsterLine.cpp GameOver.cpp YouWon.cpp LetterGroup.cpp ESP.cpp
+SRC = main.cpp main_function.cpp Explosion.cpp Monster.cpp Point.cpp Projectile.cpp SpaceShip.cpp MonsterLine.cpp GameOver.cpp YouWon.cpp LetterGroup.cpp ESP.cpp
 
 TPP =
 OBJ_DIR = ./obj

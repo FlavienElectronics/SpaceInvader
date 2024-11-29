@@ -16,7 +16,6 @@
 #include "YouWon.hpp"
 #include "ESP.hpp"
 
-
 struct main_info
 {
 	ESP &uControler;
@@ -47,7 +46,5 @@ struct clock_info
 	sf::Time &delayExplosion;
 	sf::Time &delayRefreshScreen;
 };
-
-
 
 #endif
