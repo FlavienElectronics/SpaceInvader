@@ -19,42 +19,124 @@ struct main_info
 	float winW;
 };
 
-void init(struct main_info &information)
+struct clock_info
 {
-	information.shipDestroyed = false;
-	*information.ship = new SpaceShip(&information.win, information.winH, information.winW, information.winW / 2, information.winH / 1.2, "Green");
-	*information.monsterL = new MonsterLine *[information.numberOfLine];
-	*information.explo = new bool *[information.numberOfLine];
-	for (int i = 0; i < information.numberOfLine; i++)
+	sf::Clock &clockCommand;
+	sf::Clock &clockProjectile;
+	sf::Clock &clockShoot;
+	sf::Clock &clockMonster;
+	sf::Clock &clockExplosion;
+	sf::Clock &clockRefreshScreen;
+	sf::Time &delayCommand;
+	sf::Time &delayProjectile;
+	sf::Time &delayMonster;
+	sf::Time &delayShoot;
+	sf::Time &delayExplosion;
+	sf::Time &delayRefreshScreen;
+};
+
+void init(struct main_info &main_information)
+{
+	main_information.shipDestroyed = false;
+	*main_information.ship = new SpaceShip(&main_information.win, main_information.winH, main_information.winW, main_information.winW / 2, main_information.winH / 1.2, "col");
+	*main_information.monsterL = new MonsterLine *[main_information.numberOfLine];
+	*main_information.explo = new bool *[main_information.numberOfLine];
+	for (int i = 0; i < main_information.numberOfLine; i++)
 	{
-		(*information.explo)[i] = nullptr;
-		(*information.monsterL)[i] = new MonsterLine(&information.win, information.winH, information.winW, information.winW / 2 - (1 + i * 2 * 4), information.winH / 2 - (1 + i * 2 * 4), i * 2 + 1, "col");
+		(*main_information.explo)[i] = nullptr;
+		(*main_information.monsterL)[i] = new MonsterLine(&main_information.win, main_information.winH, main_information.winW, main_information.winW / 2 - (1 + i * 2 * 4), main_information.winH / 2 - (1 + i * 2 * 4), i * 2 + 1, "col");
 	}
-	information.change = false;
-	information.allMonsDestroyed = false;
+	main_information.change = false;
+	main_information.allMonsDestroyed = false;
 
 	/* Sending to esp the initialisation signal*/
-	if (information.uControler.isConnected())
+	if (main_information.uControler.isConnected())
 	{
 		string messageToESP = "[RST]";
-		information.uControler.sendUSART(messageToESP);
+		main_information.uControler.sendUSART(messageToESP);
 	}
 }
 
 /*Delete monsters line allocated, ship allocated and explosion bool vector*/
-void freeMem(main_info &information)
+void freeMem(main_info &main_information)
 {
 	// Delete allocated ship
-	delete (*information.ship);
+	delete (*main_information.ship);
 	// Delete allocated monsters line
-	for (int j = 0; j < information.numberOfLine; j++)
+	for (int j = 0; j < main_information.numberOfLine; j++)
 	{
-		delete (*information.monsterL)[j];
+		delete (*main_information.monsterL)[j];
 
 		// Delete allocated bool vector
-		if ((*information.explo)[j] != nullptr)
+		if ((*main_information.explo)[j] != nullptr)
 		{
-			delete (*information.explo)[j];
+			delete (*main_information.explo)[j];
+		}
+	}
+}
+
+void manageKeyboard(main_info main_information, clock_info clock_information)
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		try
+		{
+			(*main_information.ship)->xAdd();
+		}
+		catch (SpaceShip::Exept exp)
+		{
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		try
+		{
+			(*main_information.ship)->xSub();
+		}
+		catch (SpaceShip::Exept exp)
+		{
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		try
+		{
+			(*main_information.ship)->yAdd();
+		}
+		catch (SpaceShip::Exept exp)
+		{
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		try
+		{
+			(*main_information.ship)->ySub();
+		}
+		catch (SpaceShip::Exept exp)
+		{
+		}
+	}
+
+	/*Managing the shooting*/
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		if (clock_information.clockShoot.getElapsedTime() >= clock_information.delayShoot)
+		{
+			(*main_information.ship)->shoot();
+			for (int j = 0; j < main_information.numberOfLine; j++)
+			{
+				for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
+				{
+					Monster &tempMonster = (*(*main_information.monsterL)[j])[i];
+					// Monster &tempMonster = (*mons[j])[i];
+					if (tempMonster.isAlive())
+					{
+						tempMonster.shoot();
+					}
+				}
+			}
+			clock_information.clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
 		}
 	}
 }
@@ -78,7 +160,6 @@ int main()
 	window.setView(view);
 
 	int numberOfLine = 4;
-	// int numberOfLine = 25;
 	MonsterLine **mons;
 	SpaceShip *ship;
 
@@ -87,11 +168,6 @@ int main()
 	bool shipDestroyed;
 
 	bool allMonstersDestroyed;
-
-	struct main_info info = {myESP, &ship, &mons, &explosion, allMonstersDestroyed, change, shipDestroyed, numberOfLine, window, windowHeight, windowWidth};
-
-	init(info);
-
 	sf::Clock clockCommand;
 	sf::Clock clockProjectile;
 	sf::Clock clockShoot;
@@ -106,6 +182,35 @@ int main()
 	sf::Time delayRefreshScreen = sf::milliseconds(17);
 
 	sf::Event event;
+
+	struct main_info main_info = {myESP,
+								  &ship,
+								  &mons,
+								  &explosion,
+								  allMonstersDestroyed,
+								  change,
+								  shipDestroyed,
+								  numberOfLine,
+								  window,
+								  windowHeight,
+								  windowWidth};
+
+	struct clock_info clock_info =
+		{
+			clockCommand,
+			clockProjectile,
+			clockShoot,
+			clockMonster,
+			clockExplosion,
+			clockRefreshScreen,
+			delayCommand,
+			delayProjectile,
+			delayMonster,
+			delayShoot,
+			delayExplosion,
+			delayRefreshScreen};
+
+	init(main_info);
 
 	while (window.isOpen())
 	{
@@ -166,70 +271,7 @@ int main()
 				/* Update collision and detect impact between projectile and ship-monster*/
 				if (clockCommand.getElapsedTime() >= delayCommand)
 				{
-
-					if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-					{
-						int position = windowWidth * (100. / 100);
-						ship->goTo(position);
-					}
-					if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-					{
-						int position = windowWidth * (0. / 100);
-						ship->goTo(position);
-					}
-
-					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-					{
-						try
-						{
-							ship->xAdd();
-						}
-						catch (SpaceShip::Exept exp)
-						{
-#ifdef VERBOSE_MAIN
-							cout << exp.message << endl;
-#endif
-						}
-					}
-					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-					{
-						try
-						{
-							ship->xSub();
-						}
-						catch (SpaceShip::Exept exp)
-						{
-#ifdef VERBOSE_MAIN
-							cout << exp.message << endl;
-#endif
-						}
-					}
-					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-					{
-						try
-						{
-							ship->yAdd();
-						}
-						catch (SpaceShip::Exept exp)
-						{
-#ifdef VERBOSE_MAIN
-							cout << exp.message << endl;
-#endif
-						}
-					}
-					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-					{
-						try
-						{
-							ship->ySub();
-						}
-						catch (SpaceShip::Exept exp)
-						{
-#ifdef VERBOSE_MAIN
-							cout << exp.message << endl;
-#endif
-						}
-					}
+					manageKeyboard(main_info, clock_info);
 
 					for (int j = 0; j < numberOfLine; j++)
 					{
@@ -242,27 +284,6 @@ int main()
 					shipDestroyed = ship->detectImpact(mons, numberOfLine);
 
 					clockCommand.restart(); // Redémarre l'horloge pour le prochain intervalle
-				}
-
-				/*Managing the shooting*/
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-				{
-					if (clockShoot.getElapsedTime() >= delayShoot)
-					{
-						ship->shoot();
-						for (int j = 0; j < numberOfLine; j++)
-						{
-							for (int i = 0; i < mons[j]->getNumberOfMonster(); i++)
-							{
-								Monster &tempMonster = (*mons[j])[i];
-								if (tempMonster.isAlive())
-								{
-									tempMonster.shoot();
-								}
-							}
-						}
-						clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
-					}
 				}
 
 				/*Managing the projectile*/
@@ -394,7 +415,7 @@ int main()
 					ESP::USART_package localPackage;
 					localPackage = myESP.readUSART();
 					if (localPackage.device == "BTN")
-						init(info);
+						init(main_info);
 				}
 
 				cout << "All monster destroyed" << endl;
@@ -417,7 +438,7 @@ int main()
 				ESP::USART_package localPackage;
 				localPackage = myESP.readUSART();
 				if (localPackage.device == "BTN")
-					init(info);
+					init(main_info);
 			}
 
 			/*Player died*/
@@ -447,8 +468,8 @@ int main()
 			/*Reseting the game*/
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 			{
-				freeMem(info);
-				init(info);
+				freeMem(main_info);
+				init(main_info);
 			}
 		}
 
@@ -461,7 +482,7 @@ int main()
 
 	cout << "Window closed" << endl;
 
-	freeMem(info);
+	freeMem(main_info);
 
 	return 0;
 }
