@@ -41,15 +41,20 @@ void init(struct main_info &information)
 	}
 }
 
-void freeMem(SpaceShip *ship, MonsterLine **monsterL, bool **explo, int numberOfLine)
+/*Delete monsters line allocated, ship allocated and explosion bool vector*/
+void freeMem(main_info &information)
 {
-	delete ship;
-	for (int j = 0; j < numberOfLine; j++)
+	// Delete allocated ship
+	delete (*information.ship);
+	// Delete allocated monsters line
+	for (int j = 0; j < information.numberOfLine; j++)
 	{
-		delete monsterL[j];
-		if (explo[j] != nullptr)
+		delete (*information.monsterL)[j];
+
+		// Delete allocated bool vector
+		if ((*information.explo)[j] != nullptr)
 		{
-			delete explo[j];
+			delete (*information.explo)[j];
 		}
 	}
 }
@@ -442,7 +447,7 @@ int main()
 			/*Reseting the game*/
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 			{
-				freeMem(ship, mons, explosion, numberOfLine);
+				freeMem(info);
 				init(info);
 			}
 		}
@@ -456,7 +461,7 @@ int main()
 
 	cout << "Window closed" << endl;
 
-	freeMem(ship, mons, explosion, numberOfLine);
+	freeMem(info);
 
 	return 0;
 }
