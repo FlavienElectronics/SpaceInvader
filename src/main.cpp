@@ -75,7 +75,7 @@ void freeMem(main_info &main_information)
 	}
 }
 
-void manageKeyboard(main_info main_information, clock_info clock_information)
+void manageKeyboard(main_info &main_information, clock_info &clock_information)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
@@ -137,6 +137,18 @@ void manageKeyboard(main_info main_information, clock_info clock_information)
 				}
 			}
 			clock_information.clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
+		}
+	}
+}
+
+void updateCollision(main_info &main_information)
+{
+	for (int j = 0; j < main_information.numberOfLine; j++)
+	{
+		
+		if ((*main_information.monsterL)[j] != nullptr)
+		{
+			(*main_information.monsterL)[j]->updateCollision(*(*main_information.ship), &(*main_information.explo)[j]);
 		}
 	}
 }
@@ -273,13 +285,9 @@ int main()
 				{
 					manageKeyboard(main_info, clock_info);
 
-					for (int j = 0; j < numberOfLine; j++)
-					{
-						if (mons[j] != nullptr)
-						{
-							mons[j]->updateCollision(*ship, &(explosion[j]));
-						}
-					}
+					updateCollision(main_info);
+
+					//detectInpact();
 
 					shipDestroyed = ship->detectImpact(mons, numberOfLine);
 
