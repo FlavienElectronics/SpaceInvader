@@ -1,13 +1,10 @@
 /*********************************************************************
  * @file  Apllication.cpp
- * @author <mettre l'adresse mail ou nom prenom>
- * @brief Fichier source de l'application
+ * @author LESPIAUCQ Denis & CARVALHO Flavien (4 AE SE 3)
  *********************************************************************/
 #include "Application.h"
 
 using namespace std;
-
-int First_Start = 1;
 
 // ********** CLASSES **********
 
@@ -124,7 +121,7 @@ int Music::durations[] = {
 
 Application::Application()
 {
-  // Code
+  First_Start = 1;
   ; 
 }
   

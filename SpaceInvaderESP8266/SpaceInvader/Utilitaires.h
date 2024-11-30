@@ -1,7 +1,6 @@
 /*********************************************************************
- * @file  Apllication.h
- * @author <mettre l'adresse mail ou nom prenom>
- * @brief Fichier header de l'application
+ * @file  Utilitaires.h
+ * @author LESPIAUCQ Denis & CARVALHO Flavien (4 AE SE 3)
  *********************************************************************/
 #ifndef UTILITAIRES_H_
 #define UTILITAIRES_H_

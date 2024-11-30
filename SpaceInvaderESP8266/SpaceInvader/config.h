@@ -1,7 +1,6 @@
 /*********************************************************************
- * @file  Apllication.h
- * @author <mettre l'adresse mail ou nom prenom>
- * @brief Fichier header de l'application
+ * @file  config.h
+ * @author LESPIAUCQ Denis & CARVALHO Flavien (4 AE SE 3)
  *********************************************************************/
 #ifndef CONFIG_H_
 #define CONFIG_H_

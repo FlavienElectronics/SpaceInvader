@@ -1,7 +1,6 @@
 /*********************************************************************
- * @file  Apllication.h
- * @author <mettre l'adresse mail ou nom prenom>
- * @brief Fichier header de l'application
+ * @file  LCD.h
+ * @author LESPIAUCQ Denis & CARVALHO Flavien (4 AE SE 3)
  *********************************************************************/
 #ifndef LCD_H_
 #define LCD_H_
