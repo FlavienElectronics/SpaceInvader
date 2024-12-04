@@ -1,3 +1,5 @@
+/*Ajouter des entête sous chaque fichier*/
+
 #ifndef PROJECTILE_HPP
 #define PROJECTILE_HPP
 

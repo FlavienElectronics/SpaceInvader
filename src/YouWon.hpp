@@ -1,3 +1,6 @@
+
+/*Ajouter des entête sous chaque fichier*/
+
 #ifndef YOUWON_HPP
 #define YOUWON_HPP
 #include "LetterGroup.hpp"

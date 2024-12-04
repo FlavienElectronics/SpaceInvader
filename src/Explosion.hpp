@@ -1,3 +1,5 @@
+/*Ajouter des entête sous chaque fichier*/
+
 #ifndef EXPLOSION_HPP
 #define EXPLOSION_HPP
 
@@ -14,7 +16,6 @@ class Monster;
 
 using namespace std;
 
-//#define VERBOSE
 
 class Explosion : public SpaceShip
 {

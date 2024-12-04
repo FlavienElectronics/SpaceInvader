@@ -1,3 +1,5 @@
+/*Ajouter des entête sous chaque fichier*/
+
 #ifndef GAMEOVER_HPP
 #define GAMEOVER_HPP
 
