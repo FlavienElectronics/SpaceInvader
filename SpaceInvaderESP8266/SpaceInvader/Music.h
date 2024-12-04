@@ -22,10 +22,11 @@ public:
 
     unsigned long noteStartTime;
     int currentNote;
-    int isPlaying;      // 0 : aucune musique / 1 : musique / 2 : soun
 
     unsigned long noteStartTime_SOND;
     int currentNote_SOND;
+
+    int isPlaying;      // 0 : aucune musique / 1 : musique / 2 : soun
 
     Music();
     ~Music();
@@ -37,6 +38,7 @@ public:
     void BUZZER_Tone(int frequency, int duration);
     void UPDATE_Buzzer(void);
     void playMelody(void);
+    void MelodyStart(void);
 };
 
 #endif

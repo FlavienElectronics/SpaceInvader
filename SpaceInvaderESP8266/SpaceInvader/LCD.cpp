@@ -54,37 +54,37 @@ void LCD::LCD_Score(int score){
       LCD_RGB.print(score);
     }
     
-    if (score > 999){
+    if (score > 15){
       LCD_Print("GOD OF GODS", 3, 0, Red, false);
-    }else if (score > 70){
+    }else if (score > 14){
       LCD_Print("SUPREM IMPERATOR", 0, 0, Red, false);
-    }else if (score > 65){
+    }else if (score > 13){
       LCD_Print("The TERMINATOR", 1, 0, Red, false);
-    }else if (score > 60){
+    }else if (score > 12){
       LCD_Print("Exterminator", 2, 0, Red, false);
-    }else if (score > 55){
+    }else if (score > 11){
       LCD_Print("Corsaire", 2, 0, Red, false);
-    }else if (score > 50){
-      LCD_Print("Chef supreme", 2, 0, Red, false);
-    }else if (score > 45){
-      LCD_Print("Commandant", 2, 0, Red, false);
-    }else if (score > 40){;
-      LCD_Print("Amiral", 5, 0, Red, false);
-    }else if (score > 35){
-      LCD_Print("Contre-amiral", 1, 0, Red, false);
-    }else if (score > 30){
-      LCD_Print("Capitaine", 3, 0, Red, false);
-    }else if (score > 25){
-      LCD_Print("Lieutenant", 3, 0, Red, false);
-    }else if (score > 25){
-      LCD_Print("Aspirant Chef", 1, 0, Red, false);
-    }else if (score > 20){
-      LCD_Print("Aspirant", 4, 0, Red, false);
-    }else if (score > 15){
-      LCD_Print("Major 2 l'espace", 0, 0, Red, false);
     }else if (score > 10){
-      LCD_Print("Mousse", 5, 0, Red, false);
+      LCD_Print("Chef supreme", 2, 0, Red, false);
+    }else if (score > 9){
+      LCD_Print("Commandant", 2, 0, Red, false);
+    }else if (score > 8){;
+      LCD_Print("Amiral", 5, 0, Red, false);
+    }else if (score > 7){
+      LCD_Print("Contre-amiral", 1, 0, Red, false);
+    }else if (score > 6){
+      LCD_Print("Capitaine", 3, 0, Red, false);
     }else if (score > 5){
+      LCD_Print("Lieutenant", 3, 0, Red, false);
+    }else if (score > 4){
+      LCD_Print("Aspirant Chef", 1, 0, Red, false);
+    }else if (score > 3){
+      LCD_Print("Aspirant", 4, 0, Red, false);
+    }else if (score > 2){
+      LCD_Print("Major 2 l'espace", 0, 0, Red, false);
+    }else if (score > 1){
+      LCD_Print("Mousse", 5, 0, Red, false);
+    }else if (score > 0){
       LCD_Print("Novice", 5, 0, Blue, false);
     }else if (score >= 0){
       LCD_Print("Bleu de l'espace", 0, 0, White, false);
