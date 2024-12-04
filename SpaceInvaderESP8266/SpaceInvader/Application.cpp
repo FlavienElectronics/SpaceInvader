@@ -8,13 +8,13 @@ using namespace std;
 
 // ********** CLASSES **********
 
-Music myMusic;    // GESTION DE LA MUSIQUE PAR LE BUZZER
-Potar myPotar;    // GESTION DU POTENTIOMETRE
-UART myUART;      // GESTION DE LA COMMUNICATION UART
-LCD myLCD;        // GESTION DE L'AFFICHAGE LCD
-LED myLED;        // GESTION DE LA LED
-Bouton myBouton;  // GESTION DU BOUTON POUSSOIR
-Utilitaires myUtilitaire;  // CLASSE DE FONCTIONS UTILITAIRES
+Music myMusic;              // GESTION DE LA MUSIQUE PAR LE BUZZER
+Potar myPotar;              // GESTION DU POTENTIOMETRE
+UART myUART;                // GESTION DE LA COMMUNICATION UART
+LCD myLCD;                  // GESTION DE L'AFFICHAGE LCD
+LED myLED;                  // GESTION DE LA LED
+Bouton myBouton;            // GESTION DU BOUTON POUSSOIR
+Utilitaires myUtilitaire;   // CLASSE DE FONCTIONS UTILITAIRES
 
 // ********** MELODIE : Game of Thrones **********
 
@@ -114,8 +114,8 @@ int Music::durations[] = {
   8, 16, 16, 16, 8, 8, 16, 16
 };
 
-//int Music::melody_start[] = { NOTE_AS3, NOTE_B3, NOTE_C5, NOTE_C5, NOTE_G5, NOTE_A4, NOTE_G7, NOTE_G8 };
-//int Music::durations_start[] = { 8,4,4,2,4,2,2,1 };
+int Music::melody_start[] = { NOTE_AS3, NOTE_B3, NOTE_C5, NOTE_C5, NOTE_G5 };
+int Music::durations_start[] = { 8,2,4,1,1 };
 
 // **********
 
@@ -146,14 +146,16 @@ void Application::init(void)
 void Application::UTILITAIRE_Welcome(void){
   myLCD.LCD_Print("SPACE INVADER", 2, 0, Blue, true);
   myLCD.LCD_Print("PRESS START !", 2, 1, Blue, false);
+  myLED.LED_Control(ON);
   while ((myBouton.BUTTON_Read() != HIGH)){ delay(50); }
   First_Start = 0;
   myLCD.LCD_Score(0);
   myMusic.MelodyStart();
+  myLED.LED_Control(OFF);
 }
 
 void Application::UTILITAIRE_HardReset(void){
-  myLCD.old_score = 0;
+  myLCD.old_score = -1;
   myMusic.buzzerStartTime = 0;
   myMusic.buzzerDuration = 0;
   myMusic.buzzerActive = false;
@@ -161,7 +163,7 @@ void Application::UTILITAIRE_HardReset(void){
   myMusic.currentNote = 0;
   myMusic.isPlaying = false;
   myPotar.old_potar_value = -1;
-  myLED.led_state = OFF;
+  myLED.LED_Control(OFF);
   First_Start = 1;
   init();
 }
@@ -171,6 +173,7 @@ void Application::UTILITAIRE_HardReset(void){
 void Application::run(void)
 {
 
+  // Vérifie si le jeu est en pause (game over) et affiche l'écran de bienvenue
   if (First_Start == 1){
     UTILITAIRE_Welcome();
   }
@@ -178,21 +181,16 @@ void Application::run(void)
   // LECTURE ET ENVOIE DE LA VALEUR DU POTENTIOMETRE
   int pot_value = myPotar.POTAR_Read();
   char buffer[16];
-  sprintf(buffer, "[POT]%.0f", 100*myPotar.POTAR_Read()/POTAR_FULL_ANGLE);
+  sprintf(buffer, "[POT]%.0f", 100*myPotar.POTAR_Read()/POTAR_FULL_ANGLE);  // Mise en forme paquet du potar avec conversion de la position en %
   myUART.UART_Send(buffer);
-  /*if (myPotar.old_potar_value != pot_value){
-    myPotar.old_potar_value = pot_value;
-    char buffer[16];
-    sprintf(buffer, "[POT]%.0f", 100*myPotar.POTAR_Read()/POTAR_FULL_ANGLE);
-    myUART.UART_Send(buffer);
-  }*/
   
   // DETECTION ET ENVOIE DU CLICK DU BOUTON
   if (myBouton.BUTTON_Read() == HIGH){
     myUART.UART_Send("[BTN]");
   }
 
-  if (Serial.available() > 0) { // Vérifie si des données sont disponibles
+  // Vérifie si des données sont disponibles
+  if (Serial.available() > 0) {
     String message = myUART.UART_Read();
 
     Serial.print("Message reçu : ");
@@ -212,7 +210,7 @@ void Application::run(void)
     }
   }
 
-  // UPDATES
+  // Mise à jour de la musique
   myMusic.UPDATE_Buzzer();
 
 }

@@ -12,10 +12,14 @@ class Potar{
 public:
     int old_potar_value;
 
+    // Constructeur & déstructeur de la classe POTAR
     Potar();
     ~Potar();
 
+    // Fonction d'initialisation du potentiomètre
     void POTAR_init(void);
+
+    // Retourne la valeur convertie sur l'intervale [0 ; 4096] du potentiomètre
     float POTAR_Read(void);
 };
 

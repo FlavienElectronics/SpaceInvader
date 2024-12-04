@@ -1,8 +1,9 @@
 #include "LCD.h"
 
 rgb_lcd LCD_RGB;
+LED MyLED;
 
-LCD::LCD(){ old_score = 0; };
+LCD::LCD(){ old_score = -1; MyLED.LED_Control(OFF); };
 LCD::~LCD(){};
 
 void LCD::LCD_init(void)
@@ -63,27 +64,27 @@ void LCD::LCD_Score(int score){
     }else if (score > 12){
       LCD_Print("Exterminator", 2, 0, Red, false);
     }else if (score > 11){
-      LCD_Print("Corsaire", 2, 0, Red, false);
+      LCD_Print("Corsaire", 4, 0, Orange, false);
     }else if (score > 10){
-      LCD_Print("Chef supreme", 2, 0, Red, false);
+      LCD_Print("Chef supreme", 2, 0, Cyan, false);
     }else if (score > 9){
-      LCD_Print("Commandant", 2, 0, Red, false);
+      LCD_Print("Commandant", 2, 0, Green, false);
     }else if (score > 8){;
-      LCD_Print("Amiral", 5, 0, Red, false);
+      LCD_Print("Amiral", 5, 0, White, false);
     }else if (score > 7){
-      LCD_Print("Contre-amiral", 1, 0, Red, false);
+      LCD_Print("Contre-amiral", 1, 0, Orange, false);
     }else if (score > 6){
-      LCD_Print("Capitaine", 3, 0, Red, false);
+      LCD_Print("Capitaine", 3, 0, Cyan, false);
     }else if (score > 5){
-      LCD_Print("Lieutenant", 3, 0, Red, false);
+      LCD_Print("Lieutenant", 3, 0, Blue, false);
     }else if (score > 4){
-      LCD_Print("Aspirant Chef", 1, 0, Red, false);
+      LCD_Print("Aspirant Chef", 1, 0, Green, false);
     }else if (score > 3){
-      LCD_Print("Aspirant", 4, 0, Red, false);
+      LCD_Print("Aspirant", 4, 0, White, false);
     }else if (score > 2){
-      LCD_Print("Major 2 l'espace", 0, 0, Red, false);
+      LCD_Print("Major 2 l'espace", 0, 0, Cyan, false);
     }else if (score > 1){
-      LCD_Print("Mousse", 5, 0, Red, false);
+      LCD_Print("Mousse", 5, 0, Green, false);
     }else if (score > 0){
       LCD_Print("Novice", 5, 0, Blue, false);
     }else if (score >= 0){
@@ -91,7 +92,9 @@ void LCD::LCD_Score(int score){
     }else if (score == -1){
       // GameOver
       LCD_Print("GAME OVER", 4, 0, Red, true);
-      LCD_Print("PRESS START !", 2, 1, Red, true);
+      LCD_Print("PRESS START !", 2, 1, Red, false);
+      MyLED.LED_Control(ON);
+
     }
   }
 }

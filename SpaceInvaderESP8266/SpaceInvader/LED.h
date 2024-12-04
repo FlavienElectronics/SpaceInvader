@@ -12,10 +12,14 @@ class LED{
 public:
     int led_state;
 
+    // Constructeur & déstructeur de la classe LED
     LED();
     ~LED();
 
+    // Fonction d'initilisation de la LED
     void LED_init(void);
+
+    // Fonction permettant le contrôle de la LED (ON, OFF ou TOGGLE)
     void LED_Control(int ONOFF);
 };
 

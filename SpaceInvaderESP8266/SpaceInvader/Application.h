@@ -26,17 +26,20 @@ class Application
 	int First_Start;
 	
   public :
-
+    //Constructeur & déstructeur de la classe APPLICATION
     Application();
     ~Application();
 
+    // Permet d'initialiser l'ensemble des constructeurs des classes utiles
     void init(void);
 
+    // Fonction principale d'exécution du programme
     void run(void);
 
+    // Fonction utilitaire permettant l'affichage de l'écran de bienvenue et le démarrage du jeu
     void UTILITAIRE_Welcome(void);
-    void UTILITAIRE_HardReset(void);
 
-    void BUZZER_NextGrade(void);
+    // Fonction permettant le RESET complet des paramètres
+    void UTILITAIRE_HardReset(void);
 };
 #endif

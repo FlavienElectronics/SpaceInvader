@@ -10,10 +10,14 @@
 
 class Bouton{
 public:
+    //Constructeur & déstructeur de la classe BOUTON
     Bouton();
     ~Bouton();
 
+    // Initilisation de la broche du bouton en tant qu'entrée numérique
     void BUTTON_init(void);
+
+    // Permet de retourner l'état actif du bouton
     int BUTTON_Read(void);
 };
 
