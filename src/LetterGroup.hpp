@@ -1,3 +1,5 @@
+/*Ajouter des entête sous chaque fichier*/
+
 #ifndef LETTERGROUP_HPP
 #define LETTERGROUP_HPP
 

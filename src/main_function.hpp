@@ -1,3 +1,5 @@
+/*Ajouter des entête sous chaque fichier*/
+
 #include "main.hpp"
 
 #ifndef MAIN_FUNCTION_HPP
@@ -24,4 +26,7 @@ void displayGame(main_info &main_information, clock_info &clock_information);
 void gameOver(main_info &main_information, clock_info &clock_information);
 
 void youWon(main_info &main_information, clock_info &clock_information);
+
+void manage_uControler(main_info &main_information, clock_info &clock_information);
+
 #endif

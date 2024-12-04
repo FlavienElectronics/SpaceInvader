@@ -326,3 +326,47 @@ void youWon(main_info &main_information, clock_info &clock_information)
 		}
 	}
 }
+
+void manage_uControler(main_info &main_information, clock_info &clock_information)
+{
+	/* Reading USART and sending command to game */
+	if (main_information.uControler.isConnected())
+	{
+		int totalMonsterAlive = 0;
+		for (int t = 0; t < main_information.numberOfLine; t++)
+		{
+			totalMonsterAlive += (*main_information.monsterL)[t]->getNumberOfMonsterAlive();
+		}
+		string messageToESP = "[SCR]";
+		messageToESP += to_string((int)pow(2, main_information.numberOfLine) - totalMonsterAlive);
+		main_information.uControler.sendUSART(messageToESP);
+
+		ESP::USART_package localPackage;
+		localPackage = main_information.uControler.readUSART();
+		// cout << localPackage.value << endl;
+		if (localPackage.device == "POT")
+		{
+			int position = main_information.winW * (localPackage.value) / 100;
+			(*main_information.ship)->goTo(position - 1);
+		}
+		else if (localPackage.device == "BTN")
+		{
+			if (clock_information.clockShoot.getElapsedTime() >= clock_information.delayShoot)
+			{
+				(*main_information.ship)->shoot();
+				for (int j = 0; j < main_information.numberOfLine; j++)
+				{
+					for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
+					{
+						Monster &tempMonster = (*(*main_information.monsterL)[j])[i];
+						if (tempMonster.isAlive())
+						{
+							tempMonster.shoot();
+						}
+					}
+				}
+				clock_information.clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
+			}
+		}
+	}
+}

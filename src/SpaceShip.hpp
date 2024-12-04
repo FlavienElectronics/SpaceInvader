@@ -1,3 +1,5 @@
+/*Ajouter des entête sous chaque fichier*/
+
 #ifndef SPACESHIP_HPP
 #define SPACESHIP_HPP
 

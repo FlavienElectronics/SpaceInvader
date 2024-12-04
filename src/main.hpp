@@ -1,3 +1,5 @@
+/*Ajouter des entête sous chaque fichier*/
+
 #ifndef MAIN_HPP
 #define MAIN_HPP
 

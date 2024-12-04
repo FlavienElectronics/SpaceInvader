@@ -1,3 +1,5 @@
+/*Ajouter des entête sous chaque fichier*/
+
 #ifndef POINT_HPP
 #define POINT_HPP
 
