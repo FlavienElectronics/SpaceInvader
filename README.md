@@ -8,7 +8,7 @@ Ce jeu est entièrement contrôlable via une manette ESP8266 connectée au syst�
 **Installation**
 
     make install
-En executant «make install», les librairies sont installé automatiquement.
+En executant «make install», les librairies sont installées automatiquement.
 ### 📚 Librairies
 
 Pour utiliser correctement ce programme, il faut installer les librairies (LINUX) avec les commandes suivantes (dans le cas où «make install» échoue:
