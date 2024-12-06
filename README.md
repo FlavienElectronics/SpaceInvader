@@ -1,6 +1,8 @@
 # Space Invaders 🎮🚀
 
+<div align="center">
 ![trailer](https://github.com/user-attachments/assets/450b9634-a491-4457-a95b-7105bab08e33)
+</div>
 
 Bienvenue dans **Space Invaders**, un jeu rétro classique où vous devrez combattre de méchants envahisseurs venus de l'espace !
 Ce jeu est entièrement contrôlable via une manette ESP8266 connectée au système, offrant une expérience immersive et rétro digne d'une ATARI 2600 ou d'un COMMODORE 64 !
@@ -11,14 +13,6 @@ Ce jeu est entièrement contrôlable via une manette ESP8266 connectée au syst�
 
     make install
 En executant «make install», les librairies sont installées automatiquement.
-### 📚 Librairies
-
-Pour utiliser correctement ce programme, il faut installer les librairies (LINUX) avec les commandes suivantes (dans le cas où «make install» échoue) :
-
-#### 🖥️ Librairie graphique
-    sudo apt install libsfml-dev
-#### ⚡ Librairie USART
-    sudo apt install libboost-all-dev 
 
 ### 📦 Compilation
 
@@ -45,6 +39,15 @@ Il suffit donc de se rendre dans le dossier **/src** puis d'utiliser les command
 * Exécutez le programme “SpaceInvader” sur le PC en ayant vérifié que la carte ESP8266 ait bien été identifiée par le système (sur le port /dev/ttyUSB0)
 * Si la télécommande est détectée et qu’elle se synchronise avec le jeu, cette dernière affichera le message “Connexion avec succès” durant 3 secondes
 * Vous pouvez enfin appuyer sur le bouton pour lancer une partie
+
+### 📚 Librairies
+
+A utiliser dans le cas où «make install» échoue :
+
+#### 🖥️ Librairie graphique
+    sudo apt install libsfml-dev
+#### ⚡ Librairie USART
+    sudo apt install libboost-all-dev 
 
 
 ## ℹ️ Plus d'informations
