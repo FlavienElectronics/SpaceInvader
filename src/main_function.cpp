@@ -244,6 +244,24 @@ void displayGame(main_info &main_information, clock_info &clock_information)
     }
 }
 
+/*To force the display of the game no matter the clock*/
+void displayGame(main_info &main_information)
+{
+        // Erase the screen in white
+        main_information.win.clear(sf::Color::White);
+
+        /*Displaying ship and monsters*/
+        main_information.win.draw(*(*main_information.ship));
+        for (int j = 0; j < main_information.numberOfLine; j++)
+        {
+            for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
+            {
+                main_information.win.draw((*(*main_information.monsterL)[j])[i]);
+            }
+        }
+        main_information.win.display();
+}
+
 
 void gameOver(main_info &main_information, clock_info &clock_information)
 {

@@ -30,15 +30,32 @@ int main()
 
 	struct clock_info clock_info;
 
-	struct main_info main_info = {myESP,window};
+	struct main_info main_info = {myESP, window};
 	main_info.winW = windowWidth;
 	main_info.winH = windowHeight;
 	main_info.numberOfLine = 4;
+	bool ESP_starts_the_game = false;
 
 	/*Initialisation of the mains variables and allocation*/
-	init(main_info,clock_info);
+	init(main_info, clock_info);
 
 	/*Check if the windows is still open*/
+
+	while (window.isOpen() && !ESP_starts_the_game)
+	{
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		displayGame(main_info); // Forcing the display
+
+		/*Waiting the ESP to press the button one time to avoid black screen*/
+		manage_uControler(main_info, clock_info);
+		ESP_starts_the_game = true; // The game is initialized, the main loop can starts
+	}
+
 	while (window.isOpen())
 	{
 		if (!main_info.shipDestroyed)
