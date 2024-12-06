@@ -1,5 +1,7 @@
 #include "main.hpp"
 #include "main_function.hpp"
+#include <thread>
+#include <mutex>
 
 using namespace std;
 
@@ -34,28 +36,14 @@ int main()
 	main_info.winW = windowWidth;
 	main_info.winH = windowHeight;
 	main_info.numberOfLine = 4;
-	bool ESP_starts_the_game = false;
 
 	/*Initialisation of the mains variables and allocation*/
 	init(main_info, clock_info);
 
+	// std::thread uControllerThread(manage_uControler,std::ref(main_info),std::ref(clock_info));
+	std::thread uControllerThread(manage_uControler, std::ref(main_info), std::ref(clock_info));
+
 	/*Check if the windows is still open*/
-
-	while (window.isOpen() && !ESP_starts_the_game)
-	{
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
-		displayGame(main_info); // Forcing the display
-
-		/*Waiting the ESP to press the button one time to avoid black screen*/
-		manage_uControler(main_info, clock_info);
-		ESP_starts_the_game = true; // The game is initialized, the main loop can starts
-	}
-
 	while (window.isOpen())
 	{
 		if (!main_info.shipDestroyed)
@@ -68,7 +56,30 @@ int main()
 						window.close();
 				}
 
-				manage_uControler(main_info, clock_info);
+				if (!main_info.package_ESP.functionRequested_OK)
+				{
+					if (main_info.package_ESP.requestedFunction == "shoot")
+					{
+						(*main_info.ship)->shoot();
+						for (int j = 0; j < main_info.numberOfLine; j++)
+						{
+							for (int i = 0; i < (*main_info.monsterL)[j]->getNumberOfMonster(); i++)
+							{
+								Monster &tempMonster = (*(*main_info.monsterL)[j])[i];
+								if (tempMonster.isAlive())
+								{
+									tempMonster.shoot();
+								}
+							}
+						}
+						main_info.package_ESP.functionRequested_OK = true;
+					}
+					else if (main_info.package_ESP.requestedFunction == "goto")
+					{
+						(*main_info.ship)->goTo(main_info.package_ESP.position);
+						main_info.package_ESP.functionRequested_OK = true;
+					}
+				}
 
 				/*Managing the input command*/
 				/* Update collision and detect impact between projectile and ship-monster*/

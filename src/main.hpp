@@ -5,6 +5,7 @@
 
 #include <boost/asio.hpp>
 #include <math.h>
+#include <thread>
 
 #include <vector>
 
@@ -17,6 +18,13 @@
 #include "GameOver.hpp"
 #include "YouWon.hpp"
 #include "ESP.hpp"
+
+struct communication_ESP
+{
+	string requestedFunction;
+	float position;
+	bool functionRequested_OK;
+};
 
 struct main_info
 {
@@ -32,6 +40,7 @@ struct main_info
 	float winH;
 	float winW;
     bool endScreenPrinted;
+	struct communication_ESP package_ESP;
 };
 
 struct clock_info

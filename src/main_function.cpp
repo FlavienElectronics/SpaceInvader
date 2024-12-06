@@ -13,11 +13,11 @@ void init(struct main_info &main_information, struct clock_info &clock_informati
 
     main_information.endScreenPrinted = false;
     main_information.shipDestroyed = false;
-    main_information.ship = new SpaceShip*;
+    main_information.ship = new SpaceShip *;
     *main_information.ship = new SpaceShip(&main_information.win, main_information.winH, main_information.winW, main_information.winW / 2, main_information.winH / 1.2, "col");
-    main_information.monsterL = new MonsterLine**;
+    main_information.monsterL = new MonsterLine **;
     *main_information.monsterL = new MonsterLine *[main_information.numberOfLine];
-    main_information.explo = new bool**;
+    main_information.explo = new bool **;
     *main_information.explo = new bool *[main_information.numberOfLine];
     for (int i = 0; i < main_information.numberOfLine; i++)
     {
@@ -33,6 +33,9 @@ void init(struct main_info &main_information, struct clock_info &clock_informati
         string messageToESP = "[RST]";
         main_information.uControler.sendUSART(messageToESP);
     }
+
+    main_information.package_ESP.requestedFunction = "void";
+    main_information.package_ESP.functionRequested_OK = true;
 }
 
 /*Delete monsters line allocated, ship allocated and explosion bool vector*/
@@ -93,7 +96,7 @@ void manageKeyboard(main_info &main_information, clock_info &clock_information)
                     }
                 }
             }
-            //cout << clock_information.clockShoot.getElapsedTime().asMilliseconds() << endl;
+            // cout << clock_information.clockShoot.getElapsedTime().asMilliseconds() << endl;
             clock_information.clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
         }
     }
@@ -247,144 +250,139 @@ void displayGame(main_info &main_information, clock_info &clock_information)
 /*To force the display of the game no matter the clock*/
 void displayGame(main_info &main_information)
 {
-        // Erase the screen in white
-        main_information.win.clear(sf::Color::White);
+    // Erase the screen in white
+    main_information.win.clear(sf::Color::White);
 
-        /*Displaying ship and monsters*/
-        main_information.win.draw(*(*main_information.ship));
-        for (int j = 0; j < main_information.numberOfLine; j++)
+    /*Displaying ship and monsters*/
+    main_information.win.draw(*(*main_information.ship));
+    for (int j = 0; j < main_information.numberOfLine; j++)
+    {
+        for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
         {
-            for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
-            {
-                main_information.win.draw((*(*main_information.monsterL)[j])[i]);
-            }
+            main_information.win.draw((*(*main_information.monsterL)[j])[i]);
         }
-        main_information.win.display();
+    }
+    main_information.win.display();
 }
-
 
 void gameOver(main_info &main_information, clock_info &clock_information)
 {
-	if (main_information.endScreenPrinted == false)
-	{
-		/*Check if the player pressed the button to restart the game*/
+    if (main_information.endScreenPrinted == false)
+    {
+        /*Check if the player pressed the button to restart the game*/
 
-		if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
-		{
-			main_information.endScreenPrinted = true; // Display only once per game
-			cout << "Monsters killed you" << endl;
-			main_information.win.clear(sf::Color::Black);
-			(*main_information.ship)->die();
+        if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
+        {
+            main_information.endScreenPrinted = true; // Display only once per game
+            cout << "Monsters killed you" << endl;
+            main_information.win.clear(sf::Color::Black);
+            (*main_information.ship)->die();
 
-			if (main_information.uControler.isConnected())
-			{
-				string messageToESP = "[GOR]";
-				main_information.uControler.sendUSART(messageToESP);
-			}
+            if (main_information.uControler.isConnected())
+            {
+                string messageToESP = "[GOR]";
+                main_information.uControler.sendUSART(messageToESP);
+            }
 
-			main_information.win.draw(GameOver("W", main_information.winW, main_information.winH));
+            main_information.win.draw(GameOver("W", main_information.winW, main_information.winH));
 
-			main_information.win.display();
+            main_information.win.display();
 
-			clock_information.clockRefreshScreen.restart();
-		}
-	}
+            clock_information.clockRefreshScreen.restart();
+        }
+    }
 
-	if (main_information.uControler.isConnected())
-	{
-		ESP::USART_package localPackage;
-		localPackage = main_information.uControler.readUSART();
-		if (localPackage.device == "BTN")
-			init(main_information,clock_information);
-	}
-	if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
-	{
-		/*Reseting the game*/
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-		{
-			freeMem(main_information);
-			init(main_information,clock_information);
-		}
-	}
+    if (main_information.uControler.isConnected())
+    {
+        ESP::USART_package localPackage;
+        localPackage = main_information.uControler.readUSART();
+        if (localPackage.device == "BTN")
+            init(main_information, clock_information);
+    }
+    if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
+    {
+        /*Reseting the game*/
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+        {
+            freeMem(main_information);
+            init(main_information, clock_information);
+        }
+    }
 }
 
 void youWon(main_info &main_information, clock_info &clock_information)
 {
-	if (main_information.endScreenPrinted == false)
-	{
+    if (main_information.endScreenPrinted == false)
+    {
 
-		if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
-		{
-			main_information.endScreenPrinted = true; // Display only once per game
-			cout << "All monster destroyed" << endl;
-			main_information.win.clear(sf::Color::Magenta);
+        if (clock_information.clockRefreshScreen.getElapsedTime() >= clock_information.delayRefreshScreen)
+        {
+            main_information.endScreenPrinted = true; // Display only once per game
+            cout << "All monster destroyed" << endl;
+            main_information.win.clear(sf::Color::Magenta);
 
-			main_information.win.draw(YouWon("B", main_information.winW, main_information.winH));
+            main_information.win.draw(YouWon("B", main_information.winW, main_information.winH));
 
-			main_information.win.display();
-			clock_information.clockRefreshScreen.restart();
-		}
-	}
-	/*Check if the player pressed the button to restart the game*/
-	if (main_information.uControler.isConnected())
-	{
-		ESP::USART_package localPackage;
-		localPackage = main_information.uControler.readUSART();
-		if (localPackage.device == "BTN")
-			init(main_information,clock_information);
-	}
+            main_information.win.display();
+            clock_information.clockRefreshScreen.restart();
+        }
+    }
+    /*Check if the player pressed the button to restart the game*/
+    if (main_information.uControler.isConnected())
+    {
+        ESP::USART_package localPackage;
+        localPackage = main_information.uControler.readUSART();
+        if (localPackage.device == "BTN")
+            init(main_information, clock_information);
+    }
 
-	if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
-	{
-		/*Reseting the game*/
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-		{
-			freeMem(main_information);
-			init(main_information,clock_information);
-		}
-	}
+    if (clock_information.clockCommand.getElapsedTime() >= clock_information.delayCommand)
+    {
+        /*Reseting the game*/
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+        {
+            freeMem(main_information);
+            init(main_information, clock_information);
+        }
+    }
 }
 
 void manage_uControler(main_info &main_information, clock_info &clock_information)
 {
-	/* Reading USART and sending command to game */
-	if (main_information.uControler.isConnected())
-	{
-		int totalMonsterAlive = 0;
-		for (int t = 0; t < main_information.numberOfLine; t++)
-		{
-			totalMonsterAlive += (*main_information.monsterL)[t]->getNumberOfMonsterAlive();
-		}
-		string messageToESP = "[SCR]";
-		messageToESP += to_string((int)pow(2, main_information.numberOfLine) - totalMonsterAlive);
-		main_information.uControler.sendUSART(messageToESP);
+    while (main_information.win.isOpen())
+    {
+        /* Reading USART and sending command to game */
+        if (main_information.uControler.isConnected())
+        {
+            int totalMonsterAlive = 0;
+            for (int t = 0; t < main_information.numberOfLine; t++)
+            {
+                totalMonsterAlive += (*main_information.monsterL)[t]->getNumberOfMonsterAlive();
+            }
+            string messageToESP = "[SCR]";
+            messageToESP += to_string((int)pow(2, main_information.numberOfLine) - totalMonsterAlive);
+            main_information.uControler.sendUSART(messageToESP);
 
-		ESP::USART_package localPackage;
-		localPackage = main_information.uControler.readUSART();
-		// cout << localPackage.value << endl;
-		if (localPackage.device == "POT")
-		{
-			int position = main_information.winW * (localPackage.value) / 100;
-			(*main_information.ship)->goTo(position - 1);
-		}
-		else if (localPackage.device == "BTN")
-		{
-			if (clock_information.clockShoot.getElapsedTime() >= clock_information.delayShoot)
-			{
-				(*main_information.ship)->shoot();
-				for (int j = 0; j < main_information.numberOfLine; j++)
-				{
-					for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
-					{
-						Monster &tempMonster = (*(*main_information.monsterL)[j])[i];
-						if (tempMonster.isAlive())
-						{
-							tempMonster.shoot();
-						}
-					}
-				}
-				clock_information.clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
-			}
-		}
-	}
+            ESP::USART_package localPackage;
+            localPackage = main_information.uControler.readUSART();
+            // cout << localPackage.value << endl;
+            if (localPackage.device == "POT")
+            {
+                int position = main_information.winW * (localPackage.value) / 100;
+                main_information.package_ESP.position = position;
+                main_information.package_ESP.requestedFunction = "goto";
+                main_information.package_ESP.functionRequested_OK = false;
+                //(*main_information.ship)->goTo(position - 1);
+            }
+            else if (localPackage.device == "BTN")
+            {
+                if (clock_information.clockShoot.getElapsedTime() >= clock_information.delayShoot)
+                {
+                    main_information.package_ESP.requestedFunction = "shoot";
+                    main_information.package_ESP.functionRequested_OK = false;
+                    clock_information.clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
+                }
+            }
+        }
+    }
 }
