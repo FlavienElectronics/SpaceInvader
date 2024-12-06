@@ -1,8 +1,6 @@
 # Space Invaders 🎮🚀
 
-<p align="center">
 ![trailer](https://github.com/user-attachments/assets/450b9634-a491-4457-a95b-7105bab08e33)
-</p>
 
 Bienvenue dans **Space Invaders**, un jeu rétro classique où vous devrez combattre de méchants envahisseurs venus de l'espace !
 Ce jeu est entièrement contrôlable via une manette ESP8266 connectée au système, offrant une expérience immersive et rétro digne d'une ATARI 2600 ou d'un COMMODORE 64 !
