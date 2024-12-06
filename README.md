@@ -1,7 +1,7 @@
 # Space Invaders 🎮🚀
 
 <div align="center">
-![trailer](https://github.com/user-attachments/assets/450b9634-a491-4457-a95b-7105bab08e33)
+<a ![trailer](https://github.com/user-attachments/assets/450b9634-a491-4457-a95b-7105bab08e33)</a>
 </div>
 
 Bienvenue dans **Space Invaders**, un jeu rétro classique où vous devrez combattre de méchants envahisseurs venus de l'espace !
