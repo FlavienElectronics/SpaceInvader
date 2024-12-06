@@ -18,9 +18,8 @@ ESP::USART_package ESP::readUSART()
     }
     struct USART_package package;
     package.device = data.substr(1, 3);
-    // cout << "Device " << package.device << endl;
+
     package.sizeStr = data.size();
-    // cout << "Size " << package.sizeStr << endl;
 
     if (package.device != "BTN")
     {
@@ -68,7 +67,7 @@ ESP::ESP(const string &port, unsigned int baud_rate)
     catch (std::exception& e)
     {
         this->connected = false;
-        cout << "Erreur connexion USART" << e.what() << endl;
+        cout << "Erreur connexion USART\n" << e.what() << endl;
     }
 }
 

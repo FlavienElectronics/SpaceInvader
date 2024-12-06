@@ -5,9 +5,13 @@ Ce jeu est entièrement contrôlable via une manette ESP8266 connectée au syst�
 
 ## ⚙️ Faire fonctionner le Space Invaders
 
+**Installation**
+
+    make install
+En executant «make install», les librairies sont installées automatiquement.
 ### 📚 Librairies
 
-Pour utiliser correctement ce programme, il faut installer les librairies (LINUX) avec les commandes suivantes:
+Pour utiliser correctement ce programme, il faut installer les librairies (LINUX) avec les commandes suivantes (dans le cas où «make install» échoue) :
 
 #### 🖥️ Librairie graphique
     sudo apt install libsfml-dev
@@ -19,7 +23,7 @@ Pour utiliser correctement ce programme, il faut installer les librairies (LINUX
 Pour aisément compiler le programme, nous avons fournis un fichier Makefile.
 Il suffit donc de se rendre dans le dossier **/src** puis d'utiliser les commandes suivantes :
 
-**Compilation**
+**Compilation simple**
 
     make   
 

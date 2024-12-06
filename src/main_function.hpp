@@ -23,6 +23,8 @@ void manageExplosion(main_info &main_information, clock_info &clock_information)
 
 void displayGame(main_info &main_information, clock_info &clock_information);
 
+void displayGame(main_info &main_information);
+
 void gameOver(main_info &main_information, clock_info &clock_information);
 
 void youWon(main_info &main_information, clock_info &clock_information);

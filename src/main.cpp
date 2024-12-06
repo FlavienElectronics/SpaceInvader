@@ -1,5 +1,7 @@
 #include "main.hpp"
 #include "main_function.hpp"
+#include <thread>
+#include <mutex>
 
 using namespace std;
 
@@ -30,13 +32,16 @@ int main()
 
 	struct clock_info clock_info;
 
-	struct main_info main_info = {myESP,window};
+	struct main_info main_info = {myESP, window};
 	main_info.winW = windowWidth;
 	main_info.winH = windowHeight;
 	main_info.numberOfLine = 4;
 
 	/*Initialisation of the mains variables and allocation*/
-	init(main_info,clock_info);
+	init(main_info, clock_info);
+
+	// std::thread uControllerThread(manage_uControler,std::ref(main_info),std::ref(clock_info));
+	std::thread uControllerThread(manage_uControler, std::ref(main_info), std::ref(clock_info));
 
 	/*Check if the windows is still open*/
 	while (window.isOpen())
@@ -51,7 +56,30 @@ int main()
 						window.close();
 				}
 
-				manage_uControler(main_info, clock_info);
+				if (!main_info.package_ESP.functionRequested_OK)
+				{
+					if (main_info.package_ESP.requestedFunction == "BTN")
+					{
+						(*main_info.ship)->shoot();
+						for (int j = 0; j < main_info.numberOfLine; j++)
+						{
+							for (int i = 0; i < (*main_info.monsterL)[j]->getNumberOfMonster(); i++)
+							{
+								Monster &tempMonster = (*(*main_info.monsterL)[j])[i];
+								if (tempMonster.isAlive())
+								{
+									tempMonster.shoot();
+								}
+							}
+						}
+						main_info.package_ESP.functionRequested_OK = true;
+					}
+					else if (main_info.package_ESP.requestedFunction == "POT")
+					{
+						(*main_info.ship)->goTo(main_info.package_ESP.position);
+						main_info.package_ESP.functionRequested_OK = true;
+					}
+				}
 
 				/*Managing the input command*/
 				/* Update collision and detect impact between projectile and ship-monster*/
@@ -98,6 +126,8 @@ int main()
 	}
 
 	cout << "Window closed" << endl;
+
+	uControllerThread.join();
 
 	/*Free the memory allocated*/
 	freeMem(main_info);

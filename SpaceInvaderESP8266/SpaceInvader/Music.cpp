@@ -38,26 +38,29 @@ void Music::UPDATE_Buzzer(void){
 
 // !!!!!!!!! MODIFIER LA METHODE POUR JOUER UN SOND PRIORITAIREMENT A LA MUSIQUE !
 
+void Music::MelodyStart(void){
+  isPlaying == 0;
+  currentNote_SOND = 0;
+}
+
 void Music::playMelody(void){
   //int melodySize = sizeof(myMusic.durations) / sizeof(int);
   int melodySize = getSizeDuration();
   int soundSize = 8;
 
-  if (isPlaying == 2){
-    if (millis() - noteStartTime_SOND >= 1000 / getDuration(currentNote_SOND) * 1.30) {
+  if ((isPlaying == 2) && (millis() - noteStartTime_SOND >= 1000 / getDuration(currentNote_SOND) * 1.30)) {
       noTone(BUZZER_PIN);         // Arrête la note actuelle
-      isPlaying = 0;          // Indique que la note est terminée
+      isPlaying = 0;      // Indique que la note est terminée
       noteStartTime_SOND = millis();   // Réinitialise le temps pour la prochaine note
-      currentNote_SOND++;              // Passe à la note suivante
-    }
-  }else if (isPlaying == 1) {
-    if (millis() - noteStartTime >= 1000 / getDuration(currentNote) * 1.30) {
+      currentNote_SOND++;              // Passe à la note sui
+  if ((isPlaying == 1) && (millis() - noteStartTime >= 1000 / getDuration(currentNote) * 1.30)){
       noTone(BUZZER_PIN);         // Arrête la note actuelle
       isPlaying = 0;          // Indique que la note est terminée
       noteStartTime = millis();   // Réinitialise le temps pour la prochaine note
       currentNote++;              // Passe à la note suivante
     }
   }
+
 
   if (isPlaying == 0 && currentNote_SOND < soundSize) {
     int noteDuration = 1000 / getDuration(currentNote_SOND);
@@ -70,9 +73,9 @@ void Music::playMelody(void){
   }
 
   if (currentNote_SOND >= soundSize) {
-    currentNote_SOND = 0;
+    //currentNote_SOND = 0;
     isPlaying = 0;
-    buzzerActive = false;
+    //buzzerActive = false;
   }else if (currentNote >= melodySize) {
     currentNote = 0;
     isPlaying = 0;

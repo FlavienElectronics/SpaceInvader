@@ -149,6 +149,7 @@ void Application::UTILITAIRE_Welcome(void){
   while ((myBouton.BUTTON_Read() != HIGH)){ delay(50); }
   First_Start = 0;
   myLCD.LCD_Score(0);
+  myMusic.MelodyStart();
 }
 
 void Application::UTILITAIRE_HardReset(void){
@@ -205,6 +206,7 @@ void Application::run(void)
       myLCD.LCD_Score(SCORE);
     }else if (command == "GOR"){
       myLCD.LCD_Score(-1);
+      myMusic.MelodyStart();
     }else if (command == "RST"){
       UTILITAIRE_HardReset();
     }
