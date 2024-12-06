@@ -9,6 +9,8 @@ Ce jeu est entièrement contrôlable via une manette ESP8266 connectée au syst�
 
 ### 🏠 Installation
 
+Il faut se rendre dans le dossier /src et executer la commande suivante :
+
     make install
     
 En executant «make install», les librairies sont installées automatiquement.
