@@ -389,6 +389,7 @@ void manage_uControler(main_info &main_information, clock_info &clock_informatio
                     main_information.package_ESP.requestedFunction = "BTN";
                     main_information.package_ESP.functionRequested_OK = false;
                     clock_information.clockShoot.restart(); // Redémarre l'horloge pour le prochain intervalle
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
                 }
             }
         }
