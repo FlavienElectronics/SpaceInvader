@@ -1,0 +1,203 @@
+\doxysection{Point Class Reference}
+\hypertarget{class_point}{}\label{class_point}\index{Point@{Point}}
+Inheritance diagram for Point\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_point}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_point_ad92f2337b839a94ce97dcdb439b4325a}{Point}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \doxylink{class_point}{Point} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_point_aba16a0821446f9f21ceeee3961acaea3}{Point}} (float x, float y, int size, string color)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_point}{Point} class with specified position, size, and color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_point_aa74d2223ee5c701245c2c2645fa525ac}{Point}} (float x, float y, string color)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_point}{Point} class with specified position and color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_point_a30bc8409287de4f43e160664be834636}{Point}} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_point}{Point} class with specified position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_point_acd27307e1092b0f2ccc03a232cf90b56}{x\+Add}} ()
+\begin{DoxyCompactList}\small\item\em Moves the point one unit to the right (positive x-\/direction). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_point_a883772b63865fbe67c9237e529976d88}{y\+Add}} ()
+\begin{DoxyCompactList}\small\item\em Moves the point one unit upwards (positive y-\/direction). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_point_af00720d08ccd81c1b21dc11302173907}{x\+Sub}} ()
+\begin{DoxyCompactList}\small\item\em Moves the point one unit to the left (negative x-\/direction). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_point_a02e21babe51dfb837022f7794e6de6c8}{y\+Sub}} ()
+\begin{DoxyCompactList}\small\item\em Moves the point one unit downwards (negative y-\/direction). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_point_a558175f432b25af8a54ad36348012898}{hide}} ()
+\begin{DoxyCompactList}\small\item\em Hides the point by making it invisible. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_point_a29c44ec7c7279e02629645a06cdaf7d5}{getX}} () const
+\begin{DoxyCompactList}\small\item\em Gets the x-\/coordinate of the point. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_point_a2371ffadbe245d12a8f556d0a976521b}{getY}} () const
+\begin{DoxyCompactList}\small\item\em Gets the y-\/coordinate of the point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_point_acd1214449703bd4d1b095efc07489f45}\label{class_point_acd1214449703bd4d1b095efc07489f45} 
+class {\bfseries Monster}
+\item 
+\Hypertarget{class_point_a9b016c7c7f2ad042bc47b7a8b9c31d53}\label{class_point_a9b016c7c7f2ad042bc47b7a8b9c31d53} 
+class {\bfseries Space\+Ship}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_point_ad92f2337b839a94ce97dcdb439b4325a}\index{Point@{Point}!Point@{Point}}
+\index{Point@{Point}!Point@{Point}}
+\doxysubsubsection{\texorpdfstring{Point()}{Point()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{class_point_ad92f2337b839a94ce97dcdb439b4325a} 
+Point\+::\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor for the \doxylink{class_point}{Point} class. 
+
+Initializes the point with default values\+: position set to (-\/1, -\/1) and color set to "{}\+Invisible"{}. \Hypertarget{class_point_aba16a0821446f9f21ceeee3961acaea3}\index{Point@{Point}!Point@{Point}}
+\index{Point@{Point}!Point@{Point}}
+\doxysubsubsection{\texorpdfstring{Point()}{Point()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{class_point_aba16a0821446f9f21ceeee3961acaea3} 
+Point\+::\+Point (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{size}{, }\item[{string}]{color}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{class_point}{Point} class with specified position, size, and color. 
+
+Initializes a point at the specified (x, y) coordinates with the given size and color. This constructor also sets up the fill color for the rectangle shape based on the specified color string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/coordinate of the point. \\
+\hline
+{\em y} & The y-\/coordinate of the point. \\
+\hline
+{\em size} & The size of the point (not currently used but stored). \\
+\hline
+{\em color} & The color of the point, represented by a string ("{}\+B"{} for black, "{}\+W"{} for white). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_point_aa74d2223ee5c701245c2c2645fa525ac}\index{Point@{Point}!Point@{Point}}
+\index{Point@{Point}!Point@{Point}}
+\doxysubsubsection{\texorpdfstring{Point()}{Point()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{class_point_aa74d2223ee5c701245c2c2645fa525ac} 
+Point\+::\+Point (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{string}]{color}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{class_point}{Point} class with specified position and color. 
+
+Initializes a point at the specified (x, y) coordinates and sets the color based on the provided string ("{}\+B"{} for black, "{}\+W"{} for white).
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/coordinate of the point. \\
+\hline
+{\em y} & The y-\/coordinate of the point. \\
+\hline
+{\em color} & The color of the point, represented by a string ("{}\+B"{} for black, "{}\+W"{} for white). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_point_a30bc8409287de4f43e160664be834636}\index{Point@{Point}!Point@{Point}}
+\index{Point@{Point}!Point@{Point}}
+\doxysubsubsection{\texorpdfstring{Point()}{Point()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{class_point_a30bc8409287de4f43e160664be834636} 
+Point\+::\+Point (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{class_point}{Point} class with specified position. 
+
+Initializes a point at the specified (x, y) coordinates and sets the color to black by default.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/coordinate of the point. \\
+\hline
+{\em y} & The y-\/coordinate of the point. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_point_a29c44ec7c7279e02629645a06cdaf7d5}\index{Point@{Point}!getX@{getX}}
+\index{getX@{getX}!Point@{Point}}
+\doxysubsubsection{\texorpdfstring{getX()}{getX()}}
+{\footnotesize\ttfamily \label{class_point_a29c44ec7c7279e02629645a06cdaf7d5} 
+float Point\+::getX (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the x-\/coordinate of the point. 
+
+\begin{DoxyReturn}{Returns}
+The current x-\/coordinate of the point. 
+\end{DoxyReturn}
+\Hypertarget{class_point_a2371ffadbe245d12a8f556d0a976521b}\index{Point@{Point}!getY@{getY}}
+\index{getY@{getY}!Point@{Point}}
+\doxysubsubsection{\texorpdfstring{getY()}{getY()}}
+{\footnotesize\ttfamily \label{class_point_a2371ffadbe245d12a8f556d0a976521b} 
+float Point\+::getY (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the y-\/coordinate of the point. 
+
+\begin{DoxyReturn}{Returns}
+The current y-\/coordinate of the point. 
+\end{DoxyReturn}
+\Hypertarget{class_point_a558175f432b25af8a54ad36348012898}\index{Point@{Point}!hide@{hide}}
+\index{hide@{hide}!Point@{Point}}
+\doxysubsubsection{\texorpdfstring{hide()}{hide()}}
+{\footnotesize\ttfamily \label{class_point_a558175f432b25af8a54ad36348012898} 
+void Point\+::hide (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Hides the point by making it invisible. 
+
+This method sets the color of the point to "{}\+Invisible"{} and makes the fill color transparent, effectively hiding the point from the display. \Hypertarget{class_point_acd27307e1092b0f2ccc03a232cf90b56}\index{Point@{Point}!xAdd@{xAdd}}
+\index{xAdd@{xAdd}!Point@{Point}}
+\doxysubsubsection{\texorpdfstring{xAdd()}{xAdd()}}
+{\footnotesize\ttfamily \label{class_point_acd27307e1092b0f2ccc03a232cf90b56} 
+void Point\+::x\+Add (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves the point one unit to the right (positive x-\/direction). 
+
+This method increments the x-\/coordinate of the point by 1 and updates the position of the point in the SFML window. \Hypertarget{class_point_af00720d08ccd81c1b21dc11302173907}\index{Point@{Point}!xSub@{xSub}}
+\index{xSub@{xSub}!Point@{Point}}
+\doxysubsubsection{\texorpdfstring{xSub()}{xSub()}}
+{\footnotesize\ttfamily \label{class_point_af00720d08ccd81c1b21dc11302173907} 
+void Point\+::x\+Sub (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves the point one unit to the left (negative x-\/direction). 
+
+This method decrements the x-\/coordinate of the point by 1 and updates the position of the point in the SFML window. \Hypertarget{class_point_a883772b63865fbe67c9237e529976d88}\index{Point@{Point}!yAdd@{yAdd}}
+\index{yAdd@{yAdd}!Point@{Point}}
+\doxysubsubsection{\texorpdfstring{yAdd()}{yAdd()}}
+{\footnotesize\ttfamily \label{class_point_a883772b63865fbe67c9237e529976d88} 
+void Point\+::y\+Add (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves the point one unit upwards (positive y-\/direction). 
+
+This method increments the y-\/coordinate of the point by 1 and updates the position of the point in the SFML window. \Hypertarget{class_point_a02e21babe51dfb837022f7794e6de6c8}\index{Point@{Point}!ySub@{ySub}}
+\index{ySub@{ySub}!Point@{Point}}
+\doxysubsubsection{\texorpdfstring{ySub()}{ySub()}}
+{\footnotesize\ttfamily \label{class_point_a02e21babe51dfb837022f7794e6de6c8} 
+void Point\+::y\+Sub (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves the point one unit downwards (negative y-\/direction). 
+
+This method decrements the y-\/coordinate of the point by 1 and updates the position of the point in the SFML window. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Point.\+hpp\item 
+\mbox{\hyperlink{_point_8cpp}{Point.\+cpp}}\end{DoxyCompactItemize}

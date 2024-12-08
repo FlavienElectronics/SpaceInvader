@@ -1,0 +1,66 @@
+\doxysection{main.\+hpp}
+\hypertarget{main_8hpp_source}{}\label{main_8hpp_source}\mbox{\hyperlink{main_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifndef\ MAIN\_HPP}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ MAIN\_HPP}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <boost/asio.hpp>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}Point.hpp"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}SpaceShip.hpp"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_monster_8hpp}{Monster.hpp}}"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}Projectile.hpp"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_explosion_8hpp}{Explosion.hpp}}"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}MonsterLine.hpp"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_over_8hpp}{GameOver.hpp}}"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_you_won_8hpp}{YouWon.hpp}}"{}}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_e_s_p_8hpp}{ESP.hpp}}"{}}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcommunication___e_s_p}{communication\_ESP}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{string}\ requestedFunction;}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{float}\ position;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ functionRequested\_OK;}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmain__info}{main\_info}}}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_e_s_p}{ESP}}\ \&uControler;}
+\DoxyCodeLine{00044\ \ \ \ \ sf::RenderWindow\ \&win;}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{class_space_ship}{SpaceShip}}\ **ship;}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{class_monster_line}{MonsterLine}}\ ***monsterL;}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ ***explo;}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ allMonsDestroyed;}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ change;}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ shipDestroyed;}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{int}\ numberOfLine;}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{float}\ winH;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{float}\ winW;}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ endScreenPrinted;}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcommunication___e_s_p}{communication\_ESP}}\ package\_ESP;}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structclock__info}{clock\_info}}}
+\DoxyCodeLine{00059\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ sf::Clock\ clockCommand;}
+\DoxyCodeLine{00061\ \ \ \ \ sf::Clock\ clockProjectile;}
+\DoxyCodeLine{00062\ \ \ \ \ sf::Clock\ clockShoot;}
+\DoxyCodeLine{00063\ \ \ \ \ sf::Clock\ clockMonster;}
+\DoxyCodeLine{00064\ \ \ \ \ sf::Clock\ clockExplosion;}
+\DoxyCodeLine{00065\ \ \ \ \ sf::Clock\ clockRefreshScreen;}
+\DoxyCodeLine{00066\ \ \ \ \ sf::Time\ delayCommand;}
+\DoxyCodeLine{00067\ \ \ \ \ sf::Time\ delayProjectile;}
+\DoxyCodeLine{00068\ \ \ \ \ sf::Time\ delayMonster;}
+\DoxyCodeLine{00069\ \ \ \ \ sf::Time\ delayShoot;}
+\DoxyCodeLine{00070\ \ \ \ \ sf::Time\ delayExplosion;}
+\DoxyCodeLine{00071\ \ \ \ \ sf::Time\ delayRefreshScreen;}
+\DoxyCodeLine{00072\ \};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

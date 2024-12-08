@@ -1,0 +1,149 @@
+\doxysection{Explosion Class Reference}
+\hypertarget{class_explosion}{}\label{class_explosion}\index{Explosion@{Explosion}}
+Inheritance diagram for Explosion\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_explosion}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_explosion_a3686b2a9c2072b43726734bdba034b81}{Explosion}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \doxylink{class_explosion}{Explosion} class. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_explosion_af6ddc2695a89e6fe18a1e66e69eeac5f}{grow}} (const \mbox{\hyperlink{class_monster}{Monster}} \&monstr)
+\begin{DoxyCompactList}\small\item\em Simulates the growth of the explosion by modifying the points based on the explosion\textquotesingle{}s status. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_space_ship}{Space\+Ship}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_space_ship_ae56e545157e761155089250245ad3455}{Space\+Ship}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \doxylink{class_space_ship}{Space\+Ship} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_space_ship_a3c698498e9f11fafff11dc31c845616e}{Space\+Ship}} (sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}win, float window\+Height, float window\+Width, float x\+\_\+pos, float y\+\_\+pos, string color)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_space_ship}{Space\+Ship} class with window parameters and position. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_space_ship_a92738fb78da53412c9fdd6134a4531c2}{shoot}} ()
+\begin{DoxyCompactList}\small\item\em Shoots a projectile from the spaceship. \end{DoxyCompactList}\item 
+void {\bfseries update\+Projectiles} ()
+\begin{DoxyCompactList}\small\item\em Updates the state of all projectiles by moving them and removing any that are out of bounds. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_space_ship_ae0a8b70fd5caa4262fdc796004536729}{draw}} (sf\+::\+Render\+Target \&target, sf\+::\+Render\+States states) const override
+\begin{DoxyCompactList}\small\item\em Draws the spaceship and all its projectiles on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a83e72ee99e7d9bf3547f62aef76cd91d}{x\+Add}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit to the right. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_af6c41cbf36b79bd3b8264ee77eb454e0}{y\+Add}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit downward. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_ab45a11325328c73efbcca4d860306419}{x\+Sub}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit to the left. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a72bdebbb36c6fa3713557c5091107007}{y\+Sub}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit upward. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_space_ship_a4442daaa9cdc06a0ff885aedabf8abf0}{\texorpdfstring{$\sim$}{\string~}\+Space\+Ship}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_space_ship}{Space\+Ship} class. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_space_ship_a6ac5cd121e011e5ae3cecc1abe840714}{getX}} () const
+\begin{DoxyCompactList}\small\item\em Gets the x-\/coordinate of the spaceship. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_space_ship_a19b3f62046da8c6774333d7fc5f088cf}{getY}} () const
+\begin{DoxyCompactList}\small\item\em Gets the y-\/coordinate of the spaceship. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_ae0926cacc321c500147ef2d2b65391d4}{hide\+Pixel}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Hides a specific pixel of the spaceship. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a4510f0661ea0d939936e8b60c7dc6f89}{go\+To}} (float x\+Value)
+\begin{DoxyCompactList}\small\item\em Moves the spaceship to a specified x-\/coordinate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_ad85a9032b49ad22d93c5ef348137a090}{correct\+Coordinates}} (int \&x\+To\+Correct, int \&y\+To\+Correct)
+\begin{DoxyCompactList}\small\item\em Corrects the y-\/coordinate to avoid overlap with other ship\textquotesingle{}s pixels. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_space_ship_a3c836e0626316151324ddfc2bb9a5448}{detect\+Impact}} (\mbox{\hyperlink{class_monster_line}{Monster\+Line}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}monster\+Line, int number\+Of\+Line)
+\begin{DoxyCompactList}\small\item\em Detects if the spaceship has collided with any monsters. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_space_ship_a1ad46b310aa7b59e042784f3337ee06e}{is\+Alive}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the spaceship is still alive. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a0a709c4fddec9b36f1aa51542c3218b5}{die}} ()
+\begin{DoxyCompactList}\small\item\em Kills the spaceship, marking it as not alive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_explosion_a9ab6347053331e333c998757a0c1ae3d}\label{class_explosion_a9ab6347053331e333c998757a0c1ae3d} 
+friend {\bfseries Monster}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_explosion_af428bb139980139fd023bede0ec0aa7a}\label{class_explosion_af428bb139980139fd023bede0ec0aa7a} 
+void {\bfseries clear\+Points} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_explosion_ae5a0e234c58341ea6213264f8fffc79e}\label{class_explosion_ae5a0e234c58341ea6213264f8fffc79e} 
+int {\bfseries status}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_space_ship}{Space\+Ship}}}
+\begin{DoxyCompactItemize}
+\item 
+float {\bfseries x}
+\item 
+float {\bfseries y}
+\item 
+\mbox{\hyperlink{class_point}{Point}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries pt}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_projectile}{Projectile}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries pjt}
+\item 
+int {\bfseries hit\+Box\+\_\+x}
+\item 
+int {\bfseries hit\+Box\+\_\+y}
+\item 
+int {\bfseries number\+Of\+Pixels}
+\item 
+int {\bfseries number\+Of\+Projectiles}
+\item 
+int {\bfseries x\+Size}
+\item 
+int {\bfseries y\+Size}
+\item 
+bool {\bfseries alive}
+\item 
+sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*} {\bfseries window}
+\item 
+float {\bfseries win\+Height}
+\item 
+float {\bfseries win\+Width}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_explosion_a3686b2a9c2072b43726734bdba034b81}\index{Explosion@{Explosion}!Explosion@{Explosion}}
+\index{Explosion@{Explosion}!Explosion@{Explosion}}
+\doxysubsubsection{\texorpdfstring{Explosion()}{Explosion()}}
+{\footnotesize\ttfamily \label{class_explosion_a3686b2a9c2072b43726734bdba034b81} 
+Explosion\+::\+Explosion (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor for the \doxylink{class_explosion}{Explosion} class. 
+
+Initializes all attributes to their default values. Sets {\ttfamily pt} to {\ttfamily nullptr}, {\ttfamily number\+Of\+Pixels} and {\ttfamily number\+Of\+Projectiles} to 0, and {\ttfamily status} to -\/1. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_explosion_af6ddc2695a89e6fe18a1e66e69eeac5f}\index{Explosion@{Explosion}!grow@{grow}}
+\index{grow@{grow}!Explosion@{Explosion}}
+\doxysubsubsection{\texorpdfstring{grow()}{grow()}}
+{\footnotesize\ttfamily \label{class_explosion_af6ddc2695a89e6fe18a1e66e69eeac5f} 
+int Explosion\+::grow (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_monster}{Monster}} \&}]{monstr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Simulates the growth of the explosion by modifying the points based on the explosion\textquotesingle{}s status. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em monstr} & Reference to a \doxylink{class_monster}{Monster} object used to determine the explosion\textquotesingle{}s position and size.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The current status of the explosion after the growth phase.
+\end{DoxyReturn}
+
+\begin{DoxyItemize}
+\item {\bfseries{Status -\/1\+:}} Initializes the explosion with one pixel.
+\item {\bfseries{Status 0\+:}} Expands the explosion to three pixels.
+\item {\bfseries{Status 1\+:}} Further expands the explosion to seven pixels.
+\item {\bfseries{Status 2\+:}} Clears all points, ending the explosion. 
+\end{DoxyItemize}
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_explosion_8hpp}{Explosion.\+hpp}}\item 
+Explosion.\+cpp\end{DoxyCompactItemize}

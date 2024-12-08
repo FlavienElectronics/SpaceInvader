@@ -1,0 +1,285 @@
+\doxysection{main\+\_\+function.\+hpp File Reference}
+\hypertarget{main__function_8hpp}{}\label{main__function_8hpp}\index{main\_function.hpp@{main\_function.hpp}}
+
+
+Contains game logic for managing the ship, monsters, projectiles, and game states.  
+
+
+{\ttfamily \#include "{}main.\+hpp"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main__function_8hpp_aa166fcfd737ed1a93814cfaf27586085}{init}} (struct \mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information, struct \mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&clock\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Initializes the game by setting up the clock delays and allocating memory for the ship, monsters, and explosions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_aabbfe7f72c625cdc870c252c33b6e153}{free\+Mem}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Frees memory allocated for the ship, monster lines, and explosion vectors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_a01687560a230826387e5076c84d1adba}{manage\+Keyboard}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information, \mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&clock\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Manages the keyboard input for controlling the ship\textquotesingle{}s movement and shooting. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_a6e44ffd5dceb2abd830aae1b0f36a350}{update\+Collision}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Updates the collision detection between the ship and the monsters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_ad4de6e4989f11469e270c72fa05a120f}{detect\+Impact}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Detects if the ship has been destroyed by a monster. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_ac30874765459e6e8b706c8960c8b2867}{update\+Projectile}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information, \mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&clock\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Updates the projectiles fired by the ship and monsters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_aae49ddd02865682b01b2a2f8cc4bf726}{manage\+Monsters}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information, \mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&clock\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Manages the movement and direction changes of the monsters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_a33af41c32d50814148e936338bf331dd}{manage\+Explosion}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information, \mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&clock\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Handles the explosion effects of destroyed monsters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_ac6f6742e3f66c49914d3dc5b782f6dad}{display\+Game}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information, \mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&clock\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Displays the game elements (ship, monsters) on the window, updating the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_a90afba96c0ba3d344141a79690ff5dbb}{display\+Game}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Forces the display of the game, bypassing the clock delays. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_a5473e4c16ff7944eb025dc7d1035c14e}{game\+Over}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information, \mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&clock\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Handles the end of the game when the player loses, displaying a game-\/over screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_a3fa7de9cab6a9e3310bb587704fcd571}{you\+Won}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information, \mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&clock\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Displays a victory screen when all monsters are destroyed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_a7f2b51278d0adefb3c5580088f96f5c5}{manage\+\_\+u\+Controler}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information, \mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&clock\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Manages the communication with the external microcontroller (u\+Controler) through USART. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__function_8hpp_a192463f5a1fbfbfe4f955cd14fbdd965}{handle\+\_\+u\+Controler\+\_\+command}} (\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&main\+\_\+information)
+\begin{DoxyCompactList}\small\item\em Handles the commands received from the external microcontroller (u\+Controler) to control the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains game logic for managing the ship, monsters, projectiles, and game states. 
+
+This file defines the functions responsible for initializing, updating, and handling the core gameplay mechanics, including ship movement, monster management, projectile updates, collision detection, and game state transitions such as victory or game over. It also manages external communication with the microcontroller.
+
+Each function is responsible for a specific gameplay feature or interaction, and all data structures are passed by reference to minimize memory usage and maximize performance.
+
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/12-\/08
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main__function_8hpp_ad4de6e4989f11469e270c72fa05a120f}\index{main\_function.hpp@{main\_function.hpp}!detectImpact@{detectImpact}}
+\index{detectImpact@{detectImpact}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{detectImpact()}{detectImpact()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_ad4de6e4989f11469e270c72fa05a120f} 
+void detect\+Impact (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Detects if the ship has been destroyed by a monster. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_a90afba96c0ba3d344141a79690ff5dbb}\index{main\_function.hpp@{main\_function.hpp}!displayGame@{displayGame}}
+\index{displayGame@{displayGame}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{displayGame()}{displayGame()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{main__function_8hpp_a90afba96c0ba3d344141a79690ff5dbb} 
+void display\+Game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Forces the display of the game, bypassing the clock delays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_ac6f6742e3f66c49914d3dc5b782f6dad}\index{main\_function.hpp@{main\_function.hpp}!displayGame@{displayGame}}
+\index{displayGame@{displayGame}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{displayGame()}{displayGame()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{main__function_8hpp_ac6f6742e3f66c49914d3dc5b782f6dad} 
+void display\+Game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{, }\item[{\mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&}]{clock\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Displays the game elements (ship, monsters) on the window, updating the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+{\em clock\+\_\+information} & The clock information structure containing timing data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_aabbfe7f72c625cdc870c252c33b6e153}\index{main\_function.hpp@{main\_function.hpp}!freeMem@{freeMem}}
+\index{freeMem@{freeMem}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{freeMem()}{freeMem()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_aabbfe7f72c625cdc870c252c33b6e153} 
+void free\+Mem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Frees memory allocated for the ship, monster lines, and explosion vectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_a5473e4c16ff7944eb025dc7d1035c14e}\index{main\_function.hpp@{main\_function.hpp}!gameOver@{gameOver}}
+\index{gameOver@{gameOver}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{gameOver()}{gameOver()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_a5473e4c16ff7944eb025dc7d1035c14e} 
+void game\+Over (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{, }\item[{\mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&}]{clock\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Handles the end of the game when the player loses, displaying a game-\/over screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+{\em clock\+\_\+information} & The clock information structure containing timing data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_a192463f5a1fbfbfe4f955cd14fbdd965}\index{main\_function.hpp@{main\_function.hpp}!handle\_uControler\_command@{handle\_uControler\_command}}
+\index{handle\_uControler\_command@{handle\_uControler\_command}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{handle\_uControler\_command()}{handle\_uControler\_command()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_a192463f5a1fbfbfe4f955cd14fbdd965} 
+void handle\+\_\+u\+Controler\+\_\+command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Handles the commands received from the external microcontroller (u\+Controler) to control the game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_aa166fcfd737ed1a93814cfaf27586085}\index{main\_function.hpp@{main\_function.hpp}!init@{init}}
+\index{init@{init}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_aa166fcfd737ed1a93814cfaf27586085} 
+void init (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{, }\item[{struct \mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&}]{clock\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the game by setting up the clock delays and allocating memory for the ship, monsters, and explosions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+{\em clock\+\_\+information} & The clock information structure containing timing data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_a7f2b51278d0adefb3c5580088f96f5c5}\index{main\_function.hpp@{main\_function.hpp}!manage\_uControler@{manage\_uControler}}
+\index{manage\_uControler@{manage\_uControler}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{manage\_uControler()}{manage\_uControler()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_a7f2b51278d0adefb3c5580088f96f5c5} 
+void manage\+\_\+u\+Controler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{, }\item[{\mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&}]{clock\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Manages the communication with the external microcontroller (u\+Controler) through USART. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+{\em clock\+\_\+information} & The clock information structure containing timing data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_a33af41c32d50814148e936338bf331dd}\index{main\_function.hpp@{main\_function.hpp}!manageExplosion@{manageExplosion}}
+\index{manageExplosion@{manageExplosion}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{manageExplosion()}{manageExplosion()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_a33af41c32d50814148e936338bf331dd} 
+void manage\+Explosion (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{, }\item[{\mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&}]{clock\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Handles the explosion effects of destroyed monsters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+{\em clock\+\_\+information} & The clock information structure containing timing data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_a01687560a230826387e5076c84d1adba}\index{main\_function.hpp@{main\_function.hpp}!manageKeyboard@{manageKeyboard}}
+\index{manageKeyboard@{manageKeyboard}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{manageKeyboard()}{manageKeyboard()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_a01687560a230826387e5076c84d1adba} 
+void manage\+Keyboard (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{, }\item[{\mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&}]{clock\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Manages the keyboard input for controlling the ship\textquotesingle{}s movement and shooting. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+{\em clock\+\_\+information} & The clock information structure containing timing data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_aae49ddd02865682b01b2a2f8cc4bf726}\index{main\_function.hpp@{main\_function.hpp}!manageMonsters@{manageMonsters}}
+\index{manageMonsters@{manageMonsters}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{manageMonsters()}{manageMonsters()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_aae49ddd02865682b01b2a2f8cc4bf726} 
+void manage\+Monsters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{, }\item[{\mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&}]{clock\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Manages the movement and direction changes of the monsters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+{\em clock\+\_\+information} & The clock information structure containing timing data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_a6e44ffd5dceb2abd830aae1b0f36a350}\index{main\_function.hpp@{main\_function.hpp}!updateCollision@{updateCollision}}
+\index{updateCollision@{updateCollision}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{updateCollision()}{updateCollision()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_a6e44ffd5dceb2abd830aae1b0f36a350} 
+void update\+Collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Updates the collision detection between the ship and the monsters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_ac30874765459e6e8b706c8960c8b2867}\index{main\_function.hpp@{main\_function.hpp}!updateProjectile@{updateProjectile}}
+\index{updateProjectile@{updateProjectile}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{updateProjectile()}{updateProjectile()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_ac30874765459e6e8b706c8960c8b2867} 
+void update\+Projectile (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{, }\item[{\mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&}]{clock\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Updates the projectiles fired by the ship and monsters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+{\em clock\+\_\+information} & The clock information structure containing timing data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main__function_8hpp_a3fa7de9cab6a9e3310bb587704fcd571}\index{main\_function.hpp@{main\_function.hpp}!youWon@{youWon}}
+\index{youWon@{youWon}!main\_function.hpp@{main\_function.hpp}}
+\doxysubsubsection{\texorpdfstring{youWon()}{youWon()}}
+{\footnotesize\ttfamily \label{main__function_8hpp_a3fa7de9cab6a9e3310bb587704fcd571} 
+void you\+Won (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmain__info}{main\+\_\+info}} \&}]{main\+\_\+information}{, }\item[{\mbox{\hyperlink{structclock__info}{clock\+\_\+info}} \&}]{clock\+\_\+information}{}\end{DoxyParamCaption})}
+
+
+
+Displays a victory screen when all monsters are destroyed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em main\+\_\+information} & The main information structure containing all game-\/related data. \\
+\hline
+{\em clock\+\_\+information} & The clock information structure containing timing data. \\
+\hline
+\end{DoxyParams}

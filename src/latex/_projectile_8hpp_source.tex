@@ -1,0 +1,47 @@
+\doxysection{Projectile.\+hpp}
+\hypertarget{_projectile_8hpp_source}{}\label{_projectile_8hpp_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ PROJECTILE\_HPP}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ PROJECTILE\_HPP}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <SFML/Window.hpp>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}Point.hpp"{}}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_projectile}{Projectile}}\ :\ \textcolor{keyword}{public}\ sf::Drawable}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ numberOfPixels;}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_point}{Point}}\ *pt[2];}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{float}\ x,\ y;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{class_projectile_abef7ae095e6472605bfa38a0c4b28d18}{Projectile}}(\textcolor{keywordtype}{float}\ x\_pos,\ \textcolor{keywordtype}{float}\ y\_pos,\ \textcolor{keywordtype}{string}\ color);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_projectile_a2849d2b7c580d7dd4c8e4f3803ef1087}{ySub}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_projectile_a59d4473b83f0112a53b3db695af6a71b}{yAdd}}();}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_projectile_a629405641ae301a55a240c53c9f9381f}{isOutOfBounds}}(\textcolor{keywordtype}{float}\ windowHeight);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_projectile_a390400d2ac0f260d2c9a8d7caff2f421}{draw}}(sf::RenderTarget\ \&target,\ sf::RenderStates\ states)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_projectile_a53690c6efa01581fa0db321aacfd10bf}{getY}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_projectile_a6c80479a247fa7fe923d810da3320948}{getX}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{class_projectile_a94903e021fa2edab60ba3836ca0b937d}{\string~Projectile}}();}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_monster}{Monster}};}
+\DoxyCodeLine{00110\ \};}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,70 @@
+\doxysection{You\+Won Class Reference}
+\hypertarget{class_you_won}{}\label{class_you_won}\index{YouWon@{YouWon}}
+Inheritance diagram for You\+Won\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_you_won}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_you_won_a6d71b6fda5e7b1a993cb51591b4674c9}{You\+Won}} (string colour, float window\+Width, float window\+Height)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_you_won}{You\+Won} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_letter_group}{Letter\+Group}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_letter_group_a5b0f7308f678f59d2e54ef53ab130750}{Letter\+Group}} (string group\+Colour, float window\+Width, float window\+Height)
+\begin{DoxyCompactList}\small\item\em Constructs a letter group with a specified color and window dimensions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_letter_group_adba54430a5eb7bd608bda0ab03eea613}{draw}} (sf\+::\+Render\+Target \&target, sf\+::\+Render\+States states) const
+\begin{DoxyCompactList}\small\item\em Draws the letter group onto the target. \end{DoxyCompactList}\item 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Letter\+Group} ()
+\begin{DoxyCompactList}\small\item\em Destroys the letter group and deallocates all associated letters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_letter_group}{Letter\+Group}}}
+\begin{DoxyCompactItemize}
+\item 
+float {\bfseries winW}
+\item 
+float {\bfseries winH}
+\item 
+\mbox{\hyperlink{class_letter_group_1_1_letter}{Letter}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries letters\+List}
+\item 
+int {\bfseries number\+Of\+Letter}
+\item 
+const int {\bfseries big\+\_\+space} = 4
+\item 
+const int {\bfseries small\+\_\+space} = 1
+\item 
+string {\bfseries color\+Grp}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_you_won_a6d71b6fda5e7b1a993cb51591b4674c9}\index{YouWon@{YouWon}!YouWon@{YouWon}}
+\index{YouWon@{YouWon}!YouWon@{YouWon}}
+\doxysubsubsection{\texorpdfstring{YouWon()}{YouWon()}}
+{\footnotesize\ttfamily \label{class_you_won_a6d71b6fda5e7b1a993cb51591b4674c9} 
+You\+Won\+::\+You\+Won (\begin{DoxyParamCaption}\item[{string}]{colour}{, }\item[{float}]{window\+Width}{, }\item[{float}]{window\+Height}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{class_you_won}{You\+Won} class. 
+
+The constructor initializes a series of letter objects that together form the message "{}\+YOU WON!!"{} and positions them on the screen. The message is centered based on the window\textquotesingle{}s width, and letters are spaced properly to ensure they do not overlap.
+
+
+\begin{DoxyParams}{Parameters}
+{\em colour} & The color of the text. \\
+\hline
+{\em window\+Width} & The width of the game window used to center the text. \\
+\hline
+{\em window\+Height} & The height of the game window used to position the text vertically. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_you_won_8hpp}{You\+Won.\+hpp}}\item 
+You\+Won.\+cpp\end{DoxyCompactItemize}

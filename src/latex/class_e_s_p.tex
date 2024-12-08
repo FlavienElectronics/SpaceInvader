@@ -1,0 +1,91 @@
+\doxysection{ESP Class Reference}
+\hypertarget{class_e_s_p}{}\label{class_e_s_p}\index{ESP@{ESP}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_e_s_p_1_1_u_s_a_r_t__package}{USART\+\_\+package}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_e_s_p_aae42c023397f06720d8e267dcb3e35e0}{is\+Connected}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the \doxylink{class_e_s_p}{ESP} device is connected. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_e_s_p_1_1_u_s_a_r_t__package}{USART\+\_\+package}} \mbox{\hyperlink{class_e_s_p_a8d8421c7b168ae559b30ec49a0f03e36}{read\+USART}} ()
+\begin{DoxyCompactList}\small\item\em Reads a message from the USART interface and parses it into a \doxylink{struct_e_s_p_1_1_u_s_a_r_t__package}{USART\+\_\+package} structure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_e_s_p_a3e714fa6123616de7fa59fec66a17eb4}{send\+USART}} (string \&message)
+\begin{DoxyCompactList}\small\item\em Sends a message through the USART interface. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_e_s_p_a0f92b0fc670b3f817dfe4259a28fbe61}{ESP}} (const string \&port, unsigned int baud\+\_\+rate)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{class_e_s_p}{ESP} object and initializes the USART connection. \end{DoxyCompactList}\item 
+\Hypertarget{class_e_s_p_a5dfdc085237f3e58ce2ce2e720b96121}\label{class_e_s_p_a5dfdc085237f3e58ce2ce2e720b96121} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+ESP} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_e_s_p}{ESP} class. Cleans up the allocated resources if connected. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_e_s_p_a0f92b0fc670b3f817dfe4259a28fbe61}\index{ESP@{ESP}!ESP@{ESP}}
+\index{ESP@{ESP}!ESP@{ESP}}
+\doxysubsubsection{\texorpdfstring{ESP()}{ESP()}}
+{\footnotesize\ttfamily \label{class_e_s_p_a0f92b0fc670b3f817dfe4259a28fbe61} 
+ESP\+::\+ESP (\begin{DoxyParamCaption}\item[{const string \&}]{port}{, }\item[{unsigned int}]{baud\+\_\+rate}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{class_e_s_p}{ESP} object and initializes the USART connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & The name of the serial port. \\
+\hline
+{\em baud\+\_\+rate} & The baud rate for the USART communication. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_e_s_p_aae42c023397f06720d8e267dcb3e35e0}\index{ESP@{ESP}!isConnected@{isConnected}}
+\index{isConnected@{isConnected}!ESP@{ESP}}
+\doxysubsubsection{\texorpdfstring{isConnected()}{isConnected()}}
+{\footnotesize\ttfamily \label{class_e_s_p_aae42c023397f06720d8e267dcb3e35e0} 
+bool ESP\+::is\+Connected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Checks if the \doxylink{class_e_s_p}{ESP} device is connected. 
+
+\begin{DoxyReturn}{Returns}
+true if connected, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_e_s_p_a8d8421c7b168ae559b30ec49a0f03e36}\index{ESP@{ESP}!readUSART@{readUSART}}
+\index{readUSART@{readUSART}!ESP@{ESP}}
+\doxysubsubsection{\texorpdfstring{readUSART()}{readUSART()}}
+{\footnotesize\ttfamily \label{class_e_s_p_a8d8421c7b168ae559b30ec49a0f03e36} 
+\mbox{\hyperlink{struct_e_s_p_1_1_u_s_a_r_t__package}{ESP\+::\+USART\+\_\+package}} ESP\+::read\+USART (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Reads a message from the USART interface and parses it into a \doxylink{struct_e_s_p_1_1_u_s_a_r_t__package}{USART\+\_\+package} structure. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_e_s_p_1_1_u_s_a_r_t__package}{ESP\+::\+USART\+\_\+package} containing the parsed data. 
+\end{DoxyReturn}
+\Hypertarget{class_e_s_p_a3e714fa6123616de7fa59fec66a17eb4}\index{ESP@{ESP}!sendUSART@{sendUSART}}
+\index{sendUSART@{sendUSART}!ESP@{ESP}}
+\doxysubsubsection{\texorpdfstring{sendUSART()}{sendUSART()}}
+{\footnotesize\ttfamily \label{class_e_s_p_a3e714fa6123616de7fa59fec66a17eb4} 
+void ESP\+::send\+USART (\begin{DoxyParamCaption}\item[{string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Sends a message through the USART interface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to send. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_e_s_p_8hpp}{ESP.\+hpp}}\item 
+ESP.\+cpp\end{DoxyCompactItemize}

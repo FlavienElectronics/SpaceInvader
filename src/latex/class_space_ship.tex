@@ -1,0 +1,375 @@
+\doxysection{Space\+Ship Class Reference}
+\hypertarget{class_space_ship}{}\label{class_space_ship}\index{SpaceShip@{SpaceShip}}
+Inheritance diagram for Space\+Ship\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_space_ship}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_space_ship_1_1_exept}{Exept}}
+\begin{DoxyCompactList}\small\item\em Exception constructor for the \doxylink{class_space_ship}{Space\+Ship} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_space_ship_ae56e545157e761155089250245ad3455}{Space\+Ship}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \doxylink{class_space_ship}{Space\+Ship} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_space_ship_a3c698498e9f11fafff11dc31c845616e}{Space\+Ship}} (sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}win, float window\+Height, float window\+Width, float x\+\_\+pos, float y\+\_\+pos, string color)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_space_ship}{Space\+Ship} class with window parameters and position. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_space_ship_a92738fb78da53412c9fdd6134a4531c2}{shoot}} ()
+\begin{DoxyCompactList}\small\item\em Shoots a projectile from the spaceship. \end{DoxyCompactList}\item 
+\Hypertarget{class_space_ship_a45f37b1f10ad794c3358b7ca4c399ffd}\label{class_space_ship_a45f37b1f10ad794c3358b7ca4c399ffd} 
+void {\bfseries update\+Projectiles} ()
+\begin{DoxyCompactList}\small\item\em Updates the state of all projectiles by moving them and removing any that are out of bounds. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_space_ship_ae0a8b70fd5caa4262fdc796004536729}{draw}} (sf\+::\+Render\+Target \&target, sf\+::\+Render\+States states) const override
+\begin{DoxyCompactList}\small\item\em Draws the spaceship and all its projectiles on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a83e72ee99e7d9bf3547f62aef76cd91d}{x\+Add}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit to the right. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_af6c41cbf36b79bd3b8264ee77eb454e0}{y\+Add}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit downward. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_ab45a11325328c73efbcca4d860306419}{x\+Sub}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit to the left. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a72bdebbb36c6fa3713557c5091107007}{y\+Sub}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit upward. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_space_ship_a4442daaa9cdc06a0ff885aedabf8abf0}{\texorpdfstring{$\sim$}{\string~}\+Space\+Ship}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_space_ship}{Space\+Ship} class. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_space_ship_a6ac5cd121e011e5ae3cecc1abe840714}{getX}} () const
+\begin{DoxyCompactList}\small\item\em Gets the x-\/coordinate of the spaceship. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_space_ship_a19b3f62046da8c6774333d7fc5f088cf}{getY}} () const
+\begin{DoxyCompactList}\small\item\em Gets the y-\/coordinate of the spaceship. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_ae0926cacc321c500147ef2d2b65391d4}{hide\+Pixel}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Hides a specific pixel of the spaceship. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a4510f0661ea0d939936e8b60c7dc6f89}{go\+To}} (float x\+Value)
+\begin{DoxyCompactList}\small\item\em Moves the spaceship to a specified x-\/coordinate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_ad85a9032b49ad22d93c5ef348137a090}{correct\+Coordinates}} (int \&x\+To\+Correct, int \&y\+To\+Correct)
+\begin{DoxyCompactList}\small\item\em Corrects the y-\/coordinate to avoid overlap with other ship\textquotesingle{}s pixels. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_space_ship_a3c836e0626316151324ddfc2bb9a5448}{detect\+Impact}} (\mbox{\hyperlink{class_monster_line}{Monster\+Line}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}monster\+Line, int number\+Of\+Line)
+\begin{DoxyCompactList}\small\item\em Detects if the spaceship has collided with any monsters. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_space_ship_a1ad46b310aa7b59e042784f3337ee06e}{is\+Alive}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the spaceship is still alive. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a0a709c4fddec9b36f1aa51542c3218b5}{die}} ()
+\begin{DoxyCompactList}\small\item\em Kills the spaceship, marking it as not alive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_space_ship_ab607a1b90f240fe7bf2b0fdd6e98c99a}\label{class_space_ship_ab607a1b90f240fe7bf2b0fdd6e98c99a} 
+float {\bfseries x}
+\item 
+\Hypertarget{class_space_ship_ac9f1c3060f54819786976a340f9b1621}\label{class_space_ship_ac9f1c3060f54819786976a340f9b1621} 
+float {\bfseries y}
+\item 
+\Hypertarget{class_space_ship_a8dbb2939912623c9f23f24a2bbe01f27}\label{class_space_ship_a8dbb2939912623c9f23f24a2bbe01f27} 
+\mbox{\hyperlink{class_point}{Point}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries pt}
+\item 
+\Hypertarget{class_space_ship_a54976a7e1ca6174f5c253c2c5c628ced}\label{class_space_ship_a54976a7e1ca6174f5c253c2c5c628ced} 
+std\+::vector$<$ \mbox{\hyperlink{class_projectile}{Projectile}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries pjt}
+\item 
+\Hypertarget{class_space_ship_a7d1d2672048cbc9037c59238481f475f}\label{class_space_ship_a7d1d2672048cbc9037c59238481f475f} 
+int {\bfseries hit\+Box\+\_\+x}
+\item 
+\Hypertarget{class_space_ship_a4dd2ff4d3eaf9039c86a4263b3369fc4}\label{class_space_ship_a4dd2ff4d3eaf9039c86a4263b3369fc4} 
+int {\bfseries hit\+Box\+\_\+y}
+\item 
+\Hypertarget{class_space_ship_a938fa21a77b5ac2ab8f012d62249022c}\label{class_space_ship_a938fa21a77b5ac2ab8f012d62249022c} 
+int {\bfseries number\+Of\+Pixels}
+\item 
+\Hypertarget{class_space_ship_ab73596c31fa2792b8c384b136000e0a1}\label{class_space_ship_ab73596c31fa2792b8c384b136000e0a1} 
+int {\bfseries number\+Of\+Projectiles}
+\item 
+\Hypertarget{class_space_ship_af90d9138aa83e6784f9a9fdb8a09352a}\label{class_space_ship_af90d9138aa83e6784f9a9fdb8a09352a} 
+int {\bfseries x\+Size}
+\item 
+\Hypertarget{class_space_ship_a76938157a4a35b2175178013136826f5}\label{class_space_ship_a76938157a4a35b2175178013136826f5} 
+int {\bfseries y\+Size}
+\item 
+\Hypertarget{class_space_ship_a4aaa5837fee7a8ffc110bcfdc152fd94}\label{class_space_ship_a4aaa5837fee7a8ffc110bcfdc152fd94} 
+bool {\bfseries alive}
+\item 
+\Hypertarget{class_space_ship_a0ebda3fa63c0ca2f98aeee55ebb33b50}\label{class_space_ship_a0ebda3fa63c0ca2f98aeee55ebb33b50} 
+sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*} {\bfseries window}
+\item 
+\Hypertarget{class_space_ship_a3650bba83f818a78f6a6ef5052352ecd}\label{class_space_ship_a3650bba83f818a78f6a6ef5052352ecd} 
+float {\bfseries win\+Height}
+\item 
+\Hypertarget{class_space_ship_a5a4927642c5a8764f0144932159a4c60}\label{class_space_ship_a5a4927642c5a8764f0144932159a4c60} 
+float {\bfseries win\+Width}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_space_ship_a48e51f2b472e8111a60b7b9886f2b3a0}\label{class_space_ship_a48e51f2b472e8111a60b7b9886f2b3a0} 
+class {\bfseries Explosion}
+\item 
+\Hypertarget{class_space_ship_acd1214449703bd4d1b095efc07489f45}\label{class_space_ship_acd1214449703bd4d1b095efc07489f45} 
+class {\bfseries Monster}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_space_ship_ae56e545157e761155089250245ad3455}\index{SpaceShip@{SpaceShip}!SpaceShip@{SpaceShip}}
+\index{SpaceShip@{SpaceShip}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{SpaceShip()}{SpaceShip()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_space_ship_ae56e545157e761155089250245ad3455} 
+Space\+Ship\+::\+Space\+Ship (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor for the \doxylink{class_space_ship}{Space\+Ship} class. 
+
+Initializes the spaceship\textquotesingle{}s position to (0, 0) and sets the number of pixels to 11. \Hypertarget{class_space_ship_a3c698498e9f11fafff11dc31c845616e}\index{SpaceShip@{SpaceShip}!SpaceShip@{SpaceShip}}
+\index{SpaceShip@{SpaceShip}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{SpaceShip()}{SpaceShip()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_space_ship_a3c698498e9f11fafff11dc31c845616e} 
+Space\+Ship\+::\+Space\+Ship (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}}]{win}{, }\item[{float}]{window\+Height}{, }\item[{float}]{window\+Width}{, }\item[{float}]{x\+\_\+pos}{, }\item[{float}]{y\+\_\+pos}{, }\item[{string}]{color}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{class_space_ship}{Space\+Ship} class with window parameters and position. 
+
+Initializes the spaceship with specific position and color, creates points to represent the ship\textquotesingle{}s pixels, and initializes various properties such as the number of projectiles, ship size, and life.
+
+
+\begin{DoxyParams}{Parameters}
+{\em win} & The render window for the game. \\
+\hline
+{\em window\+Height} & The height of the game window. \\
+\hline
+{\em window\+Width} & The width of the game window. \\
+\hline
+{\em x\+\_\+pos} & The x-\/coordinate of the spaceship\textquotesingle{}s starting position. \\
+\hline
+{\em y\+\_\+pos} & The y-\/coordinate of the spaceship\textquotesingle{}s starting position. \\
+\hline
+{\em color} & The color of the spaceship. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_space_ship_a4442daaa9cdc06a0ff885aedabf8abf0}\index{SpaceShip@{SpaceShip}!````~SpaceShip@{\texorpdfstring{$\sim$}{\string~}SpaceShip}}
+\index{````~SpaceShip@{\texorpdfstring{$\sim$}{\string~}SpaceShip}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SpaceShip()}{\string~SpaceShip()}}
+{\footnotesize\ttfamily \label{class_space_ship_a4442daaa9cdc06a0ff885aedabf8abf0} 
+Space\+Ship\+::\texorpdfstring{$\sim$}{\string~}\+Space\+Ship (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor for the \doxylink{class_space_ship}{Space\+Ship} class. 
+
+Frees the memory allocated for the spaceship\textquotesingle{}s points and projectiles. Ensures no memory leaks occur when the spaceship object is destroyed. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_space_ship_ad85a9032b49ad22d93c5ef348137a090}\index{SpaceShip@{SpaceShip}!correctCoordinates@{correctCoordinates}}
+\index{correctCoordinates@{correctCoordinates}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{correctCoordinates()}{correctCoordinates()}}
+{\footnotesize\ttfamily \label{class_space_ship_ad85a9032b49ad22d93c5ef348137a090} 
+void Space\+Ship\+::correct\+Coordinates (\begin{DoxyParamCaption}\item[{int \&}]{x\+To\+Correct}{, }\item[{int \&}]{y\+To\+Correct}{}\end{DoxyParamCaption})}
+
+
+
+Corrects the y-\/coordinate to avoid overlap with other ship\textquotesingle{}s pixels. 
+
+Iterates over all the ship\textquotesingle{}s pixels and adjusts the {\ttfamily y\+To\+Correct} variable to avoid conflicts.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+To\+Correct} & The x-\/coordinate to be corrected. \\
+\hline
+{\em y\+To\+Correct} & The y-\/coordinate to be corrected. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_space_ship_a3c836e0626316151324ddfc2bb9a5448}\index{SpaceShip@{SpaceShip}!detectImpact@{detectImpact}}
+\index{detectImpact@{detectImpact}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{detectImpact()}{detectImpact()}}
+{\footnotesize\ttfamily \label{class_space_ship_a3c836e0626316151324ddfc2bb9a5448} 
+bool Space\+Ship\+::detect\+Impact (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_monster_line}{Monster\+Line}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{monster\+Line}{, }\item[{int}]{number\+Of\+Line}{}\end{DoxyParamCaption})}
+
+
+
+Detects if the spaceship has collided with any monsters. 
+
+This function checks for any impact between the spaceship and the monsters, based on the given monster lines in the game. If an impact is detected, the spaceship is marked as damaged or destroyed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em monster\+Line} & A pointer to the array of monster lines. \\
+\hline
+{\em number\+Of\+Line} & The number of lines containing monsters.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the spaceship has collided with a monster, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_space_ship_a0a709c4fddec9b36f1aa51542c3218b5}\index{SpaceShip@{SpaceShip}!die@{die}}
+\index{die@{die}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{die()}{die()}}
+{\footnotesize\ttfamily \label{class_space_ship_a0a709c4fddec9b36f1aa51542c3218b5} 
+void Space\+Ship\+::die (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Kills the spaceship, marking it as not alive. 
+
+This function handles the death of the spaceship, which includes marking the spaceship as dead, resetting its life to 0, and triggering any necessary game over or destruction processes. \Hypertarget{class_space_ship_ae0a8b70fd5caa4262fdc796004536729}\index{SpaceShip@{SpaceShip}!draw@{draw}}
+\index{draw@{draw}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{class_space_ship_ae0a8b70fd5caa4262fdc796004536729} 
+void Space\+Ship\+::draw (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Target \&}]{target}{, }\item[{sf\+::\+Render\+States}]{states}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Draws the spaceship and all its projectiles on the screen. 
+
+This method iterates through all the spaceship\textquotesingle{}s points and its projectiles, drawing them on the target window.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The render target where the spaceship and projectiles are drawn. \\
+\hline
+{\em states} & The render states used for drawing. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{class_monster_a7a2146fa72e019eb5078210acc4de189}{Monster}}.
+
+\Hypertarget{class_space_ship_a6ac5cd121e011e5ae3cecc1abe840714}\index{SpaceShip@{SpaceShip}!getX@{getX}}
+\index{getX@{getX}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{getX()}{getX()}}
+{\footnotesize\ttfamily \label{class_space_ship_a6ac5cd121e011e5ae3cecc1abe840714} 
+float Space\+Ship\+::getX (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the x-\/coordinate of the spaceship. 
+
+This function returns the current x-\/coordinate of the spaceship in the game world.
+
+\begin{DoxyReturn}{Returns}
+The x-\/coordinate of the spaceship. 
+\end{DoxyReturn}
+\Hypertarget{class_space_ship_a19b3f62046da8c6774333d7fc5f088cf}\index{SpaceShip@{SpaceShip}!getY@{getY}}
+\index{getY@{getY}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{getY()}{getY()}}
+{\footnotesize\ttfamily \label{class_space_ship_a19b3f62046da8c6774333d7fc5f088cf} 
+float Space\+Ship\+::getY (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the y-\/coordinate of the spaceship. 
+
+This function returns the current y-\/coordinate of the spaceship in the game world.
+
+\begin{DoxyReturn}{Returns}
+The y-\/coordinate of the spaceship. 
+\end{DoxyReturn}
+\Hypertarget{class_space_ship_a4510f0661ea0d939936e8b60c7dc6f89}\index{SpaceShip@{SpaceShip}!goTo@{goTo}}
+\index{goTo@{goTo}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{goTo()}{goTo()}}
+{\footnotesize\ttfamily \label{class_space_ship_a4510f0661ea0d939936e8b60c7dc6f89} 
+void Space\+Ship\+::go\+To (\begin{DoxyParamCaption}\item[{float}]{x\+Value}{}\end{DoxyParamCaption})}
+
+
+
+Moves the spaceship to a specified x-\/coordinate. 
+
+Moves the spaceship towards the target x-\/coordinate, adjusting its position accordingly.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Value} & The x-\/coordinate to move the spaceship to. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_space_ship_ae0926cacc321c500147ef2d2b65391d4}\index{SpaceShip@{SpaceShip}!hidePixel@{hidePixel}}
+\index{hidePixel@{hidePixel}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{hidePixel()}{hidePixel()}}
+{\footnotesize\ttfamily \label{class_space_ship_ae0926cacc321c500147ef2d2b65391d4} 
+void Space\+Ship\+::hide\+Pixel (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Hides a specific pixel of the spaceship. 
+
+Given a specific x and y coordinate, the corresponding pixel is hidden from view.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+TH} & The x-\/coordinate of the pixel to hide. \\
+\hline
+{\em y\+TH} & The y-\/coordinate of the pixel to hide. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_space_ship_a1ad46b310aa7b59e042784f3337ee06e}\index{SpaceShip@{SpaceShip}!isAlive@{isAlive}}
+\index{isAlive@{isAlive}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{isAlive()}{isAlive()}}
+{\footnotesize\ttfamily \label{class_space_ship_a1ad46b310aa7b59e042784f3337ee06e} 
+bool Space\+Ship\+::is\+Alive (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Checks if the spaceship is still alive. 
+
+This function determines if the spaceship is still alive based on its current health. If the life count is greater than 0, the spaceship is considered alive.
+
+\begin{DoxyReturn}{Returns}
+true if the spaceship is alive, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_space_ship_a92738fb78da53412c9fdd6134a4531c2}\index{SpaceShip@{SpaceShip}!shoot@{shoot}}
+\index{shoot@{shoot}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{shoot()}{shoot()}}
+{\footnotesize\ttfamily \label{class_space_ship_a92738fb78da53412c9fdd6134a4531c2} 
+void Space\+Ship\+::shoot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Shoots a projectile from the spaceship. 
+
+Creates a new projectile and adds it to the projectile list, initializing its position above the spaceship. 
+
+Reimplemented in \mbox{\hyperlink{class_monster_a67c251402364c9427849bbb598aeb87f}{Monster}}.
+
+\Hypertarget{class_space_ship_a83e72ee99e7d9bf3547f62aef76cd91d}\index{SpaceShip@{SpaceShip}!xAdd@{xAdd}}
+\index{xAdd@{xAdd}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{xAdd()}{xAdd()}}
+{\footnotesize\ttfamily \label{class_space_ship_a83e72ee99e7d9bf3547f62aef76cd91d} 
+void Space\+Ship\+::x\+Add (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves the spaceship one unit to the right. 
+
+Updates the x-\/coordinate of the spaceship, checking bounds. If out of bounds, throws an exception. \Hypertarget{class_space_ship_ab45a11325328c73efbcca4d860306419}\index{SpaceShip@{SpaceShip}!xSub@{xSub}}
+\index{xSub@{xSub}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{xSub()}{xSub()}}
+{\footnotesize\ttfamily \label{class_space_ship_ab45a11325328c73efbcca4d860306419} 
+void Space\+Ship\+::x\+Sub (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves the spaceship one unit to the left. 
+
+Updates the x-\/coordinate of the spaceship, checking bounds. If out of bounds, throws an exception. \Hypertarget{class_space_ship_af6c41cbf36b79bd3b8264ee77eb454e0}\index{SpaceShip@{SpaceShip}!yAdd@{yAdd}}
+\index{yAdd@{yAdd}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{yAdd()}{yAdd()}}
+{\footnotesize\ttfamily \label{class_space_ship_af6c41cbf36b79bd3b8264ee77eb454e0} 
+void Space\+Ship\+::y\+Add (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves the spaceship one unit downward. 
+
+Updates the y-\/coordinate of the spaceship, checking bounds. If out of bounds, throws an exception. \Hypertarget{class_space_ship_a72bdebbb36c6fa3713557c5091107007}\index{SpaceShip@{SpaceShip}!ySub@{ySub}}
+\index{ySub@{ySub}!SpaceShip@{SpaceShip}}
+\doxysubsubsection{\texorpdfstring{ySub()}{ySub()}}
+{\footnotesize\ttfamily \label{class_space_ship_a72bdebbb36c6fa3713557c5091107007} 
+void Space\+Ship\+::y\+Sub (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves the spaceship one unit upward. 
+
+Updates the y-\/coordinate of the spaceship, checking bounds. If out of bounds, throws an exception. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Space\+Ship.\+hpp\item 
+\mbox{\hyperlink{_space_ship_8cpp}{Space\+Ship.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,60 @@
+\doxysection{Monster\+Line.\+hpp}
+\hypertarget{_monster_line_8hpp_source}{}\label{_monster_line_8hpp_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ MONSTER\_LINE\_HPP}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ MONSTER\_LINE\_HPP}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <SFML/Window.hpp>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_monster_8hpp}{Monster.hpp}}"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}SpaceShip.hpp"{}}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_monster_line}{MonsterLine}}}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ direction;}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_monster}{Monster}}\ **block;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ numberOfMonster;}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{float}\ spacing;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ sf::RenderWindow\ *window;}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{float}\ winHeight;}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{float}\ winWidth;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_monster_line_a46413e945d684b7f05d25557bfbc22fb}{MonsterLine}}(sf::RenderWindow\ *win,\ \textcolor{keywordtype}{float}\ windowHeight,\ \textcolor{keywordtype}{float}\ windowWidth,\ \textcolor{keywordtype}{float}\ x\_pos,\ \textcolor{keywordtype}{float}\ y\_pos,\ \textcolor{keywordtype}{int}\ numberOfMonster,\ \textcolor{keywordtype}{string}\ color);}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{class_monster}{Monster}}\ \&\mbox{\hyperlink{class_monster_line_afffc708818347767daa85defa5482e28}{operator[]}}(\textcolor{keywordtype}{int}\ location);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_monster_line_a23b598167acbc11fed489a8e37514fa1}{isLineDestoyed}}();}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_line_aa9f62e29a662dc229b2113dba2491838}{draw}}(sf::RenderTarget\ \&target,\ sf::RenderStates\ states)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_monster_line_ab0903dbab655142fd55c68b585489d57}{isExplosing}}(\textcolor{keywordtype}{int}\ location);}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_line_afe5e78aed9b40e5eba80185498950da9}{updateParticule}}(\textcolor{keywordtype}{int}\ location);}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_line_a0fc9de2be44214b0d84c0305ae1727f1}{explode}}(\textcolor{keywordtype}{int}\ location);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_monster_line_a859a13ccb1ad42edadba6e7a1f0546c4}{isAlive}}(\textcolor{keywordtype}{int}\ location);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_line_a2747322980b57af15a46926f9132b941}{changeDirection}}();}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_line_a75e122d2e3f4dfbc6ec8a2be4c34e1d7}{updateCollision}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_space_ship}{SpaceShip}}\ \&ship,\ \textcolor{keywordtype}{bool}\ **vectorBool);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_line_a7d2c274ac26a86400176fefdde06f560}{xSub}}();}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_line_a07d07d2ea2bcd0d178d2a50b69b93446}{xAdd}}();}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_monster_line_ab42a3f6803594ace557091abc53b7c22}{getDirection}}();}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_monster_line_ab7f60a4b50d84815ae6b27954ee71728}{getNumberOfMonster}}();}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_monster_line_a1b0fe0318507656c108ea7e18cec3311}{getNumberOfMonsterAlive}}();}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00175\ \ \ \ \ \mbox{\hyperlink{class_monster_line_ac805c947e64beea3284347cc4d084abe}{\string~MonsterLine}}();}
+\DoxyCodeLine{00176\ \};}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

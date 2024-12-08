@@ -1,0 +1,60 @@
+\doxysection{Monster.\+hpp}
+\hypertarget{_monster_8hpp_source}{}\label{_monster_8hpp_source}\mbox{\hyperlink{_monster_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#ifndef\ MONSTER\_HPP}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ MONSTER\_HPP}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <SFML/Window.hpp>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}SpaceShip.hpp"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_explosion}{Explosion}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_monster}{Monster}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_space_ship}{SpaceShip}}}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{int}\ direction;\ \textcolor{comment}{//\ 0\ -\/>\ goes\ left\ |\ 1\ -\/>\ goes\ right}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ stat;}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_explosion}{Explosion}}\ *explo;\ \textcolor{comment}{//\ Circular\ inclusion}}
+\DoxyCodeLine{00038\ \ \ \ \ sf::Clock\ *clockExplosion;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{class_monster}{Monster}}(sf::RenderWindow\ *win,\ \textcolor{keywordtype}{float}\ windowHeight,\ \textcolor{keywordtype}{float}\ windowWidth,\ \textcolor{keywordtype}{float}\ x\_pos,\ \textcolor{keywordtype}{float}\ y\_pos,\ \textcolor{keywordtype}{int}\ direction,\ \textcolor{keywordtype}{string}\ color);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_a7a2146fa72e019eb5078210acc4de189}{draw}}(sf::RenderTarget\ \&target,\ sf::RenderStates\ states)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_monster_a0cf6d2c8bb28332c652883eb16c6e3d0}{getDirection}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_a4ffd58ecb3e834052f7b8f83409c0b51}{changeDirection}}();}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_af6702aa6628ebdc5c9b4f299db1f95bc}{hide}}();}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_a2451196ae44408e57a6bde5a2461bcac}{explode}}();}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{class_monster_a21619ba1759b910cd2fd50d858aab338}{\string~Monster}}();}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_monster_ae982e2e4597de892dcc4a68dab2b695f}{isExplosing}}();}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_monster_ab2756789e9aeecd9f5becbcbfba4f1e0}{getX}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_monster_a7ba016a727be6e20b613d6fdc3251f2e}{getY}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_a6636927277fba0577e03727421e6101e}{updateProjectiles}}();}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_monster_a92543c3c7838ba17349b4bb4729b92da}{updateCollision}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_space_ship}{SpaceShip}}\ \&ship);\ \textcolor{comment}{//\ For\ projectile\ throw\ by\ player}}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_a9437574318016f43193c60fe3436d8b5}{updateParticule}}();}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_a67c251402364c9427849bbb598aeb87f}{shoot}}();}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00145\ \ \ \ \ sf::Time\ \mbox{\hyperlink{class_monster_a43f192b9ef0f8968b353b4d0b633a93b}{getElapsedTimeClockExplosion}}();}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_monster_a7157e5c42d9efa85bd327c69e29aa83e}{resetClockExplosion}}();}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_explosion}{Explosion}};}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_monster_line}{MonsterLine}};}
+\DoxyCodeLine{00154\ \};}
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

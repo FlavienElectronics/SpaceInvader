@@ -1,0 +1,42 @@
+\doxysection{ESP.\+hpp}
+\hypertarget{_e_s_p_8hpp_source}{}\label{_e_s_p_8hpp_source}\mbox{\hyperlink{_e_s_p_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifndef\ ESP\_HPP}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ ESP\_HPP}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <boost/asio.hpp>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{using\ namespace\ }boost::asio;}
+\DoxyCodeLine{00022\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_e_s_p}{ESP}}}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{string}\ portName;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ baud\_rate;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ connected;}
+\DoxyCodeLine{00030\ \ \ \ \ serial\_port\ *serial;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_e_s_p_1_1_u_s_a_r_t__package}{USART\_package}}}
+\DoxyCodeLine{00034\ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ device;\ \textcolor{comment}{//\ Button\ ,\ potentiometer...}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ sizeStr;\ \ \ \textcolor{comment}{//\ size\ of\ the\ string}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value;\ \ \ \ \ \textcolor{comment}{//\ Value\ of\ the\ device}}
+\DoxyCodeLine{00038\ \ \ \ \ \};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_e_s_p_aae42c023397f06720d8e267dcb3e35e0}{isConnected}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_e_s_p_1_1_u_s_a_r_t__package}{USART\_package}}\ \mbox{\hyperlink{class_e_s_p_a8d8421c7b168ae559b30ec49a0f03e36}{readUSART}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_e_s_p_a3e714fa6123616de7fa59fec66a17eb4}{sendUSART}}(\textcolor{keywordtype}{string}\ \&message);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{class_e_s_p_a0f92b0fc670b3f817dfe4259a28fbe61}{ESP}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \&port,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ baud\_rate);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{class_e_s_p_a5dfdc085237f3e58ce2ce2e720b96121}{\string~ESP}}();}
+\DoxyCodeLine{00072\ \};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

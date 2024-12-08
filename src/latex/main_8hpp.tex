@@ -1,0 +1,42 @@
+\doxysection{main.\+hpp File Reference}
+\hypertarget{main_8hpp}{}\label{main_8hpp}\index{main.hpp@{main.hpp}}
+
+
+Declaration of structures and includes for managing the main game logic, communication with \doxylink{class_e_s_p}{ESP}, and game states.  
+
+
+{\ttfamily \#include $<$boost/asio.\+hpp$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include "{}Point.\+hpp"{}}\newline
+{\ttfamily \#include "{}Space\+Ship.\+hpp"{}}\newline
+{\ttfamily \#include "{}Monster.\+hpp"{}}\newline
+{\ttfamily \#include "{}Projectile.\+hpp"{}}\newline
+{\ttfamily \#include "{}Explosion.\+hpp"{}}\newline
+{\ttfamily \#include "{}Monster\+Line.\+hpp"{}}\newline
+{\ttfamily \#include "{}Game\+Over.\+hpp"{}}\newline
+{\ttfamily \#include "{}You\+Won.\+hpp"{}}\newline
+{\ttfamily \#include "{}ESP.\+hpp"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcommunication___e_s_p}{communication\+\_\+\+ESP}}
+\item 
+struct \mbox{\hyperlink{structmain__info}{main\+\_\+info}}
+\item 
+struct \mbox{\hyperlink{structclock__info}{clock\+\_\+info}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Declaration of structures and includes for managing the main game logic, communication with \doxylink{class_e_s_p}{ESP}, and game states. 
+
+This header file contains the structure declarations and the necessary includes for managing the overall game logic, including the spaceship, monsters, projectiles, and explosion effects. It also integrates communication with an external \doxylink{class_e_s_p}{ESP} device through the {\ttfamily \doxylink{class_e_s_p}{ESP}} class for control input, as well as the setup for game state management such as victory, defeat, and ongoing game processes. Additionally, it defines the {\ttfamily \doxylink{structmain__info}{main\+\_\+info}} and {\ttfamily \doxylink{structclock__info}{clock\+\_\+info}} structures that handle communication and time tracking.
+
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/12-\/08 
+\end{DoxyDate}

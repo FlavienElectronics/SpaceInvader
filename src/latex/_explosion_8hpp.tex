@@ -1,0 +1,31 @@
+\doxysection{Explosion.\+hpp File Reference}
+\hypertarget{_explosion_8hpp}{}\label{_explosion_8hpp}\index{Explosion.hpp@{Explosion.hpp}}
+
+
+Declaration of the \doxylink{class_explosion}{Explosion} class, simulating the explosion effect in the game.  
+
+
+{\ttfamily \#include $<$SFML/\+Graphics.\+hpp$>$}\newline
+{\ttfamily \#include $<$SFML/\+Window.\+hpp$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include "{}Monster.\+hpp"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_explosion}{Explosion}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Declaration of the \doxylink{class_explosion}{Explosion} class, simulating the explosion effect in the game. 
+
+This file contains the definition of the {\ttfamily \doxylink{class_explosion}{Explosion}} class, which is responsible for simulating the explosion effect of a monster when it is destroyed. The explosion grows in size over time, starting with a single pixel and expanding into multiple pixels as the explosion progresses. The class manages the state of the explosion through a status attribute, and it is linked to the {\ttfamily \doxylink{class_monster}{Monster}} class to track the position and size of the explosion relative to the monster. The explosion can grow through different stages, representing different phases of the explosion\textquotesingle{}s visual effect.
+
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/12-\/08 
+\end{DoxyDate}

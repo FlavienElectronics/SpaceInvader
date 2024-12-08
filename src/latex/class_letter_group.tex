@@ -1,0 +1,119 @@
+\doxysection{Letter\+Group Class Reference}
+\hypertarget{class_letter_group}{}\label{class_letter_group}\index{LetterGroup@{LetterGroup}}
+Inheritance diagram for Letter\+Group\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_letter_group}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_a}{A}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_e}{E}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_exclamation}{Exclamation}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_g}{G}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_letter}{Letter}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_m}{M}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_n}{N}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_o}{O}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_r}{R}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_u}{U}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_v}{V}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_w}{W}}
+\item 
+class \mbox{\hyperlink{class_letter_group_1_1_y}{Y}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_letter_group_a5b0f7308f678f59d2e54ef53ab130750}{Letter\+Group}} (string group\+Colour, float window\+Width, float window\+Height)
+\begin{DoxyCompactList}\small\item\em Constructs a letter group with a specified color and window dimensions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_letter_group_adba54430a5eb7bd608bda0ab03eea613}{draw}} (sf\+::\+Render\+Target \&target, sf\+::\+Render\+States states) const
+\begin{DoxyCompactList}\small\item\em Draws the letter group onto the target. \end{DoxyCompactList}\item 
+\Hypertarget{class_letter_group_ac08ba896259f6348d6618af283c23ac8}\label{class_letter_group_ac08ba896259f6348d6618af283c23ac8} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Letter\+Group} ()
+\begin{DoxyCompactList}\small\item\em Destroys the letter group and deallocates all associated letters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_letter_group_a11044ed64bf271dc7d3d96a026ab23de}\label{class_letter_group_a11044ed64bf271dc7d3d96a026ab23de} 
+float {\bfseries winW}
+\item 
+\Hypertarget{class_letter_group_a4da25cb0e41439d7ac8612b0a8fa31ca}\label{class_letter_group_a4da25cb0e41439d7ac8612b0a8fa31ca} 
+float {\bfseries winH}
+\item 
+\Hypertarget{class_letter_group_ad50caa3cee1ab5e53fb564332abc6c49}\label{class_letter_group_ad50caa3cee1ab5e53fb564332abc6c49} 
+\mbox{\hyperlink{class_letter_group_1_1_letter}{Letter}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries letters\+List}
+\item 
+\Hypertarget{class_letter_group_a99e38719fa7d6a0ffa0678fab6536898}\label{class_letter_group_a99e38719fa7d6a0ffa0678fab6536898} 
+int {\bfseries number\+Of\+Letter}
+\item 
+\Hypertarget{class_letter_group_ae84055a71173a187f5211e028104b8e2}\label{class_letter_group_ae84055a71173a187f5211e028104b8e2} 
+const int {\bfseries big\+\_\+space} = 4
+\item 
+\Hypertarget{class_letter_group_a77cfcbdda21bdeadde67917fa079c52a}\label{class_letter_group_a77cfcbdda21bdeadde67917fa079c52a} 
+const int {\bfseries small\+\_\+space} = 1
+\item 
+\Hypertarget{class_letter_group_a4e95bd85b054365b2bbd74723bb788d3}\label{class_letter_group_a4e95bd85b054365b2bbd74723bb788d3} 
+string {\bfseries color\+Grp}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_letter_group_a5b0f7308f678f59d2e54ef53ab130750}\index{LetterGroup@{LetterGroup}!LetterGroup@{LetterGroup}}
+\index{LetterGroup@{LetterGroup}!LetterGroup@{LetterGroup}}
+\doxysubsubsection{\texorpdfstring{LetterGroup()}{LetterGroup()}}
+{\footnotesize\ttfamily \label{class_letter_group_a5b0f7308f678f59d2e54ef53ab130750} 
+Letter\+Group\+::\+Letter\+Group (\begin{DoxyParamCaption}\item[{string}]{group\+Colour}{, }\item[{float}]{window\+Width}{, }\item[{float}]{window\+Height}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a letter group with a specified color and window dimensions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em group\+Colour} & The color for the entire letter group. \\
+\hline
+{\em window\+Width} & The width of the rendering window. \\
+\hline
+{\em window\+Height} & The height of the rendering window. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_letter_group_adba54430a5eb7bd608bda0ab03eea613}\index{LetterGroup@{LetterGroup}!draw@{draw}}
+\index{draw@{draw}!LetterGroup@{LetterGroup}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{class_letter_group_adba54430a5eb7bd608bda0ab03eea613} 
+void Letter\+Group\+::draw (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Target \&}]{target}{, }\item[{sf\+::\+Render\+States}]{states}{}\end{DoxyParamCaption}) const}
+
+
+
+Draws the letter group onto the target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The render target to draw on. \\
+\hline
+{\em states} & The render states to apply during drawing. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_letter_group_8hpp}{Letter\+Group.\+hpp}}\item 
+Letter\+Group.\+cpp\end{DoxyCompactItemize}

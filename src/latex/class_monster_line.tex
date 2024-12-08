@@ -1,0 +1,304 @@
+\doxysection{Monster\+Line Class Reference}
+\hypertarget{class_monster_line}{}\label{class_monster_line}\index{MonsterLine@{MonsterLine}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_monster_line_a46413e945d684b7f05d25557bfbc22fb}{Monster\+Line}} (sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}win, float window\+Height, float window\+Width, float x\+\_\+pos, float y\+\_\+pos, int number\+Of\+Monster, string color)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_monster_line}{Monster\+Line} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_monster}{Monster}} \& \mbox{\hyperlink{class_monster_line_afffc708818347767daa85defa5482e28}{operator\mbox{[}$\,$\mbox{]}}} (int location)
+\begin{DoxyCompactList}\small\item\em Overloaded index operator to access monsters in the line. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_monster_line_a23b598167acbc11fed489a8e37514fa1}{is\+Line\+Destoyed}} ()
+\begin{DoxyCompactList}\small\item\em Checks if all monsters in the line are destroyed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_line_aa9f62e29a662dc229b2113dba2491838}{draw}} (sf\+::\+Render\+Target \&target, sf\+::\+Render\+States states) const
+\begin{DoxyCompactList}\small\item\em Draws the monsters in the line on the target. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_monster_line_ab0903dbab655142fd55c68b585489d57}{is\+Explosing}} (int location)
+\begin{DoxyCompactList}\small\item\em Checks if a monster at the given location is currently exploding. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_line_afe5e78aed9b40e5eba80185498950da9}{update\+Particule}} (int location)
+\begin{DoxyCompactList}\small\item\em Updates the explosion particles of a specific monster in the line. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_line_a0fc9de2be44214b0d84c0305ae1727f1}{explode}} (int location)
+\begin{DoxyCompactList}\small\item\em Triggers the explosion of a specific monster in the line. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_monster_line_a859a13ccb1ad42edadba6e7a1f0546c4}{is\+Alive}} (int location)
+\begin{DoxyCompactList}\small\item\em Checks if a specific monster is alive. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_line_a2747322980b57af15a46926f9132b941}{change\+Direction}} ()
+\begin{DoxyCompactList}\small\item\em Changes the direction of the entire monster line. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_line_a75e122d2e3f4dfbc6ec8a2be4c34e1d7}{update\+Collision}} (const \mbox{\hyperlink{class_space_ship}{Space\+Ship}} \&ship, bool \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}vector\+Bool)
+\begin{DoxyCompactList}\small\item\em Checks for collisions between the spaceship and the monsters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_line_a7d2c274ac26a86400176fefdde06f560}{x\+Sub}} ()
+\begin{DoxyCompactList}\small\item\em Moves all monsters in the line to the left. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_line_a07d07d2ea2bcd0d178d2a50b69b93446}{x\+Add}} ()
+\begin{DoxyCompactList}\small\item\em Moves all monsters in the line to the right. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_monster_line_ab42a3f6803594ace557091abc53b7c22}{get\+Direction}} ()
+\begin{DoxyCompactList}\small\item\em Gets the direction of the monster line. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_monster_line_ab7f60a4b50d84815ae6b27954ee71728}{get\+Number\+Of\+Monster}} ()
+\begin{DoxyCompactList}\small\item\em Gets the total number of monsters in the line. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_monster_line_a1b0fe0318507656c108ea7e18cec3311}{get\+Number\+Of\+Monster\+Alive}} ()
+\begin{DoxyCompactList}\small\item\em Gets the number of monsters that are still alive in the line. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_monster_line_ac805c947e64beea3284347cc4d084abe}{\texorpdfstring{$\sim$}{\string~}\+Monster\+Line}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_monster_line}{Monster\+Line} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_monster_line_a46413e945d684b7f05d25557bfbc22fb}\index{MonsterLine@{MonsterLine}!MonsterLine@{MonsterLine}}
+\index{MonsterLine@{MonsterLine}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{MonsterLine()}{MonsterLine()}}
+{\footnotesize\ttfamily \label{class_monster_line_a46413e945d684b7f05d25557bfbc22fb} 
+Monster\+Line\+::\+Monster\+Line (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}}]{win}{, }\item[{float}]{window\+Height}{, }\item[{float}]{window\+Width}{, }\item[{float}]{x\+\_\+pos}{, }\item[{float}]{y\+\_\+pos}{, }\item[{int}]{number\+Of\+Monster}{, }\item[{string}]{color}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{class_monster_line}{Monster\+Line} class. 
+
+Initializes a new line of monsters at specified position, with a random direction and the given number of monsters. Each monster is allocated dynamically and placed with a certain spacing between them.
+
+
+\begin{DoxyParams}{Parameters}
+{\em win} & Pointer to the SFML window used for rendering the game. \\
+\hline
+{\em window\+Height} & The height of the game window. \\
+\hline
+{\em window\+Width} & The width of the game window. \\
+\hline
+{\em x\+\_\+pos} & The initial x-\/coordinate of the first monster in the line. \\
+\hline
+{\em y\+\_\+pos} & The initial y-\/coordinate of the monsters in the line. \\
+\hline
+{\em number\+Of\+Monster} & The total number of monsters in the line. \\
+\hline
+{\em color} & The color used for the monsters (currently unused in the constructor). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_monster_line_ac805c947e64beea3284347cc4d084abe}\index{MonsterLine@{MonsterLine}!````~MonsterLine@{\texorpdfstring{$\sim$}{\string~}MonsterLine}}
+\index{````~MonsterLine@{\texorpdfstring{$\sim$}{\string~}MonsterLine}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MonsterLine()}{\string~MonsterLine()}}
+{\footnotesize\ttfamily \label{class_monster_line_ac805c947e64beea3284347cc4d084abe} 
+Monster\+Line\+::\texorpdfstring{$\sim$}{\string~}\+Monster\+Line (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor for the \doxylink{class_monster_line}{Monster\+Line} class. 
+
+Cleans up the dynamically allocated memory for the monsters in the line. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_monster_line_a2747322980b57af15a46926f9132b941}\index{MonsterLine@{MonsterLine}!changeDirection@{changeDirection}}
+\index{changeDirection@{changeDirection}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{changeDirection()}{changeDirection()}}
+{\footnotesize\ttfamily \label{class_monster_line_a2747322980b57af15a46926f9132b941} 
+void Monster\+Line\+::change\+Direction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Changes the direction of the entire monster line. 
+
+This method flips the direction of the whole line of monsters, causing them to move in the opposite direction. \Hypertarget{class_monster_line_aa9f62e29a662dc229b2113dba2491838}\index{MonsterLine@{MonsterLine}!draw@{draw}}
+\index{draw@{draw}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{class_monster_line_aa9f62e29a662dc229b2113dba2491838} 
+void Monster\+Line\+::draw (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Target \&}]{target}{, }\item[{sf\+::\+Render\+States}]{states}{}\end{DoxyParamCaption}) const}
+
+
+
+Draws the monsters in the line on the target. 
+
+Loops through all monsters in the line and draws them to the screen.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The target to draw on (typically the game window). \\
+\hline
+{\em states} & Render states for drawing. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_monster_line_a0fc9de2be44214b0d84c0305ae1727f1}\index{MonsterLine@{MonsterLine}!explode@{explode}}
+\index{explode@{explode}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{explode()}{explode()}}
+{\footnotesize\ttfamily \label{class_monster_line_a0fc9de2be44214b0d84c0305ae1727f1} 
+void Monster\+Line\+::explode (\begin{DoxyParamCaption}\item[{int}]{location}{}\end{DoxyParamCaption})}
+
+
+
+Triggers the explosion of a specific monster in the line. 
+
+This method simulates the explosion of a monster when it is destroyed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The index of the monster to explode. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_monster_line_ab42a3f6803594ace557091abc53b7c22}\index{MonsterLine@{MonsterLine}!getDirection@{getDirection}}
+\index{getDirection@{getDirection}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{getDirection()}{getDirection()}}
+{\footnotesize\ttfamily \label{class_monster_line_ab42a3f6803594ace557091abc53b7c22} 
+int Monster\+Line\+::get\+Direction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the direction of the monster line. 
+
+\begin{DoxyReturn}{Returns}
+The current direction of the line (1 for right, 0 for left). 
+\end{DoxyReturn}
+\Hypertarget{class_monster_line_ab7f60a4b50d84815ae6b27954ee71728}\index{MonsterLine@{MonsterLine}!getNumberOfMonster@{getNumberOfMonster}}
+\index{getNumberOfMonster@{getNumberOfMonster}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{getNumberOfMonster()}{getNumberOfMonster()}}
+{\footnotesize\ttfamily \label{class_monster_line_ab7f60a4b50d84815ae6b27954ee71728} 
+int Monster\+Line\+::get\+Number\+Of\+Monster (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the total number of monsters in the line. 
+
+\begin{DoxyReturn}{Returns}
+The number of monsters in the line. 
+\end{DoxyReturn}
+\Hypertarget{class_monster_line_a1b0fe0318507656c108ea7e18cec3311}\index{MonsterLine@{MonsterLine}!getNumberOfMonsterAlive@{getNumberOfMonsterAlive}}
+\index{getNumberOfMonsterAlive@{getNumberOfMonsterAlive}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{getNumberOfMonsterAlive()}{getNumberOfMonsterAlive()}}
+{\footnotesize\ttfamily \label{class_monster_line_a1b0fe0318507656c108ea7e18cec3311} 
+int Monster\+Line\+::get\+Number\+Of\+Monster\+Alive (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the number of monsters that are still alive in the line. 
+
+This method counts how many monsters in the line are still alive.
+
+\begin{DoxyReturn}{Returns}
+The number of alive monsters. 
+\end{DoxyReturn}
+\Hypertarget{class_monster_line_a859a13ccb1ad42edadba6e7a1f0546c4}\index{MonsterLine@{MonsterLine}!isAlive@{isAlive}}
+\index{isAlive@{isAlive}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{isAlive()}{isAlive()}}
+{\footnotesize\ttfamily \label{class_monster_line_a859a13ccb1ad42edadba6e7a1f0546c4} 
+bool Monster\+Line\+::is\+Alive (\begin{DoxyParamCaption}\item[{int}]{location}{}\end{DoxyParamCaption})}
+
+
+
+Checks if a specific monster is alive. 
+
+This method returns whether the monster at the given location is still alive.
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The index of the monster to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the monster is alive, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_monster_line_ab0903dbab655142fd55c68b585489d57}\index{MonsterLine@{MonsterLine}!isExplosing@{isExplosing}}
+\index{isExplosing@{isExplosing}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{isExplosing()}{isExplosing()}}
+{\footnotesize\ttfamily \label{class_monster_line_ab0903dbab655142fd55c68b585489d57} 
+bool Monster\+Line\+::is\+Explosing (\begin{DoxyParamCaption}\item[{int}]{location}{}\end{DoxyParamCaption})}
+
+
+
+Checks if a monster at the given location is currently exploding. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The index of the monster in the line. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the monster is exploding, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_monster_line_a23b598167acbc11fed489a8e37514fa1}\index{MonsterLine@{MonsterLine}!isLineDestoyed@{isLineDestoyed}}
+\index{isLineDestoyed@{isLineDestoyed}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{isLineDestoyed()}{isLineDestoyed()}}
+{\footnotesize\ttfamily \label{class_monster_line_a23b598167acbc11fed489a8e37514fa1} 
+bool Monster\+Line\+::is\+Line\+Destoyed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Checks if all monsters in the line are destroyed. 
+
+This method checks if all monsters have been destroyed and the line is empty.
+
+\begin{DoxyReturn}{Returns}
+True if all monsters are destroyed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_monster_line_afffc708818347767daa85defa5482e28}\index{MonsterLine@{MonsterLine}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{class_monster_line_afffc708818347767daa85defa5482e28} 
+\mbox{\hyperlink{class_monster}{Monster}} \& Monster\+Line\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{location}{}\end{DoxyParamCaption})}
+
+
+
+Overloaded index operator to access monsters in the line. 
+
+Allows direct access to a specific monster in the line using the array index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The index of the monster to be accessed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the monster at the specified location. 
+\end{DoxyReturn}
+\Hypertarget{class_monster_line_a75e122d2e3f4dfbc6ec8a2be4c34e1d7}\index{MonsterLine@{MonsterLine}!updateCollision@{updateCollision}}
+\index{updateCollision@{updateCollision}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{updateCollision()}{updateCollision()}}
+{\footnotesize\ttfamily \label{class_monster_line_a75e122d2e3f4dfbc6ec8a2be4c34e1d7} 
+void Monster\+Line\+::update\+Collision (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_space_ship}{Space\+Ship}} \&}]{ship}{, }\item[{bool \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{vector\+Bool}{}\end{DoxyParamCaption})}
+
+
+
+Checks for collisions between the spaceship and the monsters. 
+
+This method updates a boolean array indicating whether a collision has occurred for each monster in the line.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ship} & The spaceship object to check for collisions. \\
+\hline
+{\em vector\+Bool} & Pointer to a boolean array to store the collision status. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_monster_line_afe5e78aed9b40e5eba80185498950da9}\index{MonsterLine@{MonsterLine}!updateParticule@{updateParticule}}
+\index{updateParticule@{updateParticule}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{updateParticule()}{updateParticule()}}
+{\footnotesize\ttfamily \label{class_monster_line_afe5e78aed9b40e5eba80185498950da9} 
+void Monster\+Line\+::update\+Particule (\begin{DoxyParamCaption}\item[{int}]{location}{}\end{DoxyParamCaption})}
+
+
+
+Updates the explosion particles of a specific monster in the line. 
+
+This method updates the explosion effect if the monster is exploding.
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The index of the monster to update. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_monster_line_a07d07d2ea2bcd0d178d2a50b69b93446}\index{MonsterLine@{MonsterLine}!xAdd@{xAdd}}
+\index{xAdd@{xAdd}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{xAdd()}{xAdd()}}
+{\footnotesize\ttfamily \label{class_monster_line_a07d07d2ea2bcd0d178d2a50b69b93446} 
+void Monster\+Line\+::x\+Add (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves all monsters in the line to the right. 
+
+This method shifts the position of each monster in the line by a fixed amount to the right. \Hypertarget{class_monster_line_a7d2c274ac26a86400176fefdde06f560}\index{MonsterLine@{MonsterLine}!xSub@{xSub}}
+\index{xSub@{xSub}!MonsterLine@{MonsterLine}}
+\doxysubsubsection{\texorpdfstring{xSub()}{xSub()}}
+{\footnotesize\ttfamily \label{class_monster_line_a7d2c274ac26a86400176fefdde06f560} 
+void Monster\+Line\+::x\+Sub (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves all monsters in the line to the left. 
+
+This method shifts the position of each monster in the line by a fixed amount. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Monster\+Line.\+hpp\item 
+\mbox{\hyperlink{_monster_line_8cpp}{Monster\+Line.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,88 @@
+\doxysection{Space\+Ship.\+hpp}
+\hypertarget{_space_ship_8hpp_source}{}\label{_space_ship_8hpp_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ SPACESHIP\_HPP}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ SPACESHIP\_HPP}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <SFML/Window.hpp>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}Projectile.hpp"{}}}
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_monster}{Monster}};}
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_monster_line}{MonsterLine}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_space_ship}{SpaceShip}}\ :\ \textcolor{keyword}{public}\ sf::Drawable}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ life;}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{int}\ max\_life;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{float}\ x,\ y;}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{class_point}{Point}}\ **pt;}
+\DoxyCodeLine{00037\ \ \ \ \ std::vector<Projectile\ *>\ pjt;\ \textcolor{comment}{/*Utilisation\ de\ la\ STL\ pour\ les\ projectile\ (vector)*/}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{int}\ hitBox\_x;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{int}\ hitBox\_y;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{int}\ numberOfPixels;}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{int}\ numberOfProjectiles;}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ xSize;}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{int}\ ySize;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ alive;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ sf::RenderWindow\ *window;}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{float}\ winHeight;}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{float}\ winWidth;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_space_ship_1_1_exept}{Exept}}}
+\DoxyCodeLine{00060\ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ std::string\ message;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_space_ship_1_1_exept}{Exept}}(std::string\ mes);}
+\DoxyCodeLine{00064\ \ \ \ \ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{class_space_ship_ae56e545157e761155089250245ad3455}{SpaceShip}}();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{class_space_ship_ae56e545157e761155089250245ad3455}{SpaceShip}}(sf::RenderWindow\ *win,\ \textcolor{keywordtype}{float}\ windowHeight,\ \textcolor{keywordtype}{float}\ windowWidth,\ \textcolor{keywordtype}{float}\ x\_pos,\ \textcolor{keywordtype}{float}\ y\_pos,\ \textcolor{keywordtype}{string}\ color);}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_space_ship_a92738fb78da53412c9fdd6134a4531c2}{shoot}}();}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_space_ship_a45f37b1f10ad794c3358b7ca4c399ffd}{updateProjectiles}}();}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_space_ship_ae0a8b70fd5caa4262fdc796004536729}{draw}}(sf::RenderTarget\ \&target,\ sf::RenderStates\ states)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_space_ship_a83e72ee99e7d9bf3547f62aef76cd91d}{xAdd}}();}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_space_ship_af6c41cbf36b79bd3b8264ee77eb454e0}{yAdd}}();}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_space_ship_ab45a11325328c73efbcca4d860306419}{xSub}}();}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_space_ship_a72bdebbb36c6fa3713557c5091107007}{ySub}}();}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{class_space_ship_a4442daaa9cdc06a0ff885aedabf8abf0}{\string~SpaceShip}}();}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_space_ship_a6ac5cd121e011e5ae3cecc1abe840714}{getX}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_space_ship_a19b3f62046da8c6774333d7fc5f088cf}{getY}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_space_ship_ae0926cacc321c500147ef2d2b65391d4}{hidePixel}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_space_ship_a4510f0661ea0d939936e8b60c7dc6f89}{goTo}}(\textcolor{keywordtype}{float}\ xValue);}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_space_ship_ad85a9032b49ad22d93c5ef348137a090}{correctCoordinates}}(\textcolor{keywordtype}{int}\ \&xToCorrect,\ \textcolor{keywordtype}{int}\ \&yToCorrect);}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_space_ship_a3c836e0626316151324ddfc2bb9a5448}{detectImpact}}(\mbox{\hyperlink{class_monster_line}{MonsterLine}}\ **monsterLine,\ \textcolor{keywordtype}{int}\ numberOfLine);}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_space_ship_a1ad46b310aa7b59e042784f3337ee06e}{isAlive}}();}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_space_ship_a0a709c4fddec9b36f1aa51542c3218b5}{die}}();}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_explosion}{Explosion}};}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_monster}{Monster}};}
+\DoxyCodeLine{00222\ \};}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

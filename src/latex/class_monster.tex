@@ -1,0 +1,344 @@
+\doxysection{Monster Class Reference}
+\hypertarget{class_monster}{}\label{class_monster}\index{Monster@{Monster}}
+Inheritance diagram for Monster\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_monster}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_monster_ae57d149293eb6498c48e7141176e4543}{Monster}} (sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}win, float window\+Height, float window\+Width, float x\+\_\+pos, float y\+\_\+pos, int direction, string color)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_monster}{Monster} class. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_monster_a7a2146fa72e019eb5078210acc4de189}{draw}} (sf\+::\+Render\+Target \&target, sf\+::\+Render\+States states) const override
+\begin{DoxyCompactList}\small\item\em Draws the monster, its projectiles, and explosion particles onto the screen. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_monster_a0cf6d2c8bb28332c652883eb16c6e3d0}{get\+Direction}} ()
+\begin{DoxyCompactList}\small\item\em Returns the current direction of the monster. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_a4ffd58ecb3e834052f7b8f83409c0b51}{change\+Direction}} ()
+\begin{DoxyCompactList}\small\item\em Changes the direction of the monster. \end{DoxyCompactList}\item 
+\Hypertarget{class_monster_af6702aa6628ebdc5c9b4f299db1f95bc}\label{class_monster_af6702aa6628ebdc5c9b4f299db1f95bc} 
+void {\bfseries hide} ()
+\begin{DoxyCompactList}\small\item\em Hides the monster by hiding its pixels. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_a2451196ae44408e57a6bde5a2461bcac}{explode}} ()
+\begin{DoxyCompactList}\small\item\em Handles the explosion of the monster when it is destroyed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_monster_a21619ba1759b910cd2fd50d858aab338}{\texorpdfstring{$\sim$}{\string~}\+Monster}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_monster}{Monster} class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_monster_ae982e2e4597de892dcc4a68dab2b695f}{is\+Explosing}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the monster is currently exploding. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_monster_ab2756789e9aeecd9f5becbcbfba4f1e0}{getX}} () const
+\begin{DoxyCompactList}\small\item\em Returns the x-\/coordinate of the monster. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_monster_a7ba016a727be6e20b613d6fdc3251f2e}{getY}} () const
+\begin{DoxyCompactList}\small\item\em Returns the y-\/coordinate of the monster. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_a6636927277fba0577e03727421e6101e}{update\+Projectiles}} ()
+\begin{DoxyCompactList}\small\item\em Updates the movement of the monster\textquotesingle{}s projectiles. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_monster_a92543c3c7838ba17349b4bb4729b92da}{update\+Collision}} (const \mbox{\hyperlink{class_space_ship}{Space\+Ship}} \&ship)
+\begin{DoxyCompactList}\small\item\em Checks for collisions between the monster and the spaceship\textquotesingle{}s projectiles. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_a9437574318016f43193c60fe3436d8b5}{update\+Particule}} ()
+\begin{DoxyCompactList}\small\item\em Updates the monster\textquotesingle{}s explosion effect. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_monster_a67c251402364c9427849bbb598aeb87f}{shoot}} ()
+\begin{DoxyCompactList}\small\item\em Shoots a projectile from the monster. \end{DoxyCompactList}\item 
+sf\+::\+Time \mbox{\hyperlink{class_monster_a43f192b9ef0f8968b353b4d0b633a93b}{get\+Elapsed\+Time\+Clock\+Explosion}} ()
+\begin{DoxyCompactList}\small\item\em Returns the elapsed time from the monster\textquotesingle{}s explosion clock. \end{DoxyCompactList}\item 
+\Hypertarget{class_monster_a7157e5c42d9efa85bd327c69e29aa83e}\label{class_monster_a7157e5c42d9efa85bd327c69e29aa83e} 
+void {\bfseries reset\+Clock\+Explosion} ()
+\begin{DoxyCompactList}\small\item\em Resets the explosion clock to restart the timer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_space_ship}{Space\+Ship}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_space_ship_ae56e545157e761155089250245ad3455}{Space\+Ship}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \doxylink{class_space_ship}{Space\+Ship} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_space_ship_a3c698498e9f11fafff11dc31c845616e}{Space\+Ship}} (sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}win, float window\+Height, float window\+Width, float x\+\_\+pos, float y\+\_\+pos, string color)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_space_ship}{Space\+Ship} class with window parameters and position. \end{DoxyCompactList}\item 
+void {\bfseries update\+Projectiles} ()
+\begin{DoxyCompactList}\small\item\em Updates the state of all projectiles by moving them and removing any that are out of bounds. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a83e72ee99e7d9bf3547f62aef76cd91d}{x\+Add}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit to the right. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_af6c41cbf36b79bd3b8264ee77eb454e0}{y\+Add}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit downward. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_ab45a11325328c73efbcca4d860306419}{x\+Sub}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit to the left. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a72bdebbb36c6fa3713557c5091107007}{y\+Sub}} ()
+\begin{DoxyCompactList}\small\item\em Moves the spaceship one unit upward. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_space_ship_a4442daaa9cdc06a0ff885aedabf8abf0}{\texorpdfstring{$\sim$}{\string~}\+Space\+Ship}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_space_ship}{Space\+Ship} class. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_space_ship_a6ac5cd121e011e5ae3cecc1abe840714}{getX}} () const
+\begin{DoxyCompactList}\small\item\em Gets the x-\/coordinate of the spaceship. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_space_ship_a19b3f62046da8c6774333d7fc5f088cf}{getY}} () const
+\begin{DoxyCompactList}\small\item\em Gets the y-\/coordinate of the spaceship. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_ae0926cacc321c500147ef2d2b65391d4}{hide\+Pixel}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Hides a specific pixel of the spaceship. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a4510f0661ea0d939936e8b60c7dc6f89}{go\+To}} (float x\+Value)
+\begin{DoxyCompactList}\small\item\em Moves the spaceship to a specified x-\/coordinate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_ad85a9032b49ad22d93c5ef348137a090}{correct\+Coordinates}} (int \&x\+To\+Correct, int \&y\+To\+Correct)
+\begin{DoxyCompactList}\small\item\em Corrects the y-\/coordinate to avoid overlap with other ship\textquotesingle{}s pixels. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_space_ship_a3c836e0626316151324ddfc2bb9a5448}{detect\+Impact}} (\mbox{\hyperlink{class_monster_line}{Monster\+Line}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}monster\+Line, int number\+Of\+Line)
+\begin{DoxyCompactList}\small\item\em Detects if the spaceship has collided with any monsters. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_space_ship_a1ad46b310aa7b59e042784f3337ee06e}{is\+Alive}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the spaceship is still alive. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_space_ship_a0a709c4fddec9b36f1aa51542c3218b5}{die}} ()
+\begin{DoxyCompactList}\small\item\em Kills the spaceship, marking it as not alive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_monster_a28b079284833ead5c5785ce4adc04bf5}\label{class_monster_a28b079284833ead5c5785ce4adc04bf5} 
+int {\bfseries direction}
+\item 
+\Hypertarget{class_monster_aeea6d876da9e3505b0e09c7413a15c01}\label{class_monster_aeea6d876da9e3505b0e09c7413a15c01} 
+int {\bfseries stat}
+\item 
+\Hypertarget{class_monster_ac77d2154e2897f8bf0b5e003c9e685c7}\label{class_monster_ac77d2154e2897f8bf0b5e003c9e685c7} 
+\mbox{\hyperlink{class_explosion}{Explosion}} \texorpdfstring{$\ast$}{*} {\bfseries explo}
+\item 
+\Hypertarget{class_monster_a4245ad727a6f1949a0a9a62477b070a5}\label{class_monster_a4245ad727a6f1949a0a9a62477b070a5} 
+sf\+::\+Clock \texorpdfstring{$\ast$}{*} {\bfseries clock\+Explosion}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_space_ship}{Space\+Ship}}}
+\begin{DoxyCompactItemize}
+\item 
+float {\bfseries x}
+\item 
+float {\bfseries y}
+\item 
+\mbox{\hyperlink{class_point}{Point}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries pt}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_projectile}{Projectile}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries pjt}
+\item 
+int {\bfseries hit\+Box\+\_\+x}
+\item 
+int {\bfseries hit\+Box\+\_\+y}
+\item 
+int {\bfseries number\+Of\+Pixels}
+\item 
+int {\bfseries number\+Of\+Projectiles}
+\item 
+int {\bfseries x\+Size}
+\item 
+int {\bfseries y\+Size}
+\item 
+bool {\bfseries alive}
+\item 
+sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*} {\bfseries window}
+\item 
+float {\bfseries win\+Height}
+\item 
+float {\bfseries win\+Width}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_monster_a48e51f2b472e8111a60b7b9886f2b3a0}\label{class_monster_a48e51f2b472e8111a60b7b9886f2b3a0} 
+class {\bfseries Explosion}
+\item 
+\Hypertarget{class_monster_a04518011fa8fd5635ba726f4cece37cf}\label{class_monster_a04518011fa8fd5635ba726f4cece37cf} 
+class {\bfseries Monster\+Line}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_monster_ae57d149293eb6498c48e7141176e4543}\index{Monster@{Monster}!Monster@{Monster}}
+\index{Monster@{Monster}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{Monster()}{Monster()}}
+{\footnotesize\ttfamily \label{class_monster_ae57d149293eb6498c48e7141176e4543} 
+Monster\+::\+Monster (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}}]{win}{, }\item[{float}]{window\+Height}{, }\item[{float}]{window\+Width}{, }\item[{float}]{x\+\_\+pos}{, }\item[{float}]{y\+\_\+pos}{, }\item[{int}]{direction}{, }\item[{string}]{color}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{class_monster}{Monster} class. 
+
+Initializes the monster\textquotesingle{}s properties, including position, size, and projectiles.
+
+
+\begin{DoxyParams}{Parameters}
+{\em win} & The render window for drawing the monster. \\
+\hline
+{\em window\+Height} & The height of the window. \\
+\hline
+{\em window\+Width} & The width of the window. \\
+\hline
+{\em x\+\_\+pos} & The x-\/coordinate of the monster\textquotesingle{}s initial position. \\
+\hline
+{\em y\+\_\+pos} & The y-\/coordinate of the monster\textquotesingle{}s initial position. \\
+\hline
+{\em direction} & The initial direction of the monster. \\
+\hline
+{\em color} & The color of the monster\textquotesingle{}s pixels. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_monster_a21619ba1759b910cd2fd50d858aab338}\index{Monster@{Monster}!````~Monster@{\texorpdfstring{$\sim$}{\string~}Monster}}
+\index{````~Monster@{\texorpdfstring{$\sim$}{\string~}Monster}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Monster()}{\string~Monster()}}
+{\footnotesize\ttfamily \label{class_monster_a21619ba1759b910cd2fd50d858aab338} 
+Monster\+::\texorpdfstring{$\sim$}{\string~}\+Monster (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor for the \doxylink{class_monster}{Monster} class. 
+
+Frees the memory allocated for the monster\textquotesingle{}s explosion and projectile objects. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_monster_a4ffd58ecb3e834052f7b8f83409c0b51}\index{Monster@{Monster}!changeDirection@{changeDirection}}
+\index{changeDirection@{changeDirection}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{changeDirection()}{changeDirection()}}
+{\footnotesize\ttfamily \label{class_monster_a4ffd58ecb3e834052f7b8f83409c0b51} 
+void Monster\+::change\+Direction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Changes the direction of the monster. 
+
+If the direction is 1 (right), it changes to 0 (left), and vice versa. \Hypertarget{class_monster_a7a2146fa72e019eb5078210acc4de189}\index{Monster@{Monster}!draw@{draw}}
+\index{draw@{draw}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{class_monster_a7a2146fa72e019eb5078210acc4de189} 
+void Monster\+::draw (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Target \&}]{target}{, }\item[{sf\+::\+Render\+States}]{states}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Draws the monster, its projectiles, and explosion particles onto the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The target to draw on. \\
+\hline
+{\em states} & The render states for drawing. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_space_ship_ae0a8b70fd5caa4262fdc796004536729}{Space\+Ship}}.
+
+\Hypertarget{class_monster_a2451196ae44408e57a6bde5a2461bcac}\index{Monster@{Monster}!explode@{explode}}
+\index{explode@{explode}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{explode()}{explode()}}
+{\footnotesize\ttfamily \label{class_monster_a2451196ae44408e57a6bde5a2461bcac} 
+void Monster\+::explode (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Handles the explosion of the monster when it is destroyed. 
+
+Changes the monster\textquotesingle{}s state to "{}exploding"{} and triggers the explosion effect. \Hypertarget{class_monster_a0cf6d2c8bb28332c652883eb16c6e3d0}\index{Monster@{Monster}!getDirection@{getDirection}}
+\index{getDirection@{getDirection}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{getDirection()}{getDirection()}}
+{\footnotesize\ttfamily \label{class_monster_a0cf6d2c8bb28332c652883eb16c6e3d0} 
+int Monster\+::get\+Direction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the current direction of the monster. 
+
+\begin{DoxyReturn}{Returns}
+The direction of the monster (1 for right, 0 for left). 
+\end{DoxyReturn}
+\Hypertarget{class_monster_a43f192b9ef0f8968b353b4d0b633a93b}\index{Monster@{Monster}!getElapsedTimeClockExplosion@{getElapsedTimeClockExplosion}}
+\index{getElapsedTimeClockExplosion@{getElapsedTimeClockExplosion}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{getElapsedTimeClockExplosion()}{getElapsedTimeClockExplosion()}}
+{\footnotesize\ttfamily \label{class_monster_a43f192b9ef0f8968b353b4d0b633a93b} 
+sf\+::\+Time Monster\+::get\+Elapsed\+Time\+Clock\+Explosion (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the elapsed time from the monster\textquotesingle{}s explosion clock. 
+
+\begin{DoxyReturn}{Returns}
+The elapsed time since the explosion was triggered. 
+\end{DoxyReturn}
+\Hypertarget{class_monster_ab2756789e9aeecd9f5becbcbfba4f1e0}\index{Monster@{Monster}!getX@{getX}}
+\index{getX@{getX}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{getX()}{getX()}}
+{\footnotesize\ttfamily \label{class_monster_ab2756789e9aeecd9f5becbcbfba4f1e0} 
+float Monster\+::getX (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the x-\/coordinate of the monster. 
+
+\begin{DoxyReturn}{Returns}
+The x-\/coordinate of the monster. 
+\end{DoxyReturn}
+\Hypertarget{class_monster_a7ba016a727be6e20b613d6fdc3251f2e}\index{Monster@{Monster}!getY@{getY}}
+\index{getY@{getY}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{getY()}{getY()}}
+{\footnotesize\ttfamily \label{class_monster_a7ba016a727be6e20b613d6fdc3251f2e} 
+float Monster\+::getY (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the y-\/coordinate of the monster. 
+
+\begin{DoxyReturn}{Returns}
+The y-\/coordinate of the monster. 
+\end{DoxyReturn}
+\Hypertarget{class_monster_ae982e2e4597de892dcc4a68dab2b695f}\index{Monster@{Monster}!isExplosing@{isExplosing}}
+\index{isExplosing@{isExplosing}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{isExplosing()}{isExplosing()}}
+{\footnotesize\ttfamily \label{class_monster_ae982e2e4597de892dcc4a68dab2b695f} 
+bool Monster\+::is\+Explosing (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Checks if the monster is currently exploding. 
+
+\begin{DoxyReturn}{Returns}
+True if the monster is exploding, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_monster_a67c251402364c9427849bbb598aeb87f}\index{Monster@{Monster}!shoot@{shoot}}
+\index{shoot@{shoot}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{shoot()}{shoot()}}
+{\footnotesize\ttfamily \label{class_monster_a67c251402364c9427849bbb598aeb87f} 
+void Monster\+::shoot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Shoots a projectile from the monster. 
+
+The projectile is created at the monster\textquotesingle{}s position and added to the list of projectiles. 
+
+Reimplemented from \mbox{\hyperlink{class_space_ship_a92738fb78da53412c9fdd6134a4531c2}{Space\+Ship}}.
+
+\Hypertarget{class_monster_a92543c3c7838ba17349b4bb4729b92da}\index{Monster@{Monster}!updateCollision@{updateCollision}}
+\index{updateCollision@{updateCollision}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{updateCollision()}{updateCollision()}}
+{\footnotesize\ttfamily \label{class_monster_a92543c3c7838ba17349b4bb4729b92da} 
+bool Monster\+::update\+Collision (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_space_ship}{Space\+Ship}} \&}]{ship}{}\end{DoxyParamCaption})}
+
+
+
+Checks for collisions between the monster and the spaceship\textquotesingle{}s projectiles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ship} & The spaceship object to check for collisions. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if a collision is detected, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_monster_a9437574318016f43193c60fe3436d8b5}\index{Monster@{Monster}!updateParticule@{updateParticule}}
+\index{updateParticule@{updateParticule}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{updateParticule()}{updateParticule()}}
+{\footnotesize\ttfamily \label{class_monster_a9437574318016f43193c60fe3436d8b5} 
+void Monster\+::update\+Particule (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Updates the monster\textquotesingle{}s explosion effect. 
+
+This function is called each frame to check if the monster is exploding. \Hypertarget{class_monster_a6636927277fba0577e03727421e6101e}\index{Monster@{Monster}!updateProjectiles@{updateProjectiles}}
+\index{updateProjectiles@{updateProjectiles}!Monster@{Monster}}
+\doxysubsubsection{\texorpdfstring{updateProjectiles()}{updateProjectiles()}}
+{\footnotesize\ttfamily \label{class_monster_a6636927277fba0577e03727421e6101e} 
+void Monster\+::update\+Projectiles (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Updates the movement of the monster\textquotesingle{}s projectiles. 
+
+This function is called each frame to move the projectiles and check if they are out of bounds. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_monster_8hpp}{Monster.\+hpp}}\item 
+Monster.\+cpp\end{DoxyCompactItemize}

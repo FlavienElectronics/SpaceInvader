@@ -1,0 +1,34 @@
+\doxysection{Explosion.\+hpp}
+\hypertarget{_explosion_8hpp_source}{}\label{_explosion_8hpp_source}\mbox{\hyperlink{_explosion_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#ifndef\ EXPLOSION\_HPP}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ EXPLOSION\_HPP}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <SFML/Window.hpp>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_monster_8hpp}{Monster.hpp}}"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_monster}{Monster}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_explosion}{Explosion}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_space_ship}{SpaceShip}}}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ status;\ \textcolor{comment}{//-\/1\ =\ starting\ |\ 0\ =\ explosion\ range\ 1|\ 1\ =\ explosion\ range\ 2\ |\ 2\ =\ monster\ has\ exploded}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ clearPoints();}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{class_explosion_a3686b2a9c2072b43726734bdba034b81}{Explosion}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_explosion_af6ddc2695a89e6fe18a1e66e69eeac5f}{grow}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_monster}{Monster}}\ \&monstr);}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{class_monster}{Monster}};}
+\DoxyCodeLine{00060\ \};}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

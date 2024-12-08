@@ -1,0 +1,49 @@
+\doxysection{Point.\+hpp}
+\hypertarget{_point_8hpp_source}{}\label{_point_8hpp_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ POINT\_HPP}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ POINT\_HPP}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <SFML/Window.hpp>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_point}{Point}}\ :\ \textcolor{keyword}{public}\ sf::RectangleShape}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{float}\ x,\ y;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ size;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{string}\ color;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{class_point_ad92f2337b839a94ce97dcdb439b4325a}{Point}}();}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_point_ad92f2337b839a94ce97dcdb439b4325a}{Point}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ size,\ \textcolor{keywordtype}{string}\ color);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{class_point_ad92f2337b839a94ce97dcdb439b4325a}{Point}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{string}\ color);}
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{class_point_ad92f2337b839a94ce97dcdb439b4325a}{Point}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_point_acd27307e1092b0f2ccc03a232cf90b56}{xAdd}}();}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_point_a883772b63865fbe67c9237e529976d88}{yAdd}}();}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_point_af00720d08ccd81c1b21dc11302173907}{xSub}}();}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_point_a02e21babe51dfb837022f7794e6de6c8}{ySub}}();}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_point_a558175f432b25af8a54ad36348012898}{hide}}();}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_point_a29c44ec7c7279e02629645a06cdaf7d5}{getX}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_point_a2371ffadbe245d12a8f556d0a976521b}{getY}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_monster}{Monster}};}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_space_ship}{SpaceShip}};}
+\DoxyCodeLine{00132\ \};}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

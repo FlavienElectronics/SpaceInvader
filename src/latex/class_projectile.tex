@@ -1,0 +1,161 @@
+\doxysection{Projectile Class Reference}
+\hypertarget{class_projectile}{}\label{class_projectile}\index{Projectile@{Projectile}}
+Inheritance diagram for Projectile\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_projectile}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_projectile_abef7ae095e6472605bfa38a0c4b28d18}{Projectile}} (float x\+\_\+pos, float y\+\_\+pos, string color)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_projectile}{Projectile} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_projectile_a2849d2b7c580d7dd4c8e4f3803ef1087}{y\+Sub}} ()
+\begin{DoxyCompactList}\small\item\em Moves the projectile one unit upwards (negative y-\/direction). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_projectile_a59d4473b83f0112a53b3db695af6a71b}{y\+Add}} ()
+\begin{DoxyCompactList}\small\item\em Moves the projectile one unit downwards (positive y-\/direction). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_projectile_a629405641ae301a55a240c53c9f9381f}{is\+Out\+Of\+Bounds}} (float window\+Height)
+\begin{DoxyCompactList}\small\item\em Checks if the projectile is out of bounds of the game window. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_projectile_a390400d2ac0f260d2c9a8d7caff2f421}{draw}} (sf\+::\+Render\+Target \&target, sf\+::\+Render\+States states) const override
+\begin{DoxyCompactList}\small\item\em Draws the projectile on the screen. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_projectile_a53690c6efa01581fa0db321aacfd10bf}{getY}} () const
+\begin{DoxyCompactList}\small\item\em Gets the y-\/coordinate of the projectile. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_projectile_a6c80479a247fa7fe923d810da3320948}{getX}} () const
+\begin{DoxyCompactList}\small\item\em Gets the x-\/coordinate of the projectile. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_projectile_a94903e021fa2edab60ba3836ca0b937d}{\texorpdfstring{$\sim$}{\string~}\+Projectile}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_projectile}{Projectile} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_projectile_acd1214449703bd4d1b095efc07489f45}\label{class_projectile_acd1214449703bd4d1b095efc07489f45} 
+class {\bfseries Monster}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_projectile_abef7ae095e6472605bfa38a0c4b28d18}\index{Projectile@{Projectile}!Projectile@{Projectile}}
+\index{Projectile@{Projectile}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{Projectile()}{Projectile()}}
+{\footnotesize\ttfamily \label{class_projectile_abef7ae095e6472605bfa38a0c4b28d18} 
+Projectile\+::\+Projectile (\begin{DoxyParamCaption}\item[{float}]{x\+\_\+pos}{, }\item[{float}]{y\+\_\+pos}{, }\item[{string}]{color}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{class_projectile}{Projectile} class. 
+
+Initializes the projectile with a specified position and color. The projectile is represented by two points, one for each part of the projectile. These points are initialized at the provided coordinates.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+\_\+pos} & The x-\/coordinate of the projectile\textquotesingle{}s starting position. \\
+\hline
+{\em y\+\_\+pos} & The y-\/coordinate of the projectile\textquotesingle{}s starting position. \\
+\hline
+{\em color} & The color of the projectile, represented as a string. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_projectile_a94903e021fa2edab60ba3836ca0b937d}\index{Projectile@{Projectile}!````~Projectile@{\texorpdfstring{$\sim$}{\string~}Projectile}}
+\index{````~Projectile@{\texorpdfstring{$\sim$}{\string~}Projectile}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Projectile()}{\string~Projectile()}}
+{\footnotesize\ttfamily \label{class_projectile_a94903e021fa2edab60ba3836ca0b937d} 
+Projectile\+::\texorpdfstring{$\sim$}{\string~}\+Projectile (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor for the \doxylink{class_projectile}{Projectile} class. 
+
+Cleans up the memory allocated for the points representing the projectile. This destructor ensures that the points are properly destroyed when the projectile object is destroyed. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_projectile_a390400d2ac0f260d2c9a8d7caff2f421}\index{Projectile@{Projectile}!draw@{draw}}
+\index{draw@{draw}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{class_projectile_a390400d2ac0f260d2c9a8d7caff2f421} 
+void Projectile\+::draw (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Target \&}]{target}{, }\item[{sf\+::\+Render\+States}]{states}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Draws the projectile on the screen. 
+
+This method draws both points representing the projectile on the target window.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The render target where the projectile is to be drawn. \\
+\hline
+{\em states} & The render states used for drawing. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_projectile_a6c80479a247fa7fe923d810da3320948}\index{Projectile@{Projectile}!getX@{getX}}
+\index{getX@{getX}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{getX()}{getX()}}
+{\footnotesize\ttfamily \label{class_projectile_a6c80479a247fa7fe923d810da3320948} 
+float Projectile\+::getX (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the x-\/coordinate of the projectile. 
+
+\begin{DoxyReturn}{Returns}
+The current x-\/coordinate of the projectile. 
+\end{DoxyReturn}
+\Hypertarget{class_projectile_a53690c6efa01581fa0db321aacfd10bf}\index{Projectile@{Projectile}!getY@{getY}}
+\index{getY@{getY}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{getY()}{getY()}}
+{\footnotesize\ttfamily \label{class_projectile_a53690c6efa01581fa0db321aacfd10bf} 
+float Projectile\+::getY (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the y-\/coordinate of the projectile. 
+
+\begin{DoxyReturn}{Returns}
+The current y-\/coordinate of the projectile. 
+\end{DoxyReturn}
+\Hypertarget{class_projectile_a629405641ae301a55a240c53c9f9381f}\index{Projectile@{Projectile}!isOutOfBounds@{isOutOfBounds}}
+\index{isOutOfBounds@{isOutOfBounds}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{isOutOfBounds()}{isOutOfBounds()}}
+{\footnotesize\ttfamily \label{class_projectile_a629405641ae301a55a240c53c9f9381f} 
+bool Projectile\+::is\+Out\+Of\+Bounds (\begin{DoxyParamCaption}\item[{float}]{window\+Height}{}\end{DoxyParamCaption})}
+
+
+
+Checks if the projectile is out of bounds of the game window. 
+
+This method checks if the projectile has gone beyond the top or bottom edge of the window, returning {\ttfamily true} if it is out of bounds and {\ttfamily false} otherwise.
+
+
+\begin{DoxyParams}{Parameters}
+{\em window\+Height} & The height of the game window. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the projectile is out of bounds, {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_projectile_a59d4473b83f0112a53b3db695af6a71b}\index{Projectile@{Projectile}!yAdd@{yAdd}}
+\index{yAdd@{yAdd}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{yAdd()}{yAdd()}}
+{\footnotesize\ttfamily \label{class_projectile_a59d4473b83f0112a53b3db695af6a71b} 
+void Projectile\+::y\+Add (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves the projectile one unit downwards (positive y-\/direction). 
+
+This method increments the y-\/coordinate of the projectile by 1, and updates the y-\/coordinate of both points representing the projectile. \Hypertarget{class_projectile_a2849d2b7c580d7dd4c8e4f3803ef1087}\index{Projectile@{Projectile}!ySub@{ySub}}
+\index{ySub@{ySub}!Projectile@{Projectile}}
+\doxysubsubsection{\texorpdfstring{ySub()}{ySub()}}
+{\footnotesize\ttfamily \label{class_projectile_a2849d2b7c580d7dd4c8e4f3803ef1087} 
+void Projectile\+::y\+Sub (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves the projectile one unit upwards (negative y-\/direction). 
+
+This method decrements the y-\/coordinate of the projectile by 1, and updates the y-\/coordinate of both points representing the projectile. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Projectile.\+hpp\item 
+\mbox{\hyperlink{_projectile_8cpp}{Projectile.\+cpp}}\end{DoxyCompactItemize}
