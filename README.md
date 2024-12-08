@@ -53,7 +53,7 @@ A utiliser dans le cas où «make install» échoue :
 
 ## ℹ️ Plus d'informations
 
-https://github.com/FlavienElectronics/SpaceInvader/blob/main/src/html/index.html
+https://FlavienElectronics.github.io/SpaceInvader/src/html/index.html
 
 Pour avoir accès à la documentation détaillée doxyfile,  [the documentation]([docs/index.html](https://FlavienElectronics.github.io/SpaceInvader/src/index.html)) or view it directly via GitHub Pages: [GitHub Pages Documentation](https://FlavienElectronics.github.io/SpaceInvader/src/).
 
