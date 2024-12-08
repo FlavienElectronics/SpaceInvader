@@ -31,4 +31,6 @@ void youWon(main_info &main_information, clock_info &clock_information);
 
 void manage_uControler(main_info &main_information, clock_info &clock_information);
 
+void handle_uControler_command(main_info &main_information);
+
 #endif

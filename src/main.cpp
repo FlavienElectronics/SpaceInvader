@@ -3,33 +3,6 @@
 
 using namespace std;
 
-void handle_uControler_command(main_info &main_information)
-{
-	if (!main_information.package_ESP.functionRequested_OK)
-	{
-		if (main_information.package_ESP.requestedFunction == "BTN")
-		{
-			(*main_information.ship)->shoot();
-			for (int j = 0; j < main_information.numberOfLine; j++)
-			{
-				for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
-				{
-					Monster &tempMonster = (*(*main_information.monsterL)[j])[i];
-					if (tempMonster.isAlive())
-					{
-						tempMonster.shoot();
-					}
-				}
-			}
-			main_information.package_ESP.functionRequested_OK = true;
-		}
-		else if (main_information.package_ESP.requestedFunction == "POT")
-		{
-			(*main_information.ship)->goTo(main_information.package_ESP.position);
-			main_information.package_ESP.functionRequested_OK = true;
-		}
-	}
-}
 
 /*SpaceInvader INSA*/
 int main()
@@ -38,7 +11,7 @@ int main()
 	const string portName = "/dev/port_ESP8266";
 	const unsigned int baud_rate = 921600;
 
-	/*Configuration of the windows*/
+	/*Configuration of the window*/
 	const string gameName = "SpaceInvader";
 	const float windowWidth = 128;
 	const float windowHeight = 64;
@@ -66,6 +39,7 @@ int main()
 	/*Initialisation of the mains variables and allocation*/
 	init(main_info, clock_info);
 
+	/*Creation of a thread that handle the uControler's signals*/
 	std::thread uControllerThread(manage_uControler, std::ref(main_info), std::ref(clock_info));
 
 	/*Check if the windows is still open*/
@@ -129,6 +103,7 @@ int main()
 
 	cout << "Window closed" << endl;
 
+	/*Wait until Thread is terminating*/
 	uControllerThread.join();
 
 	/*Free the memory allocated*/

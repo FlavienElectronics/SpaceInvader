@@ -395,3 +395,32 @@ void manage_uControler(main_info &main_information, clock_info &clock_informatio
         }
     }
 }
+
+
+void handle_uControler_command(main_info &main_information)
+{
+	if (!main_information.package_ESP.functionRequested_OK)
+	{
+		if (main_information.package_ESP.requestedFunction == "BTN")
+		{
+			(*main_information.ship)->shoot();
+			for (int j = 0; j < main_information.numberOfLine; j++)
+			{
+				for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
+				{
+					Monster &tempMonster = (*(*main_information.monsterL)[j])[i];
+					if (tempMonster.isAlive())
+					{
+						tempMonster.shoot();
+					}
+				}
+			}
+			main_information.package_ESP.functionRequested_OK = true;
+		}
+		else if (main_information.package_ESP.requestedFunction == "POT")
+		{
+			(*main_information.ship)->goTo(main_information.package_ESP.position);
+			main_information.package_ESP.functionRequested_OK = true;
+		}
+	}
+}
