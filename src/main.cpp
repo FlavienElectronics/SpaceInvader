@@ -1,8 +1,35 @@
 #include "main.hpp"
 #include "main_function.hpp"
-#include <thread>
 
 using namespace std;
+
+void handle_uControler_command(main_info &main_information)
+{
+	if (!main_information.package_ESP.functionRequested_OK)
+	{
+		if (main_information.package_ESP.requestedFunction == "BTN")
+		{
+			(*main_information.ship)->shoot();
+			for (int j = 0; j < main_information.numberOfLine; j++)
+			{
+				for (int i = 0; i < (*main_information.monsterL)[j]->getNumberOfMonster(); i++)
+				{
+					Monster &tempMonster = (*(*main_information.monsterL)[j])[i];
+					if (tempMonster.isAlive())
+					{
+						tempMonster.shoot();
+					}
+				}
+			}
+			main_information.package_ESP.functionRequested_OK = true;
+		}
+		else if (main_information.package_ESP.requestedFunction == "POT")
+		{
+			(*main_information.ship)->goTo(main_information.package_ESP.position);
+			main_information.package_ESP.functionRequested_OK = true;
+		}
+	}
+}
 
 /*SpaceInvader INSA*/
 int main()
@@ -39,7 +66,6 @@ int main()
 	/*Initialisation of the mains variables and allocation*/
 	init(main_info, clock_info);
 
-	// std::thread uControllerThread(manage_uControler,std::ref(main_info),std::ref(clock_info));
 	std::thread uControllerThread(manage_uControler, std::ref(main_info), std::ref(clock_info));
 
 	/*Check if the windows is still open*/
@@ -55,30 +81,7 @@ int main()
 						window.close();
 				}
 
-				if (!main_info.package_ESP.functionRequested_OK)
-				{
-					if (main_info.package_ESP.requestedFunction == "BTN")
-					{
-						(*main_info.ship)->shoot();
-						for (int j = 0; j < main_info.numberOfLine; j++)
-						{
-							for (int i = 0; i < (*main_info.monsterL)[j]->getNumberOfMonster(); i++)
-							{
-								Monster &tempMonster = (*(*main_info.monsterL)[j])[i];
-								if (tempMonster.isAlive())
-								{
-									tempMonster.shoot();
-								}
-							}
-						}
-						main_info.package_ESP.functionRequested_OK = true;
-					}
-					else if (main_info.package_ESP.requestedFunction == "POT")
-					{
-						(*main_info.ship)->goTo(main_info.package_ESP.position);
-						main_info.package_ESP.functionRequested_OK = true;
-					}
-				}
+				handle_uControler_command(main_info);
 
 				/*Managing the input command*/
 				/* Update collision and detect impact between projectile and ship-monster*/
