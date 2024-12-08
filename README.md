@@ -53,9 +53,8 @@ A utiliser dans le cas où «make install» échoue :
 
 ## ℹ️ Plus d'informations
 
-https://FlavienElectronics.github.io/SpaceInvader/src/html/index.html
-
-Pour avoir accès à la documentation détaillée doxyfile,  [the documentation]([docs/index.html](https://FlavienElectronics.github.io/SpaceInvader/src/index.html)) or view it directly via GitHub Pages: [GitHub Pages Documentation](https://FlavienElectronics.github.io/SpaceInvader/src/).
+Pour avoir accès à la documentation détaillée doxyfile, il suffit de cloner le répertoire, se rendre dans /src/html/index.html. 
+Cela va lancer la documentation doxygen.
 
 ### ⚠️A noter :
 Le programme a été testé sur un machine virtuelle linux, le port de liaison USB pour la communication USART est le suivant : **/dev/ttyUSB0**.
