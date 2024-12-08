@@ -53,7 +53,7 @@ A utiliser dans le cas où «make install» échoue :
 
 ## ℹ️ Plus d'informations
 
-Pour plus de documentation détaillée,  [the documentation](docs/index.html) or view it directly via GitHub Pages: [GitHub Pages Documentation](https://FlavienElectronics.github.io//SpaceInvader/src/).
+Pour avoir accès à la documentation détaillée doxyfile,  [the documentation]([docs/index.html](https://FlavienElectronics.github.io/SpaceInvader/src/index.html)) or view it directly via GitHub Pages: [GitHub Pages Documentation](https://FlavienElectronics.github.io/SpaceInvader/src/).
 
 ### ⚠️A noter :
 Le programme a été testé sur un machine virtuelle linux, le port de liaison USB pour la communication USART est le suivant : **/dev/ttyUSB0**.
