@@ -53,6 +53,8 @@ A utiliser dans le cas où «make install» échoue :
 
 ## ℹ️ Plus d'informations
 
+Pour plus de documentation détaillée,  [the documentation](docs/index.html) or view it directly via GitHub Pages: [GitHub Pages Documentation](https://FlavienElectronics.github.io//SpaceInvader/src/).
+
 ### ⚠️A noter :
 Le programme a été testé sur un machine virtuelle linux, le port de liaison USB pour la communication USART est le suivant : **/dev/ttyUSB0**.
 Ce n'est pas sur mais peut-être que ce port doit être modifié si d'autres périphériques USB sont déjà connectés à la machine linux (/dev/ttyUSB1 ou /dev/ttyUSB2 ...)
