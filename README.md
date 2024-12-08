@@ -53,7 +53,7 @@ A utiliser dans le cas où «make install» échoue :
 
 ## ℹ️ Plus d'informations
 
-Pour avoir accès à la documentation détaillée doxyfile, il suffit de cloner le répertoire, se rendre dans /src/html/index.html. 
+Pour avoir accès à la documentation détaillée doxyfile, il suffit de cloner le répertoire, se rendre dans /src/html/files.html. 
 Cela va lancer la documentation doxygen.
 
 ### ⚠️A noter :
