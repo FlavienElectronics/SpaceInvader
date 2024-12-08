@@ -1,4 +1,19 @@
-/*Ajouter des entête sous chaque fichier*/
+/**
+ * @file LetterGroup.hpp
+ * @brief Defines the LetterGroup class and its associated letter classes (A, E, G, M, N, O, R, U, V, W, Y, Exclamation).
+ * 
+ * This file provides the declaration of the `LetterGroup` class, which manages a group of letters
+ * drawn on a window. Each letter is represented as a set of points, and the group can render the letters
+ * on the screen using SFML. The letter shapes are predefined, and each letter (A, E, G, M, N, O, R, U, V, W, Y, Exclamation)
+ * is implemented as a subclass of the `Letter` class.
+ * 
+ * The `LetterGroup` class provides functionality to initialize the group with a specific color and window dimensions,
+ * draw the group to the screen, and manage the destruction of all letters within the group.
+ * 
+ * @version 1.0
+ * @date 2024-12-08
+ */
+
 
 #ifndef LETTERGROUP_HPP
 #define LETTERGROUP_HPP

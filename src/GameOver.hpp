@@ -1,4 +1,16 @@
-/*Ajouter des entête sous chaque fichier*/
+/**
+ * @file GameOver.hpp
+ * @brief Declaration of the GameOver class, responsible for displaying the "GAME OVER" message.
+ * 
+ * This file contains the definition of the `GameOver` class, which inherits from the `LetterGroup` class.
+ * The `GameOver` class is responsible for displaying a "GAME OVER" message in the game, typically shown
+ * when the player loses or completes the game. It initializes a group of letters to form the "GAME OVER" text
+ * and positions them appropriately in the center of the screen. The class leverages the `LetterGroup` class to manage 
+ * the creation and positioning of each individual letter. The color and position of the text can be customized.
+ * 
+ * @version 1.0
+ * @date 2024-12-08
+ */
 
 #ifndef GAMEOVER_HPP
 #define GAMEOVER_HPP

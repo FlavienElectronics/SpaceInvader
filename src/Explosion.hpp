@@ -1,4 +1,17 @@
-/*Ajouter des entête sous chaque fichier*/
+/**
+ * @file Explosion.hpp
+ * @brief Declaration of the Explosion class, simulating the explosion effect in the game.
+ * 
+ * This file contains the definition of the `Explosion` class, which is responsible for simulating the
+ * explosion effect of a monster when it is destroyed. The explosion grows in size over time, starting
+ * with a single pixel and expanding into multiple pixels as the explosion progresses. The class manages
+ * the state of the explosion through a status attribute, and it is linked to the `Monster` class to track
+ * the position and size of the explosion relative to the monster. The explosion can grow through different
+ * stages, representing different phases of the explosion's visual effect.
+ * 
+ * @version 1.0
+ * @date 2024-12-08
+ */
 
 #ifndef EXPLOSION_HPP
 #define EXPLOSION_HPP

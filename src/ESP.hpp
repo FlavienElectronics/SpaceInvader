@@ -1,4 +1,16 @@
-/*Ajouter des entête sous chaque fichier*/
+/**
+ * @file ESP.hpp
+ * @brief Declaration of the ESP class, used for managing communication via USART.
+ * 
+ * This file contains the definition of the `ESP` class, which facilitates communication between
+ * a microcontroller or other device and a computer via the USART (Universal Synchronous/Asynchronous Receiver/Transmitter)
+ * interface. It allows for sending and receiving messages over a serial connection. The class includes functions for checking
+ * the connection status, reading data from the serial port, and sending messages. Additionally, it defines a structure
+ * `USART_package` to store data read from the interface, such as device information, string size, and value.
+ * 
+ * @version 1.0
+ * @date 2024-12-08
+ */
 
 #ifndef ESP_HPP
 #define ESP_HPP
